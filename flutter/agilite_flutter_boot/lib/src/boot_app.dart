@@ -6,9 +6,7 @@ import 'boot_theme.dart';
 import 'services/auth_service.dart';
 import 'storages/storage.dart';
 
-final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
-
-class BootApp extends StatelessWidget {
+class BootApp extends StatefulWidget {
   final String? storageName;
   final Widget Function(bool toAppBar)? appLogoBuilder;
   final String appTitle;
@@ -31,8 +29,21 @@ class BootApp extends StatelessWidget {
   });
 
   @override
+  State<BootApp> createState() => _BootAppState();
+}
+
+class _BootAppState extends State<BootApp> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.themeMode != null) {
+      themeNotifier.value = widget.themeMode!;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _storageName ??= storageName;
+    _storageName ??= widget.storageName;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
@@ -46,11 +57,11 @@ class BootApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
             ],
             supportedLocales: const [Locale('pt', 'BR'), Locale('en')],
-            routerConfig: buildRouterConfig(routes ?? <ARoute>[]),
-            title: appTitle,
+            routerConfig: buildRouterConfig(widget.routes ?? <ARoute>[]),
+            title: widget.appTitle,
             themeMode: themeMode,
-            theme: lightTheme ?? buildLightTheme(),
-            darkTheme: darkTheme ?? buildDarkTheme(),
+            theme: widget.lightTheme ?? buildLightTheme(),
+            darkTheme: widget.darkTheme ?? buildDarkTheme(),
           ),
         );
       },

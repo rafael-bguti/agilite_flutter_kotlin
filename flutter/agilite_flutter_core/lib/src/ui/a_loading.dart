@@ -38,9 +38,6 @@ class _ALoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +46,7 @@ class _ALoadingView extends StatelessWidget {
           const SizedBox(height: 22),
           Text(
             'Por favor, aguarde...',
-            style: textTheme.headlineMedium,
+            style: textTheme?.headlineMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
@@ -61,7 +58,7 @@ class _ALoadingView extends StatelessWidget {
                 builder: (context, msg, _) {
                   return Text(
                     msg,
-                    style: textTheme.titleLarge,
+                    style: textTheme?.titleLarge,
                     textAlign: TextAlign.center,
                   );
                 },

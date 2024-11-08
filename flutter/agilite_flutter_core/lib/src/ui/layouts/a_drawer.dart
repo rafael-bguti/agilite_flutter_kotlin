@@ -18,14 +18,14 @@ class ADrawer extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
-            child: buildLogo(LogoDestination.drawer),
+            child: coreStyle.getLogoWidget(LogoDestination.drawer, Brightness.dark),
           ),
         ),
         Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.1),
+              color: primaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(90),
             ),
             child: ALoggedUserDropdown(

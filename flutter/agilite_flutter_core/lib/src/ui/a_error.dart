@@ -35,7 +35,7 @@ class AError {
     if (closeAllDialogsBefore) {
       ANavigator.closeAllDialogs();
     }
-    final backgroundColor = errorView.backgroundColor ?? (errorView._isWarning ? warningColor : colorSchema!.errorContainer);
+    final backgroundColor = errorView.backgroundColor ?? (errorView._isWarning ? warningColor : colorScheme!.errorContainer);
 
     showDialog(
       routeSettings: const RouteSettings(name: errorRouteName),

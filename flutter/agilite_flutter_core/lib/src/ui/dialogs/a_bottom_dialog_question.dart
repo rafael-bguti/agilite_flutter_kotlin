@@ -32,7 +32,6 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
   bool running = false;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Container(
       constraints: BoxConstraints(
         minWidth: MediaQuery.of(context).size.width,
@@ -42,7 +41,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
         children: [
           Expanded(
             child: Container(
-              color: theme.colorScheme.surfaceContainerLow,
+              color: colorScheme?.surfaceContainerLow,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +56,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         widget.message,
-                        style: theme.textTheme.headlineSmall!.copyWith(
+                        style: textTheme?.headlineSmall!.copyWith(
                           color: color,
                         ),
                         textAlign: TextAlign.center,
@@ -71,7 +70,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
           const Divider(height: 1),
           Expanded(
             child: Container(
-              color: theme.colorScheme.surfaceVariant,
+              color: colorScheme?.surfaceContainerHighest,
               child: Center(
                 child: running
                     ? Column(
@@ -83,7 +82,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                             ),
                             child: const LinearProgressIndicator(),
                           ),
-                          Text("Aguarde...", style: theme.textTheme.bodyLarge!),
+                          Text("Aguarde...", style: textTheme?.bodyLarge),
                         ],
                       )
                     : ASpacingRow(
@@ -96,7 +95,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                              child: Text('Não', style: theme.textTheme.titleLarge),
+                              child: Text('Não', style: textTheme?.titleLarge),
                             ),
                           ),
                           const SizedBox(width: 18),
@@ -107,7 +106,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                               child: Text(
                                 widget.confirmButtonText,
-                                style: theme.textTheme.titleLarge!.copyWith(
+                                style: textTheme?.titleLarge?.copyWith(
                                   color: Colors.white,
                                 ),
                               ),

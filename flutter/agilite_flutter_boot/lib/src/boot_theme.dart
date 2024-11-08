@@ -21,16 +21,19 @@ ThemeData buildTheme(ThemeData theme, CoreStyleColors coreThemeColors) {
 
 final ThemeData _defaultBootLightTheme = _buildThemeData(_lightColorScheme);
 const _defaultLightCoreTheme = CoreStyleColors(
+  name: 'AgiliteLight',
   successColor: Color(0xFF1E009E),
   onSuccessColor: Colors.white,
   appBarColor: Color(0xFFF5F7FA),
   onAppBarColor: Color(0xFF272C33),
   sideBarColor: Color(0xFF303840),
   onSideBarColor: Colors.white,
+  onWarningColor: Color(0xFFE68200),
 );
 
 final ThemeData _defaultBootDarkTheme = _buildThemeData(_darkColorScheme);
 const _defaultDarkCoreTheme = CoreStyleColors(
+  name: 'AgiliteDark',
   successColor: Colors.pink, //Color(0xFF3404FF),
   onSuccessColor: Colors.white,
   appBarColor: Color(0xFF1D2126),
@@ -46,6 +49,7 @@ const _buttonBorder = RoundedRectangleBorder(
 ThemeData _buildThemeData(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
+    brightness: colorScheme.brightness,
     colorScheme: colorScheme,
     inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder(), isDense: true),
     elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(shape: _buttonBorder)),

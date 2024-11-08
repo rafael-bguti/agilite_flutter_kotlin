@@ -1,9 +1,9 @@
 import 'package:agilite_flutter_boot/boot.dart';
 import 'package:agilite_flutter_core/core.dart';
 import 'package:projeto_estudo/ClientesScreen.dart';
-import 'package:projeto_estudo/DashboardScreen.dart';
 
 import 'fake_services.dart';
+import 'modules/dashboard_screen.dart';
 
 final routes = <ARoute>[
   ARoute.eager(

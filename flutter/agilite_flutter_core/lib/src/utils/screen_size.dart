@@ -48,4 +48,14 @@ class ScreenSize {
       return Device.phone;
     }
   }
+
+  double horizontalPadding() {
+    if (isPhone()) {
+      return 8;
+    } else if (isTablet()) {
+      return 16;
+    } else {
+      return 24;
+    }
+  }
 }

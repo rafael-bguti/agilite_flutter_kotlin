@@ -12,5 +12,6 @@ void main() async {
   runApp(BootApp(
     appTitle: 'Agilite Flutter Boot',
     routes: routes,
+    themeMode: ThemeMode.light,
   ));
 }

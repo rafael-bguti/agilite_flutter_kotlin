@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
     return Stack(
       children: [
         DecoratedBox(
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      coreStyle.getLogoWidget(false),
+                      coreStyle.getLogoWidget(LogoDestination.drawer, Theme.of(context).brightness),
                       ASpacingColumn(
                         children: [
                           Text('Bem vindo!', style: textTheme?.headlineMedium),
@@ -246,10 +247,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     } else {
       return Text(
         'ENTRAR',
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: backgroundColor,
-            ),
+        style: textTheme?.titleMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+          color: backgroundColor,
+        ),
       );
     }
   }
@@ -296,7 +297,6 @@ class Ripple extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final cs = Theme.of(context).colorScheme;
 
     double radius = screenHeight * value;
     return Positioned(
@@ -307,7 +307,7 @@ class Ripple extends StatelessWidget {
         height: 2 * radius,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: cs.surface,
+          color: colorScheme?.surface,
         ),
       ),
     );

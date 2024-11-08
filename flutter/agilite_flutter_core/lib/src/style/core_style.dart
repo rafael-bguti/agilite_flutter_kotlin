@@ -2,20 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-//---- Instance of CoreStyle ----
-CoreStyle? _coreStyle;
-set coreStyle(CoreStyle coreStyle) {
-  _coreStyle = coreStyle;
-}
-
-CoreStyle get coreStyle {
-  return _coreStyle ??= const CoreStyle();
-}
-//---- Instance of CoreStyle ----
+enum LogoDestination { appBar, drawer }
 
 class CoreStyle {
   final Widget loadingWidget;
-  final Widget Function(bool toAppBar)? logoBuilder;
+  final Widget Function(LogoDestination destination, Brightness brightness)? logoBuilder;
 
   final double kPaddingS;
   final double kPaddingM;
@@ -57,10 +48,22 @@ class CoreStyle {
               ),
             );
 
-  Widget getLogoWidget(bool toAppBar) => logoBuilder?.call(toAppBar) ?? const FlutterLogo(size: 40);
+  Widget getLogoWidget(LogoDestination destination, Brightness brightness) {
+    if (logoBuilder != null) {
+      return logoBuilder!(destination, brightness);
+    }
+
+    final logo = brightness == Brightness.dark ? 'logow' : 'logob';
+    return Image(
+      image: AssetImage('assets/images/$logo.png'),
+      height: destination == LogoDestination.appBar ? 18 : 40,
+    );
+  }
 }
 
 class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
+  final String name;
+
   final Color successColor;
   final Color onSuccessColor;
 
@@ -74,6 +77,7 @@ class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
   final Color onSideBarColor;
 
   const CoreStyleColors({
+    required this.name,
     required this.successColor,
     required this.onSuccessColor,
     required this.appBarColor,
@@ -96,6 +100,7 @@ class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
     Color? onSideBarColor,
   }) {
     return CoreStyleColors(
+      name: name,
       successColor: successColor ?? this.successColor,
       onSuccessColor: onSuccessColor ?? this.onSuccessColor,
       warningColor: warningColor ?? this.warningColor,
@@ -113,6 +118,7 @@ class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
       return this;
     }
     return CoreStyleColors(
+      name: name,
       successColor: Color.lerp(successColor, other.successColor, t)!,
       onSuccessColor: Color.lerp(onSuccessColor, other.onSuccessColor, t)!,
       warningColor: Color.lerp(warningColor, other.warningColor, t)!,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final menuItens = <MenuItem>[
   MenuItem('s', title: 'Overview', type: MenuItemType.header),
-  MenuItem('a', title: 'Dashboard', type: MenuItemType.item, iconCode: 0xe871, route: '/dashboard'),
+  MenuItem('a', title: 'Dashboard', type: MenuItemType.item, iconCode: 0xe1b1, route: '/dashboard'),
   MenuItem('b', title: 'Login', type: MenuItemType.item, iconCode: 0xf041),
   MenuItem('s', title: 'Applications', type: MenuItemType.header),
   MenuItem('x', title: 'Cadastros', type: MenuItemType.group, iconCode: Icons.add_chart_sharp.codePoint, children: [

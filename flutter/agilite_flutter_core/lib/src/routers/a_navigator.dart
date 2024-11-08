@@ -6,11 +6,14 @@ final GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>(d
 const String loadingRouteName = 'loading';
 const String errorRouteName = 'error';
 
+typedef NavigatorListener = void Function(String path);
+
 class ANavigator {
   static void go(String path, [bool closeAllDialogsBefore = true]) {
     if (closeAllDialogsBefore) {
       ANavigator.closeAllDialogs();
     }
+
     appRouter.go(path);
   }
 
@@ -18,6 +21,7 @@ class ANavigator {
     if (closeAllDialogsBefore) {
       ANavigator.closeAllDialogs();
     }
+
     appRouter.replace(path);
   }
 

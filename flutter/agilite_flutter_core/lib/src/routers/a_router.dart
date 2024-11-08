@@ -14,10 +14,14 @@ GoRouter get appRouter => _cachedRouter!;
 GoRouter buildRouterConfig(List<ARoute> routes) {
   GoRouter.optionURLReflectsImperativeAPIs = true;
 
+  return _cachedRouter ??= _buildGoRouter(routes);
+}
+
+GoRouter _buildGoRouter(List<ARoute> routes) {
   List<ARoute> routesWithFullLayout = routes.where((e) => e.inFullLayout).toList();
   List<ARoute> routesWithoutFullLayout = routes.where((e) => !e.inFullLayout).toList();
 
-  return _cachedRouter ??= GoRouter(
+  return GoRouter(
     initialLocation: loginPath,
     routes: <RouteBase>[
       ...(routesWithoutFullLayout.map((e) => e.route).toList()),

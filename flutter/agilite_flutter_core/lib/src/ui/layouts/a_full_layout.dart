@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:agilite_flutter_core/src/ui/layouts/a_drawer.dart';
 import 'package:flutter/material.dart';
 
-const _kMinWidthMenuFixed = 1280.0;
+const kMinWidthMenuFixed = 1280.0;
 const _kTopbarHeight = 64.0;
 const kSidebarWidth = 255.0;
 
@@ -39,13 +39,13 @@ class _AFullLayoutState extends State<AFullLayout> {
     return Scaffold(
       extendBody: true,
       body: LayoutBuilder(builder: (context, size) {
-        menuController.layout = size.maxWidth >= _kMinWidthMenuFixed ? Layout.fixed : Layout.floating;
+        menuController.layout = size.maxWidth >= kMinWidthMenuFixed ? Layout.fixed : Layout.floating;
         return Stack(
           children: [
             AnimatedPadding(
               key: const Key("DesktopBodyPadding"),
               duration: kThemeAnimationDuration,
-              padding: EdgeInsets.only(left: size.maxWidth < _kMinWidthMenuFixed ? 0 : kSidebarWidth),
+              padding: EdgeInsets.only(left: size.maxWidth < kMinWidthMenuFixed ? 0 : kSidebarWidth),
               child: Column(
                 children: [
                   ATopBar(
@@ -82,7 +82,7 @@ class _AFullLayoutState extends State<AFullLayout> {
                   curve: Curves.fastOutSlowIn,
                   top: 0,
                   bottom: 0,
-                  left: size.maxWidth < _kMinWidthMenuFixed ? leftMenuPosition : 0,
+                  left: size.maxWidth < kMinWidthMenuFixed ? leftMenuPosition : 0,
                   child: ASideBar(menuController),
                 );
               },
@@ -136,7 +136,7 @@ class ATopBar extends StatelessWidget {
                 },
               ),
               const SizedBox(width: 8),
-              buildLogo(LogoDestination.appBar),
+              coreStyle.getLogoWidget(LogoDestination.appBar, Theme.of(context).brightness),
             ],
           )
         : const SizedBox.shrink();
@@ -168,7 +168,7 @@ class ATopBar extends StatelessWidget {
             AAlertBadge(Icons.email, emailMsgs),
             const SizedBox(width: 8),
             ALoggedUserDropdown(
-              menuController.topbarUserMenuController,
+              menuController.topBarUserMenuController,
             ),
             const SizedBox(width: 8),
           ],
@@ -245,6 +245,8 @@ class ALoggedUserDropdown extends StatelessWidget {
                     title: Text('Configurações', style: TextStyle(color: onBackgroundColor)),
                     onTap: () => print('Configurações'),
                   ),
+                  //TODO remover o Switch do Tema daqui e adicionar em uma página de configuração que não tenha nenhum const para que não fique travado o tema ao alterar
+                  _ThemeSwitcherTile(isDarkMode: Theme.of(context).brightness == Brightness.dark),
                   const Divider(),
                   ListTile(
                     leading: Icon(Icons.exit_to_app, color: errorColor),
@@ -306,12 +308,46 @@ class ALoggedUserDropdown extends StatelessWidget {
 
 enum Layout { fixed, floating }
 
+class _ThemeSwitcherTile extends StatelessWidget {
+  final bool isDarkMode;
+
+  const _ThemeSwitcherTile({
+    required this.isDarkMode,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
+      title: Text('Modo ${isDarkMode ? 'Escuro' : 'Claro'}'),
+      trailing: Switch(
+        value: isDarkMode,
+        onChanged: (_) => onChanged(context),
+      ),
+      onTap: () {
+        onChanged(context);
+      },
+    );
+  }
+
+  void onChanged(BuildContext context) {
+    if (themeNotifier.value == ThemeMode.system) {
+      final brightness = MediaQuery.of(context).platformBrightness;
+      themeNotifier.value = brightness == Brightness.dark ? ThemeMode.light : ThemeMode.dark;
+    } else {
+      themeNotifier.value = themeNotifier.value == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    }
+
+    StyleHelper.onChangeTheme();
+  }
+}
+
 class AFullLayoutController {
   Layout? layout;
   final $sideMenuVisibleValue = ValueNotifier<bool>(false);
 
   //User menu Controllers
-  final MenuController topbarUserMenuController = MenuController();
+  final MenuController topBarUserMenuController = MenuController();
   final MenuController drawerUserMenuController = MenuController();
 
   //Sidebar menu
@@ -388,11 +424,7 @@ class FullLayoutFacade {
   }
 
   void selectMenuItemAndNavigationReplace(String route) {
-    final item = _itensByRoute[route];
-    if (item != null) {
-      selectItem(item);
-    }
-
+    selectItemByRoute(route);
     ANavigator.replace(route);
   }
 
