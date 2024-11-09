@@ -86,6 +86,7 @@ class NextCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ACard(
+      padding: EdgeInsets.zero,
       header: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
@@ -150,6 +151,7 @@ class TodayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ACard(
+      padding: EdgeInsets.zero,
       header: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
@@ -187,6 +189,7 @@ class _OverviewPanel extends StatelessWidget {
           ],
           children: const [
             ACard(
+              padding: EdgeInsets.zero,
               minHeight: 150,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -194,6 +197,7 @@ class _OverviewPanel extends StatelessWidget {
               ),
             ),
             ACard(
+              padding: EdgeInsets.zero,
               minHeight: 150,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -201,10 +205,12 @@ class _OverviewPanel extends StatelessWidget {
               ),
             ),
             ACard(
+              padding: EdgeInsets.zero,
               minHeight: 150,
               body: _CardPercents(),
             ),
             ACard(
+              padding: EdgeInsets.zero,
               minHeight: 150,
               body: _CardPercents2(),
             ),

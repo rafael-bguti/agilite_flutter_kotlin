@@ -33,34 +33,14 @@ class ACard extends StatelessWidget {
     final localBackgroundColor = backgroundColor ?? (brightness == Brightness.light ? Colors.white : const Color(0xFF23282e));
     final localPadding = padding ?? const EdgeInsets.all(16);
     final localBorderColor = borderColor ?? style.backgroundColor.darkenIfLightOrLightenIfDark(style.brightness, 0.1);
+    final shadown = _buildShadown();
 
     final content = Container(
       decoration: BoxDecoration(
         color: localBackgroundColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: _getBorderRadius(leftBorderColor == null ? 4 : 0, 4),
         border: Border.all(color: localBorderColor),
-        boxShadow: showShadow
-            ? [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  offset: const Offset(0, 3),
-                  blurRadius: 3,
-                  spreadRadius: -2,
-                ),
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  offset: const Offset(0, 3),
-                  blurRadius: 4,
-                  spreadRadius: 0,
-                ),
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.02),
-                  offset: const Offset(0, 1),
-                  blurRadius: 8,
-                  spreadRadius: 0,
-                ),
-              ]
-            : null,
+        boxShadow: leftBorderColor == null ? shadown : null,
       ),
       constraints: BoxConstraints(minHeight: minHeight ?? 0),
       child: Column(
@@ -86,15 +66,45 @@ class ACard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: leftBorderColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(8),
-          bottomLeft: Radius.circular(8),
-          topRight: Radius.circular(16),
-          bottomRight: Radius.circular(16),
-        ),
+        borderRadius: _getBorderRadius(4, 16),
+        boxShadow: leftBorderColor == null ? null : shadown,
       ),
-      padding: const EdgeInsets.only(left: 4),
+      padding: const EdgeInsets.only(left: 8),
       child: content,
     );
+  }
+
+  BorderRadius _getBorderRadius(double left, double right) {
+    return BorderRadius.only(
+      topLeft: Radius.circular(left),
+      bottomLeft: Radius.circular(left),
+      topRight: Radius.circular(right),
+      bottomRight: Radius.circular(right),
+    );
+  }
+
+  List<BoxShadow>? _buildShadown() {
+    return showShadow
+        ? [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, 3),
+              blurRadius: 3,
+              spreadRadius: -2,
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              offset: const Offset(0, 3),
+              blurRadius: 4,
+              spreadRadius: 0,
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              offset: const Offset(0, 1),
+              blurRadius: 8,
+              spreadRadius: 0,
+            ),
+          ]
+        : null;
   }
 }

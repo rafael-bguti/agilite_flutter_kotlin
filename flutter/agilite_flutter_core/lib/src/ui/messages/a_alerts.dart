@@ -78,17 +78,16 @@ class AAlert extends StatelessWidget {
                 if (title != null)
                   Text(
                     title!,
-                    style: TextStyle(
+                    style: textTheme?.labelLarge?.copyWith(
                       color: _getForeColor(),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 SelectableText(
                   message,
-                  style: TextStyle(
+                  style: textTheme?.labelLarge?.copyWith(
                     color: _getForeColor(),
-                    fontWeight: FontWeight.bold,
-                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],

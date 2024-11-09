@@ -158,11 +158,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                 ],
                               ),
                               const SizedBox(height: 16),
-                              if (_errorMessage != null)
-                                Text(
-                                  _errorMessage!,
-                                  style: textTheme?.titleLarge?.copyWith(color: errorColor, fontWeight: FontWeight.bold),
-                                ),
+                              if (_errorMessage != null) AAlert.error(message: _errorMessage!),
                               ConstrainedBox(
                                 constraints: const BoxConstraints(
                                   minWidth: double.infinity,
