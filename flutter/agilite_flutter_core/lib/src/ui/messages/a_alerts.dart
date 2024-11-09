@@ -8,56 +8,60 @@ enum AlertType {
   success,
 }
 
+enum RenderType { light, soft, strong }
+
 class AAlert extends StatelessWidget {
   final String message;
-  final String title;
-
+  final String? title;
   final AlertType type;
+  final RenderType renderType;
 
   const AAlert._(
     this.message,
     this.type,
-    this.title, {
+    this.title,
+    this.renderType, {
     super.key,
   });
 
   const AAlert.warning({
     required this.message,
-    this.title = 'Atenção',
+    this.title,
+    this.renderType = RenderType.soft,
     super.key,
   }) : type = AlertType.warning;
 
   const AAlert.error({
     required this.message,
-    this.title = 'Erro',
+    this.title,
+    this.renderType = RenderType.soft,
     super.key,
   }) : type = AlertType.error;
 
   const AAlert.info({
     required this.message,
-    this.title = 'Informação',
+    this.title,
+    this.renderType = RenderType.soft,
     super.key,
   }) : type = AlertType.info;
 
   const AAlert.success({
     required this.message,
-    this.title = 'Sucesso',
+    this.title,
+    this.renderType = RenderType.soft,
     super.key,
   }) : type = AlertType.success;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final color = _getBackColor(renderType);
+    return ACard(
+      showShadow: false,
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: _getBackColor().withOpacity(0.6),
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: _getBackColor(),
-          width: 1,
-        ),
-      ),
-      child: Row(
+      backgroundColor: color,
+      borderColor: _getBorderColor(),
+      leftBorderColor: _getLeftCardColor(),
+      body: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -71,17 +75,20 @@ class AAlert extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: _getForeColor(),
-                    fontWeight: FontWeight.bold,
+                if (title != null)
+                  Text(
+                    title!,
+                    style: TextStyle(
+                      color: _getForeColor(),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
                 SelectableText(
                   message,
                   style: TextStyle(
                     color: _getForeColor(),
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -107,33 +114,49 @@ class AAlert extends StatelessWidget {
     }
   }
 
-  Color _getBackColor() {
+  Color? _getBorderColor() {
+    if (renderType == RenderType.soft) {
+      return _getBackColor(renderType).darkenIfLightOrLightenIfDark(brightness);
+    } else if (renderType == RenderType.strong) {
+      return _getBackColor(renderType);
+    } else {
+      return null;
+    }
+  }
+
+  Color? _getLeftCardColor() {
+    if (renderType != RenderType.light) {
+      return null;
+    } else {
+      return _getBackColor(RenderType.strong);
+    }
+  }
+
+  Color _getBackColor(RenderType renderType) {
+    if (renderType == RenderType.light) {
+      return backgroundColor;
+    }
     switch (type) {
       case AlertType.warning:
-        return warningColor;
+        return renderType == RenderType.soft ? const Color(0xFFFAEED8) : const Color(0xFFE4A93C);
       case AlertType.error:
-        return errorColor;
+        return renderType == RenderType.soft ? const Color(0xFFF9D9D9) : const Color(0xFFE23D3D);
       case AlertType.info:
-        return primaryColor;
+        return renderType == RenderType.soft ? const Color(0xFFDBECFC) : const Color(0xFF4AA2EE);
       case AlertType.success:
-        return successColor;
+        return renderType == RenderType.soft ? const Color(0xFFCCF2F3) : const Color(0xFF00BCC2);
       default:
         return Colors.transparent;
     }
   }
 
   Color _getForeColor() {
-    switch (type) {
-      case AlertType.warning:
-        return onWarningColor;
-      case AlertType.error:
-        return onErrorColor;
-      case AlertType.info:
-        return onPrimaryColor;
-      case AlertType.success:
-        return onSuccessColor;
-      default:
-        return Colors.transparent;
+    if (renderType == RenderType.light) {
+      return onBackgroundColor;
     }
+    if (renderType == RenderType.strong) {
+      return Colors.white;
+    }
+    return const Color(0xFF303840);
   }
 }

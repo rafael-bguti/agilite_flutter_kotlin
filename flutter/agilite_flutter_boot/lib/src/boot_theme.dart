@@ -28,7 +28,7 @@ const _defaultLightCoreTheme = CoreStyleColors(
   onAppBarColor: Color(0xFF272C33),
   sideBarColor: Color(0xFF303840),
   onSideBarColor: Colors.white,
-  onWarningColor: Color(0xFFE68200),
+  onWarningColor: Colors.deepOrange,
 );
 
 final ThemeData _defaultBootDarkTheme = _buildThemeData(_darkColorScheme);
@@ -43,7 +43,7 @@ const _defaultDarkCoreTheme = CoreStyleColors(
 );
 
 const _buttonBorder = RoundedRectangleBorder(
-  borderRadius: BorderRadius.all(Radius.circular(8)),
+  borderRadius: BorderRadius.all(Radius.circular(4)),
 );
 
 ThemeData _buildThemeData(ColorScheme colorScheme) {
@@ -51,12 +51,24 @@ ThemeData _buildThemeData(ColorScheme colorScheme) {
     useMaterial3: true,
     brightness: colorScheme.brightness,
     colorScheme: colorScheme,
+    chipTheme: const ChipThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(90)),
+      ),
+    ),
     inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder(), isDense: true),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(shape: _buttonBorder)),
-    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: _buttonBorder)),
-    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: _buttonBorder)),
-    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: _buttonBorder)),
-    popupMenuTheme: PopupMenuThemeData(surfaceTintColor: colorScheme.surface, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
+    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
+    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
+    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
+    //popupMenuTheme: PopupMenuThemeData(surfaceTintColor: colorScheme.surface, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+    textTheme: const TextTheme(
+      labelLarge: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'HeaderFont',
+      ),
+    ),
   );
 }
 
@@ -65,6 +77,7 @@ final _lightColorScheme = ColorScheme.fromSeed(
   seedColor: seedColor,
   brightness: Brightness.light,
   error: const Color(0xFF981111),
+  onError: const Color(0xFFFFFFFF),
   surface: const Color(0xFFF5F7FA),
   onSurface: const Color(0xFF272C33),
 ).copyWith();
@@ -74,6 +87,7 @@ final _darkColorScheme = ColorScheme.fromSeed(
   seedColor: seedColor,
   brightness: Brightness.dark,
   error: const Color(0xFFEC0000),
+  onError: const Color(0xFFFFFFFF),
   errorContainer: _lightColorScheme.errorContainer,
   onErrorContainer: _lightColorScheme.onErrorContainer,
   surface: const Color(0xFF1D2126),

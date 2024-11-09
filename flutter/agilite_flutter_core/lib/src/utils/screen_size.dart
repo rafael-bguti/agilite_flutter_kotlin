@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const double _phoneMaxBreakpoint = 850;
-const double _tabletMaxBreakpoint = 1100;
+const double _phoneMaxBreakpoint = 900;
+const double _tabletMaxBreakpoint = 1400;
 
 enum Device { phone, tablet, desktop }
 

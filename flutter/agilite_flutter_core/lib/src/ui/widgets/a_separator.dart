@@ -11,27 +11,30 @@ class ASeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: AText(
-            label.toUpperCase(),
-            style: textTheme?.bodyMedium?.copyWith(
-              fontFamily: 'HeaderFont',
-              fontSize: 16,
-              letterSpacing: 1.3,
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: AText(
+              label.toUpperCase(),
+              style: textTheme?.bodyMedium?.copyWith(
+                fontFamily: 'HeaderFont',
+                fontSize: 16,
+                letterSpacing: 1.3,
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Divider(
-            color: textTheme?.bodyMedium?.color,
-            thickness: 0.5,
+          Expanded(
+            child: Divider(
+              color: textTheme?.bodyMedium?.color,
+              thickness: 0.5,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -1,13 +1,16 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class AFluidTaskLayout extends StatelessWidget {
+class AContainer extends StatelessWidget {
   final Widget child;
+
+  final bool fluid;
   final String? taskHeader;
 
-  const AFluidTaskLayout({
+  const AContainer({
     required this.child,
     this.taskHeader,
+    this.fluid = false,
     super.key,
   });
 
@@ -15,29 +18,28 @@ class AFluidTaskLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = ScreenSize(context);
     const width = kMinWidthMenuFixed - kSidebarWidth;
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ..._buildTaskHeader(width, screenSize),
-          Expanded(
-            child: SizedBox(
-              width: width,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24.0),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ..._buildTaskHeader(width, screenSize),
+            SizedBox(
+              width: fluid ? double.infinity : width,
               child: Padding(
                 padding: EdgeInsets.only(
                   left: screenSize.horizontalPadding(),
                   right: screenSize.horizontalPadding(),
                   top: 16,
                 ),
-                child: SingleChildScrollView(
-                  child: child,
-                ),
+                child: child,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -49,7 +51,7 @@ class AFluidTaskLayout extends StatelessWidget {
     }
     children.add(
       SizedBox(
-        width: width,
+        width: fluid ? double.infinity : width,
         child: Padding(
           padding: EdgeInsets.only(
             left: screenSize.horizontalPadding(),

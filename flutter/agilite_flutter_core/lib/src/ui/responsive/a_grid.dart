@@ -13,18 +13,18 @@ class AGrid extends StatelessWidget {
   ///          5,*    -- * indica resto do espaco
   ///          10-6-4
   ///
-  final List<String> linhas;
+  final List<String> rows;
   final bool recursiveGrid;
   final double spacing;
 
   final GridSizes _gridSizes;
   AGrid({
     required this.children,
-    this.linhas = const ['12'],
+    this.rows = const ['12'],
     this.recursiveGrid = true,
     this.spacing = 4,
     super.key,
-  }) : _gridSizes = GridSizes(linhas, recursiveGrid);
+  }) : _gridSizes = GridSizes(rows, recursiveGrid);
 
   @override
   Widget build(BuildContext context) {

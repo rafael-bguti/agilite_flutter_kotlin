@@ -84,7 +84,7 @@ class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
     required this.onAppBarColor,
     required this.sideBarColor,
     required this.onSideBarColor,
-    this.warningColor = Colors.orangeAccent,
+    this.warningColor = const Color.fromARGB(255, 243, 201, 141),
     this.onWarningColor = const Color(0xFFFFFFFF),
   });
 

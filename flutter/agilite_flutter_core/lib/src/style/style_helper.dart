@@ -21,7 +21,7 @@ Color get warningColor => _warningColor ??= coreStyleColors?.warningColor ?? Col
 Color get onWarningColor => _onWarningColor ??= coreStyleColors?.onWarningColor ?? Colors.red;
 Color get errorColor => _errorColor ??= colorScheme?.error ?? Colors.red;
 Color get errorContainerColor => _errorContainerColor ??= colorScheme?.errorContainer ?? Colors.red;
-Color get onErrorColor => _onErrorColor ??= colorScheme?.onErrorContainer ?? Colors.red;
+Color get onErrorColor => _onErrorColor ??= colorScheme?.onError ?? Colors.red;
 Color get successColor => _successColor ??= coreStyleColors?.successColor ?? Colors.red;
 Color get onSuccessColor => _onSuccessColor ??= coreStyleColors?.onSuccessColor ?? Colors.red;
 
@@ -60,8 +60,8 @@ set coreStyle(CoreStyle coreStyle) {
 CoreStyle get coreStyle {
   return _coreStyle ??= const CoreStyle();
 }
-//---- Instance of CoreStyle ----
 
+//---- Instance of CoreStyle ----
 class StyleHelper {
   static void onChangeTheme() {
     _backgroundColor = null;
