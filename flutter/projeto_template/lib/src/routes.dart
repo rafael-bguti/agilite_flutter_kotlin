@@ -3,6 +3,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:projeto_estudo/src/modules/alerts_screen.dart';
 import 'package:projeto_estudo/src/modules/buttons_screen.dart';
 import 'package:projeto_estudo/src/modules/cards_screen.dart';
+import 'package:projeto_estudo/src/modules/tables/tables_screen.dart';
 
 import 'fake_services.dart';
 import 'modules/dashboard_screen.dart';
@@ -37,5 +38,10 @@ final routes = <ARoute>[
     '/alerts',
     inFullLayout: true,
     (_, __) => const AlertsScreen(),
+  ),
+  ARoute.eager(
+    '/tables',
+    inFullLayout: true,
+    (_, __) => const TablesScreen(),
   ),
 ];

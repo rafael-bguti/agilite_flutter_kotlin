@@ -12,9 +12,11 @@ Color? _errorContainerColor;
 Color? _onErrorColor;
 Color? _successColor;
 Color? _onSuccessColor;
+Color? _onSurfaceColor;
 
 Color get backgroundColor => _backgroundColor ??= colorScheme?.surface ?? Colors.red;
 Color get onBackgroundColor => _onBackgroundColor ??= colorScheme?.onSurface ?? Colors.red;
+Color get barrierColor => onBackgroundColor.withOpacity(0.5);
 Color get primaryColor => _primaryColor ??= colorScheme?.primary ?? Colors.red;
 Color get onPrimaryColor => _onPrimaryColor ??= colorScheme?.onPrimary ?? Colors.red;
 Color get warningColor => _warningColor ??= coreStyleColors?.warningColor ?? Colors.red;
@@ -24,6 +26,7 @@ Color get errorContainerColor => _errorContainerColor ??= colorScheme?.errorCont
 Color get onErrorColor => _onErrorColor ??= colorScheme?.onError ?? Colors.red;
 Color get successColor => _successColor ??= coreStyleColors?.successColor ?? Colors.red;
 Color get onSuccessColor => _onSuccessColor ??= coreStyleColors?.onSuccessColor ?? Colors.red;
+Color get onSurfaceColor => _onSurfaceColor ??= colorScheme?.onSurface ?? Colors.red;
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 
@@ -75,5 +78,6 @@ class StyleHelper {
     _onErrorColor = null;
     _successColor = null;
     _onSuccessColor = null;
+    _onSurfaceColor = null;
   }
 }

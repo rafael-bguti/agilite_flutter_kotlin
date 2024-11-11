@@ -115,7 +115,7 @@ class AAlert extends StatelessWidget {
 
   Color? _getBorderColor() {
     if (renderType == RenderType.soft) {
-      return _getBackColor(renderType).darkenIfLightOrLightenIfDark(brightness);
+      return _getBackColor(renderType)!.darkenIfLightOrLightenIfDark(brightness);
     } else if (renderType == RenderType.strong) {
       return _getBackColor(renderType);
     } else {
@@ -131,9 +131,9 @@ class AAlert extends StatelessWidget {
     }
   }
 
-  Color _getBackColor(RenderType renderType) {
+  Color? _getBackColor(RenderType renderType) {
     if (renderType == RenderType.light) {
-      return backgroundColor;
+      return null;
     }
     switch (type) {
       case AlertType.warning:

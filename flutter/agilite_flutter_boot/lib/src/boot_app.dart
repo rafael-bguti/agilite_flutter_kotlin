@@ -36,6 +36,9 @@ class _BootAppState extends State<BootApp> {
   @override
   void initState() {
     super.initState();
+    metadataRepository = MetadataRepositoryImpl(httpProvider);
+    coreHttpProvider = httpProvider;
+
     if (widget.themeMode != null) {
       themeNotifier.value = widget.themeMode!;
     }
@@ -69,7 +72,7 @@ class _BootAppState extends State<BootApp> {
   }
 }
 
-Storage get storage => _storageCache ??= HiveStorage(_storageName ?? 'agilite_boot');
+Storage get storage => _storageCache ??= HiveStorage(_storageName ?? 'new_agilite_boot');
 AuthService get authService => _authServiceCache ??= StorageAuthServiceImpl(storage);
 HttpProvider get httpProvider => _httpProviderCache ??= HttpProviderImpl(authorizationTokenGetter: () => authService.loadLoggedToken());
 
