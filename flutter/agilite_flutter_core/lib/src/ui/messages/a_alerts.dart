@@ -61,7 +61,7 @@ class AAlert extends StatelessWidget {
       backgroundColor: color,
       borderColor: _getBorderColor(),
       leftBorderColor: _getLeftCardColor(),
-      body: Row(
+      child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

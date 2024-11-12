@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/gestures.dart';
-
-import '../../utils/platform_info.dart';
+import 'package:flutter/material.dart';
 
 class AppScrollBehavior extends ScrollBehavior {
   @override
@@ -19,11 +18,16 @@ class AppScrollBehavior extends ScrollBehavior {
   @override
   Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
     if (PlatformInfo.isMobile) return child;
+
+    bool isScrollView = details.controller?.debugLabel == 'AScrollVisible';
+    bool showScroll = !isScrollView && PlatformInfo.hasMouse;
     return RawScrollbar(
       controller: details.controller,
-      thumbVisibility: PlatformInfo.hasMouse,
-      thickness: 8,
-      interactive: true,
+      thumbVisibility: showScroll,
+      trackVisibility: showScroll,
+      thumbColor: showScroll ? onBackgroundColor.withOpacity(0.5) : null,
+      thickness: showScroll ? 8 : 0,
+      interactive: showScroll ? true : false,
       child: child,
     );
   }

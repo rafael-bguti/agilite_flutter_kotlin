@@ -28,7 +28,7 @@ class CardsScreen extends StatelessWidget {
                   IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
                 ],
               ),
-              body: Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text("Some quick example text to build on the card title and make up the bulk of the card's content."),
@@ -62,7 +62,7 @@ class CardsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              body: Padding(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class CardsScreen extends StatelessWidget {
             ),
             ACard(
               padding: EdgeInsets.zero,
-              body: IntrinsicHeight(
+              child: IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -130,7 +130,7 @@ class CardsScreen extends StatelessWidget {
             ACard(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               leftBorderColor: Colors.tealAccent,
-              body: Row(
+              child: Row(
                 children: [
                   const Icon(Icons.lock_clock),
                   const SizedBox(width: 16),
@@ -142,25 +142,25 @@ class CardsScreen extends StatelessWidget {
             ),
             const ACard(
               leftBorderColor: Colors.blueAccent,
-              body: AText(
+              child: AText(
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
               ),
             ),
             const ACard(
               leftBorderColor: Colors.green,
-              body: AText(
+              child: AText(
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
               ),
             ),
             const ACard(
               leftBorderColor: Colors.orangeAccent,
-              body: AText(
+              child: AText(
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
               ),
             ),
             const ACard(
               leftBorderColor: Colors.red,
-              body: AText(
+              child: AText(
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
               ),
             ),

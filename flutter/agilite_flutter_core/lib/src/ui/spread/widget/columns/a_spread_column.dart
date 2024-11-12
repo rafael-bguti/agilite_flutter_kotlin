@@ -53,7 +53,7 @@ abstract class ASpreadColumn<T> {
       ),
     );
 
-    return _buildCellSizeContainer(child);
+    return _buildCellSizeContainer(child, true);
   }
 
   Widget buildFooter(BuildContext context) {
@@ -65,7 +65,7 @@ abstract class ASpreadColumn<T> {
       ),
     );
 
-    return _buildCellSizeContainer(child);
+    return _buildCellSizeContainer(child, false);
   }
 
   bool validate() {
@@ -115,7 +115,7 @@ abstract class ASpreadColumn<T> {
       cell = buildRenderCellWrapper(context, row, isFocused);
     }
 
-    return _buildCellSizeContainer(cell);
+    return _buildCellSizeContainer(cell, false);
   }
 
   Widget buildEditCellWrapper(BuildContext context, int row) {
@@ -150,15 +150,17 @@ abstract class ASpreadColumn<T> {
     );
   }
 
-  Widget _buildCellSizeContainer(Widget child) {
-    const borderDecorator = BoxDecoration(
-      border: Border(
-        left: BorderSide(
-          color: Color(0xFFCCCCCC),
-          width: 1,
-        ),
-      ),
-    );
+  Widget _buildCellSizeContainer(Widget child, bool header) {
+    final borderDecorator = header
+        ? null
+        : const BoxDecoration(
+            border: Border(
+              left: BorderSide(
+                color: Color(0xFFCCCCCC),
+                width: 1,
+              ),
+            ),
+          );
     if (width.hasFixedWidth) {
       return Container(
         width: width.width,

@@ -46,7 +46,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             const ASeparator(label: 'Recently added'),
             const ACard(
               padding: EdgeInsets.all(8),
-              body: SizedBox(
+              child: SizedBox(
                 width: double.infinity,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -101,7 +101,7 @@ class NextCard extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
+      child: Padding(
         padding: const EdgeInsets.all(8),
         child: ASpacingColumn(
           spacing: 8,
@@ -165,7 +165,7 @@ class TodayCard extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
+      child: Padding(
         padding: EdgeInsets.all(8),
         child: AAlert.warning(message: 'Nothing scheduled for today.'),
       ),
@@ -191,7 +191,7 @@ class _OverviewPanel extends StatelessWidget {
             ACard(
               padding: EdgeInsets.zero,
               minHeight: 150,
-              body: Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 child: _CardRow(number: '130', title: 'Contacts'),
               ),
@@ -199,7 +199,7 @@ class _OverviewPanel extends StatelessWidget {
             ACard(
               padding: EdgeInsets.zero,
               minHeight: 150,
-              body: Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 child: _CardRow(number: '53', title: 'Companies'),
               ),
@@ -207,12 +207,12 @@ class _OverviewPanel extends StatelessWidget {
             ACard(
               padding: EdgeInsets.zero,
               minHeight: 150,
-              body: _CardPercents(),
+              child: _CardPercents(),
             ),
             ACard(
               padding: EdgeInsets.zero,
               minHeight: 150,
-              body: _CardPercents2(),
+              child: _CardPercents2(),
             ),
           ],
         )

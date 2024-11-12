@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ACard extends StatelessWidget {
   final Widget? header;
-  final Widget body;
+  final Widget child;
 
   final double? minHeight;
   final EdgeInsetsGeometry? padding;
@@ -16,7 +16,7 @@ class ACard extends StatelessWidget {
   final Color? leftBorderColor;
 
   const ACard({
-    required this.body,
+    required this.child,
     this.header,
     this.padding,
     this.showDivider = true,
@@ -55,7 +55,7 @@ class ACard extends StatelessWidget {
           if (showDivider && header != null) const Divider(height: 1),
           Padding(
             padding: localPadding,
-            child: body,
+            child: child,
           ),
         ],
       ),

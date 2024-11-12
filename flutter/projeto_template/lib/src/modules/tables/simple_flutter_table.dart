@@ -2,9 +2,12 @@ import 'dart:math';
 
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_estudo/src/modules/tables/tables_screen.dart';
 
 class SimpleFlutterTable extends StatefulWidget {
-  const SimpleFlutterTable({super.key});
+  const SimpleFlutterTable({
+    super.key,
+  });
 
   @override
   _SimpleFlutterTableState createState() => _SimpleFlutterTableState();
@@ -14,20 +17,11 @@ class _SimpleFlutterTableState extends State<SimpleFlutterTable> {
   bool _sortAscending = true;
   int _sortColumnIndex = -1;
 
-  List<User> users = [
-    User("https://i.pravatar.cc/150?img=1", 'Ollie Wallace', 'lorna.kirlin@nora.biz', null, 'Manager', '285-626-6050', '16 February 2019', false),
-    User("https://i.pravatar.cc/150?img=5", 'Gilbert Barrett', 'paolo.zieme@gmail.com', null, 'Admin', '462-060-7408', '17 February 2019', false),
-    User("https://i.pravatar.cc/150?img=8", 'Tony Parks', 'vida.glover@gmail.com', Company('Frontend Matter Inc', 'Leuschkefurt'), 'Admin', '169-769-4821', '18 February 2019',
-        true),
-    User(
-        "https://i.pravatar.cc/150?img=9", 'Billy Nunez', 'annabell.kris@yahoo.com', Company('Huma Huma Inc.', 'Huma Huma Inc.'), 'User', '239-721-3649', '19 February 2019', true),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ACard(
       padding: const EdgeInsets.all(8),
-      body: SizedBox(
+      child: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -197,24 +191,4 @@ class CompanyAvatar extends StatelessWidget {
       1,
     );
   }
-}
-
-class User {
-  final String image;
-  final String name;
-  final String email;
-  final Company? company;
-  final String tags;
-  final String phone;
-  final String added;
-  bool selected;
-
-  User(this.image, this.name, this.email, this.company, this.tags, this.phone, this.added, this.selected);
-}
-
-class Company {
-  final String name;
-  final String location;
-
-  Company(this.name, this.location);
 }

@@ -57,6 +57,9 @@ class _ScrollViewState extends State<AScrollView> {
 
   Widget _buildHeader() {
     return Scrollbar(
+      thickness: 0,
+      trackVisibility: false,
+      thumbVisibility: false,
       controller: _scrollController.headerHorizontal,
       notificationPredicate: (notif) => false,
       child: _wrapperInHorizontalScroll(
@@ -101,9 +104,9 @@ class _ScrollViewState extends State<AScrollView> {
 
 class AScrollController {
   final double offSet = 55;
-  final ScrollController headerHorizontal = ScrollController();
-  final ScrollController bodyHorizontal = ScrollController();
-  final ScrollController bodyVertical = ScrollController();
+  final ScrollController headerHorizontal = ScrollController(debugLabel: 'AScrollVisible');
+  final ScrollController bodyHorizontal = ScrollController(debugLabel: 'AScrollVisible');
+  final ScrollController bodyVertical = ScrollController(debugLabel: 'AScrollVisible');
 
   final bool _disposeOnViewDispose;
 

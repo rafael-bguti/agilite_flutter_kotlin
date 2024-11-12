@@ -24,6 +24,7 @@ class ASpread extends StatefulWidget {
   final List<ASpreadColumn<dynamic>>? columns;
   final bool? disableScroll;
   final bool? disableVerticalScroll;
+  final bool? readOnly;
   final String? selectColumnName;
   final String labelButtonAddNew;
 
@@ -56,6 +57,7 @@ class ASpread extends StatefulWidget {
         selectColumnName = null,
         onAddNewRow = null,
         canAddNewRow = null,
+        readOnly = null,
         onCellStopEdit = null,
         onControllerCreated = null,
         labelTextToValidationMessage = null;
@@ -73,6 +75,7 @@ class ASpread extends StatefulWidget {
     this.moreDetail,
     this.onAddNewRow,
     this.canAddNewRow,
+    this.readOnly,
     this.onCellStopEdit,
     this.value,
     this.onControllerCreated,
@@ -329,7 +332,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
       disableScroll: widget.disableScroll ?? false,
       disableVerticalScroll: widget.disableVerticalScroll ?? false,
       selectColumnName: widget.selectColumnName,
-      readOnly: widget.onRowTap != null,
+      readOnly: widget.readOnly ?? false,
       onAddNewRow: widget.onAddNewRow,
       canAddNewRow: widget.canAddNewRow,
       onCellStopEdit: widget.onCellStopEdit,
@@ -407,7 +410,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   }
 
   List<SpreadMoreOptionAction>? Function(int row)? _buildDefaultMoreOptionActionsBuilder(ASpreadController controller) {
-    if (controller.readOnly) return null;
+    // if (controller.readOnly) return null;
 
     final options = [
       spreadMoreActionAddNewRow,
@@ -520,62 +523,65 @@ class SpreadMoreDetail {
   }
 
   Widget _defaultMoreDetailBodyBuilder(BuildContext context, int rowIndex, ASpreadController controller) {
-    final result = Column(
-      children: [
-        const ADialogHeader(
-          headerText: 'Mais detalhes',
-        ),
-        const Divider(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: AForm(
-              controller.moreDetailFormController,
-              child: Focus(
-                onKey: (node, event) {
-                  if (event.logicalKey == LogicalKeyboardKey.enter) {
-                    Navigator.of(globalNavigatorKey.currentContext!).pop();
-                    return KeyEventResult.handled;
-                  }
-                  return KeyEventResult.ignored;
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AGrid(
-                      rows: gridAreas,
-                      children: _getMoreDetailBodyChildren(context, rowIndex, controller),
-                    ),
-                    otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()
-                  ],
+    final result = Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          const ADialogHeader(
+            headerText: 'Mais detalhes',
+          ),
+          const Divider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: AForm(
+                controller.moreDetailFormController,
+                child: Focus(
+                  onKey: (node, event) {
+                    if (event.logicalKey == LogicalKeyboardKey.enter) {
+                      Navigator.of(globalNavigatorKey.currentContext!).pop();
+                      return KeyEventResult.handled;
+                    }
+                    return KeyEventResult.ignored;
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AGrid(
+                        rows: gridAreas,
+                        children: _getMoreDetailBodyChildren(context, rowIndex, controller),
+                      ),
+                      otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  foregroundColor: onSuccessColor,
-                  backgroundColor: successColor,
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FilledButton.icon(
+                  style: FilledButton.styleFrom(
+                    foregroundColor: onSuccessColor,
+                    backgroundColor: successColor,
+                  ),
+                  onPressed: () {
+                    Navigator.of(globalNavigatorKey.currentContext!).pop();
+                  },
+                  icon: const Icon(Icons.check),
+                  label: const Tooltip(
+                    message: 'Ok (Enter)',
+                    child: Text("Ok"),
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.of(globalNavigatorKey.currentContext!).pop();
-                },
-                icon: const Icon(Icons.check),
-                label: const Tooltip(
-                  message: 'Ok (Enter)',
-                  child: Text("Ok"),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
     return result;
   }

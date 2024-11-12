@@ -15,6 +15,7 @@ final menuItens = <MenuItem>[
     MenuItem('62', title: 'Cards', type: MenuItemType.item, route: '/cards'),
     MenuItem('63', title: 'Alerts', type: MenuItemType.item, route: '/alerts'),
     MenuItem('64', title: 'Tables / Spread', type: MenuItemType.item, route: '/tables'),
+    MenuItem('65', title: 'Forms', type: MenuItemType.item, route: '/forms'),
     MenuItem('69999', title: 'Diversos', type: MenuItemType.item, route: '/diversos'), //TODO criar uma pagina com todos os componentes customizados criados
   ]),
 ];

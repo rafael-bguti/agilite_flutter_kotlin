@@ -19,7 +19,7 @@ class CoreStyle {
 
   static const BorderSide kSpreadBorderSide = BorderSide(
     color: Color(0xFFCCCCCC),
-    width: 1,
+    width: 2,
   );
 
   const CoreStyle({
@@ -34,7 +34,7 @@ class CoreStyle {
   })  : loadingWidget = loadingWidget ?? const DefaultLoadingWidget(),
         tableHeaderRowDecoration = tableHeaderRowDecoration ??
             const BoxDecoration(
-              color: Color(0xFFEEEEEE),
+              color: Color(0xFFFFFFFF),
               border: Border(bottom: kSpreadBorderSide),
             ),
         tableRowDecoration = tableRowDecoration ??
