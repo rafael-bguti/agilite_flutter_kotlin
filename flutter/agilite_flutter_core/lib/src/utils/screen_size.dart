@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const double _phoneMaxBreakpoint = 900;
-const double _tabletMaxBreakpoint = 1400;
+const double _phoneMaxBreakpoint = 600;
+const double _tabletMaxBreakpoint = 1024;
 
 enum Device { phone, tablet, desktop }
 
@@ -40,6 +40,7 @@ class ScreenSize {
 
   Device whichDevice() {
     final width = mq.size.width;
+
     if (isDesktopSize(width)) {
       return Device.desktop;
     } else if (isTabletSize(width)) {

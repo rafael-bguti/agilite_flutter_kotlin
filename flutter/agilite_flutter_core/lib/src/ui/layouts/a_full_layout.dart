@@ -1,5 +1,4 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/ui/layouts/a_drawer.dart';
 import 'package:flutter/material.dart';
 
 const kMinWidthMenuFixed = 1280.0;
@@ -36,16 +35,18 @@ class _AFullLayoutState extends State<AFullLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    menuController.layout = mq.size.width >= kMinWidthMenuFixed ? Layout.fixed : Layout.floating;
     return Scaffold(
       extendBody: true,
-      body: LayoutBuilder(builder: (context, size) {
-        menuController.layout = size.maxWidth >= kMinWidthMenuFixed ? Layout.fixed : Layout.floating;
-        return Stack(
+      body: MediaQuery(
+        data: mq,
+        child: Stack(
           children: [
             AnimatedPadding(
               key: const Key("DesktopBodyPadding"),
               duration: kThemeAnimationDuration,
-              padding: EdgeInsets.only(left: size.maxWidth < kMinWidthMenuFixed ? 0 : kSidebarWidth),
+              padding: EdgeInsets.only(left: mq.size.width < kMinWidthMenuFixed ? 0 : kSidebarWidth),
               child: Column(
                 children: [
                   ATopBar(
@@ -82,14 +83,14 @@ class _AFullLayoutState extends State<AFullLayout> {
                   curve: Curves.fastOutSlowIn,
                   top: 0,
                   bottom: 0,
-                  left: size.maxWidth < kMinWidthMenuFixed ? leftMenuPosition : 0,
+                  left: mq.size.width < kMinWidthMenuFixed ? leftMenuPosition : 0,
                   child: ASideBar(menuController),
                 );
               },
             ),
           ],
-        );
-      }),
+        ),
+      ),
     );
   }
 }

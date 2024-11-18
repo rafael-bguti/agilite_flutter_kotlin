@@ -28,7 +28,7 @@ class _FullRebuildWidgetState extends State<FullRebuildWidget> {
         color: Colors.red,
         child: Center(
           child: Text(
-            'Forçando reconstrução! ${mq.size.width}',
+            'Forçando reconstrução! ${mq.size.width} - ${mq.size.height}',
             style: TextStyle(color: Colors.white),
           ),
         ),

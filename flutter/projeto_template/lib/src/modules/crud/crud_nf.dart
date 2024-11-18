@@ -37,7 +37,7 @@ class PainelDeFiltros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AGrid.rows([
-      AGridRow("12-6-4", [
+      AGridRow("6 ", [
         ASearchField(
           onSearchChanged: (value) {
             print('Buscar por $value');

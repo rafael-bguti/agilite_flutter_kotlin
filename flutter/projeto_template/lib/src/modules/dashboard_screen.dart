@@ -25,7 +25,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        headerLabel: "CRM Dashboard",
+        fluid: true,
+        headerLabel: "CRM Dashboard -> ${ScreenSize(context).whichDevice()}",
         child: ASpacingColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
@@ -36,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             AGrid(
               areas: const [
-                '12-8, 12-4',
+                '12-12-8, 12-12-4',
               ],
               children: const [
                 _OverviewPanel(),
