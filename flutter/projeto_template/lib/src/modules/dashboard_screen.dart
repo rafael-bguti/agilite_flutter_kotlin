@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             AGrid(
               areas: const [
-                '12-12-8, 12-12-4',
+                '8, 4',
               ],
               children: const [
                 _OverviewPanel(),
@@ -186,7 +186,7 @@ class _OverviewPanel extends StatelessWidget {
         AGrid(
           spacing: 8,
           areas: const [
-            '12-6, 12-6',
+            '6, 6',
           ],
           children: const [
             ACard(

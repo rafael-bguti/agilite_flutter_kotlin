@@ -12,12 +12,12 @@ class CardsScreen extends StatelessWidget {
         child: AGrid(
           spacing: 16,
           areas: const [
-            '12-6, 12-6',
+            '6, 6',
             '12',
             '12',
             '12',
-            '12-6, 12-6',
-            '12-6, 12-6',
+            '6, 6',
+            '6, 6',
           ],
           children: [
             ACard(

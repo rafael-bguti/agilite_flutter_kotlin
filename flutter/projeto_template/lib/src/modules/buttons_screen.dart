@@ -179,7 +179,7 @@ class _Grid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AGrid(
-      areas: const ['12-4, 12-8'],
+      areas: const ['4, 8'],
       children: [
         ASeparator(label: label),
         Padding(

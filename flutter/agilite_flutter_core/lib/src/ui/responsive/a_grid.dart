@@ -1,16 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/ui/responsive/a_grid_row.dart';
 import 'package:flutter/material.dart';
 
 class AGrid extends StatelessWidget {
   final List<Widget> children;
 
-  /// Informar as linhas separadas por \n as colunas separadas por , e os dispositivos separados por -
-  /// o Dispositivo segue o padrao phone[-tablet[-desktop]]
-  /// Exemplo: 6-2,6-4,6-2-1
-  ///          5,*    -- * indica resto do espaco
-  ///          10-6-4
+  /// Areas:
+  /// Informar o tamanho por dispositivo separado por - e os dispositivos separados por ,
+  /// o Dispositivo segue o padrao desktop[-tablet[-phone]], o valor default para todos é 12
+  /// Exemplo: 2-6, 4-6, 1-2-6 -> nesse caso primeiro componente: 2 desktop, 6 tablet, 12 phone. segundo componente: 4 desktop, 6 tablet, 12 phone. terceiro componente: 1 desktop, 2 tablet, 6 phone
+  ///          5, *    -- * indica resto do espaco
+  ///          10-6-4 -> nesse caso primeiro componente: 10 desktop, 6 tablet, 4 phone
   ///
   final bool recursiveGrid;
   final double spacing;

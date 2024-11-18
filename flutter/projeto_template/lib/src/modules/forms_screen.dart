@@ -13,7 +13,7 @@ class FormsScreen extends StatelessWidget {
           spacing: 16,
           children: [
             AGrid(
-              areas: const ['12-4, 12-8'],
+              areas: const ['4, 8'],
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +32,7 @@ class FormsScreen extends StatelessWidget {
               ],
             ),
             AGrid(
-              areas: const ['12-4, 12-8'],
+              areas: const ['4, 8'],
               children: const [
                 ASeparator(label: "Autocomplete/Combo"),
                 Padding(
@@ -152,11 +152,11 @@ class _SimpleFormState extends State<SimpleForm> {
           formController,
           child: AGrid.rows(
             [
-              AGridRow('12-6, 12-6', [
+              AGridRow('6, 6', [
                 const ATextField.string("nome", labelText: "First Name", req: true),
                 const ATextField.string("sobrenome", labelText: "Last Name", req: true),
               ]),
-              AGridRow('4, 8', [
+              AGridRow('4-4-4, 8-8-8', [
                 const ATextField.string("estado", labelText: "State", maxLength: 2, req: true),
                 const ATextField.string("cidade", labelText: "City", req: true),
               ]),

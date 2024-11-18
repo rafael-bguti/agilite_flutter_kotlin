@@ -17,13 +17,20 @@ class ResponsiveSize {
     try {
       final split = query.splitToList("-");
       return ResponsiveSize(
-        phone: int.parse(split[0].trim()),
-        tablet: split.length >= 2 ? int.parse(split[1].trim()) : int.parse(split[0].trim()),
-        desktop: int.parse(split[split.length - 1].trim()),
+        desktop: _areaOrDefault(split, 0),
+        tablet: _areaOrDefault(split, 1),
+        phone: _areaOrDefault(split, 2),
       );
     } catch (e) {
       throw Exception("Invalid query format. Expected format: 'phone[-tablet[-desktop]]'");
     }
+  }
+
+  static int _areaOrDefault(List<String> split, int index) {
+    if (split.length > index) {
+      return int.parse(split[index].trim());
+    }
+    return 12;
   }
 
   int columnSize(Device device) {
