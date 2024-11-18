@@ -28,4 +28,14 @@ extension ColorExtensions on Color {
       return lighten(amount);
     }
   }
+
+  Color lightenOrDarken(Brightness brightness, [double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    if (brightness == Brightness.light) {
+      return lighten(amount);
+    } else {
+      return darken(amount);
+    }
+  }
 }

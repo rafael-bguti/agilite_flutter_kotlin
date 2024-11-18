@@ -8,7 +8,7 @@ class AlertsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        taskHeader: "Alerts",
+        headerLabel: "Alerts",
         child: ASpacingColumn(
           spacing: 32,
           children: [
@@ -64,7 +64,7 @@ class _Grid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AGrid(
-      rows: const ['12-4, 12-8'],
+      areas: const ['12-4, 12-8'],
       children: [
         ASeparator(label: label),
         Padding(

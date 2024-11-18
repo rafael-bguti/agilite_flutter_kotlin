@@ -9,7 +9,7 @@ class TablesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        taskHeader: "Tables / Spread",
+        headerLabel: "Tables / Spread",
         child: ASpacingColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 32,

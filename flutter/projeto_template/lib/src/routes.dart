@@ -3,6 +3,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:projeto_estudo/src/modules/alerts_screen.dart';
 import 'package:projeto_estudo/src/modules/buttons_screen.dart';
 import 'package:projeto_estudo/src/modules/cards_screen.dart';
+import 'package:projeto_estudo/src/modules/crud/crud_nf.dart';
 import 'package:projeto_estudo/src/modules/forms_screen.dart';
 import 'package:projeto_estudo/src/modules/tables/tables_screen.dart';
 
@@ -49,5 +50,10 @@ final routes = <ARoute>[
     '/forms',
     inFullLayout: true,
     (_, __) => const FormsScreen(),
+  ),
+  ARoute.eager(
+    '/crud',
+    inFullLayout: true,
+    (_, __) => const CrudNf(),
   ),
 ];

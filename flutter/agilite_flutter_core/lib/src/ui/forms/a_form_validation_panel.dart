@@ -1,6 +1,8 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
+//TODO melhorar o Disigne desse panel
+//TODO esconder o painel automaticamente no lostFocus de correção dos fields
 class AFormValidationPanel extends StatefulWidget {
   const AFormValidationPanel({
     Key? key,

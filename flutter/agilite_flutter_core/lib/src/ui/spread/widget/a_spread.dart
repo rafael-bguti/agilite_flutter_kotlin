@@ -547,7 +547,7 @@ class SpreadMoreDetail {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AGrid(
-                        rows: gridAreas,
+                        areas: gridAreas,
                         children: _getMoreDetailBodyChildren(context, rowIndex, controller),
                       ),
                       otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()

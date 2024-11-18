@@ -26,7 +26,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
     return SingleChildScrollView(
       child: AContainer(
         fluid: true,
-        taskHeader: "Buttons",
+        headerLabel: "Buttons",
         child: ASpacingColumn(
           spacing: 32.0,
           children: [
@@ -179,7 +179,7 @@ class _Grid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AGrid(
-      rows: const ['12-4, 12-8'],
+      areas: const ['12-4, 12-8'],
       children: [
         ASeparator(label: label),
         Padding(

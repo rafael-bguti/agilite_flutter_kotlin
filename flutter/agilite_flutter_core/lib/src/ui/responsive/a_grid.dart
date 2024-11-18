@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:agilite_flutter_core/core.dart';
+import 'package:agilite_flutter_core/src/ui/responsive/a_grid_row.dart';
 import 'package:flutter/material.dart';
-
-import 'responsive_size.dart';
 
 class AGrid extends StatelessWidget {
   final List<Widget> children;
@@ -13,18 +12,25 @@ class AGrid extends StatelessWidget {
   ///          5,*    -- * indica resto do espaco
   ///          10-6-4
   ///
-  final List<String> rows;
   final bool recursiveGrid;
   final double spacing;
 
   final GridSizes _gridSizes;
   AGrid({
     required this.children,
-    this.rows = const ['12'],
+    List<String> areas = const ['12'],
     this.recursiveGrid = true,
-    this.spacing = 4,
+    this.spacing = 8,
     super.key,
-  }) : _gridSizes = GridSizes(rows, recursiveGrid);
+  }) : _gridSizes = GridSizes(areas, recursiveGrid);
+
+  AGrid.rows(
+    List<AGridRow> rows, {
+    this.recursiveGrid = true,
+    this.spacing = 8,
+    super.key,
+  })  : _gridSizes = GridSizes(_extractAreasFromColumns(rows), recursiveGrid),
+        children = rows.map((e) => e.children).expand((e) => e).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +94,10 @@ class AGrid extends StatelessWidget {
         ),
     ];
   }
+}
+
+List<String> _extractAreasFromColumns(List<AGridRow> rows) {
+  return rows.map((e) => e.areas).toList();
 }
 
 class GridSizes {

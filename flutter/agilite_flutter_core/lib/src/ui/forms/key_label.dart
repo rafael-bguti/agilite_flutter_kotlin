@@ -7,15 +7,25 @@ abstract class KeyLabel<T> {
 
   @override
   String toString() => label;
+
+  Map<String, dynamic>? getMoreDetails();
 }
 
 class LocalKeyLabel<T> extends KeyLabel<T> {
   final T? key;
   @override
   final String label;
+  final Map<String, dynamic>? moreDetails;
 
-  LocalKeyLabel(this.key, this.label);
-  LocalKeyLabel.keyOnly(this.key) : label = key.toString();
+  LocalKeyLabel(
+    this.key,
+    this.label, {
+    this.moreDetails,
+  });
+
+  LocalKeyLabel.keyOnly(this.key)
+      : label = key.toString(),
+        moreDetails = null;
 
   @override
   bool operator ==(covariant LocalKeyLabel<T> other) {
@@ -30,6 +40,9 @@ class LocalKeyLabel<T> extends KeyLabel<T> {
 
   @override
   dynamic get jsonKey => key;
+
+  @override
+  Map<String, dynamic>? getMoreDetails() => moreDetails;
 }
 
 class RemoteKeyLabel<T> extends KeyLabel<T> {
@@ -59,4 +72,7 @@ class RemoteKeyLabel<T> extends KeyLabel<T> {
 
   @override
   dynamic get jsonKey => allData;
+
+  @override
+  Map<String, dynamic>? getMoreDetails() => allData;
 }

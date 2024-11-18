@@ -7,7 +7,214 @@ class FormsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: AContainer(taskHeader: "Forms", child: Placeholder()),
+      child: AContainer(
+        headerLabel: "Forms",
+        child: ASpacingColumn(
+          spacing: 16,
+          children: [
+            AGrid(
+              areas: const ['12-4, 12-8'],
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const ASeparator(label: "Simple form with Validation"),
+                    AText(
+                      "Provide valuable, actionable feedback to your users with HTML5 form validation – available in all our supported browsers.",
+                      style: moreDetailTextStyle,
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 24.0),
+                  child: SimpleForm(),
+                ),
+              ],
+            ),
+            AGrid(
+              areas: const ['12-4, 12-8'],
+              children: const [
+                ASeparator(label: "Autocomplete/Combo"),
+                Padding(
+                  padding: EdgeInsets.only(top: 24.0),
+                  child: Autocompletes(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+class Autocompletes extends StatefulWidget {
+  const Autocompletes({super.key});
+
+  @override
+  State<Autocompletes> createState() => _AutocompletesState();
+}
+
+class _AutocompletesState extends State<Autocompletes> {
+  final formController = AFormController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AForm(
+      formController,
+      child: ASpacingColumn(
+        spacing: 16,
+        children: [
+          AComboField("comboFixo", labelText: "Combobox Fixo", options: [
+            LocalKeyLabel<String>("1", "Opção 1"),
+            LocalKeyLabel<String>("2", "Opção 2"),
+            LocalKeyLabel<String>("3", "Opção 3"),
+          ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AAutocompleteField.options("autocompleteFixo", labelText: "Autocomplete Fixo", options: [
+                LocalKeyLabel<String>("1", "Opção 1"),
+                LocalKeyLabel<String>("2", "Opção 2"),
+                LocalKeyLabel<String>("3", "Opção 3"),
+              ]),
+              AText("No Autocomplete com Options, o sistema exibe as opções paginado", style: moreDetailTextStyle),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AAutocompleteField.combo("autocompleteCombo", labelText: "Autocomplete Combo", options: [
+                LocalKeyLabel<String>("1", "Opção 1"),
+                LocalKeyLabel<String>("2", "Opção 2"),
+                LocalKeyLabel<String>("3", "Opção 3"),
+              ]),
+              AText("No Autocomplete Combo, o sistema exibe todas as opções sem página", style: moreDetailTextStyle),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AAutocompleteField.combo(
+                "autocompleteCustomField",
+                labelText: "Autocomplete Custom Field",
+                options: [
+                  LocalKeyLabel<String>("1", "João", moreDetails: {"image": "https://i.pravatar.cc/150?img=1", "empresa": "Company A"}),
+                  LocalKeyLabel<String>("2", "José", moreDetails: {"image": "https://i.pravatar.cc/150?img=2", "empresa": "Company B"}),
+                  LocalKeyLabel<String>("3", "Maria", moreDetails: {"image": "https://i.pravatar.cc/150?img=3", "empresa": "Company C"}),
+                ],
+                listItemBuilder: _buildCustomListItem,
+              ),
+              AText("Custom autocomplete Field", style: moreDetailTextStyle),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomListItem(KeyLabel<String> item) {
+    final moreDetails = item.getMoreDetails();
+    return ASpacingRow(
+      children: [
+        CircleAvatar(
+          radius: 16,
+          backgroundImage: NetworkImage(moreDetails!["image"] as String),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AText(item.label),
+            AText(moreDetails["empresa"] as String, style: moreDetailTextStyle),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class SimpleForm extends StatefulWidget {
+  const SimpleForm({super.key});
+
+  @override
+  State<SimpleForm> createState() => _SimpleFormState();
+}
+
+class _SimpleFormState extends State<SimpleForm> {
+  final formController = AFormController();
+  String? result;
+
+  @override
+  Widget build(BuildContext context) {
+    return ASpacingColumn(
+      children: [
+        AForm(
+          formController,
+          child: AGrid.rows(
+            [
+              AGridRow('12-6, 12-6', [
+                const ATextField.string("nome", labelText: "First Name", req: true),
+                const ATextField.string("sobrenome", labelText: "Last Name", req: true),
+              ]),
+              AGridRow('4, 8', [
+                const ATextField.string("estado", labelText: "State", maxLength: 2, req: true),
+                const ATextField.string("cidade", labelText: "City", req: true),
+              ]),
+              AGridRow('12', [
+                const ABoolField("accept", labelText: "Agree to terms and conditions", renderType: ABoolRenderType.checkbox),
+              ]),
+              AGridRow('12', [
+                const AFormValidationPanel(),
+              ]),
+              AGridRow('12', [
+                ASpacingRow(
+                  children: [
+                    ElevatedButton(
+                      style: successButtonStyle,
+                      onPressed: _enviar,
+                      child: const Text("Submit"),
+                    ),
+                    ElevatedButton(
+                      onPressed: _preencher,
+                      child: const Text("Show Values"),
+                    ),
+                    ElevatedButton(
+                      style: warningButtonStyle,
+                      onPressed: _clear,
+                      child: const Text("Clear"),
+                    ),
+                  ],
+                ),
+              ])
+            ],
+          ),
+        ),
+        if (result != null) const Divider(),
+        if (result != null) AText(result!),
+      ],
+    );
+  }
+
+  void _enviar() {
+    setState(() {
+      result = null;
+    });
+    if (formController.validate()) {
+      result = formController.buidlJson().toString();
+    }
+  }
+
+  void _preencher() {
+    formController.value = {
+      "nome": "João",
+      "sobrenome": "Silva",
+      "estado": "SP",
+      "cidade": "São Paulo",
+      "accept": true,
+    };
+  }
+
+  void _clear() {
+    formController.clear();
   }
 }

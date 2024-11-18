@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 class AContainer extends StatelessWidget {
   final Widget child;
+  final Widget? headerOptions;
 
   final bool fluid;
-  final String? taskHeader;
+  final String? headerLabel;
 
   const AContainer({
     required this.child,
-    this.taskHeader,
+    this.headerOptions,
+    this.headerLabel,
     this.fluid = false,
     super.key,
   });
@@ -26,14 +28,18 @@ class AContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ..._buildTaskHeader(width, screenSize),
+            _buildTaskHeader(width, screenSize),
+            if (_needDivider())
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Divider(height: 1),
+              ),
             SizedBox(
               width: fluid ? double.infinity : width,
               child: Padding(
                 padding: EdgeInsets.only(
                   left: screenSize.horizontalPadding(),
                   right: screenSize.horizontalPadding(),
-                  top: 16,
                 ),
                 child: child,
               ),
@@ -44,29 +50,56 @@ class AContainer extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildTaskHeader(double width, ScreenSize screenSize) {
-    final List<Widget> children = [];
-    if (taskHeader == null) {
-      return children;
+  bool _needDivider() {
+    return headerLabel != null || headerOptions != null;
+  }
+
+  Widget _buildTaskHeader(double width, ScreenSize screenSize) {
+    if (headerLabel == null && this.headerOptions == null) {
+      return const SizedBox.shrink();
     }
-    children.add(
-      SizedBox(
-        width: fluid ? double.infinity : width,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: screenSize.horizontalPadding(),
-            right: screenSize.horizontalPadding(),
-            bottom: 16,
-          ),
-          child: SelectableText(
-            taskHeader!,
-            style: textTheme?.headlineMedium?.copyWith(fontFamily: 'HeaderFont'),
-          ),
-        ),
+
+    final headerText = _buildLabel(screenSize);
+    final headerOptions = _buildHeaderOptions(screenSize);
+    return SizedBox(
+      width: fluid ? double.infinity : width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          headerText,
+          headerOptions,
+        ],
       ),
     );
-    children.add(const Divider(height: 1));
+  }
 
-    return children;
+  Widget _buildHeaderOptions(ScreenSize screenSize) {
+    if (headerOptions != null) {
+      return Padding(
+        padding: EdgeInsets.only(
+          right: screenSize.horizontalPadding(),
+        ),
+        child: headerOptions,
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget _buildLabel(ScreenSize screenSize) {
+    if (headerLabel != null) {
+      return Padding(
+        padding: EdgeInsets.only(
+          left: screenSize.horizontalPadding(),
+        ),
+        child: SelectableText(
+          headerLabel!,
+          style: textTheme?.headlineMedium?.copyWith(fontFamily: 'HeaderFont'),
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

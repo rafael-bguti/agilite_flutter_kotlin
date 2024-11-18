@@ -22,7 +22,7 @@ ThemeData buildTheme(ThemeData theme, CoreStyleColors coreThemeColors) {
 final ThemeData _defaultBootLightTheme = _buildThemeData(_lightColorScheme);
 const _defaultLightCoreTheme = CoreStyleColors(
   name: 'AgiliteLight',
-  successColor: Color(0xFF1E009E),
+  successColor: Colors.teal,
   onSuccessColor: Colors.white,
   appBarColor: Color(0xFFF5F7FA),
   onAppBarColor: Color(0xFF272C33),

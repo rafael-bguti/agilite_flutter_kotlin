@@ -17,6 +17,8 @@ class BootApp extends StatefulWidget {
 
   final List<ARoute>? routes;
 
+  final HttpProvider? customHttpProvider;
+
   const BootApp({
     this.storageName,
     this.appTitle = 'Agilite',
@@ -25,6 +27,7 @@ class BootApp extends StatefulWidget {
     this.lightTheme,
     this.darkTheme,
     this.routes,
+    this.customHttpProvider,
     super.key,
   });
 
@@ -36,6 +39,10 @@ class _BootAppState extends State<BootApp> {
   @override
   void initState() {
     super.initState();
+    if (widget.customHttpProvider != null) {
+      _httpProviderCache = widget.customHttpProvider;
+    }
+
     metadataRepository = MetadataRepositoryImpl(httpProvider);
     coreHttpProvider = httpProvider;
 

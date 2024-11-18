@@ -25,7 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        taskHeader: "CRM Dashboard",
+        headerLabel: "CRM Dashboard",
         child: ASpacingColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
@@ -35,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
             ),
             AGrid(
-              rows: const [
+              areas: const [
                 '12-8, 12-4',
               ],
               children: const [
@@ -184,7 +184,7 @@ class _OverviewPanel extends StatelessWidget {
         const ASeparator(label: 'Overview'),
         AGrid(
           spacing: 8,
-          rows: const [
+          areas: const [
             '12-6, 12-6',
           ],
           children: const [

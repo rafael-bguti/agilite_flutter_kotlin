@@ -8,10 +8,10 @@ class CardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        taskHeader: "Cards",
+        headerLabel: "Cards",
         child: AGrid(
           spacing: 16,
-          rows: const [
+          areas: const [
             '12-6, 12-6',
             '12',
             '12',
