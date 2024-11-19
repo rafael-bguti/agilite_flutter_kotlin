@@ -32,7 +32,7 @@ class AContainer extends StatelessWidget {
             if (_needDivider())
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Divider(height: 1),
+                child: ADivider.lineOnly(),
               ),
             SizedBox(
               width: fluid ? double.infinity : width,

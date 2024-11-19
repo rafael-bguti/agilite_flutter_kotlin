@@ -30,7 +30,7 @@ class ACard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localBackgroundColor = backgroundColor ?? (brightness == Brightness.light ? Colors.white : const Color(0xFF23282e));
+    final localBackgroundColor = backgroundColor ?? cardColor;
     final localPadding = padding ?? const EdgeInsets.all(16);
     final localBorderColor = borderColor ?? style.backgroundColor.darkenIfLightOrLightenIfDark(style.brightness, 0.1);
     final shadown = _buildShadown();
@@ -43,21 +43,25 @@ class ACard extends StatelessWidget {
         boxShadow: leftBorderColor == null ? shadown : null,
       ),
       constraints: BoxConstraints(minHeight: minHeight ?? 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          if (header != null)
+      child: Material(
+        borderRadius: _getBorderRadius(leftBorderColor == null ? 4 : 0, 4),
+        color: localBackgroundColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            if (header != null)
+              Padding(
+                padding: localPadding,
+                child: header!,
+              ),
+            if (showDivider && header != null) const ADivider.lineOnly(),
             Padding(
               padding: localPadding,
-              child: header!,
+              child: child,
             ),
-          if (showDivider && header != null) const Divider(height: 1),
-          Padding(
-            padding: localPadding,
-            child: child,
-          ),
-        ],
+          ],
+        ),
       ),
     );
 

@@ -67,7 +67,7 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
               ),
             ),
           ),
-          const Divider(height: 1),
+          const ADivider.lineOnly(),
           Expanded(
             child: Container(
               color: colorScheme?.surfaceContainerHighest,

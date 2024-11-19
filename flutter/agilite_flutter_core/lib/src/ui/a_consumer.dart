@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 
 class AConsumer<T extends ChangeNotifier> extends StatefulWidget {
   final T notifier;
-  final Widget Function(BuildContext context, T notifier) builder;
+  final Widget Function(BuildContext context, T notifier, Widget? child) builder;
   final Widget? child;
 
-  const AConsumer(
-    this.notifier, {
+  const AConsumer({
+    required this.notifier,
     required this.builder,
     this.child,
     super.key,
@@ -31,9 +31,7 @@ class _AConsumerState<T extends ChangeNotifier> extends State<AConsumer<T>> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.child != null) return widget.child!;
-
-    return widget.builder(context, widget.notifier);
+    return widget.builder(context, widget.notifier, widget.child);
   }
 
   void _refresh() {

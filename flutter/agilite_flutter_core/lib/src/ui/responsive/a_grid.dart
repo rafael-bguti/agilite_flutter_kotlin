@@ -15,12 +15,15 @@ class AGrid extends StatelessWidget {
   final bool recursiveGrid;
   final double spacing;
 
+  final WrapCrossAlignment crossAxisAlignment;
+
   final GridSizes _gridSizes;
   AGrid({
     required this.children,
     List<String> areas = const ['12'],
     this.recursiveGrid = true,
     this.spacing = 8,
+    this.crossAxisAlignment = WrapCrossAlignment.start,
     super.key,
   }) : _gridSizes = GridSizes(areas, recursiveGrid);
 
@@ -28,6 +31,7 @@ class AGrid extends StatelessWidget {
     List<AGridRow> rows, {
     this.recursiveGrid = true,
     this.spacing = 8,
+    this.crossAxisAlignment = WrapCrossAlignment.start,
     super.key,
   })  : _gridSizes = GridSizes(_extractAreasFromColumns(rows), recursiveGrid),
         children = rows.map((e) => e.children).expand((e) => e).toList();
@@ -46,7 +50,7 @@ class AGrid extends StatelessWidget {
         return Wrap(
           spacing: 0,
           runSpacing: 0,
-          crossAxisAlignment: WrapCrossAlignment.start,
+          crossAxisAlignment: crossAxisAlignment,
           children: _buildCells(maxWidth, device),
         );
       },

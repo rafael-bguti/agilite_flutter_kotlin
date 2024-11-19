@@ -33,31 +33,34 @@ class _AFormValidationPanelState extends State<AFormValidationPanel> {
 
     return Container(
       key: _key,
-      child: AConsumer(formState!.validationMessages$, builder: (_, validations$) {
-        final msgs = validations$.value;
-        if (msgs.isEmpty) {
-          return const SizedBox.shrink();
-        }
+      child: AConsumer(
+        notifier: formState!.$validationMessages,
+        builder: (_, $validations, __) {
+          final msgs = $validations.value;
+          if (msgs.isEmpty) {
+            return const SizedBox.shrink();
+          }
 
-        return Container(
-          color: errorContainerColor,
-          padding: const EdgeInsets.all(8),
-          constraints: const BoxConstraints(maxHeight: 145),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Corrija as validações abaixo antes de continuar:", style: TextStyle(color: errorColor, fontWeight: FontWeight.bold)),
-              Divider(color: errorColor),
-              Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) => Text(' - ${msgs[index]}', style: TextStyle(color: errorColor)),
-                  itemCount: msgs.length,
+          return Container(
+            color: errorContainerColor,
+            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(maxHeight: 145),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Corrija as validações abaixo antes de continuar:", style: TextStyle(color: errorColor, fontWeight: FontWeight.bold)),
+                Divider(color: errorColor),
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => Text(' - ${msgs[index]}', style: TextStyle(color: errorColor)),
+                    itemCount: msgs.length,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

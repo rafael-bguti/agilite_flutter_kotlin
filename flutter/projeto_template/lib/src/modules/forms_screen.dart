@@ -18,7 +18,7 @@ class FormsScreen extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const ASeparator(label: "Simple form with Validation"),
+                    const ADivider.text(text: "Simple form with Validation"),
                     AText(
                       "Provide valuable, actionable feedback to your users with HTML5 form validation – available in all our supported browsers.",
                       style: moreDetailTextStyle,
@@ -34,7 +34,7 @@ class FormsScreen extends StatelessWidget {
             AGrid(
               areas: const ['4, 8'],
               children: const [
-                ASeparator(label: "Autocomplete/Combo"),
+                ADivider.text(text: "Autocomplete/Combo"),
                 Padding(
                   padding: EdgeInsets.only(top: 24.0),
                   child: Autocompletes(),
@@ -170,7 +170,7 @@ class _SimpleFormState extends State<SimpleForm> {
                 ASpacingRow(
                   children: [
                     ElevatedButton(
-                      style: successButtonStyle,
+                      style: primaryButtonStyle,
                       onPressed: _enviar,
                       child: const Text("Submit"),
                     ),
@@ -189,7 +189,7 @@ class _SimpleFormState extends State<SimpleForm> {
             ],
           ),
         ),
-        if (result != null) const Divider(),
+        if (result != null) const ADivider.lineOnly(),
         if (result != null) AText(result!),
       ],
     );

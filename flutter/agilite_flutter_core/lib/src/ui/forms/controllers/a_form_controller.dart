@@ -12,7 +12,7 @@ class AFormController {
   List<FieldController<dynamic>> get fieldControllers => _fieldControllers;
 
   //Panel validations
-  final ValueNotifier<List<String>> validationMessages$ = ValueNotifier([]);
+  final ValueNotifier<List<String>> $validationMessages = ValueNotifier([]);
   GlobalKey? panelValidationGlobalKey;
 
   T addController<T extends FieldController<dynamic>>(T controller) {
@@ -59,7 +59,7 @@ class AFormController {
         isValid = false;
       }
     }
-    validationMessages$.value = msgs;
+    $validationMessages.value = msgs;
     if (panelValidationGlobalKey?.currentContext != null) {
       Scrollable.ensureVisible(panelValidationGlobalKey!.currentContext!, duration: const Duration(milliseconds: 200));
     }
@@ -68,7 +68,7 @@ class AFormController {
   }
 
   void addValidationMessage(String message) {
-    validationMessages$.value = [...validationMessages$.value, message];
+    $validationMessages.value = [...$validationMessages.value, message];
   }
 
   bool isClean() {
@@ -116,7 +116,7 @@ class AFormController {
 
   void clear() {
     _value.clear();
-    validationMessages$.value = [];
+    $validationMessages.value = [];
     for (var f in _fieldControllers) {
       f.clear();
     }
@@ -140,7 +140,7 @@ class AFormController {
       element.dispose();
     }
     _fieldControllers.clear();
-    validationMessages$.value = [];
+    $validationMessages.value = [];
   }
 
   // ---- Utils to FieldController ----

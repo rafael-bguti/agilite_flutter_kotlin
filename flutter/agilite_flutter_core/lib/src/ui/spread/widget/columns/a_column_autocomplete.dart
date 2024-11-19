@@ -146,7 +146,6 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
       listItemBuilder: listItemBuilder,
       decoration: const InputDecoration(
         border: InputBorder.none,
-        isDense: true,
         contentPadding: EdgeInsets.all(0),
       ),
     );

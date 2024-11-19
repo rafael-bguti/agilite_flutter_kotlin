@@ -136,7 +136,6 @@ class AColumnDate extends ASpreadColumn<DateTime> {
       _controller,
       decoration: const InputDecoration(
         border: InputBorder.none,
-        isDense: true,
         contentPadding: EdgeInsets.all(0),
       ),
     );

@@ -75,8 +75,8 @@ class _ABoolFieldState extends State<ABoolField> with FieldControllerRegisterMix
     final theme = Theme.of(context);
 
     return AConsumer(
-      fieldController,
-      builder: (context, fieldController) {
+      notifier: fieldController,
+      builder: (context, fieldController, _) {
         final childs = [
           if (widget.renderType == ABoolRenderType.switcher)
             Switch(

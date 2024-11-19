@@ -1,7 +1,7 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-const seedColor = Color(0xFF1E009E);
+const seedColor = Color(0xFF482AC2);
 
 ThemeData buildLightTheme([ThemeData? theme, CoreStyleColors? coreThemeColors]) {
   return buildTheme(theme ?? _defaultBootLightTheme, coreThemeColors ?? _defaultLightCoreTheme);
@@ -28,7 +28,6 @@ const _defaultLightCoreTheme = CoreStyleColors(
   onAppBarColor: Color(0xFF272C33),
   sideBarColor: Color(0xFF303840),
   onSideBarColor: Colors.white,
-  onWarningColor: Colors.deepOrange,
 );
 
 final ThemeData _defaultBootDarkTheme = _buildThemeData(_darkColorScheme);
@@ -43,7 +42,7 @@ const _defaultDarkCoreTheme = CoreStyleColors(
 );
 
 const _buttonBorder = RoundedRectangleBorder(
-  borderRadius: BorderRadius.all(Radius.circular(4)),
+  borderRadius: BorderRadius.all(Radius.circular(90)),
 );
 
 ThemeData _buildThemeData(ColorScheme colorScheme) {
@@ -56,11 +55,18 @@ ThemeData _buildThemeData(ColorScheme colorScheme) {
         borderRadius: BorderRadius.all(Radius.circular(90)),
       ),
     ),
-    inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder(), isDense: true),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
-    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
-    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
-    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
+    inputDecorationTheme: InputDecorationTheme(
+      border: const OutlineInputBorder(),
+      filled: true,
+      isDense: true,
+      fillColor: colorScheme.brightness == Brightness.light ? Colors.white : Colors.black,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(shape: _buttonBorder)),
+    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: _buttonBorder)),
+    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: _buttonBorder)),
+    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: _buttonBorder)),
+
+    //iconButtonTheme: IconButtonThemeData(style: TextButton.styleFrom(shape: _buttonBorder, minimumSize: const Size(0, 48))),
     //popupMenuTheme: PopupMenuThemeData(surfaceTintColor: colorScheme.surface, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
     textTheme: const TextTheme(
       labelLarge: TextStyle(

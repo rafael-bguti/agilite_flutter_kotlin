@@ -1,5 +1,4 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/ui/layouts/a_drawer_menu.dart';
 import 'package:flutter/material.dart';
 
 class ADrawer extends StatelessWidget {

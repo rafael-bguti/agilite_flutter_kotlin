@@ -156,8 +156,8 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
     );
 
     return AConsumer(
-      fieldController,
-      builder: (context, fieldController) {
+      notifier: fieldController,
+      builder: (context, fieldController, _) {
         final enabled = fieldController.enabled ?? true;
         final suffixIcon = _buildSuffix();
 
@@ -227,7 +227,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
                   child: ListView.separated(
                     controller: fieldController.itemsScrollController,
                     itemCount: fieldController.filteredOptions.length,
-                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    separatorBuilder: (_, __) => const ADivider.lineOnly(),
                     itemBuilder: (ctx, index) => _buildItem(
                       ctx,
                       index,

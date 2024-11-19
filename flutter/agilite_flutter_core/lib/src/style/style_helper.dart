@@ -27,6 +27,7 @@ Color get onErrorColor => _onErrorColor ??= colorScheme?.onError ?? Colors.red;
 Color get successColor => _successColor ??= coreStyleColors?.successColor ?? Colors.red;
 Color get onSuccessColor => _onSuccessColor ??= coreStyleColors?.onSuccessColor ?? Colors.red;
 Color get onSurfaceColor => _onSurfaceColor ??= colorScheme?.onSurface ?? Colors.red;
+Color get cardColor => brightness == Brightness.light ? Colors.white : const Color(0xFF23282e);
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 
@@ -68,6 +69,7 @@ CoreStyle get coreStyle {
 final moreDetailTextStyle = TextStyle(color: onBackgroundColor.lightenOrDarken(brightness, 0.3), fontSize: 13);
 
 //-------- Buttons --------
+ButtonStyle primaryButtonStyle = buildButtonStyle(primaryColor, onPrimaryColor);
 ButtonStyle successButtonStyle = buildButtonStyle(successColor, onSuccessColor);
 ButtonStyle warningButtonStyle = buildButtonStyle(warningColor, onWarningColor);
 
@@ -76,6 +78,7 @@ ButtonStyle buildButtonStyle(Color backgroundColor, Color foregroundColor) {
     backgroundColor: WidgetStateProperty.resolveWith<Color?>(
       (Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) return null;
+        if (states.contains(WidgetState.hovered)) return backgroundColor.lightenOrDarken(brightness);
         return backgroundColor;
       },
     ),

@@ -248,7 +248,7 @@ class ALoggedUserDropdown extends StatelessWidget {
                   ),
                   //TODO remover o Switch do Tema daqui e adicionar em uma página de configuração que não tenha nenhum const para que não fique travado o tema ao alterar
                   _ThemeSwitcherTile(isDarkMode: Theme.of(context).brightness == Brightness.dark),
-                  const Divider(),
+                  const ADivider.lineOnly(),
                   ListTile(
                     leading: Icon(Icons.exit_to_app, color: errorColor),
                     title: Text('Sair', style: TextStyle(color: errorColor)),

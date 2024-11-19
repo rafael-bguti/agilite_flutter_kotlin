@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 const _folderOpenedBackgroundColor = Color(0xFF272C33);
 const _unHoveredColor = Color(0xFF949799);
-const _selectedItem = Color(0xFF438DB6);
+final _selectedItem = primaryColor;
 
 class ADrawerMenu extends StatelessWidget {
   const ADrawerMenu({super.key});

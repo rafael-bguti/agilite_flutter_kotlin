@@ -65,8 +65,8 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerReg
   @override
   Widget build(BuildContext context) {
     return AConsumer(
-      fieldController,
-      builder: (context, fieldController) {
+      notifier: fieldController,
+      builder: (context, fieldController, _) {
         final enabled = fieldController.enabled ?? true;
         return DropdownButtonFormField<T>(
           decoration: widget.localDecoration.copyWith(

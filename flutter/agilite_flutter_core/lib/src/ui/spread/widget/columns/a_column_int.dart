@@ -80,7 +80,6 @@ class AColumnInt extends ASpreadColumn<int> {
       _controller,
       decoration: const InputDecoration(
         border: InputBorder.none,
-        isDense: true,
         contentPadding: EdgeInsets.all(0),
       ),
     );

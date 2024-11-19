@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 
 enum LogoDestination { appBar, drawer }
 
+//TODO colocar essa classe como o extensions do Thema e não a CoreStyleColors, assim todas as propriedades ficam como extensions
 class CoreStyle {
   final Widget loadingWidget;
   final Widget Function(LogoDestination destination, Brightness brightness)? logoBuilder;
@@ -16,11 +17,6 @@ class CoreStyle {
   final BoxDecoration tableRowDecoration;
 
   final String? assetLoginBackground;
-
-  static const BorderSide kSpreadBorderSide = BorderSide(
-    color: Color(0xFFCCCCCC),
-    width: 2,
-  );
 
   const CoreStyle({
     Widget? loadingWidget,
@@ -35,7 +31,12 @@ class CoreStyle {
         tableHeaderRowDecoration = tableHeaderRowDecoration ??
             const BoxDecoration(
               color: Color(0xFFFFFFFF),
-              border: Border(bottom: kSpreadBorderSide),
+              border: Border(
+                bottom: BorderSide(
+                  color: Color(0xFFCCCCCC),
+                  width: 2,
+                ),
+              ),
             ),
         tableRowDecoration = tableRowDecoration ??
             const BoxDecoration(
@@ -84,8 +85,8 @@ class CoreStyleColors extends ThemeExtension<CoreStyleColors> {
     required this.onAppBarColor,
     required this.sideBarColor,
     required this.onSideBarColor,
-    this.warningColor = const Color.fromARGB(255, 243, 201, 141),
-    this.onWarningColor = const Color(0xFFFFFFFF),
+    this.warningColor = const Color(0xFFFAEED8),
+    this.onWarningColor = const Color(0xFF1D2126),
   });
 
   @override

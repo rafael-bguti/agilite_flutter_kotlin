@@ -126,7 +126,7 @@ class CardsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const ASeparator(label: "Custom borders"),
+            const ADivider.text(text: "Custom borders"),
             ACard(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               leftBorderColor: Colors.tealAccent,

@@ -181,7 +181,7 @@ class _Grid extends StatelessWidget {
     return AGrid(
       areas: const ['4, 8'],
       children: [
-        ASeparator(label: label),
+        ADivider.text(text: label),
         Padding(
           padding: const EdgeInsets.only(top: 32.0),
           child: child,

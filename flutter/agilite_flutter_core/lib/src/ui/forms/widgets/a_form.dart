@@ -44,7 +44,7 @@ class AFormState extends State<AForm> {
     return _controller.addController(fieldController);
   }
 
-  ValueNotifier<List<String>> get validationMessages$ => _controller.validationMessages$;
+  ValueNotifier<List<String>> get $validationMessages => _controller.$validationMessages;
   void registerPanelValidationGlobalKey(GlobalKey key) {
     _controller.panelValidationGlobalKey = key;
   }

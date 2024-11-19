@@ -44,7 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 _SchedulePanel(),
               ],
             ),
-            const ASeparator(label: 'Recently added'),
+            const ADivider.text(text: 'Recently added'),
             const ACard(
               padding: EdgeInsets.all(8),
               child: SizedBox(
@@ -73,7 +73,7 @@ class _SchedulePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ASpacingColumn(
       children: const [
-        ASeparator(label: 'Schedule'),
+        ADivider.text(text: 'Schedule'),
         TodayCard(),
         NextCard(),
       ],
@@ -115,7 +115,7 @@ class NextCard extends StatelessWidget {
               startTime: "16:30",
               endTime: "18:00",
               suffix: Padding(
-                padding: EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 16.0),
                 child: ASpacingColumn(
                   children: [
                     const AvatarsStack(),
@@ -127,10 +127,7 @@ class NextCard extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(
-              height: 1,
-              color: onBackgroundColor.withOpacity(0.2),
-            ),
+            const ADivider.lineOnly(),
             const EventCard(
               month: "FEB",
               day: "18",
@@ -182,7 +179,7 @@ class _OverviewPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ASpacingColumn(
       children: [
-        const ASeparator(label: 'Overview'),
+        const ADivider.text(text: 'Overview'),
         AGrid(
           spacing: 8,
           areas: const [

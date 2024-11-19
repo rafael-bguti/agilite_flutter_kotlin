@@ -46,7 +46,7 @@ abstract class ASpreadColumn<T> {
 
   Widget buildHeader(BuildContext context) {
     final child = Container(
-      alignment: Alignment.center,
+      alignment: Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: buildHeaderContent(context),
@@ -97,7 +97,7 @@ abstract class ASpreadColumn<T> {
   Widget buildHeaderContent(BuildContext context) {
     return SelectableText(
       label ?? name,
-      style: const TextStyle(fontWeight: FontWeight.bold),
+      style: textTheme!.labelLarge,
     );
   }
 
@@ -134,7 +134,7 @@ abstract class ASpreadColumn<T> {
     Widget child = canEdit(row)
         ? buildRenderCell(context, row, isFocused)
         : DefaultTextStyle(
-            style: TextStyle(color: onSurfaceColor?.withOpacity(0.65)),
+            style: TextStyle(color: onSurfaceColor.withOpacity(0.65)),
             child: buildRenderCell(context, row, isFocused),
           );
 
@@ -151,16 +151,8 @@ abstract class ASpreadColumn<T> {
   }
 
   Widget _buildCellSizeContainer(Widget child, bool header) {
-    final borderDecorator = header
-        ? null
-        : const BoxDecoration(
-            border: Border(
-              left: BorderSide(
-                color: Color(0xFFCCCCCC),
-                width: 1,
-              ),
-            ),
-          );
+    final borderDecorator = header ? null : null;
+
     if (width.hasFixedWidth) {
       return Container(
         width: width.width,

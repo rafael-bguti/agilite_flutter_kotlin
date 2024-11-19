@@ -237,36 +237,37 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
 
   @override
   Widget build(BuildContext context) {
-    return AConsumer(fieldController, builder: (context, fieldController) {
-      final enabled = fieldController.enabled ?? true;
-      return TextFormField(
-        decoration: widget.localDecoration.copyWith(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          errorText: fieldController.errorText,
-          errorMaxLines: 2,
-          suffixIcon: fieldController.suffixIcon(context, enabled),
-          labelText: widget.localDecoration.labelText ?? fieldController.labelText,
-          hintText: widget.localDecoration.hintText ?? fieldController.hintText,
-          hintStyle: widget.localDecoration.hintStyle ?? const TextStyle(color: Color(0xFFBABABA)), //TODO: DarkMode - ver cor para o dark mode
-          helperText: widget.localDecoration.helperText ?? fieldController.helperText,
-          counterText: (widget.showMaxLength ?? false) ? null : "",
-          isDense: true,
-        ),
-        textAlignVertical: TextAlignVertical.center,
-        textAlign: fieldController.textAlign ?? TextAlign.start,
-        enabled: enabled,
-        controller: fieldController.textEditingController,
-        focusNode: fieldController.focusNode,
-        keyboardType: fieldController.keyboardType,
-        inputFormatters: fieldController.inputFormatters,
-        maxLines: fieldController.maxLines ?? 1,
-        maxLength: fieldController.maxLength,
-        textInputAction: fieldController.textInputAction,
-        obscureText: fieldController.obscureText ?? false,
-        onChanged: (v) => fieldController.onChanged(),
-        autofocus: fieldController.autoFocus,
-      );
-    });
+    return AConsumer(
+        notifier: fieldController,
+        builder: (context, fieldController, _) {
+          final enabled = fieldController.enabled ?? true;
+          return TextFormField(
+            decoration: widget.localDecoration.copyWith(
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              errorText: fieldController.errorText,
+              errorMaxLines: 2,
+              suffixIcon: fieldController.suffixIcon(context, enabled),
+              labelText: widget.localDecoration.labelText ?? fieldController.labelText,
+              hintText: widget.localDecoration.hintText ?? fieldController.hintText,
+              hintStyle: widget.localDecoration.hintStyle ?? const TextStyle(color: Color(0xFFBABABA)), //TODO: DarkMode - ver cor para o dark mode
+              helperText: widget.localDecoration.helperText ?? fieldController.helperText,
+              counterText: (widget.showMaxLength ?? false) ? null : "",
+            ),
+            textAlignVertical: TextAlignVertical.center,
+            textAlign: fieldController.textAlign ?? TextAlign.start,
+            enabled: enabled,
+            controller: fieldController.textEditingController,
+            focusNode: fieldController.focusNode,
+            keyboardType: fieldController.keyboardType,
+            inputFormatters: fieldController.inputFormatters,
+            maxLines: fieldController.maxLines ?? 1,
+            maxLength: fieldController.maxLength,
+            textInputAction: fieldController.textInputAction,
+            obscureText: fieldController.obscureText ?? false,
+            onChanged: (v) => fieldController.onChanged(),
+            autofocus: fieldController.autoFocus,
+          );
+        });
   }
 
   FormFieldController<dynamic> _buildController() {

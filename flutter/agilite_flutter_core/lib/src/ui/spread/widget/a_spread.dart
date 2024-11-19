@@ -123,18 +123,21 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AConsumer(spreadController, builder: (context, controller) {
-      final table = _buildTable(controller);
-      if (widget.selectPanelWidget == null) return table;
+    return AConsumer(
+      notifier: spreadController,
+      builder: (context, controller, _) {
+        final table = _buildTable(controller);
+        if (widget.selectPanelWidget == null) return table;
 
-      return Stack(
-        fit: StackFit.expand,
-        children: [
-          table,
-          _buildSelectedPanel(context, controller, widget.selectPanelWidget!),
-        ],
-      );
-    });
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            table,
+            _buildSelectedPanel(context, controller, widget.selectPanelWidget!),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildTable(ASpreadController controller) {
@@ -332,7 +335,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
       disableScroll: widget.disableScroll ?? false,
       disableVerticalScroll: widget.disableVerticalScroll ?? false,
       selectColumnName: widget.selectColumnName,
-      readOnly: widget.readOnly ?? false,
+      readOnly: widget.readOnly == null ? widget.onRowTap != null : widget.readOnly!,
       onAddNewRow: widget.onAddNewRow,
       canAddNewRow: widget.canAddNewRow,
       onCellStopEdit: widget.onCellStopEdit,
@@ -344,6 +347,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
 
   Widget _buildSelectedPanel(BuildContext context, ASpreadController controller, Widget selectPanelWidget) {
     final theme = Theme.of(context);
+
     return AnimatedPositioned(
       key: ValueKey('a_crud_list-selected_panel-${controller.name}'),
       duration: kThemeAnimationDuration,
@@ -351,48 +355,40 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
       bottom: controller.selectedRowCount > 0 ? 16 : -90,
       left: 0,
       right: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48.0),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          width: double.infinity,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: ACard(
+          padding: EdgeInsets.zero,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             color: backgroundColor.withOpacity(0.7),
-            boxShadow: [
-              BoxShadow(
-                color: onBackgroundColor.withOpacity(0.15),
-                blurRadius: 15,
-                offset: const Offset(0, 0),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ASpacingRow(
-                children: [
-                  Text(
-                    _getSelectedRowsText(controller.selectedRowCount),
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  TextButton(
-                    onPressed: () => controller.unselectAllRows(),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.orange,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ASpacingRow(
+                  children: [
+                    Text(
+                      _getSelectedRowsText(controller.selectedRowCount),
+                      style: theme.textTheme.bodyLarge,
                     ),
-                    child: Text(_getUnselectText(controller.selectedRowCount)),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  const VerticalDivider(indent: 10, endIndent: 10),
-                  selectPanelWidget,
-                ],
-              )
-            ],
+                    TextButton(
+                      onPressed: () => controller.unselectAllRows(),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                      ),
+                      child: Text(_getUnselectText(controller.selectedRowCount)),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    const VerticalDivider(indent: 10, endIndent: 10),
+                    selectPanelWidget,
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -410,7 +406,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   }
 
   List<SpreadMoreOptionAction>? Function(int row)? _buildDefaultMoreOptionActionsBuilder(ASpreadController controller) {
-    // if (controller.readOnly) return null;
+    if (controller.readOnly) return null;
 
     final options = [
       spreadMoreActionAddNewRow,
@@ -481,7 +477,7 @@ class SpreadMoreOptionAction {
   });
 
   SpreadMoreOptionAction.divider()
-      : child = const Divider(),
+      : child = const ADivider.lineOnly(),
         onTap = null,
         height = 8;
 }
@@ -530,7 +526,7 @@ class SpreadMoreDetail {
           const ADialogHeader(
             headerText: 'Mais detalhes',
           ),
-          const Divider(),
+          const ADivider.lineOnly(),
           Expanded(
             child: SingleChildScrollView(
               child: AForm(
@@ -557,7 +553,7 @@ class SpreadMoreDetail {
               ),
             ),
           ),
-          const Divider(),
+          const ADivider.lineOnly(),
           Padding(
             padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
             child: Row(
