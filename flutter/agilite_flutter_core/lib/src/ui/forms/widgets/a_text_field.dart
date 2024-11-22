@@ -47,12 +47,14 @@ class ATextField extends StatefulWidget {
   final int? minDecimalDigits;
 
   final void Function(FormFieldController<dynamic> controller)? onControllerCreated;
+  final void Function(String? value)? onChanged;
 
   const ATextField.controller(
     FormFieldController<dynamic> this.fieldController, {
     super.key,
     InputDecoration? decoration,
     this.req = false,
+    this.onChanged,
   })  : _fieldType = null,
         localDecoration = decoration ?? const InputDecoration(),
         name = null,
@@ -98,6 +100,7 @@ class ATextField extends StatefulWidget {
     this.validators,
     this.autoFocus,
     this.onControllerCreated,
+    this.onChanged,
     InputDecoration? decoration,
   })  : _fieldType = FieldType.string,
         localDecoration = decoration ?? const InputDecoration(),
@@ -129,6 +132,7 @@ class ATextField extends StatefulWidget {
     this.validators,
     this.autoFocus,
     this.onControllerCreated,
+    this.onChanged,
     InputDecoration? decoration,
     super.key,
   })  : _fieldType = FieldType.double,
@@ -156,6 +160,7 @@ class ATextField extends StatefulWidget {
     this.validators,
     this.autoFocus,
     this.onControllerCreated,
+    this.onChanged,
     InputDecoration? decoration,
     super.key,
   })  : _fieldType = FieldType.int,
@@ -184,6 +189,7 @@ class ATextField extends StatefulWidget {
     this.validators,
     this.autoFocus,
     this.onControllerCreated,
+    this.onChanged,
     InputDecoration? decoration,
     super.key,
   })  : _fieldType = FieldType.date,
@@ -218,6 +224,7 @@ class ATextField extends StatefulWidget {
     this.maxDecimalDigits,
     this.minDecimalDigits,
     this.onControllerCreated,
+    this.onChanged,
     InputDecoration? decoration,
   })  : localDecoration = decoration ?? const InputDecoration(),
         fieldController = null;
@@ -264,7 +271,10 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
             maxLength: fieldController.maxLength,
             textInputAction: fieldController.textInputAction,
             obscureText: fieldController.obscureText ?? false,
-            onChanged: (v) => fieldController.onChanged(),
+            onChanged: (v) {
+              widget.onChanged?.call(v);
+              fieldController.onChanged();
+            },
             autofocus: fieldController.autoFocus,
           );
         });

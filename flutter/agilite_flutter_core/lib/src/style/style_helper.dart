@@ -104,6 +104,26 @@ ButtonStyle buildTextButtonStyle(Color color) {
   );
 }
 
+//--- Spread ---
+BoxDecoration get tableHeaderRowDecoration => BoxDecoration(
+      color: cardColor,
+      border: const Border(
+        bottom: BorderSide(
+          color: Color(0xFFCCCCCC),
+          width: 2,
+        ),
+      ),
+    );
+
+BoxDecoration get tableRowDecoration => const BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: Color(0xFFCCCCCC),
+          width: 1,
+        ),
+      ),
+    );
+
 //---- Instance of CoreStyle ----
 class StyleHelper {
   static void onChangeTheme() {

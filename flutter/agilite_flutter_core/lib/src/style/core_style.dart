@@ -13,9 +13,6 @@ class CoreStyle {
   final double kPaddingM;
   final double kPaddingL;
 
-  final BoxDecoration tableHeaderRowDecoration;
-  final BoxDecoration tableRowDecoration;
-
   final String? assetLoginBackground;
 
   const CoreStyle({
@@ -27,27 +24,7 @@ class CoreStyle {
     this.kPaddingM = 12,
     this.kPaddingL = 16,
     this.assetLoginBackground = 'packages/agilite_flutter_core/assets/login_background.jpg',
-  })  : loadingWidget = loadingWidget ?? const DefaultLoadingWidget(),
-        tableHeaderRowDecoration = tableHeaderRowDecoration ??
-            const BoxDecoration(
-              color: Color(0xFFFFFFFF),
-              border: Border(
-                bottom: BorderSide(
-                  color: Color(0xFFCCCCCC),
-                  width: 2,
-                ),
-              ),
-            ),
-        tableRowDecoration = tableRowDecoration ??
-            const BoxDecoration(
-              color: Colors.transparent,
-              border: Border(
-                bottom: BorderSide(
-                  color: Color(0xFFCCCCCC),
-                  width: 1,
-                ),
-              ),
-            );
+  }) : loadingWidget = loadingWidget ?? const DefaultLoadingWidget();
 
   Widget getLogoWidget(LogoDestination destination, Brightness brightness) {
     if (logoBuilder != null) {

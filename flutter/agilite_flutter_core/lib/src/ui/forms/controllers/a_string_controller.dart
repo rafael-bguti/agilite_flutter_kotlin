@@ -32,7 +32,7 @@ class AStringController extends FormFieldController<String?> {
   }) : _inputFormatters = inputFormatters;
 
   @override
-  String? parse(String text) => parseValue?.call(text) ?? text.nullIfEmpty;
+  String? parse(String text) => parseValue?.call(text) ?? text.nullWhenEmpty;
 
   @override
   String format(String? value) => formatValue?.call(value) ?? value ?? defaultValue ?? '';

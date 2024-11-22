@@ -25,6 +25,25 @@ class ANavigator {
     appRouter.replace(path);
   }
 
+  static Future<T?> push<T>(String path, [bool closeAllDialogsBefore = true]) {
+    if (closeAllDialogsBefore) {
+      ANavigator.closeAllDialogs();
+    }
+    return appRouter.push<T>(path);
+  }
+
+  static Future<T?> pushWidget<T>(Widget widget, [bool closeAllDialogsBefore = true]) {
+    if (closeAllDialogsBefore) {
+      ANavigator.closeAllDialogs();
+    }
+
+    return Navigator.of(globalNavigatorKey.currentContext!).push(MaterialPageRoute(builder: (context) => widget));
+  }
+
+  static void pop<T>([T? result]) {
+    appRouter.pop(result);
+  }
+
   static void refresh() {
     print('refresh');
     appRouter.refresh();
@@ -38,13 +57,21 @@ class ANavigator {
     globalNavigatorKey.currentState!.popUntil((route) => route.settings.name != errorRouteName);
   }
 
-  static bool hasRouteByName(String name) {
-    return globalRouterObserver.routeStack.any((route) => route.settings.name == name);
-  }
-
   static void closeAllDialogs() {
     globalNavigatorKey.currentState!.popUntil((route) {
       return route is PageRoute;
     });
+  }
+
+  static bool isInDialog(BuildContext context) {
+    return context.findAncestorWidgetOfExactType<Dialog>() != null;
+  }
+
+  static bool canPop() {
+    return globalNavigatorKey.currentState!.canPop();
+  }
+
+  static bool hasRouteByName(String name) {
+    return globalRouterObserver.routeStack.any((route) => route.settings.name == name);
   }
 }

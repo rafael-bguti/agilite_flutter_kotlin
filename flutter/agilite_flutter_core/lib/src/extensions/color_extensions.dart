@@ -38,4 +38,9 @@ extension ColorExtensions on Color {
       return darken(amount);
     }
   }
+
+  Color get contrastingColor {
+    double luminance = (0.299 * red / 255) + (0.587 * green / 255) + (0.114 * blue / 255);
+    return luminance > 0.5 ? Colors.black : Colors.white;
+  }
 }

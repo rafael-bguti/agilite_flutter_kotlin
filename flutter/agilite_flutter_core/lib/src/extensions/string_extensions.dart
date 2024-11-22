@@ -11,6 +11,14 @@ extension NullStringExtensions on String? {
   bool get hasValue {
     return this != null && this!.trim().isNotEmpty;
   }
+
+  String? get nullWhenEmpty {
+    return this == null
+        ? null
+        : this!.isTrimEmpty
+            ? null
+            : this;
+  }
 }
 
 extension StringExtensions on String {
@@ -18,12 +26,8 @@ extension StringExtensions on String {
     return trim().isEmpty;
   }
 
-  String? get nullIfEmpty {
-    return isTrimEmpty ? null : this;
-  }
-
   String? onlyNumbers() {
-    return replaceAll(RegExp(r'[^\d]'), '').nullIfEmpty;
+    return replaceAll(RegExp(r'[^\d]'), '').nullWhenEmpty;
   }
 
   bool get isDigit {

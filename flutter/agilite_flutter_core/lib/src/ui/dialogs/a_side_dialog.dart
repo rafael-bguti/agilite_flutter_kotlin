@@ -2,17 +2,11 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:agilite_flutter_core/src/style/style_helper.dart' as static_theme;
 import 'package:flutter/material.dart';
 
-enum SheetSide {
-  left,
-  right,
-}
-
 class ASideDialog {
-  static Future<dynamic> show({
+  static Future<dynamic> showRight({
     required Widget Function(BuildContext context) builder,
     double? width,
     double? height,
-    SheetSide side = SheetSide.right,
     Color? barrierColor,
     double sheetBorderRadius = 8,
     Color? sheetColor,
@@ -20,41 +14,108 @@ class ASideDialog {
     EdgeInsetsGeometry? padding,
     Duration transitionDuration = kThemeAnimationDuration,
     VoidCallback? onVisible,
+    bool barrierDismissible = true,
   }) async {
-    dynamic data = await _showSheetSide(
+    return _show(
       builder: builder,
-      width: width,
+      width: width ?? MediaQuery.of(globalNavigatorKey.currentContext!).size.width * (PlatformInfo.isMobile ? 1 : 0.5),
+      offset: const Offset(1, 0),
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(sheetBorderRadius), bottomLeft: Radius.circular(sheetBorderRadius)),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8),
       height: height,
-      side: side,
-      barrierColor: barrierColor ?? static_theme.barrierColor,
+      alignment: Alignment.centerRight,
+      barrierColor: barrierColor,
       sheetBorderRadius: sheetBorderRadius,
-      sheetColor: sheetColor ?? backgroundColor,
-      transitionDuration: transitionDuration,
+      sheetColor: sheetColor,
       constraints: constraints,
-      padding: padding,
+      transitionDuration: transitionDuration,
       onVisible: onVisible,
+      barrierDismissible: barrierDismissible,
     );
-
-    return data;
   }
 
-  static Future<dynamic> _showSheetSide({
+  static Future<dynamic> showLeft({
     required Widget Function(BuildContext context) builder,
-    required SheetSide side,
     double? width,
     double? height,
-    required Color barrierColor,
-    required double sheetBorderRadius,
-    required Color sheetColor,
-    required Duration transitionDuration,
+    Color? barrierColor,
+    double sheetBorderRadius = 8,
+    Color? sheetColor,
     BoxConstraints? constraints,
     EdgeInsetsGeometry? padding,
+    Duration transitionDuration = kThemeAnimationDuration,
     VoidCallback? onVisible,
+    bool barrierDismissible = true,
+  }) async {
+    return _show(
+      builder: builder,
+      width: width ?? MediaQuery.of(globalNavigatorKey.currentContext!).size.width * (PlatformInfo.isMobile ? 1 : 0.5),
+      offset: const Offset(-1, 0),
+      borderRadius: BorderRadius.only(topRight: Radius.circular(sheetBorderRadius), bottomRight: Radius.circular(sheetBorderRadius)),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8),
+      alignment: Alignment.centerLeft,
+      height: height,
+      barrierColor: barrierColor,
+      sheetBorderRadius: sheetBorderRadius,
+      sheetColor: sheetColor,
+      constraints: constraints,
+      transitionDuration: transitionDuration,
+      onVisible: onVisible,
+      barrierDismissible: barrierDismissible,
+    );
+  }
+
+  static Future<dynamic> showBottom({
+    required Widget Function(BuildContext context) builder,
+    double? width,
+    double? height,
+    Color? barrierColor,
+    double sheetBorderRadius = 8,
+    Color? sheetColor,
+    BoxConstraints? constraints,
+    EdgeInsetsGeometry? padding,
+    Duration transitionDuration = kThemeAnimationDuration,
+    VoidCallback? onVisible,
+    bool barrierDismissible = true,
+  }) async {
+    return _show(
+      builder: builder,
+      width: width ?? MediaQuery.of(globalNavigatorKey.currentContext!).size.width,
+      offset: const Offset(0, 1),
+      borderRadius: BorderRadius.only(topRight: Radius.circular(sheetBorderRadius), topLeft: Radius.circular(sheetBorderRadius)),
+      padding: padding ?? const EdgeInsets.only(top: 24, left: 8, right: 8),
+      alignment: Alignment.bottomCenter,
+      height: height,
+      barrierColor: barrierColor,
+      sheetBorderRadius: sheetBorderRadius,
+      sheetColor: sheetColor,
+      constraints: constraints,
+      transitionDuration: transitionDuration,
+      onVisible: onVisible,
+      barrierDismissible: barrierDismissible,
+    );
+  }
+
+  static Future<dynamic> _show({
+    required Alignment alignment,
+    required Widget Function(BuildContext context) builder,
+    required double width,
+    required Offset offset,
+    required BorderRadiusGeometry borderRadius,
+    required EdgeInsetsGeometry padding,
+    double? height,
+    Color? barrierColor,
+    double sheetBorderRadius = 8,
+    Color? sheetColor,
+    BoxConstraints? constraints,
+    Duration transitionDuration = kThemeAnimationDuration,
+    VoidCallback? onVisible,
+    bool barrierDismissible = true,
   }) {
     return showGeneralDialog(
-      barrierDismissible: true,
+      barrierDismissible: barrierDismissible,
       barrierLabel: 'Fechar',
-      barrierColor: barrierColor,
+      barrierColor: barrierColor ?? static_theme.barrierColor,
       transitionDuration: transitionDuration,
       useRootNavigator: true,
       context: globalNavigatorKey.currentContext!,
@@ -62,26 +123,26 @@ class ASideDialog {
         if (onVisible != null) runOnNextBuild(onVisible);
 
         return Padding(
-          padding: padding ?? const EdgeInsets.all(0.0),
+          padding: padding,
           child: Align(
-            alignment: (side == SheetSide.right ? Alignment.centerRight : Alignment.centerLeft),
-            child: Material(
-              elevation: 15,
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(color: sheetColor),
-                height: height ?? double.infinity,
-                constraints: constraints,
-                width: width ?? MediaQuery.of(context).size.width * 0.5,
-                child: builder(context),
+            alignment: alignment,
+            child: Container(
+              height: height ?? MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: sheetColor ?? static_theme.backgroundColor,
+                borderRadius: borderRadius,
               ),
+              padding: const EdgeInsets.all(8.0),
+              constraints: constraints,
+              width: width,
+              child: builder(context),
             ),
           ),
         );
       },
       transitionBuilder: (context, animation1, animation2, child) {
         return SlideTransition(
-          position: Tween(begin: Offset((side == SheetSide.right ? 1 : -1), 0), end: const Offset(0, 0)).animate(animation1),
+          position: Tween(begin: offset, end: const Offset(0, 0)).animate(animation1),
           child: child,
         );
       },

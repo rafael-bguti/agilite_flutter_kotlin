@@ -9,7 +9,7 @@ class TablesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        headerLabel: "Tables / Spread",
+        header: const AContainerHeader.text("Tables / Spread"),
         child: ASpacingColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 32,
@@ -76,9 +76,8 @@ class _UsersSpreadState extends State<UsersSpread> {
     final wrapper = Container(
       key: ValueKey('row$rowIndex'),
       height: controller.rowHeight,
-      decoration: rowIndex == 2
-          ? coreStyle.tableRowDecoration.copyWith(color: Colors.red.withOpacity(0.4))
-          : coreStyle.tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
+      decoration:
+          rowIndex == 2 ? tableRowDecoration.copyWith(color: Colors.red.withOpacity(0.4)) : tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
       child: rowContent,
     );
 

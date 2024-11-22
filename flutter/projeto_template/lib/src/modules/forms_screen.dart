@@ -8,7 +8,7 @@ class FormsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        headerLabel: "Forms",
+        header: const AContainerHeader.text("Forms"),
         child: ASpacingColumn(
           spacing: 16,
           children: [

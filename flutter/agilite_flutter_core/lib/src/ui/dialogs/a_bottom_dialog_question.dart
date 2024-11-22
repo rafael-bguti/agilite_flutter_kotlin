@@ -88,28 +88,31 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                     : ASpacingRow(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              widget.onCancel?.call();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                              child: Text('Não', style: textTheme?.titleLarge),
-                            ),
-                          ),
-                          const SizedBox(width: 18),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: color),
+                          FilledButton(
+                            style: buildButtonStyle(color, color.contrastingColor),
                             onPressed: () => _doConfirm(context),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                               child: Text(
                                 widget.confirmButtonText,
                                 style: textTheme?.titleLarge?.copyWith(
-                                  color: Colors.white,
+                                  color: onSuccessColor,
                                 ),
                               ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Text("OU"),
+                          const SizedBox(width: 8),
+                          OutlinedButton(
+                            style: buildOutlinedButtonStyle(color),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              widget.onCancel?.call();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                              child: Text('Não', style: textTheme?.titleLarge?.copyWith(color: color)),
                             ),
                           ),
                         ],

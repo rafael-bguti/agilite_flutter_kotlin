@@ -168,7 +168,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   Widget _buildHeader(ASpreadController controller) {
     return Container(
       height: controller.rowHeight,
-      decoration: coreStyle.tableHeaderRowDecoration,
+      decoration: tableHeaderRowDecoration,
       child: Row(
         children: [
           SizedBox(width: _localMoreOptionActionsBuilder != null ? _moreActionWidth : 0),
@@ -228,7 +228,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   Widget _buildFooter(ASpreadController controller) {
     return Container(
       height: controller.rowHeight,
-      decoration: coreStyle.tableHeaderRowDecoration,
+      decoration: tableHeaderRowDecoration,
       child: Row(
         children: [
           SizedBox(width: _localMoreOptionActionsBuilder != null ? _moreActionWidth : 0),
@@ -259,7 +259,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
       final wrapper = Container(
         key: ValueKey('row$index'),
         height: controller.rowHeight,
-        decoration: coreStyle.tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
+        decoration: tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
         child: rowContent,
       );
 
@@ -401,8 +401,8 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   }
 
   String _getUnselectText(int count) {
-    if (count == 1) return 'Desselecionar';
-    return 'Desselecionar todos';
+    if (count == 1) return 'desselecionar';
+    return 'desselecionar todos';
   }
 
   List<SpreadMoreOptionAction>? Function(int row)? _buildDefaultMoreOptionActionsBuilder(ASpreadController controller) {
@@ -439,7 +439,7 @@ final spreadMoreActionAddNewRow = SpreadMoreOptionAction(
   child: ASpacingRow(
     children: const [
       Icon(Icons.new_label_outlined),
-      Expanded(child: Text('Nova linha acima')),
+      Expanded(child: Text('nova linha acima')),
       Text('(Ctrl+N)', style: TextStyle(fontSize: 10)),
     ],
   ),
@@ -454,7 +454,7 @@ final spreadMoreActionRemoveRow = SpreadMoreOptionAction(
     ),
     Expanded(
       child: Text(
-        'Excluir linha',
+        'excluir linha',
         style: TextStyle(
           color: Colors.red,
         ),
@@ -491,7 +491,7 @@ class SpreadMoreDetail {
   final List<String> gridAreas;
 
   SpreadMoreDetail({
-    this.moreOptionActionText = 'Editar mais detalhes',
+    this.moreOptionActionText = 'editar mais detalhes',
     this.moreDetailBodyBuilder,
     this.otherWidgetsBuilder,
     this.gridAreas = const ['12'],

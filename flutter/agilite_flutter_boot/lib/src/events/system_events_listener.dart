@@ -6,7 +6,11 @@ import '../../boot.dart';
 class SystemEventsListener {
   static void addSystemEventsListeners() {
     coreEventBus.on<SysEventOnExitButtonTap>().listen((event) {
-      _onSysEventExitButtonClicked();
+      if (event.askBeforeLeaving) {
+        _onSysEventExitButtonClicked();
+      } else {
+        _onConfirmExitButtonClick();
+      }
     });
   }
 
@@ -19,15 +23,16 @@ class SystemEventsListener {
         minWidth: MediaQuery.of(globalNavigatorKey.currentContext!).size.width,
       ),
       builder: (ctx) => ABottomDialogQuestion(
+        primary: errorColor,
         popOnConfirm: false,
         icon: Icons.exit_to_app,
         message: "Deseja sair do sistema?",
-        onConfirm: (context) => _onConfirmExitButtonClick(context),
+        onConfirm: (context) => _onConfirmExitButtonClick(),
       ),
     );
   }
 
-  static Future<void> _onConfirmExitButtonClick(BuildContext ctx) async {
+  static Future<void> _onConfirmExitButtonClick() async {
     ANavigator.go(loginPath);
     await authService.signOut();
   }

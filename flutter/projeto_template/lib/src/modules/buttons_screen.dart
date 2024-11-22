@@ -26,7 +26,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
     return SingleChildScrollView(
       child: AContainer(
         fluid: true,
-        headerLabel: "Buttons",
+        header: const AContainerHeader.text("Buttons"),
         child: ASpacingColumn(
           spacing: 32.0,
           children: [

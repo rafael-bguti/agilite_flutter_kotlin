@@ -18,6 +18,8 @@ abstract class FormFieldController<T> extends FieldController<T> {
   TextInputType? _keyboardType;
   TextInputAction? _textInputAction;
 
+  bool _isControllerProvided;
+
   FormFieldController(
     super.name, {
     required super.defaultValue,
@@ -36,7 +38,8 @@ abstract class FormFieldController<T> extends FieldController<T> {
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
     super.createdBySpread,
-  })  : textEditingController = textEditingController ?? TextEditingController(),
+  })  : _isControllerProvided = textEditingController != null,
+        textEditingController = textEditingController ?? TextEditingController(),
         _helperText = helperText,
         _hintText = hintText,
         _obscureText = obscureText,
@@ -96,7 +99,7 @@ abstract class FormFieldController<T> extends FieldController<T> {
 
   @override
   void dispose() {
-    textEditingController.dispose();
+    if (!_isControllerProvided) textEditingController.dispose();
     super.dispose();
   }
 

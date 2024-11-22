@@ -1,8 +1,6 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../models/error_state.dart';
-
 class AError {
   static void defaultCatch(
     dynamic error,
@@ -142,8 +140,10 @@ class AErrorView extends StatelessWidget {
       if (pathToReplaceOnClose != null) {
         ANavigator.replace(pathToReplaceOnClose!);
       } else {
-        if (state.error is UnauthenticatedException || state.error is ForbiddenException) {
-          ANavigator.replace(loginPath); //TODO LOGOUT EVENT
+        if (state.error is UnauthenticatedException || state.error is ForbiddenException || state.error is ForceExitException) {
+          coreEventBus.fire(SysEventOnExitButtonTap(askBeforeLeaving: false));
+        } else if (state.error is ForceHomeException) {
+          ANavigator.replace(dashboardPath);
         } else {
           ANavigator.closeErrorDialog();
         }

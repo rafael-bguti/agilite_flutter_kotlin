@@ -358,7 +358,7 @@ class ASpreadController extends FieldController<SpreadModel> {
   void onMoreDetailTap(int row) async {
     if (_moreDetail == null) return;
 
-    await ASideDialog.show(
+    await ASideDialog.showRight(
       builder: (ctx) => _moreDetail!.buildMoreDetailBody(globalNavigatorKey.currentContext!, row, this),
       onVisible: () => _onMoreDetailDialogVisible(row),
     );

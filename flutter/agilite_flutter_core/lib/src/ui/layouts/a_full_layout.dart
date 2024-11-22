@@ -254,7 +254,7 @@ class ALoggedUserDropdown extends StatelessWidget {
                     title: Text('Sair', style: TextStyle(color: errorColor)),
                     onTap: () {
                       _menuController.close();
-                      coreEventBus.fire(SysEventOnExitButtonTap());
+                      coreEventBus.fire(SysEventOnExitButtonTap(askBeforeLeaving: true));
                     },
                   ),
                 ],
@@ -269,9 +269,14 @@ class ALoggedUserDropdown extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage('https://huma.demo.frontendmatter.com/assets/images/people/50/guy-3.jpg'),
+              backgroundImage: const NetworkImage(
+                'https://i.pravatar.cc/150?img=7',
+              ),
+              onBackgroundImageError: (exception, stackTrace) {
+                print('Error loading image: $exception');
+              },
             ),
             const SizedBox(width: 8),
             Column(

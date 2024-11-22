@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return SingleChildScrollView(
       child: AContainer(
         fluid: true,
-        headerLabel: "CRM Dashboard -> ${ScreenSize(context).whichDevice()}",
+        header: AContainerHeader.text("CRM Dashboard -> ${ScreenSize(context).whichDevice()}"),
         child: ASpacingColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,

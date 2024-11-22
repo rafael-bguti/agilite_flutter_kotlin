@@ -8,7 +8,7 @@ class AlertsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        headerLabel: "Alerts",
+        header: const AContainerHeader.text("Alerts"),
         child: ASpacingColumn(
           spacing: 32,
           children: [

@@ -17,7 +17,7 @@ class AFormController {
 
   T addController<T extends FieldController<dynamic>>(T controller) {
     if (containsControllerByName(controller.name)) {
-      throw 'Já existe um controller com a key ${controller.name} no form'; //TODO criar um erro especifico que retorne o usuario para a Home
+      throw 'Já existe um controller com a key ${controller.name} no form';
     }
 
     _fieldControllers.add(controller);
@@ -36,6 +36,7 @@ class AFormController {
 
   //---- Map Controller ----
   final Map<String, FieldController<dynamic>> _mapControllers = {};
+  final Map<String, dynamic> _customValues = {};
 
   bool containsControllerByName(String name) {
     return _mapControllers.containsKey(name);
@@ -78,20 +79,20 @@ class AFormController {
     return true;
   }
 
-  Map<String, dynamic> get _jsonValue {
+  Map<String, dynamic> get controllersValue {
     final Map<String, dynamic> map = {};
     for (var field in _fieldControllers) {
-      map[field.name] = field.jsonValue;
+      if (field.jsonValue != null) map[field.name] = field.jsonValue;
     }
     return map;
   }
 
   Map<String, dynamic> buidlJson([Map<String, dynamic> defaultValues = const {}]) {
-    return {...defaultValues, ..._jsonValue};
+    return {..._customValues, ...defaultValues, ...controllersValue};
   }
 
   bool isChanged(Map<String, dynamic> newValue) {
-    return !ObjectUtils.isEquals(_jsonValue, newValue);
+    return !ObjectUtils.isEquals(controllersValue, newValue);
   }
 
   set value(Map<String, dynamic>? data) {
@@ -117,6 +118,7 @@ class AFormController {
   void clear() {
     _value.clear();
     $validationMessages.value = [];
+    _customValues.clear();
     for (var f in _fieldControllers) {
       f.clear();
     }
@@ -143,11 +145,29 @@ class AFormController {
     $validationMessages.value = [];
   }
 
+  // ---- Register values ----
+  void setCustomValue(String key, dynamic value) {
+    _customValues[key] = value;
+  }
+
+  void removeCustomValue(String key) {
+    _customValues.remove(key);
+  }
+
   // ---- Utils to FieldController ----
   void setControllerValue(String controllerName, dynamic value) {
     final controller = getControllerByName(controllerName);
-    if (controller != null) {
-      controller.value = value;
+    if (controller == null) {
+      throw 'Controller $controllerName não encontrado';
     }
+    controller.value = value;
+  }
+
+  dynamic getControllerValue(String controllerName) {
+    final controller = getControllerByName(controllerName);
+    if (controller == null) {
+      throw 'Controller $controllerName não encontrado';
+    }
+    return controller.value;
   }
 }

@@ -23,7 +23,7 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AContainer(
-        headerLabel: "Tabs",
+        header: const AContainerHeader.text("Tabs"),
         child: ASpacingColumn(
           children: [
             AGrid(

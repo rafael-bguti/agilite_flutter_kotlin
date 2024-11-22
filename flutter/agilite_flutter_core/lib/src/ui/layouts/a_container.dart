@@ -2,16 +2,14 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class AContainer extends StatelessWidget {
+  final AContainerHeader? header;
   final Widget child;
-  final Widget? headerOptions;
 
   final bool fluid;
-  final String? headerLabel;
 
   const AContainer({
     required this.child,
-    this.headerOptions,
-    this.headerLabel,
+    this.header,
     this.fluid = false,
     super.key,
   });
@@ -28,7 +26,7 @@ class AContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildTaskHeader(width, screenSize),
+            if (header != null) header!.build(context, fluid, width),
             if (_needDivider())
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -51,24 +49,37 @@ class AContainer extends StatelessWidget {
   }
 
   bool _needDivider() {
-    return headerLabel != null || headerOptions != null;
+    return header != null;
   }
+}
 
-  Widget _buildTaskHeader(double width, ScreenSize screenSize) {
-    if (headerLabel == null && this.headerOptions == null) {
+class AContainerHeader {
+  final Widget? headerOptions;
+
+  final Widget? headerLabel;
+  final String? headerText;
+
+  const AContainerHeader.label(this.headerLabel, {this.headerOptions}) : headerText = null;
+  const AContainerHeader.text(this.headerText, {this.headerOptions}) : headerLabel = null;
+
+  Widget build(BuildContext context, bool fluid, double width) {
+    if (headerLabel == null && headerOptions == null) {
       return const SizedBox.shrink();
     }
 
-    final headerText = _buildLabel(screenSize);
-    final headerOptions = _buildHeaderOptions(screenSize);
+    final screenSize = ScreenSize(context);
+    final headerLeft = _buildLabel(screenSize);
+    final headerRight = _buildHeaderOptions(screenSize);
+
     return SizedBox(
       width: fluid ? double.infinity : width,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          headerText,
-          headerOptions,
+          headerLeft,
+          const Spacer(),
+          headerRight,
         ],
       ),
     );
@@ -88,18 +99,22 @@ class AContainer extends StatelessWidget {
   }
 
   Widget _buildLabel(ScreenSize screenSize) {
-    if (headerLabel != null) {
-      return Padding(
-        padding: EdgeInsets.only(
-          left: screenSize.horizontalPadding(),
-        ),
-        child: SelectableText(
-          headerLabel!,
-          style: textTheme?.headlineMedium?.copyWith(fontFamily: 'HeaderFont'),
-        ),
-      );
-    } else {
+    if (headerText == null && headerLabel == null) {
       return const SizedBox.shrink();
     }
+
+    Widget child = headerLabel != null
+        ? headerLabel!
+        : SelectableText(
+            headerText!,
+            style: textTheme?.headlineMedium?.copyWith(fontFamily: 'HeaderFont'),
+          );
+
+    return Padding(
+      padding: EdgeInsets.only(
+        left: screenSize.horizontalPadding(),
+      ),
+      child: child,
+    );
   }
 }

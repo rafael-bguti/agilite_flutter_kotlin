@@ -6,7 +6,7 @@ class DebounceTimer {
   final Duration duration;
   Timer? _timer;
 
-  DebounceTimer([this.duration = const Duration(milliseconds: 400)]);
+  DebounceTimer([this.duration = const Duration(milliseconds: 500)]);
 
   void run(VoidCallback action) {
     if (_timer != null) {
