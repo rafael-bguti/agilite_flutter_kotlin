@@ -1,8 +1,8 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class AViewController<T> extends ChangeNotifier {
-  AViewController([T? initialState]) : _state = initialState;
+class ViewController<T> extends ChangeNotifier {
+  ViewController([T? initialState]) : _state = initialState;
 
   void onViewLoaded() {}
 

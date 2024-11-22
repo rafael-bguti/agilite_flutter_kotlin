@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class AColumnReadOnly extends ASpreadColumn<dynamic> {
-  Widget Function(BuildContext context, ASpreadController spreadController, int row, bool isFocused) renderWidgetBuilder;
+  Widget Function(BuildContext context, SpreadController spreadController, int row, bool isFocused) renderWidgetBuilder;
 
   AColumnReadOnly(
     super.name,

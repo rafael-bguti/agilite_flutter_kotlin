@@ -7,12 +7,12 @@ import 'package:flutter/services.dart';
 const _moreActionWidth = 35.0;
 
 class ASpread extends StatefulWidget {
-  final ASpreadController? controller;
+  final SpreadController? controller;
   final Widget? selectPanelWidget;
 
   //Builders
-  final Widget Function(BuildContext context, ASpreadController controller, int rowIndex, Widget rowContent)? rowBuilder;
-  final Widget Function(BuildContext context, ASpreadController controller, int rowIndex, Widget row)? rowWrapperBuilder;
+  final Widget Function(BuildContext context, SpreadController controller, int rowIndex, Widget rowContent)? rowBuilder;
+  final Widget Function(BuildContext context, SpreadController controller, int rowIndex, Widget row)? rowWrapperBuilder;
   final List<SpreadMoreOptionAction>? Function(int row)? moreOptionActionsBuilder;
 
   //Mais detalhes
@@ -33,9 +33,9 @@ class ASpread extends StatefulWidget {
   final FutureOr<void> Function(Map<String, dynamic> row)? onAddNewRow;
   final FutureOr<bool> Function()? canAddNewRow;
 
-  final void Function(ASpreadController controller, int row, String columnName)? onCellStopEdit;
+  final void Function(SpreadController controller, int row, String columnName)? onCellStopEdit;
 
-  final void Function(ASpreadController controller)? onControllerCreated;
+  final void Function(SpreadController controller)? onControllerCreated;
 
   final String? labelTextToValidationMessage;
 
@@ -90,7 +90,7 @@ class ASpread extends StatefulWidget {
 }
 
 class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
-  late final ASpreadController spreadController;
+  late final SpreadController spreadController;
   late final List<SpreadMoreOptionAction>? Function(int row)? _localMoreOptionActionsBuilder =
       widget.moreOptionActionsBuilder ?? _buildDefaultMoreOptionActionsBuilder(spreadController);
 
@@ -140,7 +140,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  Widget _buildTable(ASpreadController controller) {
+  Widget _buildTable(SpreadController controller) {
     final showHorizontalScroll = controller.isAllColumnsFixedWidth;
 
     if (controller.disableScroll || controller.disableVerticalScroll) {
@@ -165,7 +165,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     }
   }
 
-  Widget _buildHeader(ASpreadController controller) {
+  Widget _buildHeader(SpreadController controller) {
     return Container(
       height: controller.rowHeight,
       decoration: tableHeaderRowDecoration,
@@ -178,7 +178,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  Widget _buildBody(ASpreadController controller) {
+  Widget _buildBody(SpreadController controller) {
     return Focus(
       focusNode: controller.focusNode,
       child: ValueListenableBuilder(
@@ -191,7 +191,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  Widget _buildRows(ASpreadController controller) {
+  Widget _buildRows(SpreadController controller) {
     final showFooter = controller.columns.any((element) => element.showFooter());
     if (controller.value.isEmpty) {
       return ASpacingColumn(
@@ -216,7 +216,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  Widget _buildRowWithWrapper(ASpreadController controller, int index) {
+  Widget _buildRowWithWrapper(SpreadController controller, int index) {
     final row = _buildRow(controller, index);
     if (widget.rowWrapperBuilder != null) {
       return widget.rowWrapperBuilder!(context, controller, index, row);
@@ -225,7 +225,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     }
   }
 
-  Widget _buildFooter(ASpreadController controller) {
+  Widget _buildFooter(SpreadController controller) {
     return Container(
       height: controller.rowHeight,
       decoration: tableHeaderRowDecoration,
@@ -249,7 +249,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  Widget _buildRow(ASpreadController controller, int index) {
+  Widget _buildRow(SpreadController controller, int index) {
     final rowContent = _buildRowContent(controller, index);
 
     if (widget.rowBuilder != null) {
@@ -274,7 +274,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     }
   }
 
-  Widget _buildRowContent(ASpreadController controller, int index) {
+  Widget _buildRowContent(SpreadController controller, int index) {
     final row = Row(
       children: [
         _buildMoreOptionsMenu(controller, index),
@@ -300,7 +300,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     }
   }
 
-  Widget _buildMoreOptionsMenu(ASpreadController controller, int index) {
+  Widget _buildMoreOptionsMenu(SpreadController controller, int index) {
     if (_localMoreOptionActionsBuilder == null || _localMoreOptionActionsBuilder.call(index) == null) {
       return const SizedBox.shrink();
     }
@@ -328,8 +328,8 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     );
   }
 
-  ASpreadController _buildController() {
-    final controller = ASpreadController(
+  SpreadController _buildController() {
+    final controller = SpreadController(
       widget.name!,
       columns: widget.columns!,
       disableScroll: widget.disableScroll ?? false,
@@ -345,7 +345,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     return controller;
   }
 
-  Widget _buildSelectedPanel(BuildContext context, ASpreadController controller, Widget selectPanelWidget) {
+  Widget _buildSelectedPanel(BuildContext context, SpreadController controller, Widget selectPanelWidget) {
     final theme = Theme.of(context);
 
     return AnimatedPositioned(
@@ -405,7 +405,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
     return 'desselecionar todos';
   }
 
-  List<SpreadMoreOptionAction>? Function(int row)? _buildDefaultMoreOptionActionsBuilder(ASpreadController controller) {
+  List<SpreadMoreOptionAction>? Function(int row)? _buildDefaultMoreOptionActionsBuilder(SpreadController controller) {
     if (controller.readOnly) return null;
 
     final options = [
@@ -468,7 +468,7 @@ final spreadMoreActionRemoveRow = SpreadMoreOptionAction(
 class SpreadMoreOptionAction {
   final double height;
   final Widget child;
-  final void Function(BuildContext context, int rowIndex, ASpreadController controller)? onTap;
+  final void Function(BuildContext context, int rowIndex, SpreadController controller)? onTap;
 
   SpreadMoreOptionAction({
     required this.child,
@@ -485,9 +485,9 @@ class SpreadMoreOptionAction {
 class SpreadMoreDetail {
   final String moreOptionActionText;
 
-  Widget Function(BuildContext context, int rowIndex, ASpreadController controller)? moreDetailBodyBuilder;
-  Widget Function(BuildContext context, int rowIndex, ASpreadController controller)? otherWidgetsBuilder;
-  void Function(int rowIndex, ASpreadController controller)? onShowValue;
+  Widget Function(BuildContext context, int rowIndex, SpreadController controller)? moreDetailBodyBuilder;
+  Widget Function(BuildContext context, int rowIndex, SpreadController controller)? otherWidgetsBuilder;
+  void Function(int rowIndex, SpreadController controller)? onShowValue;
   final List<String> gridAreas;
 
   SpreadMoreDetail({
@@ -497,28 +497,28 @@ class SpreadMoreDetail {
     this.gridAreas = const ['12'],
   });
 
-  Widget buildMoreDetailBody(BuildContext context, int rowIndex, ASpreadController controller) {
+  Widget buildMoreDetailBody(BuildContext context, int rowIndex, SpreadController controller) {
     return moreDetailBodyBuilder?.call(context, rowIndex, controller) ?? _defaultMoreDetailBodyBuilder(context, rowIndex, controller);
   }
 
-  void showValue(int rowIndex, ASpreadController spreadController) {
+  void showValue(int rowIndex, SpreadController spreadController) {
     spreadController.moreDetailFormController.clear();
     spreadController.moreDetailFormController.value = spreadController.value[rowIndex].toMap();
     onShowValue?.call(rowIndex, spreadController);
   }
 
-  void onDialogClose(int rowIndex, ASpreadController controller) {
+  void onDialogClose(int rowIndex, SpreadController controller) {
     final rowMap = controller.moreDetailFormController.buidlJson();
 
     controller.value[rowIndex] = rowMap;
     controller.refreshUi();
   }
 
-  void focusFirstField(ASpreadController controller) {
+  void focusFirstField(SpreadController controller) {
     controller.moreDetailFormController.getControllerByName(controller.columns.first.name)?.requestFocus();
   }
 
-  Widget _defaultMoreDetailBodyBuilder(BuildContext context, int rowIndex, ASpreadController controller) {
+  Widget _defaultMoreDetailBodyBuilder(BuildContext context, int rowIndex, SpreadController controller) {
     final result = Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -582,7 +582,7 @@ class SpreadMoreDetail {
     return result;
   }
 
-  List<Widget> _getMoreDetailBodyChildren(BuildContext context, int rowIndex, ASpreadController controller) {
+  List<Widget> _getMoreDetailBodyChildren(BuildContext context, int rowIndex, SpreadController controller) {
     List<Widget> result = [];
     bool autoFocus = true;
     for (var column in controller.columns) {

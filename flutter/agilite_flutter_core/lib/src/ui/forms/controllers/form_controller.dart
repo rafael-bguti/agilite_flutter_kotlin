@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 typedef AddContollerEvent = void Function(FieldController<dynamic> controller);
 
-class AFormController {
+class FormController {
   final Map<String, dynamic> _value = {};
 
   final List<AddContollerEvent> addControllerListeners = [];

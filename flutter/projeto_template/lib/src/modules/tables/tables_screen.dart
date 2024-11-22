@@ -36,13 +36,13 @@ class UsersSpread extends StatefulWidget {
 }
 
 class _UsersSpreadState extends State<UsersSpread> {
-  final formController = AFormController();
+  final formController = FormController();
 
   @override
   void initState() {
     super.initState();
     runOnNextBuild(() {
-      (formController.getControllerByName("sprUsers") as ASpreadController?)?.fillFromList(users.map((e) => e.toJson()).toList());
+      (formController.getControllerByName("sprUsers") as SpreadController?)?.fillFromList(users.map((e) => e.toJson()).toList());
     });
   }
 
@@ -70,7 +70,7 @@ class _UsersSpreadState extends State<UsersSpread> {
     );
   }
 
-  Widget _rowBuilder(BuildContext context, ASpreadController controller, int rowIndex, Widget rowContent) {
+  Widget _rowBuilder(BuildContext context, SpreadController controller, int rowIndex, Widget rowContent) {
     bool isSelected = controller.isRowSelected(rowIndex);
 
     final wrapper = Container(
@@ -91,7 +91,7 @@ class _UsersSpreadState extends State<UsersSpread> {
     return wrapper;
   }
 
-  Widget _renderName(BuildContext context, ASpreadController spreadController, int row, bool isFocused) {
+  Widget _renderName(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
     final user = users[row];
     return ASpacingRow(
       children: [
@@ -117,7 +117,7 @@ class _UsersSpreadState extends State<UsersSpread> {
     );
   }
 
-  Widget _renderCompany(BuildContext context, ASpreadController spreadController, int row, bool isFocused) {
+  Widget _renderCompany(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
     final user = users[row];
     return user.company == null
         ? const Text('')
@@ -137,7 +137,7 @@ class _UsersSpreadState extends State<UsersSpread> {
           );
   }
 
-  Widget _renderTags(BuildContext context, ASpreadController spreadController, int row, bool isFocused) {
+  Widget _renderTags(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
     final user = users[row];
     return Chip(label: Text(user.tags));
   }
@@ -151,13 +151,13 @@ class SimpleSpreadEditavel extends StatefulWidget {
 }
 
 class _SimpleSpreadEditavelState extends State<SimpleSpreadEditavel> {
-  final formController = AFormController();
+  final formController = FormController();
 
   @override
   void initState() {
     super.initState();
     runOnNextBuild(() {
-      (formController.getControllerByName("sprNaoEditavel") as ASpreadController?)?.fillFromList([
+      (formController.getControllerByName("sprNaoEditavel") as SpreadController?)?.fillFromList([
         {
           "nome": "João",
           "idade": 30,

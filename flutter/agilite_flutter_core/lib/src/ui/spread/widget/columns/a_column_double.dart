@@ -17,14 +17,14 @@ class AColumnDouble extends ASpreadColumn<double> {
     this.showTotalOnFooter = false,
     super.req,
     super.validators,
-  })  : _controller = ADoubleController(
+  })  : _controller = DoubleController(
           name,
           maxIntegerDigits: maxIntegerDigits,
           createdBySpread: true,
         ),
         super(alignment: Alignment.centerRight);
 
-  final ADoubleController _controller;
+  final DoubleController _controller;
 
   @override
   Widget buildEditCell(BuildContext context, int row) {

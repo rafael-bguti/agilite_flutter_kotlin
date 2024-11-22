@@ -24,7 +24,7 @@ abstract class ASpreadColumn<T> {
   final Alignment alignment;
 
   int colIndex = -1;
-  late ASpreadController spreadController;
+  late SpreadController spreadController;
 
   AWidth _width = const AWidth.flex(1);
 

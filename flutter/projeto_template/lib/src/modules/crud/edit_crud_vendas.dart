@@ -10,12 +10,12 @@ class CrudEditVendas extends StatefulWidget {
 }
 
 class _CrudEditVendasState extends State<CrudEditVendas> {
-  late final ACrudEditController controller;
+  late final CrudEditController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = ACrudEditController(id: widget.id);
+    controller = CrudEditController(id: widget.id);
   }
 
   @override

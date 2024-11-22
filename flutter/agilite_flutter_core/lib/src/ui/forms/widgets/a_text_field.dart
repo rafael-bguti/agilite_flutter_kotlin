@@ -282,7 +282,7 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
 
   FormFieldController<dynamic> _buildController() {
     final fieldController = switch (widget._fieldType!) {
-      FieldType.string => AStringController(
+      FieldType.string => StringController(
           widget.name!,
           initialValue: widget.initialValue as String?,
           defaultValue: widget.defaultValue as String?,
@@ -301,7 +301,7 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
           req: widget.req,
           autoFocus: widget.autoFocus ?? false,
         ),
-      FieldType.date => ADateController(
+      FieldType.date => DateController(
           widget.name!,
           initialValue: widget.initialValue as DateTime?,
           defaultValue: widget.defaultValue as DateTime?,
@@ -319,7 +319,7 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
           req: widget.req,
           autoFocus: widget.autoFocus ?? false,
         ),
-      FieldType.int => AIntController(
+      FieldType.int => IntController(
           widget.name!,
           initialValue: widget.initialValue as int?,
           defaultValue: widget.defaultValue as int?,
@@ -337,7 +337,7 @@ class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMix
           req: widget.req,
           autoFocus: widget.autoFocus ?? false,
         ),
-      FieldType.double => ADoubleController(
+      FieldType.double => DoubleController(
           widget.name!,
           initialValue: widget.initialValue as double?,
           defaultValue: widget.defaultValue as double?,

@@ -17,7 +17,7 @@ List<ASpreadColumn<dynamic>> _buildColumns(List<ASpreadColumn<dynamic>> columns,
   ];
 }
 
-class ASpreadController extends FieldController<SpreadModel> {
+class SpreadController extends FieldController<SpreadModel> {
   double? _rowHeight;
   String? _selectColumnName;
   bool? _showRowHover;
@@ -35,13 +35,13 @@ class ASpreadController extends FieldController<SpreadModel> {
   FutureOr<void> Function(Map<String, dynamic> row)? onAddNewRow;
   FutureOr<bool> Function()? canAddNewRow;
 
-  void Function(ASpreadController controller, int row, String columnName)? onCellStopEdit;
+  void Function(SpreadController controller, int row, String columnName)? onCellStopEdit;
 
-  AFormController moreDetailFormController = AFormController();
+  FormController moreDetailFormController = FormController();
 
   final String? labelTextToValidationMessage;
 
-  ASpreadController(
+  SpreadController(
     super.name, {
     required List<ASpreadColumn<dynamic>> columns,
     super.initialValue,

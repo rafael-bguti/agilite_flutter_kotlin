@@ -116,12 +116,12 @@ class AColumnBool extends ASpreadColumn<bool> {
     return super.processKeyPressed(event, row);
   }
 
-  void _toggleValue(ASpreadController spreadController, int row) {
+  void _toggleValue(SpreadController spreadController, int row) {
     spreadController.value[row][name] = !_extractValue(spreadController, row);
     spreadController.refreshUi();
   }
 
-  bool _extractValue(ASpreadController spreadController, int row) {
+  bool _extractValue(SpreadController spreadController, int row) {
     var value = spreadController.value[row][name];
     if (value == null) {
       return false;

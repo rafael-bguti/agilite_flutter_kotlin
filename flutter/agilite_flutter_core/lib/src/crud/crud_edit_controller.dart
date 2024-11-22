@@ -1,10 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
 
-class ACrudEditController extends AViewController<bool> {
+class CrudEditController extends ViewController<bool> {
   final int? id;
-  final formController = AFormController();
+  final formController = FormController();
 
-  ACrudEditController({required this.id}) : super(true);
+  CrudEditController({required this.id}) : super(true);
 
   @override
   void onViewLoaded() async {

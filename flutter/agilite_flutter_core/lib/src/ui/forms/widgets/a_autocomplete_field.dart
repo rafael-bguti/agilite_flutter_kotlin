@@ -9,7 +9,7 @@ final _selectedBackgroundColor = onBackgroundColor.withOpacity(0.4);
 
 class AAutocompleteField<T> extends StatefulWidget {
   final String? name;
-  final AAutocompleteController<T>? fieldController;
+  final AutocompleteController<T>? fieldController;
 
   final InputDecoration? decoration;
   final Widget Function(KeyLabel<T>)? listItemBuilder;
@@ -27,7 +27,7 @@ class AAutocompleteField<T> extends StatefulWidget {
   //Default Where only to Api Repository
   final ClientWhere? Function()? defaultWhereBuilder;
 
-  final void Function(AAutocompleteController<T> controller)? onControllerCreated;
+  final void Function(AutocompleteController<T> controller)? onControllerCreated;
   final void Function(KeyLabel<T>? value)? onSelectedValue;
 
   final String? autocompleteMetadataName;
@@ -123,7 +123,7 @@ class AAutocompleteField<T> extends StatefulWidget {
 }
 
 class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with FieldControllerRegisterMixin {
-  late final AAutocompleteController<T> fieldController;
+  late final AutocompleteController<T> fieldController;
   late final _localDecoration = widget.decoration ?? const InputDecoration();
 
   var key = GlobalKey();
@@ -296,10 +296,10 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
     );
   }
 
-  AAutocompleteController<T> _buildController() {
-    final AAutocompleteController<T> controller;
+  AutocompleteController<T> _buildController() {
+    final AutocompleteController<T> controller;
     if (widget.options != null) {
-      controller = AAutocompleteController(
+      controller = AutocompleteController(
         widget.name!,
         repository: AllInMemoryAutocompleteRepository<T>(widget.options!),
         labelText: widget.labelText,
@@ -319,7 +319,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
         defaultWhereBuilder: widget.defaultWhereBuilder,
       );
 
-      controller = AAutocompleteController(
+      controller = AutocompleteController(
         widget.name!,
         repository: repository,
         labelText: widget.labelText,

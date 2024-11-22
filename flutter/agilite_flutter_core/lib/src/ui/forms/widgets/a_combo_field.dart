@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class AComboField<T> extends StatefulWidget {
   //Criado via controller
   final List<KeyLabel<T>> options;
-  final AComboController<T>? fieldController;
+  final ComboController<T>? fieldController;
 
   //Parâmetros para criar o controller aqui no TextField
   final String? name;
@@ -19,10 +19,10 @@ class AComboField<T> extends StatefulWidget {
 
   final InputDecoration localDecoration;
 
-  final void Function(AComboController<T> controller)? onControllerCreated;
+  final void Function(ComboController<T> controller)? onControllerCreated;
 
   const AComboField.controller(
-    AComboController<T> this.fieldController, {
+    ComboController<T> this.fieldController, {
     required this.options,
     super.key,
     InputDecoration? decoration,
@@ -54,7 +54,7 @@ class AComboField<T> extends StatefulWidget {
 }
 
 class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerRegisterMixin {
-  late final AComboController<T> fieldController;
+  late final ComboController<T> fieldController;
 
   @override
   void initState() {
@@ -99,7 +99,7 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerReg
     );
   }
 
-  Widget? _buildSuffixIcon(AComboController<T> fieldController) {
+  Widget? _buildSuffixIcon(ComboController<T> fieldController) {
     if (widget.options[0].jsonKey == null && fieldController.value != null) {
       return IconButton(
         icon: const Icon(Icons.clear, color: Colors.red),
@@ -112,8 +112,8 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerReg
     return null;
   }
 
-  AComboController<T> _buildController() {
-    return AComboController<T>(
+  ComboController<T> _buildController() {
+    return ComboController<T>(
       widget.name!,
       initialValue: widget.options.first.jsonKey as T?,
       defaultValue: widget.options.first.jsonKey as T,

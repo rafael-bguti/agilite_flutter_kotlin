@@ -1,10 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
 
-class AComboController<T> extends FieldController<T> {
+class ComboController<T> extends FieldController<T> {
   String? _helperText;
   String? _hintText;
 
-  AComboController(
+  ComboController(
     super.name, {
     required super.defaultValue,
     super.initialValue,

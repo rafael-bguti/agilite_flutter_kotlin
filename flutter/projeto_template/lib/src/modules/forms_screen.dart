@@ -56,7 +56,7 @@ class Autocompletes extends StatefulWidget {
 }
 
 class _AutocompletesState extends State<Autocompletes> {
-  final formController = AFormController();
+  final formController = FormController();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class SimpleForm extends StatefulWidget {
 }
 
 class _SimpleFormState extends State<SimpleForm> {
-  final formController = AFormController();
+  final formController = FormController();
   String? result;
 
   @override

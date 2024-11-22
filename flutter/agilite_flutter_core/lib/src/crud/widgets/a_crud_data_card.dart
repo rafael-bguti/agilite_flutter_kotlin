@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class ACrudDataCard extends StatelessWidget {
-  final ACrudController crudController;
+  final CrudController crudController;
   final double height;
   final void Function(int id) onEdit;
 
@@ -41,12 +41,12 @@ class ACrudDataCard extends StatelessWidget {
                           pageSize: crudController.state.pageSize,
                           totalRecords: crudController.state.totalRecords,
                           onPageSizeChange: (pgSize) {
-                            crudController.formFiltersController.setCustomValue(ACrudController.pageSizeName, pgSize);
+                            crudController.formFiltersController.setCustomValue(CrudController.pageSizeName, pgSize);
                             crudController.doRefresh();
                           },
                           onPageChange: (delta) {
                             final newPage = crudController.state.currentPage + delta;
-                            crudController.formFiltersController.setCustomValue(ACrudController.currentPageName, newPage);
+                            crudController.formFiltersController.setCustomValue(CrudController.currentPageName, newPage);
                             crudController.doRefresh();
                           },
                         ),

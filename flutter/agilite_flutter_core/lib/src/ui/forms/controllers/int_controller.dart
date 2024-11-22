@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import '../../../extensions/string_extensions.dart';
 import 'form_field_controller.dart';
 
-class AIntController extends FormFieldController<int?> {
+class IntController extends FormFieldController<int?> {
   final int maxIntegerDigits;
 
-  AIntController(
+  IntController(
     super.name, {
     super.defaultValue,
     super.initialValue,

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/cupertino.dart';
 
-class ACrudController extends AViewController<CrudState> {
+class CrudController extends ViewController<CrudState> {
   static const String searchName = 'search';
   static const String groupIndexName = 'groupIndex';
   static const String pageSizeName = 'pageSize';
@@ -13,12 +13,12 @@ class ACrudController extends AViewController<CrudState> {
   final $loading = false.obs;
 
   //Controllers
-  final formFiltersController = AFormController();
-  final ASpreadController spreadDataController;
+  final formFiltersController = FormController();
+  final SpreadController spreadDataController;
 
-  ACrudController({
+  CrudController({
     required List<ASpreadColumn> dataColumns,
-  })  : spreadDataController = ASpreadController(
+  })  : spreadDataController = SpreadController(
           "data",
           columns: dataColumns,
           readOnly: true,

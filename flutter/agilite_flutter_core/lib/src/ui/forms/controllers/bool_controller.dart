@@ -1,7 +1,7 @@
 import 'package:agilite_flutter_core/core.dart';
 
-class ABoolController extends FieldController<bool> {
-  ABoolController(
+class BoolController extends FieldController<bool> {
+  BoolController(
     super.name, {
     super.defaultValue = false,
     super.initialValue,

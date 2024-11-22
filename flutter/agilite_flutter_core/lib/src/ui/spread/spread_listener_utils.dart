@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 
 class SpreadCellStopEditingAction {
   final Map<String, List<CellValueChangedHandler>> _columnHandlers = {};
-  void Function(ASpreadController spreadController, int row, String columnName)? handlerForAllCells;
+  void Function(SpreadController spreadController, int row, String columnName)? handlerForAllCells;
 
   void putColumnHandler(String columnName, CellValueChangedHandler handler) {
     _columnHandlers[columnName] = [handler];
@@ -24,7 +24,7 @@ class SpreadCellStopEditingAction {
     }
   }
 
-  void onSpreadCellStopEditing(ASpreadController spreadController, int row, String columnName) {
+  void onSpreadCellStopEditing(SpreadController spreadController, int row, String columnName) {
     final handler = _columnHandlers[columnName];
     if (handler != null && handler.isNotEmpty) {
       for (var h in handler) {
@@ -37,7 +37,7 @@ class SpreadCellStopEditingAction {
 }
 
 abstract class CellValueChangedHandler {
-  void onCellValueChanged(ASpreadController spreadController, int row);
+  void onCellValueChanged(SpreadController spreadController, int row);
 }
 
 class MultiplyCellsHandler implements CellValueChangedHandler {
@@ -47,7 +47,7 @@ class MultiplyCellsHandler implements CellValueChangedHandler {
   MultiplyCellsHandler(this.destColumnName, this._columnNames);
 
   @override
-  void onCellValueChanged(ASpreadController spreadController, int row) {
+  void onCellValueChanged(SpreadController spreadController, int row) {
     final values = _columnNames.map((name) => spreadController.value.getDouble(row, name)).toList();
     if (values.contains(null)) return;
 
@@ -64,7 +64,7 @@ class PercentCellsHandler implements CellValueChangedHandler {
   PercentCellsHandler(this.destColumnName, this.percentColumnName, this.valueColumnName);
 
   @override
-  void onCellValueChanged(ASpreadController spreadController, int row) {
+  void onCellValueChanged(SpreadController spreadController, int row) {
     final value = spreadController.value.getDouble(row, valueColumnName);
     final percent = spreadController.value.getDouble(row, percentColumnName);
     if (value == null || percent == null) return;

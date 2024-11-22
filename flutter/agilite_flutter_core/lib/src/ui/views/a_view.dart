@@ -1,9 +1,8 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/ui/views/a_view_controller.dart';
 import 'package:flutter/material.dart';
 
 class AView<T> extends StatefulWidget {
-  final AViewController<T> controller;
+  final ViewController<T> controller;
   final Widget Function(BuildContext context, T state) builder;
   const AView({
     required this.controller,
@@ -16,7 +15,7 @@ class AView<T> extends StatefulWidget {
 }
 
 class _AViewState<T> extends State<AView<T>> {
-  late final AViewController<T> controller = widget.controller;
+  late final ViewController<T> controller = widget.controller;
 
   @override
   void initState() {

@@ -5,7 +5,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AAutocompleteController<T> extends FieldController<KeyLabel<T>?> {
+class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
   List<KeyLabel<T>>? allOptions;
   final List<KeyLabel<T>> filteredOptions = [];
   final AutocompleteRepository<T> repository;
@@ -30,7 +30,7 @@ class AAutocompleteController<T> extends FieldController<KeyLabel<T>?> {
   final ValueNotifier<int> selectedIndex;
   final ScrollController itemsScrollController;
 
-  AAutocompleteController(
+  AutocompleteController(
     super.name, {
     required this.repository,
     super.defaultValue,

@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class ACrudDataGroups extends StatelessWidget {
-  final ACrudController crudController;
+  final CrudController crudController;
   const ACrudDataGroups(this.crudController, {super.key});
 
   @override
@@ -16,7 +16,7 @@ class ACrudDataGroups extends StatelessWidget {
       headerCount: crudController.state.groups!.length,
       contentBuilder: _buildStatusContext,
       onTabChanged: (tabIndex) {
-        crudController.formFiltersController.setCustomValue(ACrudController.groupIndexName, tabIndex);
+        crudController.formFiltersController.setCustomValue(CrudController.groupIndexName, tabIndex);
         crudController.doRefresh();
       },
     );

@@ -8,10 +8,10 @@ final _dateTextInputFormatter = DateTextInputFormatter();
 final _minDate = DateTime(1900);
 final _maxDate = DateTime(2099, 12, 31);
 
-class ADateController extends FormFieldController<DateTime?> {
+class DateController extends FormFieldController<DateTime?> {
   final FocusNode calendarFocusNode = FocusNode(skipTraversal: true);
 
-  ADateController(
+  DateController(
     super.name, {
     super.defaultValue,
     super.initialValue,

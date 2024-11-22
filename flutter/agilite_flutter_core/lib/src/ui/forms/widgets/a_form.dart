@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class AForm extends StatefulWidget {
-  final AFormController controller;
+  final FormController controller;
   final Map<String, dynamic>? value;
   final Widget child;
 
@@ -18,7 +18,7 @@ class AForm extends StatefulWidget {
 }
 
 class AFormState extends State<AForm> {
-  late final AFormController _controller;
+  late final FormController _controller;
 
   @override
   void initState() {

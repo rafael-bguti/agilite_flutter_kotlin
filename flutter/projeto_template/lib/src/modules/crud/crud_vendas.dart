@@ -10,12 +10,12 @@ class CrudVendas extends StatefulWidget {
 }
 
 class _CrudVendasState extends State<CrudVendas> {
-  late final ACrudController crudController;
+  late final CrudController crudController;
 
   @override
   void initState() {
     super.initState();
-    crudController = ACrudController(
+    crudController = CrudController(
       dataColumns: [
         AColumnString("name", "Name"),
         AColumnString("email", "Email"),

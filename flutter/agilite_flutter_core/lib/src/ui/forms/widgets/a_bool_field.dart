@@ -18,7 +18,7 @@ class ABoolField extends StatefulWidget {
   final LabelOrientation? labelOrientation;
 
   //Criado via controller
-  final ABoolController? fieldController;
+  final BoolController? fieldController;
 
   //Parâmetros para criar o controller aqui no Checkbox
   final String? name;
@@ -28,10 +28,10 @@ class ABoolField extends StatefulWidget {
   final bool? defaultValue;
   final bool? autoFocus;
 
-  final void Function(ABoolController controller)? onControllerCreated;
+  final void Function(BoolController controller)? onControllerCreated;
 
   const ABoolField.controller(
-    ABoolController this.fieldController, {
+    BoolController this.fieldController, {
     super.key,
     this.renderType = ABoolRenderType.switcher,
     this.autoFocus,
@@ -61,7 +61,7 @@ class ABoolField extends StatefulWidget {
 }
 
 class _ABoolFieldState extends State<ABoolField> with FieldControllerRegisterMixin {
-  late final ABoolController fieldController;
+  late final BoolController fieldController;
 
   @override
   void initState() {
@@ -116,8 +116,8 @@ class _ABoolFieldState extends State<ABoolField> with FieldControllerRegisterMix
     );
   }
 
-  ABoolController _buildController() {
-    return ABoolController(
+  BoolController _buildController() {
+    return BoolController(
       widget.name!,
       labelText: widget.labelText,
       enabled: widget.enabled,

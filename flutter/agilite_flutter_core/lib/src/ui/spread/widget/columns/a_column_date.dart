@@ -8,7 +8,7 @@ class AColumnDate extends ASpreadColumn<DateTime> {
     super.isEditable,
     super.req,
     super.validators,
-  })  : _controller = ADateController(
+  })  : _controller = DateController(
           name,
           createdBySpread: true,
         ),
@@ -16,7 +16,7 @@ class AColumnDate extends ASpreadColumn<DateTime> {
     _init();
   }
 
-  final ADateController _controller;
+  final DateController _controller;
 
   void _init() {
     _controller.suffixStartAction = _onDatePickerShow;

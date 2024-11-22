@@ -10,14 +10,14 @@ class AColumnInt extends ASpreadColumn<int> {
     this.maxIntegerDigits,
     super.req,
     super.validators,
-  })  : _controller = AIntController(
+  })  : _controller = IntController(
           name,
           maxIntegerDigits: maxIntegerDigits,
           createdBySpread: true,
         ),
         super(alignment: Alignment.centerRight);
 
-  final AIntController _controller;
+  final IntController _controller;
 
   @override
   Widget buildEditCell(BuildContext context, int row) {

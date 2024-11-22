@@ -4,13 +4,13 @@ import '../../../extensions/double_extensions.dart';
 import '../../../extensions/string_extensions.dart';
 import 'form_field_controller.dart';
 
-class ADoubleController extends FormFieldController<double?> {
+class DoubleController extends FormFieldController<double?> {
   final int minDecimalDigits;
   final int maxDecimalDigits;
   final int maxIntegerDigits;
   final String _regex;
 
-  ADoubleController(
+  DoubleController(
     super.name, {
     super.defaultValue,
     super.initialValue,

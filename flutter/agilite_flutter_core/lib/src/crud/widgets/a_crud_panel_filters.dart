@@ -2,7 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class ACrudPanelFilters extends StatelessWidget {
-  final ACrudController crudController;
+  final CrudController crudController;
 
   final Widget Function(BuildContext context)? moreFiltersPanelBuilder;
   final List<Widget>? customFilters;
@@ -20,7 +20,7 @@ class ACrudPanelFilters extends StatelessWidget {
       [
         AGridRow("3, 9", [
           ASearchField(
-            ACrudController.searchName,
+            CrudController.searchName,
             onSearchChanged: (_) => crudController.doRefresh(),
           ),
           Row(

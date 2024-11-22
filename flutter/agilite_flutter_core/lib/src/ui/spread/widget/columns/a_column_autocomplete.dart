@@ -14,7 +14,7 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
   final _Type _type;
 
   final void Function(KeyLabel<T>? value, int row)? onSelectedValue;
-  late final AAutocompleteController<T> _fieldController;
+  late final AutocompleteController<T> _fieldController;
 
   final String? autocompleteMetadataName;
 
@@ -185,8 +185,8 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     }
   }
 
-  AAutocompleteController<T> _buildComboController({bool combo = false}) {
-    return AAutocompleteController<T>(
+  AutocompleteController<T> _buildComboController({bool combo = false}) {
+    return AutocompleteController<T>(
       name,
       repository: AllInMemoryAutocompleteRepository<T>(options!),
       createdBySpread: true,
@@ -194,14 +194,14 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     );
   }
 
-  AAutocompleteController<T> _buildApiController() {
+  AutocompleteController<T> _buildApiController() {
     final repository = RemoteAPIAutocompleteRepository<T>(
       http: coreHttpProvider,
       autocompleteMetadataName: autocompleteMetadataName ?? name,
       defaultWhereBuilder: defaultWhereBuilder,
     );
 
-    return AAutocompleteController<T>(
+    return AutocompleteController<T>(
       name,
       repository: repository,
       createdBySpread: true,

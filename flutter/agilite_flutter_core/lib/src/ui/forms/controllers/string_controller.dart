@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import '../../../extensions/string_extensions.dart';
 import 'form_field_controller.dart';
 
-class AStringController extends FormFieldController<String?> {
+class StringController extends FormFieldController<String?> {
   final List<TextInputFormatter>? _inputFormatters;
 
   String? Function(String text)? parseValue;
   String Function(String? value)? formatValue;
 
-  AStringController(
+  StringController(
     super.name, {
     super.defaultValue,
     super.initialValue,
