@@ -12,11 +12,11 @@ class HttpResponse {
   Uint8List get bodyBytes => _response.bodyBytes;
   String get bodyString => bodyBytes.isEmpty ? '' : utf8.decode(bodyBytes);
 
-  LowercaseMap get bodyMap => !hasBody
+  Map<String, dynamic> get bodyMap => !hasBody
       ? throw UnexpectedException(
           'Server response is null',
         )
-      : bodyString.toLowercaseMap();
+      : bodyString.toMap();
   List<LowercaseMap> get bodyListLowerCaseMap => bodyString.toListLowercaseMap();
 
   List<Map<String, dynamic>> get bodyList => bodyString.toListMap();

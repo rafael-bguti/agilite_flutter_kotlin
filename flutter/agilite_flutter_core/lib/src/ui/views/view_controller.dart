@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ViewController<T> extends ChangeNotifier {
   ViewController([T? initialState]) : _state = initialState;
 
-  void onViewLoaded() {}
+  Future<void> onViewLoaded() async {}
 
   T? _state;
   bool get hasState => _state != null;
@@ -14,9 +14,14 @@ class ViewController<T> extends ChangeNotifier {
     showState();
   }
 
-  void showState() {
+  set stateDontCloseLoading(T t) {
+    _state = t;
+    showState(false);
+  }
+
+  void showState([bool hideLoading_ = true]) {
     closeError();
-    closeLoading();
+    if (hideLoading_) hideLoading();
 
     notifyListeners();
   }

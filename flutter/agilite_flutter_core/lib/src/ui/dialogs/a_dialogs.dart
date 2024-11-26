@@ -4,7 +4,7 @@ void showLoading(String loadingMessage) {
   ALoading.show(loadingMessage);
 }
 
-void closeLoading() {
+void hideLoading() {
   ANavigator.closeLoadingDialog();
 }
 

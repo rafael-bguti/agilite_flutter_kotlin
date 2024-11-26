@@ -58,8 +58,21 @@ final routes = <ARoute>[
     (_, __) => const FormsScreen(),
   ),
   ARoute.eager(
-    '/crud',
+    '/vendas',
     inFullLayout: true,
     (_, __) => const CrudVendas(),
+  ),
+  ARoute.eager(
+    '/sdui/:name',
+    inFullLayout: true,
+    (_, state) {
+      final name = state.pathParameters['name'];
+      return SduiLoader(
+        contentProvider: RemoteSduiContentProvider(
+          url: '/sdui/task/$name',
+          pathParams: state.pathParameters,
+        ),
+      );
+    },
   ),
 ];

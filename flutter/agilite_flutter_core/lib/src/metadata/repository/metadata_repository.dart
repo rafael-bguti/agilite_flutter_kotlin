@@ -4,17 +4,18 @@ abstract class MetadataRepository {
   Future<void> loadFieldsByNames(List<String> entity);
 
   FieldMetadata field(String name);
-
   FieldMetadataOption option(String field, Object value);
 }
 
-class MetadataRepositoryImpl implements MetadataRepository {
+class HttpMetadataRepositoryAdapter implements MetadataRepository {
   final HttpProvider provider;
   static final Set<String> loadedEntities = {};
   //TODO - Precisa adicionar uma forma de limpar o cache talvez com um time ou um version no servidor, pois caso contrário quando atualizar a versão no servidor os campos não serão atualizados
-  static final LowercaseMap _fields = LowercaseMap();
 
-  MetadataRepositoryImpl(this.provider);
+  static final LowercaseMap _fieldsCache = LowercaseMap();
+  static final LowercaseMap _crudCache = LowercaseMap();
+
+  HttpMetadataRepositoryAdapter(this.provider);
 
   @override
   Future<void> loadFieldsByNames(List<String> entities) async {
@@ -23,13 +24,13 @@ class MetadataRepositoryImpl implements MetadataRepository {
       return;
     }
 
-    final response = await provider.post('/public/metadata/load', body: entities);
+    final response = await provider.post('/public/metadata/entity', body: entities);
     final loadedFields = response.bodyListLowerCaseMap.map((element) {
       return FieldMetadata.fromJson(element);
     }).toList();
 
     for (final field in loadedFields) {
-      _fields[field.name] = field;
+      _fieldsCache[field.name] = field;
     }
 
     loadedEntities.addAll(entities);
@@ -37,7 +38,7 @@ class MetadataRepositoryImpl implements MetadataRepository {
 
   @override
   FieldMetadata field(String name) {
-    final field = _fields[name.toLowerCase()];
+    final field = _fieldsCache[name.toLowerCase()];
     if (field == null) {
       throw 'Field $name not found on loaded entities';
     }
@@ -47,7 +48,7 @@ class MetadataRepositoryImpl implements MetadataRepository {
 
   @override
   FieldMetadataOption option(String field, Object value) {
-    final fieldMetadata = _fields[field];
+    final fieldMetadata = _fieldsCache[field];
     if (fieldMetadata == null) {
       throw 'Field $field not found on loaded entities';
     }

@@ -127,7 +127,6 @@ class ASideDialog {
           child: Align(
             alignment: alignment,
             child: Container(
-              height: height ?? MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: sheetColor ?? static_theme.backgroundColor,
                 borderRadius: borderRadius,

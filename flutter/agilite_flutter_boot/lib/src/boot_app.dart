@@ -43,7 +43,7 @@ class _BootAppState extends State<BootApp> {
       _httpProviderCache = widget.customHttpProvider;
     }
 
-    metadataRepository = MetadataRepositoryImpl(httpProvider);
+    metadataRepository = HttpMetadataRepositoryAdapter(httpProvider);
     coreHttpProvider = httpProvider;
 
     if (widget.themeMode != null) {

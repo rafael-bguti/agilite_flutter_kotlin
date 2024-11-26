@@ -7,7 +7,7 @@ class CrudEditController extends ViewController<bool> {
   CrudEditController({required this.id}) : super(true);
 
   @override
-  void onViewLoaded() async {
+  Future<void> onViewLoaded() async {
     showLoading("Carregando registro");
     await Future.delayed(Duration(seconds: 2));
 

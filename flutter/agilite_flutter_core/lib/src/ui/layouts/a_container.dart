@@ -63,7 +63,7 @@ class AContainerHeader {
   const AContainerHeader.text(this.headerText, {this.headerOptions}) : headerLabel = null;
 
   Widget build(BuildContext context, bool fluid, double width) {
-    if (headerLabel == null && headerOptions == null) {
+    if (headerLabel == null && headerText == null) {
       return const SizedBox.shrink();
     }
 

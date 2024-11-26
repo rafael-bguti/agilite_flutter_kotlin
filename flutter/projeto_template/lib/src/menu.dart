@@ -9,7 +9,8 @@ final menuItens = <MenuItem>[
   MenuItem('3', title: 'UI', type: MenuItemType.header),
   MenuItem('4', title: 'Screens', type: MenuItemType.group, iconCode: Icons.web.codePoint, children: [
     MenuItem('41', title: 'Login', type: MenuItemType.item, route: '/login'),
-    MenuItem('42', title: 'Crud - Vendas', type: MenuItemType.item, route: '/crud'),
+    MenuItem('42', title: 'Crud - Manual', type: MenuItemType.item, route: '/vendas'),
+    MenuItem('43', title: 'Crud - Sdui', type: MenuItemType.item, route: '/sdui/cliente'),
   ]),
   MenuItem('6', title: 'Components', type: MenuItemType.group, iconCode: Icons.input.codePoint, children: [
     MenuItem('61', title: 'Buttons', type: MenuItemType.item, route: '/buttons'),

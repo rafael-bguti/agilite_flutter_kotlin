@@ -17,18 +17,22 @@ class Boot {
 // //TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
 void _configErrorLog() {
   FlutterError.onError = (errorDetails) {
-    debugPrint('Virgiii');
+    debugPrint('Virgiii - FlutterError.onError');
     debugPrint('Error on [FlutterError.onError]: $errorDetails');
 
-    AError.defaultCatch(errorDetails.exception, errorDetails.stack ?? StackTrace.current);
+    runOnNextBuild(() {
+      AError.defaultCatch(errorDetails.exception, errorDetails.stack ?? StackTrace.current);
+    });
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    debugPrint('Virgiii');
+    debugPrint('Virgiii - PlatformDispatcher.instance.onError');
     debugPrint('Error on [FlutterError.onError]: $error');
     debugPrint('Stack on [FlutterError.onError]: $stack');
 
-    AError.defaultCatch(error, stack);
+    runOnNextBuild(() {
+      AError.defaultCatch(error, stack);
+    });
     return true;
   };
 }

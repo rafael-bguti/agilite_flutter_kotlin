@@ -88,6 +88,20 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                     : ASpacingRow(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          OutlinedButton(
+                            style: buildOutlinedButtonStyle(color),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              widget.onCancel?.call();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                              child: Text('Não', style: textTheme?.titleLarge?.copyWith(color: color)),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Text("OU"),
+                          const SizedBox(width: 8),
                           FilledButton(
                             style: buildButtonStyle(color, color.contrastingColor),
                             onPressed: () => _doConfirm(context),
@@ -99,20 +113,6 @@ class _ABottomDialogQuestionState extends State<ABottomDialogQuestion> {
                                   color: onSuccessColor,
                                 ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text("OU"),
-                          const SizedBox(width: 8),
-                          OutlinedButton(
-                            style: buildOutlinedButtonStyle(color),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              widget.onCancel?.call();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                              child: Text('Não', style: textTheme?.titleLarge?.copyWith(color: color)),
                             ),
                           ),
                         ],

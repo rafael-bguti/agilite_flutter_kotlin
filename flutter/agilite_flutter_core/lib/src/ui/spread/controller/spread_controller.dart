@@ -27,6 +27,7 @@ class SpreadController extends FieldController<SpreadModel> {
   final bool disableScroll;
   final bool disableVerticalScroll;
   final bool readOnly;
+  final bool showSelectColumn = false;
   final ValueNotifier<bool> loading = ValueNotifier(false);
   final List<ASpreadColumn<dynamic>> columns;
 

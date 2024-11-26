@@ -21,7 +21,9 @@ class _AViewState<T> extends State<AView<T>> {
   void initState() {
     super.initState();
     runOnNextBuild(() {
-      controller.onViewLoaded();
+      controller.onViewLoaded().catchError((e) {
+        throw ForceHomeException(e);
+      });
     });
   }
 

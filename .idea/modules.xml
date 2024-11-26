@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/flutter/agilite_flutter_core/agilite_flutter_core.iml" filepath="$PROJECT_DIR$/flutter/agilite_flutter_core/agilite_flutter_core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/agilite_flutter_kotlin.iml" filepath="$PROJECT_DIR$/.idea/agilite_flutter_kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/flutter/projeto_template/projeto_template.iml" filepath="$PROJECT_DIR$/flutter/projeto_template/projeto_template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter/projeto_template/android/projeto_template_android.iml" filepath="$PROJECT_DIR$/flutter/projeto_template/android/projeto_template_android.iml" />
     </modules>
   </component>
 </project>

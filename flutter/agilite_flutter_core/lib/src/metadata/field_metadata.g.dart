@@ -11,7 +11,7 @@ FieldMetadata _$FieldMetadataFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       label: json['label'] as String,
       type: $enumDecode(_$FieldMetadataTypeEnumMap, json['type']),
-      req: json['req'] as bool,
+      req: json['req'] as bool? ?? false,
       size: (json['size'] as num?)?.toDouble(),
       options: (json['options'] as List<dynamic>?)
           ?.map((e) => FieldMetadataOption.fromJson(e as Map<String, dynamic>))

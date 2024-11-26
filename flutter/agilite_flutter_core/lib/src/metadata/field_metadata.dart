@@ -29,7 +29,7 @@ class FieldMetadata {
     required this.name,
     required this.label,
     required this.type,
-    required this.req,
+    this.req = false,
     this.size,
     this.options,
     this.validationQuery,

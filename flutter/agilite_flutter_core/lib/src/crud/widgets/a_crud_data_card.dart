@@ -1,13 +1,15 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ACrudDataCard extends StatelessWidget {
+class ACrudSpreadDataCard extends StatelessWidget {
   final CrudController crudController;
+  final List<ASpreadColumn> columns;
   final double height;
-  final void Function(int id) onEdit;
+  final void Function(int id)? onEdit;
 
-  const ACrudDataCard({
+  const ACrudSpreadDataCard({
     required this.crudController,
+    required this.columns,
     required this.onEdit,
     this.height = 550,
     super.key,
@@ -28,7 +30,10 @@ class ACrudDataCard extends StatelessWidget {
             return Column(
               children: [
                 ACrudDataGroups(crudController),
-                Expanded(child: _buildSpread()),
+                AForm(
+                  crudController.dataFormController,
+                  child: Expanded(child: _buildSpread()),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: Row(
@@ -73,11 +78,16 @@ class ACrudDataCard extends StatelessWidget {
   }
 
   Widget _buildSpread() {
-    return ASpread.controller(
-      crudController.spreadDataController,
-      onRowTap: (rowIndex) {
-        onEdit(crudController.state.data[rowIndex]['id']);
-      },
+    return ASpread.columns(
+      CrudController.spreadDataName,
+      columns,
+      onRowTap: onEdit == null
+          ? null
+          : (rowIndex) {
+              onEdit!(crudController.state.data[rowIndex]['id']);
+            },
+      selectColumnName: CrudController.spreadDataSelectedColumnName,
+      readOnly: true,
       selectPanelWidget: TextButton.icon(
         onPressed: crudController.deleteSelecteds,
         style: TextButton.styleFrom(foregroundColor: Colors.red),

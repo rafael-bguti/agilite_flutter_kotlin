@@ -1,6 +1,5 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_estudo/src/modules/crud/edit_crud_vendas.dart';
 
 class CrudVendas extends StatefulWidget {
   const CrudVendas({super.key});
@@ -10,18 +9,7 @@ class CrudVendas extends StatefulWidget {
 }
 
 class _CrudVendasState extends State<CrudVendas> {
-  late final CrudController crudController;
-
-  @override
-  void initState() {
-    super.initState();
-    crudController = CrudController(
-      dataColumns: [
-        AColumnString("name", "Name"),
-        AColumnString("email", "Email"),
-      ],
-    );
-  }
+  late final CrudController crudController = CrudController();
 
   @override
   void dispose() {
@@ -31,53 +19,44 @@ class _CrudVendasState extends State<CrudVendas> {
 
   @override
   Widget build(BuildContext context) {
-    return AView(
+    return ACrud(
       controller: crudController,
-      builder: (context, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: ACrudHeader.text('Vendas', onAddTap: () {
-              _showForm(null);
-            }),
-            child: ASpacingColumn(
-              spacing: 16,
-              children: [
-                AForm(
-                  crudController.formFiltersController,
-                  child: ACrudPanelFilters(
-                    crudController,
-                    customFilters: [
-                      OutlinedButton.icon(
-                        style: buildOutlinedButtonStyle(primaryColor),
-                        onPressed: () {},
-                        label: const Text("emissão"),
-                        icon: const Icon(Icons.calendar_today),
-                      ),
-                    ],
-                  ),
-                ),
-                ACrudDataCard(
-                  crudController: crudController,
-                  onEdit: _showForm,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      descr: _descr,
+      customFilters: [
+        OutlinedButton.icon(
+          style: buildOutlinedButtonStyle(primaryColor),
+          onPressed: () {},
+          label: const Text("emissão"),
+          icon: const Icon(Icons.calendar_today),
+        ),
+      ],
+      columns: [
+        AColumnString("name", "Name"),
+        AColumnString("email", "Email"),
+      ],
+      onEdit: _showForm,
     );
   }
 
   void _showForm(int? id) async {
-    final form = CrudEditVendas(id: id);
+    final editCrud = AEditCrud(
+      descr: _descr,
+      id: id,
+    );
 
-    final saved = await ASideDialog.showBottom(
-      builder: (context) => form,
-      barrierDismissible: false,
+    // final saved = await ASideDialog.showBottom(
+    //   builder: (context) => editCrud,
+    //   barrierDismissible: false,
+    // );
+
+    final saved = await ANavigator.pushWidget(
+      editCrud,
     );
 
     if (saved != null) {
       crudController.doRefresh();
     }
   }
+
+  CrudDescr get _descr => const CrudDescr('Venda');
 }

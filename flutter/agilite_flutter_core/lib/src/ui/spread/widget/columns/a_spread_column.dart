@@ -202,6 +202,7 @@ abstract class ASpreadColumn<T> {
   }
 
   AWidth get width => _width;
+  void set width(AWidth width) => _width = width;
   ASpreadColumn<T> widthFlex(int flex) {
     _width = AWidth.flex(flex);
     return this;

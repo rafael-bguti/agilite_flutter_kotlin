@@ -15,7 +15,7 @@ MenuItem _$MenuItemFromJson(Map<String, dynamic> json) => MenuItem(
           ?.map((e) => MenuItem.fromJson(e as Map<String, dynamic>))
           .toList(),
       iconCode: (json['iconCode'] as num?)?.toInt(),
-    );
+    )..parentId = json['parentId'] as String?;
 
 Map<String, dynamic> _$MenuItemToJson(MenuItem instance) => <String, dynamic>{
       'id': instance.id,
@@ -24,6 +24,7 @@ Map<String, dynamic> _$MenuItemToJson(MenuItem instance) => <String, dynamic>{
       'type': _$MenuItemTypeEnumMap[instance.type]!,
       'iconCode': instance.iconCode,
       'children': instance.children,
+      'parentId': instance.parentId,
     };
 
 const _$MenuItemTypeEnumMap = {

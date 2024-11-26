@@ -1,34 +1,31 @@
 import 'dart:math';
 
 import 'package:agilite_flutter_core/core.dart';
+import 'package:agilite_flutter_core/src/crud/crud_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class CrudController extends ViewController<CrudState> {
+  static const String spreadDataName = 'data';
   static const String searchName = 'search';
   static const String groupIndexName = 'groupIndex';
   static const String pageSizeName = 'pageSize';
   static const String currentPageName = 'currentPage';
   static const String spreadDataSelectedColumnName = 'selected';
 
-  final $loading = false.obs;
+  final CrudRepository? _repository;
 
   //Controllers
   final formFiltersController = FormController();
-  final SpreadController spreadDataController;
+  final dataFormController = FormController();
 
-  CrudController({
-    required List<ASpreadColumn> dataColumns,
-  })  : spreadDataController = SpreadController(
-          "data",
-          columns: dataColumns,
-          readOnly: true,
-          selectColumnName: spreadDataSelectedColumnName,
-        ),
+  final $loading = false.obs;
+  CrudController({CrudRepository? repository})
+      : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
         super(CrudState.empty());
 
   @override
   @mustCallSuper
-  void onViewLoaded() async {
+  Future<void> onViewLoaded() async {
     showLoading("Carregando dados do cadastro");
     await refresh(null);
   }
@@ -75,8 +72,7 @@ class CrudController extends ViewController<CrudState> {
       ],
       selectedGroupIndex: 3,
     );
-    spreadDataController.fillFromList(state.data);
-
+    dataFormController.showValues({"data": state.data});
     $loading.value = false;
   }
 
@@ -89,7 +85,6 @@ class CrudController extends ViewController<CrudState> {
   void dispose() {
     $loading.dispose();
     formFiltersController.dispose();
-    spreadDataController.dispose();
 
     super.dispose();
   }
