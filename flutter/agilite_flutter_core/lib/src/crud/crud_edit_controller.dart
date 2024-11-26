@@ -21,4 +21,15 @@ class CrudEditController extends ViewController<bool> {
     };
     state = true;
   }
+
+  Future<void> save() async {
+    if (!formController.validate()) return;
+
+    showLoading("Salvando registro");
+    await Future.delayed(Duration(seconds: 1));
+    print(formController.buidlJson());
+
+    hideLoading();
+    ANavigator.pop("ok");
+  }
 }

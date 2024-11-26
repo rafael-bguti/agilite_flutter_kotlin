@@ -20,7 +20,7 @@ class ViewController<T> extends ChangeNotifier {
   }
 
   void showState([bool hideLoading_ = true]) {
-    closeError();
+    hideError();
     if (hideLoading_) hideLoading();
 
     notifyListeners();

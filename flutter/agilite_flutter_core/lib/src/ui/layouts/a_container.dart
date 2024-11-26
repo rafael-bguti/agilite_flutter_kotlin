@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class AContainer extends StatelessWidget {
   final AContainerHeader? header;
   final Widget child;
+  final Widget? footer;
 
   final bool fluid;
 
   const AContainer({
     required this.child,
     this.header,
+    this.footer,
     this.fluid = false,
     super.key,
   });
@@ -18,11 +20,10 @@ class AContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = ScreenSize(context);
     const width = kMinWidthMenuFixed - kSidebarWidth;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 24.0),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
+
+    final body = Column(
+      children: [
+        Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -44,12 +45,45 @@ class AContainer extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ],
+    );
+
+    final wrapper = _buildWrapper(body, width);
+
+    return Align(
+      alignment: Alignment.topCenter,
+      child: wrapper,
     );
   }
 
   bool _needDivider() {
     return header != null;
+  }
+
+  Widget _buildWrapper(Widget body, double width) {
+    if (footer != null) {
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned.fill(
+            child: body,
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Center(
+              child: SizedBox(
+                width: fluid ? double.infinity : width,
+                child: footer!,
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return body;
+    }
   }
 }
 

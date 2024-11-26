@@ -1,11 +1,15 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
+import 'a_edit_crud_buttons.dart';
+
 class AEditCrud extends StatefulWidget {
   final CrudDescr descr;
   final int? id;
+  final Widget formBody;
 
   const AEditCrud({
+    required this.formBody,
     required this.descr,
     this.id,
     super.key,
@@ -27,42 +31,25 @@ class _AEditCrudState extends State<AEditCrud> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: AView(
-          controller: controller,
-          builder: (context, state) {
-            return Column(
-              children: [
-                Expanded(
-                  child: AContainer(
-                    header: AContainerHeader.text('${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}'),
-                    child: Center(child: Text("aa")),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          ANavigator.pop("ao");
-                        },
-                        child: const Text('Voltar rota'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          closeAllDialogs();
-                        },
-                        child: const Text('CLose dialogs'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+      child: AView(
+        controller: controller,
+        builder: (context, state) {
+          return AContainer(
+            header: AContainerHeader.text('${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}'),
+            footer: SizedBox(
+              height: 60,
+              child: AEditCrudButtons(
+                onSave: controller.save,
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: AForm(
+                controller.formController,
+                child: widget.formBody,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

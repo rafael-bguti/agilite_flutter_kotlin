@@ -34,10 +34,10 @@ void showErrorState(
   );
 }
 
-void closeError() {
+void hideError() {
   ANavigator.closeErrorDialog();
 }
 
-void closeAllDialogs() {
+void hideAllDialogs() {
   ANavigator.closeAllDialogs();
 }

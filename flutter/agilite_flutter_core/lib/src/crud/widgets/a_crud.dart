@@ -8,13 +8,19 @@ class ACrud extends StatefulWidget {
   final List<Widget>? customFilters;
 
   final CrudController? controller;
+
+  // ---- Para edição de registro ----
+  // ---- Informar ou o OnEdit ou o FormBody ----
   final void Function(int? id)? onEdit;
+  final Widget? formBody;
+
   const ACrud({
     required this.descr,
     required this.columns,
     this.customFilters,
     this.controller,
     this.onEdit,
+    this.formBody,
     super.key,
   });
 
@@ -43,11 +49,7 @@ class _ACrudState extends State<ACrud> {
           child: AContainer(
             header: ACrudHeader.text(
               widget.descr.plural,
-              onAddTap: widget.onEdit == null
-                  ? null
-                  : () {
-                      widget.onEdit!(null);
-                    },
+              onAddTap: _isEditable ? _onEdit : null,
             ),
             child: ASpacingColumn(
               spacing: 16,
@@ -61,7 +63,7 @@ class _ACrudState extends State<ACrud> {
                 ),
                 ACrudSpreadDataCard(
                   crudController: _controller,
-                  onEdit: widget.onEdit,
+                  onEdit: _isEditable ? _onEdit : null,
                   columns: widget.columns,
                 ),
               ],
@@ -70,5 +72,25 @@ class _ACrudState extends State<ACrud> {
         );
       },
     );
+  }
+
+  bool get _isEditable => widget.onEdit != null || widget.formBody != null;
+
+  Future<void> _onEdit([int? id]) async {
+    if (widget.onEdit != null) {
+      widget.onEdit!(id);
+    } else {
+      final saved = await ASideDialog.showBottom(
+        builder: (context) => AEditCrud(
+          descr: widget.descr,
+          id: id,
+          formBody: widget.formBody!,
+        ),
+        barrierDismissible: false,
+      );
+      if (saved != null) {
+        _controller.doRefresh();
+      }
+    }
   }
 }
