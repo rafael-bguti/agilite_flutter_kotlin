@@ -1,0 +1,3 @@
+Tarefas --------------------------------
+ROT4001 - Apenas FrontEnd - Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
+ROT2010 - Processo - Login

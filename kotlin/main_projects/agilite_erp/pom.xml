@@ -24,7 +24,7 @@
   <dependencies>
     <dependency>
       <groupId>info.agilite</groupId>
-      <artifactId>agilite_kotlin_boot</artifactId>
+      <artifactId>agilite_kotlin_shared</artifactId>
     </dependency>
 
 

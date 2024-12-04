@@ -2,12 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>agilite_kotlin_boot</artifactId>
   <version>${revision}</version>
 
-  <name>agilite_kotlin_boot</name>
-  <description>template</description>
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>info.agilite</groupId>
@@ -17,25 +15,56 @@
   </parent>
 
   <properties>
-    <kotlin.code.style>official</kotlin.code.style>
-    <java.version>21</java.version>
-    <compiler.version>21</compiler.version>
-
-
-    <ktor_version>3.0.1</ktor_version>
-    <vertx_version>4.5.11</vertx_version>
-    <koin_version>4.1.0-Beta1</koin_version>
-
-    <main.class>io.ktor.server.netty.EngineMain</main.class>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>info.agilite</groupId>
-      <artifactId>agilite_kotlin_server_core</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>0.12.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>0.12.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>0.12.5</version>
+    </dependency>
 
+    <dependency>
+      <groupId>info.agilite</groupId>
+      <artifactId>agilite_kotlin_core</artifactId>
+      <version>${revision}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
   <build>
     <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>

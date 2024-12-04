@@ -1,0 +1,4 @@
+# Tipo: Cad(10), Pro(20), Rel(30), Fro-Front-end only(40) only, Bac-Backend only(50)
+NOME,TIPO,DESCRIÇÃO
+ROT4001,Fro,Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
+ROT2010,Pro,Login

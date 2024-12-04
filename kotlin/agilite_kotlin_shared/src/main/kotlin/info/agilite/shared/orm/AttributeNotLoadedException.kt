@@ -1,6 +1,0 @@
-package info.agilite.shared.orm
-
-class AttributeNotLoadedException : RuntimeException {
-  constructor(message: String) : super(message)
-  constructor(message: String, cause: Throwable) : super(message, cause)
-}

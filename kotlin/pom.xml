@@ -21,10 +21,15 @@
         <!-- Projetos MAIN -->
         <module>main_projects/agilite_erp</module>
 
+        <!-- Modules -->
+        <module>modules/rot</module>
+        <module>modules/cas</module>
+        <module>modules/cgs</module>
+
         <!-- Frameworks -->
-        <module>agilite_kotlin_server_core</module>
-        <module>agilite_kotlin_shared</module>
         <module>agilite_kotlin_boot</module>
+        <module>agilite_kotlin_core</module>
+        <module>agilite_kotlin_shared</module>
     </modules>
 
     <properties>
@@ -85,17 +90,33 @@
         <dependencies>
             <dependency>
                 <groupId>info.agilite</groupId>
+                <artifactId>rot</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.agilite</groupId>
+                <artifactId>cas</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.agilite</groupId>
+                <artifactId>cgs</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>info.agilite</groupId>
+                <artifactId>agilite_kotlin_shared</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.agilite</groupId>
                 <artifactId>agilite_kotlin_boot</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>info.agilite</groupId>
-                <artifactId>agilite_kotlin_server_core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>info.agilite</groupId>
-                <artifactId>agilite_kotlin_shared</artifactId>
+                <artifactId>agilite_kotlin_core</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

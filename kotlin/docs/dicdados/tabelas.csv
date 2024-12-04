@@ -1,0 +1,9 @@
+# tipo: id, str, int, lng, bol, dat, tim, dtm, dec, mny, jsn (mais detalhes tabela.dart)
+# optoins: val1-label1;val2-label2;val3-label3
+TABELA,COLUNA,DESCRICAO,VERSAO,REQ/TASK,TIPO,TAMANHO,OPTIONS,UKS,LISTA CRUD,AUTOCOMPLETE,FK,"CASCADE(N,C,U)",DEFAULT,VALIDACOES,OBSERVAÇÕES
+Rot10,,Autenticação,1,ROT1010,
+,email,E-Mail,1,S,str,100,,,,,,,,"email,min:6"
+,senha,Senha,1,S,str,250,
+,token,Token,1,,str,300,
+,refreshToken,Refresh Token,1,,str,300,
+,roles,Roles,1,,str,0,,,,,,
