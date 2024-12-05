@@ -62,7 +62,7 @@ class Rot01() : AbstractEntity(4) {
     
 
   override var id: Long?
-    @JsonIgnore get() = if(rot01id == -1L) null else rot01id
+    @JsonIgnore get() = if(!isIdDefined()) null else rot01id
     set(value) { if(value != null)this.rot01id = value }
 
   override fun equals(other: Any?): Boolean {

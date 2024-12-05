@@ -5,7 +5,7 @@ import info.agilite.boot.security.JwtService
 import info.agilite.boot.security.UserDetailCache
 import info.agilite.core.extensions.encryptToPassword
 import info.agilite.rot.adapter.infra.Rot10Repository
-import info.agilite.rot.domain.AutenticacaoModel
+import info.agilite.rot.domain.AuthenticateModel
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
@@ -20,8 +20,12 @@ class AutenticacaoService(
   private val userCache: UserDetailCache,
 ) {
 
-  fun autenticar(userEmail: String, password: String): AutenticacaoModel {
-    return rot10Repository.findRot10ByEmail(userEmail)?.let {
+  fun loadAuthenticateByUserId(userId: Long): AuthenticateModel? {
+    return rot10Repository.findAuthenticateByUserId(userId)
+  }
+
+  fun authenticate(userEmail: String, password: String): AuthenticateModel {
+    return rot10Repository.findAuthenticateByEmail(userEmail)?.let {
       validatePassword(password, it)
       val token = jwtService.generateToken(it.rot10id, JWT_MINUTES_TO_EXPIRE_TOKEN)
       val refreshToken = jwtService.generateToken(it.rot10id, JWT_MINUTES_TO_EXPIRE_REFRESH_TOKEN)
@@ -36,7 +40,7 @@ class AutenticacaoService(
     } ?: throw ClientException(HttpStatus.UNAUTHORIZED, "Usuário ou senha inválidos")
   }
 
-  private fun validatePassword(password: String, autenticado: AutenticacaoModel) {
+  private fun validatePassword(password: String, autenticado: AuthenticateModel) {
     val root10senha = autenticado.rot10senha
     val cryptPassword = password.encryptToPassword(STEPS)
     if (root10senha != cryptPassword) throw ClientException(HttpStatus.UNAUTHORIZED, "Usuário ou senha inválidos")

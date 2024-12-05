@@ -1,16 +1,18 @@
 package info.agilite.rot.adapter.infra
 
-import info.agilite.rot.domain.Rot2010Autenticacao
 import info.agilite.boot.orm.repositories.RootRepository
-import info.agilite.rot.domain.AutenticacaoModel
+import info.agilite.rot.domain.AuthenticateModel
 import org.springframework.stereotype.Repository
 
 @Repository
 class Rot10Repository() : RootRepository() {
-  fun findRot10ByEmail(rot10email: String): AutenticacaoModel? {
-    return findRot10("UPPER(rot10email) = :rot10email", mapOf("rot10email" to rot10email.uppercase()))
+  fun findAuthenticateByUserId(rot10id: Long): AuthenticateModel? {
+    return findModel("rot10id = :rot10id", mapOf("rot10id" to rot10id))
   }
 
+  fun findAuthenticateByEmail(rot10email: String): AuthenticateModel? {
+    return findModel("UPPER(rot10email) = :rot10email", mapOf("rot10email" to rot10email.uppercase()))
+  }
 
   fun updateTokens(rot10id: Long, rot10token: String, rot10refreshToken: String) {
     execute(
@@ -28,9 +30,9 @@ class Rot10Repository() : RootRepository() {
   }
 
 
-  private fun findRot10(where: String, params: Map<String, Any>): AutenticacaoModel? {
+  private fun findModel(where: String, params: Map<String, Any>): AuthenticateModel? {
     return unique(
-      AutenticacaoModel::class,
+      AuthenticateModel::class,
       """ 
          SELECT *
          FROM root.rot10

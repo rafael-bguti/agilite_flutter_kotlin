@@ -15,7 +15,7 @@ class Cgl2010Controller(
   private val service: Cgl2010Service
 ) {
 
-  @PostMapping
+  @PostMapping(consumes = ["text/plain"])
   @Transactional
   fun login(@RequestBody base64Login: String): Cgl2010Model {
     val decoded = String(Base64.getDecoder().decode(base64Login), Charsets.UTF_8)

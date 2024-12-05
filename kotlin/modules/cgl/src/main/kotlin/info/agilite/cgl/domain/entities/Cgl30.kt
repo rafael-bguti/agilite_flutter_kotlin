@@ -74,7 +74,7 @@ class Cgl30() : AbstractEntity(5) {
     
 
   override var id: Long?
-    @JsonIgnore get() = if(cgl30id == -1L) null else cgl30id
+    @JsonIgnore get() = if(!isIdDefined()) null else cgl30id
     set(value) { if(value != null)this.cgl30id = value }
 
   override fun equals(other: Any?): Boolean {

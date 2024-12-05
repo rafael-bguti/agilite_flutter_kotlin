@@ -19,16 +19,16 @@
 
     <modules>
         <!-- Projetos MAIN -->
-        <module>main_projects/agilite_erp</module>
+        <module>projects/agilite_erp</module>
 
         <!-- Modules -->
         <module>modules/rot</module>
         <module>modules/cgl</module>
 
         <!-- Frameworks -->
-        <module>agilite_kotlin_boot</module>
-        <module>agilite_kotlin_core</module>
-        <module>agilite_kotlin_shared</module>
+        <module>framework/agilite_kotlin_boot</module>
+        <module>framework/agilite_kotlin_core</module>
+        <module>framework/agilite_kotlin_shared</module>
     </modules>
 
     <properties>

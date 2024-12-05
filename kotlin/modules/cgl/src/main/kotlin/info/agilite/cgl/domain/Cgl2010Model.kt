@@ -1,6 +1,6 @@
 package info.agilite.cgl.domain
 
-import info.agilite.rot.domain.FrontEndMenuItem
+import info.agilite.boot.autocode.FrontEndMenuItem
 
 data class Cgl2010Model(
   val nome: String,

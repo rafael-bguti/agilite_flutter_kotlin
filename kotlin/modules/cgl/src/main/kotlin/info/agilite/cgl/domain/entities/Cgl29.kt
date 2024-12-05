@@ -1,9 +1,6 @@
 package info.agilite.cgl.domain.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore
-import info.agilite.boot.metadata.models.EntityMetadata
-import info.agilite.boot.metadata.models.FieldMetadata
-import info.agilite.boot.metadata.models.FieldTypeMetadata
-import info.agilite.boot.metadata.models.KeyMetadata
+import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
 //GERADOR INI
 
@@ -41,7 +38,7 @@ class Cgl29() : AbstractEntity(2) {
     
 
   override var id: Long?
-    @JsonIgnore get() = if(cgl29id == -1L) null else cgl29id
+    @JsonIgnore get() = if(!isIdDefined()) null else cgl29id
     set(value) { if(value != null)this.cgl29id = value }
 
   override fun equals(other: Any?): Boolean {

@@ -6,6 +6,7 @@ import info.agilite.boot.orm.cache.GlobalEntityCache
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.cgl.domain.entities.Cgl30
+import info.agilite.cgl.domain.entities.N_CGL30AUTENTICACAO
 import org.springframework.stereotype.Repository
 
 private val autenticacaoCache = EntityCache.buildByClass(Cgl30::class)
@@ -25,7 +26,7 @@ class Cgl30Repository : RootRepository() {
         DbQueryBuilders.build(
           Cgl30::class,
           "*, cgl30empAtiva.*",
-           where = WhereAllEquals(mapOf("cas30autenticacao" to cgl30autenticacao))
+           where = WhereAllEquals(mapOf(N_CGL30AUTENTICACAO to cgl30autenticacao))
         )
       )
    }
