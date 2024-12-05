@@ -14,10 +14,14 @@ import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.reflect.KClass
 
-private object GlobalEntityCache {
+typealias RemovalListener = (entry: CacheEntryWrapper) -> Unit
+
+object GlobalEntityCache {
   private val lock = ReentrantReadWriteLock()
   private val read: Lock = lock.readLock()
   private val write: Lock = lock.writeLock()
+
+  private val removalListeners = mutableListOf<RemovalListener>()
 
   private val cache: Cache<String, CacheEntryWrapper> = CacheBuilder.newBuilder()
     .maximumSize(800)
@@ -48,9 +52,9 @@ private object GlobalEntityCache {
   fun invalidate(cacheName: String, schema: String, tableName: String, key: String) {
     write.doInLock {
       val cacheKey = computeKey(cacheName, schema, tableName, key)
-      val entry = cache.getIfPresent(cacheKey)
-      if(entry != null) {
+      cache.getIfPresent(cacheKey)?.let { entry ->
         removeKeysBySchemaTableAndId(entry)
+        removalListeners.forEach { it(entry) }
         cache.invalidate(cacheKey)
       }
     }
@@ -59,8 +63,12 @@ private object GlobalEntityCache {
   fun invalidateById(schema: String, tableName: String, id: Long) {
     write.doInLock {
       val tableAndIdKey = computeSchemaTableIdKey(schema, tableName, id)
-      keysBySchemaTableAndId[tableAndIdKey]?.forEach { cache.invalidate(it) }
-
+      keysBySchemaTableAndId[tableAndIdKey]?.forEach { key ->
+        cache.getIfPresent(key)?.let { entry ->
+          removalListeners.forEach { it(entry) }
+          cache.invalidate(key)
+        }
+      }
       keysBySchemaTableAndId.remove(tableAndIdKey)
     }
   }
@@ -68,15 +76,20 @@ private object GlobalEntityCache {
   fun invalidateByCacheName(cacheName: String) {
     val localCacheName = "$cacheName."
     write.doInLock {
-      cache.asMap().filter { it.key.startsWith(localCacheName) }.forEach {
-        removeKeysBySchemaTableAndId(it.value)
-        cache.invalidate(it.key)
+      cache.asMap().filter { it.key.startsWith(localCacheName) }.forEach { entry ->
+        removeKeysBySchemaTableAndId(entry.value)
+        removalListeners.forEach { it(entry.value) }
+        cache.invalidate(entry.key)
       }
     }
   }
 
   fun invalidateAll() {
     write.doInLock {
+      cache.asMap().forEach { entry ->
+        removalListeners.forEach { it(entry.value) }
+      }
+
       cache.invalidateAll()
       keysBySchemaTableAndId.clear()
     }
@@ -116,6 +129,14 @@ private object GlobalEntityCache {
     .append(id)
 
     return sb.toString()
+  }
+
+  fun addRemovalListener(listener: RemovalListener){
+    removalListeners.add(listener)
+  }
+
+  fun removeRemovalListener(listener: RemovalListener){
+    removalListeners.remove(listener)
   }
 }
 
@@ -213,7 +234,7 @@ class EntityCache(
   }
 }
 
-private data class CacheEntryWrapper(
+data class CacheEntryWrapper(
   val cacheName: String,
   val schema: String,
   val tableName: String,

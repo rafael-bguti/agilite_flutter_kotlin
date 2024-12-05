@@ -28,15 +28,19 @@ abstract class AbstractEntity(
 
 
   override var serializing: Boolean
-    get() = orm.serializing
+    @JsonIgnore get() = orm.serializing
     set(value) { orm.serializing = value }
 
-  fun validateLoaded(attIndex: Int, name: String) {
-    if (orm.isPartLoaded() && !orm.attLoaded.contains(attIndex)) {
-      if(orm.serializing){
+  fun validateLoaded(attIndex: Int, name: String, required: Boolean = false) {
+    if(!orm.attLoaded.contains(attIndex)){
+      if (orm.isPartLoaded()) {
+        if(orm.serializing){
+          throw AttributeNotLoadedException("Attribute $name not loaded")
+        }else{
+          autoInflate()
+        }
+      }else if(required){
         throw AttributeNotLoadedException("Attribute $name not loaded")
-      }else{
-        autoInflate()
       }
     }
   }

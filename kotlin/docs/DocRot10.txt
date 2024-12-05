@@ -2,6 +2,7 @@ Tabela: Rot10 - Autenticação
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
+rot10contrato                    10.0 S Rot01      Contrato
 rot10email                      100.0 S Str        E-Mail
 rot10senha                      250.0 S Str        Senha
 rot10token                      300.0 N Str        Token
@@ -10,3 +11,4 @@ rot10roles                        0.0 N Str        Roles
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
+rot10_uk                      rot10email

@@ -1,0 +1,12 @@
+Tabela: Rot01 - Contrato
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+rot01cnpj                        14.0 S Str        CNPJ
+rot01rs                         100.0 S Str        Razão Social
+rot01tenant                      20.0 S Str        Tenant name
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+rot01_uk                      rot01cnpj
+rot01_uk1                     rot01tenant

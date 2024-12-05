@@ -11,7 +11,7 @@ import info.agilite.boot.metadata.exceptions.AutocompleteMetadataNotFoundExcepti
 import info.agilite.boot.jdbcDialect
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.metadata.models.FieldMetadata
-import info.agilite.boot.metadata.models.KeyType
+import info.agilite.boot.metadata.models.KeyMetadataType
 import info.agilite.boot.metadata.models.tasks.TaskCrudMetadata
 import info.agilite.boot.orm.AgiliteWhere
 import info.agilite.boot.orm.EntityMappingContext
@@ -321,7 +321,7 @@ class DefaultCrudService<T>(
   }
 
   private fun getOrderByToList(entityMetadata: EntityMetadata): String {
-    val uks = entityMetadata.findKeysByType(KeyType.uk)
+    val uks = entityMetadata.findKeysByType(KeyMetadataType.uk)
     return if(uks.isNotEmpty()){
        "ORDER BY ${uks.first().fields}"
     }else{

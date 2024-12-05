@@ -202,6 +202,10 @@ abstract class RootRepository {
     return uniqueSingleColumn(clazz, sql, emptyMap())
   }
 
+  fun setTenant(tenant: String) {
+    execute("SET search_path TO $tenant")
+  }
+
   fun inflate(entity: AbstractEntity, joins: String? = null) {
     EntityInflator(this).inflate(entity, joins)
   }

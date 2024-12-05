@@ -1,4 +1,4 @@
 NOME,DESCRICAO
 ROT,"Módulo ROOT, fica no schema ROOT separado dos outros schemas. O Acesso às tabelas é restrito a administradores e suport"
-CAS,Cadastros de adminstração do sistema (não possui empresa nas tabelas)
-CGS,Cadastros Gerais do Sistema por empresa
+CGL,Cadastros Globais do Sistema (não possui empresa nas tabelas)
+CCM,Cadastros Comuns aos Módulos. Possui empresa nas tabelas

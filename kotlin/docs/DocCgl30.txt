@@ -1,0 +1,12 @@
+Tabela: Cgl30 - Usuários
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgl30autenticacao                10.0 S Lng        Autenticação (Rot10id)
+cgl30nome                        30.0 S Str        Nome
+cgl30empAtiva                    10.0 S Cgl65      Empresa ativa
+cgl30credencial                  10.0 S Cgl29      Credencial
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgl30_uk                      cgl30autenticacao

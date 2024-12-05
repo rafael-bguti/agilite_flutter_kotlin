@@ -1,4 +1,4 @@
-package info.agilite.rot.domain
+package info.agilite.boot.autocode
 
 enum class MenuItemType {
   header,

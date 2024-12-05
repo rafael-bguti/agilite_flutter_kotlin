@@ -1,9 +1,24 @@
-# tipo: id, str, int, lng, bol, dat, tim, dtm, dec, mny, jsn (mais detalhes tabela.dart)
-# optoins: val1-label1;val2-label2;val3-label3
-TABELA,COLUNA,DESCRICAO,VERSAO,REQ/TASK,TIPO,TAMANHO,OPTIONS,UKS,LISTA CRUD,AUTOCOMPLETE,FK,"CASCADE(N,C,U)",DEFAULT,VALIDACOES,OBSERVAÇÕES
-Rot10,,Autenticação,1,ROT1010,
-,email,E-Mail,1,S,str,100,,,,,,,,"email,min:6"
-,senha,Senha,1,S,str,250,
-,token,Token,1,,str,300,
-,refreshToken,Refresh Token,1,,str,300,
-,roles,Roles,1,,str,0,,,,,,
+# tipo: id, str, int, bol, dat, tim, lng, dtm, dec, mny, jsn (mais detalhes tabela.dart),,,,,
+# optoins: val1-label1;val2-label2;val3-label3,,,,,,,,,,,,,,,
+TABELA,COLUNA,DESCRICAO,REQ/TASK,TIPO,TAMANHO,VERSAO,OPTIONS,UKS,LISTA CRUD,AUTOCOMPLETE,FK,"CASCADE(N,C,U)",DEFAULT,VALIDACOES,OBSERVAÇÕES
+Rot01,,Contrato,,,,1,,,,,,,,,
+,cnpj,CNPJ,S,str,14,1,,uk,,,,,,,
+,rs,Razão Social,S,str,100,1,,,,,,,,,
+,tenant,Tenant name,S,str,20,1,,uk1,,,,,,,
+Rot10,,Autenticação,,,,1,,,,,,,,,
+,contrato,Contrato,S,lng,10,1,,,,,Rot01,,,,
+,email,E-Mail,S,str,100,1,,uk,,,,,,"email,min:6",
+,senha,Senha,S,str,250,1,,,,,,,,,
+,token,Token,,str,300,1,,,,,,,,,
+,refreshToken,Refresh Token,,str,300,1,,,,,,,,,
+,roles,Roles,,str,0,1,,,,,,,,,
+Cgl29,,Credencial,,,,2,,,,,,,,,
+,nome,Nome,S,str,50,2,,uk,,,,,,,
+Cgl30,,Usuários,,,,2,,,,,,,,,
+,autenticacao,Autenticação (Rot10id),S,lng,10,2,,uk,,,,,,,
+,nome,Nome,S,str,30,2,,,,,,,,,
+,empAtiva,Empresa ativa,S,lng,10,2,,,,,Cgl65,,,,
+,credencial,Credencial,S,lng,10,2,,,,,Cgl29,,,,
+Cgl65,,Empresa,,,,2,,,,,,,,,
+,cnpj,Cnpj,S,str,14,2,,uk,,,,,,,
+,nome,Nome,S,str,100,2,,,,,,,,,

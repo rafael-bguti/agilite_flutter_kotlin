@@ -23,8 +23,7 @@
 
         <!-- Modules -->
         <module>modules/rot</module>
-        <module>modules/cas</module>
-        <module>modules/cgs</module>
+        <module>modules/cgl</module>
 
         <!-- Frameworks -->
         <module>agilite_kotlin_boot</module>
@@ -95,12 +94,12 @@
             </dependency>
             <dependency>
                 <groupId>info.agilite</groupId>
-                <artifactId>cas</artifactId>
+                <artifactId>cgl</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>info.agilite</groupId>
-                <artifactId>cgs</artifactId>
+                <artifactId>ccm</artifactId>
                 <version>${revision}</version>
             </dependency>
 

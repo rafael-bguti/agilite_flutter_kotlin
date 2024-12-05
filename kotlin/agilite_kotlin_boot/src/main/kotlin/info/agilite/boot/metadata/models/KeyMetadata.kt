@@ -1,6 +1,6 @@
 package info.agilite.boot.metadata.models
 
-enum class KeyType {
+enum class KeyMetadataType {
   pk,
   mk,
   uk,
@@ -8,6 +8,6 @@ enum class KeyType {
 
 class KeyMetadata (
   val name: String,
-  val type: KeyType,
+  val type: KeyMetadataType,
   val fields: String,
 )

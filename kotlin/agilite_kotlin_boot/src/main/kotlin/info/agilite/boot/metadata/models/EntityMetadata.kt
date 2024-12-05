@@ -26,7 +26,7 @@ data class EntityMetadata (
     return fields.filter { it.showInFkAutoComplete } //TODO caso esteja vazio pegar os campos da UK
   }
 
-  fun findKeysByType(type: KeyType): List<KeyMetadata> {
+  fun findKeysByType(type: KeyMetadataType): List<KeyMetadata> {
     return keys.filter { it.type == type } ?: emptyList()
   }
 
