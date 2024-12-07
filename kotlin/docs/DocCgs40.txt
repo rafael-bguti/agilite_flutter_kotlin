@@ -1,0 +1,15 @@
+Tabela: Cgs40 - Categorias financeiras
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs40empresa                     10.0 S Lng        Empresa
+cgs40descr                       30.0 S Str        Descrição
+cgs40tipo                         1.0 S Int        Tipo
+                                                   0 - Receita
+                                                   1 - Despesas
+cgs40sup                         10.0 N Cgs40      Categoria Superior
+cgs40grupo                        1.0 S Bol        É grupo?
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs40_uk                      cgs40empresa, cgs40descr

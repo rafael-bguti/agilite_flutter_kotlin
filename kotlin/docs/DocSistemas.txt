@@ -1,4 +1,7 @@
 Sistemas --------------------------------
 ROT - Módulo ROOT, fica no schema ROOT separado dos outros schemas. O Acesso às tabelas é restrito a administradores e suport
-CGL - Cadastros Globais do Sistema (não possui empresa nas tabelas)
-CCM - Cadastros Comuns aos Módulos. Possui empresa nas tabelas
+CAS - Cadastros de adminstração do sistema (não possui empresa nas tabelas)
+CGS - Cadastros Gerais do Sistema por empresa
+SCF - Controle financeiro
+SRF - Recebimento e Faturamento
+GDF - Gestão de documentos fiscais eletrônicos

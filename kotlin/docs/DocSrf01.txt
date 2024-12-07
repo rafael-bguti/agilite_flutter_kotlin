@@ -1,0 +1,34 @@
+Tabela: Srf01 - Documentos Fiscais
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+srf01empresa                     10.0 S Lng        Empresa
+srf01natureza                    10.0 S Cgs18      Natureza da Operação
+srf01tipo                         1.0 S Int        Tipo
+                                                   0 - Orçamento
+                                                   1 - Pedido
+                                                   2 - Nota Fiscal Produto
+                                                   3 - Nota Fiscal Serviço
+srf01es                           1.0 S Int        Entrada/Saida
+                                                   0 - Entrada
+                                                   1 - Saída
+srf01emitirDoc                    1.0 S Bol        Emitir documento fiscal
+srf01numero                       9.0 S Int        Número do documento
+srf01serie                        3.0 N Int        Série
+srf01dtEmiss                     10.0 S Dat        Data de emissão
+srf01hrEmiss                      4.0 N Tim        Hora de emissão
+srf01entidade                    10.0 S Cgs80      Cliente ou Fornecedor
+srf01dtCanc                      10.0 N Dat        Data de cancelamento
+srf01vlrTotal                    16.2 S Dec        Valor total
+srf01vlrIss                      16.2 N Dec        Valor do ISS
+srf01dfeAprov                    10.0 N Gdf10      Registro de DFE aprovado
+srf01dfeCancAprov                10.0 N Gdf10      Registro de DFE de Cancelamento Aprovado
+srf01integraScf                   1.0 S Int        Integração com o SCF
+                                                   0 - Não integrado
+                                                   1 - Integrado
+                                                   2 - Não gerou documentos
+srf01numeroNFSe                   9.0 N Int        Número da NFSe
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+srf01_uk                      srf01empresa

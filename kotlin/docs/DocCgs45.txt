@@ -1,0 +1,10 @@
+Tabela: Cgs45 - Contas de bancos
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs45empresa                     10.0 S Lng        Empresa
+cgs45nome                        30.0 S Str        Descrição
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs45_uk                      cgs45empresa, cgs45nome

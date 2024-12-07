@@ -1,0 +1,10 @@
+Tabela: Scf10 - Conta Corrente
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+scf10empresa                     10.0 S Lng        Empresa
+scf10nome                        30.0 S Str        Nome
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+scf10_uk                      scf10empresa, scf10nome

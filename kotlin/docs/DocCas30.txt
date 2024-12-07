@@ -1,0 +1,13 @@
+Tabela: Cas30 - Usuários
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cas30autenticacao                10.0 S Lng        Autenticação (Rot10id)
+cas30nome                        30.0 S Str        Nome
+cas30empAtiva                    10.0 S Cas65      Empresa ativa
+cas30credencial                  10.0 S Cas29      Credencial
+cas30interno                      1.0 N Bol        Usuário interno do sistema, não é exibido para os clientes
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cas30_uk                      cas30autenticacao

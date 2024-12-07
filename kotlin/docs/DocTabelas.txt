@@ -1,6 +1,20 @@
 Tabelas --------------------------------
 Rot01 - Contrato
 Rot10 - Autenticação
-Cgl29 - Credencial
-Cgl30 - Usuários
-Cgl65 - Empresa
+Cas29 - Credencial
+Cas30 - Usuários
+Cas65 - Empresa
+Cas90 - Repositório de dados
+Cgs18 - Natureza da Operação
+Cgs38 - Forma de Pagamento/Recebimento
+Cgs40 - Categorias financeiras
+Cgs45 - Contas de bancos
+Cgs50 - Itens e Serviços
+Cgs80 - Entidade
+Gdf10 - Transmissões efetuadas
+Scf02 - Documento a pagar/receber
+Scf021 - Integração Bancária
+Scf11 - Lançamentos financeiros
+Srf01 - Documentos Fiscais
+Srf011 - Itens
+Srf012 - Parcelamento

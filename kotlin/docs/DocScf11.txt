@@ -1,0 +1,16 @@
+Tabela: Scf11 - Lançamentos financeiros
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+scf11empresa                     10.0 S Lng        Empresa
+scf11tipo                         1.0 S Int        Tipo
+                                                   0 - Receita
+                                                   1 - Despesa
+scf11conta                       10.0 S Cgs45      Conta
+scf11data                        10.0 S Dat        Data
+scf11valor                       16.2 S Dec        Valor
+scf11hist                         0.0 S Str        Histórico
+scf11regOrigem                    0.0 N Jsn        Registro de origem
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------

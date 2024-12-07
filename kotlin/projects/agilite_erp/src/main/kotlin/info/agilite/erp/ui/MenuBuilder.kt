@@ -1,7 +1,7 @@
 package info.agilite.erp.ui
 
 import info.agilite.boot.autocode.FrontEndMenuItem
-import info.agilite.cgl.adapter.infra.UserMenuBuilder
+import info.agilite.cas.adapter.infra.UserMenuBuilder
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/FrontEnd Agilite.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/flutter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/.flutter-plugins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/.flutter-plugins-dependencies" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/boot.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/boot_app.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/boot_init.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/boot_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/events/system_events_listener.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/models/logged_user.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/models/logged_user.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/modules/login/login_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/modules/login/login_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/modules/splash/splash_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/modules/splash/splash_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/services/auth_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/lib/src/storages/storage.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_boot/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/assets/error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/assets/loading.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/assets/loading1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/assets/login_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/assets/warning.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/core.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/core_helpers.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/crud_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/crud_edit_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/crud_repository.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/models/crud_descr.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/models/crud_descr.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_crud.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_crud_data_card.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_crud_data_groups.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_crud_header.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_crud_panel_filters.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_edit_crud.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/crud/widgets/a_edit_crud_buttons.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/events/event_bus.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/events/events.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/exceptions/force_exit_exception.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/exceptions/force_home_exception.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/color_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/datetime_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/double_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/json_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/list_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/map_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/observable_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/extensions/string_extensions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/http/http_exceptions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/http/http_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/http/http_response.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/http/http_response_handler.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/metadata/field_metadata.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/metadata/field_metadata.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/metadata/field_metadata_option.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/metadata/field_metadata_option.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/metadata/repository/metadata_repository.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/models/error_state.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/models/exceptions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/models/lowercase_map.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/models/menu_item.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/models/menu_item.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/pages/page_not_found.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/routers/a_navigator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/routers/a_route.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/routers/a_router.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/loader/sdui_content_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/loader/sdui_loader.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/sdui_context.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/sdui_render.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/sdui_widget_registry.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_column.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_column.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_crud.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_crud.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_text.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_text.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/sdui_widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/spread/sdui_spread_column.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/spread/sdui_spread_column.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/sdui/widgets/widgets.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/style/core_style.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/style/style_helper.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/a_consumer.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/a_error.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/a_future_builder.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/a_loading.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/app/agilite_app_scaffold.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/app/app_scroll_behavior.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/dialogs/a_bottom_dialog_question.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/dialogs/a_dialogs.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/dialogs/a_side_dialog.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/a_form_validation_panel.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/a_metadata_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/autocomplete_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/bool_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/combo_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/date_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/double_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/field_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/form_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/form_field_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/int_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/controllers/string_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/data/autocomplete_repositories.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/data/query_filter.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/key_label.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/mixins/field_controller_register_mixin.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/models/key_label.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/validations/validations.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/widgets/a_autocomplete_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/widgets/a_bool_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/widgets/a_combo_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/widgets/a_form.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/forms/widgets/a_text_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/layouts/a_container.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/layouts/a_drawer.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/layouts/a_drawer_menu.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/layouts/a_full_layout.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/messages/a_alerts.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/responsive/a_grid.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/responsive/a_grid_row.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/responsive/responsive_size.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/spread_listener_utils.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_autocomplete.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_bool.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_date.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_double.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_int.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_readonly.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_string.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_spread_column.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_width.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_width.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/tabs/a_tab_header.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/views/a_view.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/views/view_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_card.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_dialog_header.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_divider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_hover.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_more_options_button.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_paginator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_progress_bar.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_scroll_view.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_search_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_spacing_column.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_spacing_row.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_text.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/ui/widgets/a_title_subtitle.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/utils/debounce_timer.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/utils/object_utils.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/utils/platform_info.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/utils/run_on_next_build.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/lib/src/utils/screen_size.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agilite_flutter_core/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/agilite_flutter_projects.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/libraries/Dart_SDK.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij_project/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/assets/fonts/Exo2-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/assets/fonts/Exo2-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/assets/fonts/Exo2-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/assets/images/logob.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/assets/images/logow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Flutter/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Flutter/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/ios/RunnerTests/RunnerTests.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/ClientesScreen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/TesteCollapseMenu.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/TesteLayout.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/TesteLayoutManual.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/TesteMediaQueryBuilder.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/estudos/crud/main_crud.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/estudos/crud/user.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/estudos/crud/user_form_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/estudos/data_table_teste.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/main.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/TestDrag.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/fake_services.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/menu.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/alerts_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/buttons_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/cards_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/crud/crud_vendas.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/dashboard_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/forms_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/tables/simple_flutter_table.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/tables/tables_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/modules/tabs_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/lib/src/routes.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/main.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/my_application.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/linux/my_application.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Flutter/Flutter-Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Flutter/Flutter-Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Base.lproj/MainMenu.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Configs/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Configs/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Configs/Warnings.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/DebugProfile.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/MainFlutterWindow.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/Runner/Release.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/macos/RunnerTests/RunnerTests.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/pubspec.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/icons/Icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/icons/Icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/icons/Icon-maskable-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/icons/Icon-maskable-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/web/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/Runner.rc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/flutter_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/flutter_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/resource.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/resources/app_icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/runner.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/win32_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto_template/windows/runner/win32_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/ApplicationContextProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/Constants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/FrontEndMenuItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/AutoCompleteController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/AutoCompleteService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/models/AutoCompleteSearchDto.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/models/KeyLabel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/AgiliteCrudRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/CrudController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/CrudService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/CrudServiceResolver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/models/CrudConfigResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/models/CrudFilters.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/models/CrudListColumn.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/crud/models/CrudListData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/exceptions/ClientException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/MetadataUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/api/MetadataController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/api/MetadataService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/data/MetadataDatasource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/data/MetadataRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/exceptions/MetadataNotFoundException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/AutocompleteConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/EntityMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/FieldMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/FieldMetadataDto.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/FieldOptionMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/FieldTypeMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/KeyMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/OneToManyMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/tasks/TaskLabelMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/tasks/TaskMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/tasks/TaskTypeMetadata.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/observability/ObserverService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/AbstractEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/AgiliteWhere.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/BatchOperationProducer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/BatchOperations.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/EntityMappingContext.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/MultitenantFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/ORMController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/TableAndDefaultSchema.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereAllEquals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereClause.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/annotations/DbTable.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/annotations/EntityCacheable.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/cache/GlobalEntityCache.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/dialects/JdbcDialect.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/dialects/PostgreSQLUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/jdbc/ResultSetExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/jdbc/mappers/EntityDataClassRowMapper.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/jdbc/mappers/ListRowMapper.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/jdbc/mappers/MapRowMapper.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/jdbc/mappers/OneToManyManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DBChangeOperation.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DBSelectColumnsStrategy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbDeleteOperation.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbExecuteOperationInBatch.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbInsertOperationFromEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbInsertOperationFromMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbInsertOperationInBatch.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbUpdateChangesOperationFromEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbUpdateOperationFromEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbUpdateOperationFromMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/operations/DbUpdateOperationInBatch.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/query/DbQuery.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/query/DbQueryBuilders.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/DefaultRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/EntityInflator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/IdsList.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/RootRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/AuthenticationFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/JwtExtractFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/JwtService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/LoadUserDetailService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/Role.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/UserContext.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/UserDetail.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/UserDetailCache.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/security/UserDetailService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/AsyncConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/CustomJacksonObjectMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/GlobalExtensionHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/RestMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/SpringEvents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/spring/WebMvcConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sse/SSeController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sse/SSeService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sse/SseEmitterFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/certs/Certificado.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/exceptions/FieldValidationException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/exceptions/ValidationException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/BigDecimalExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/CollectionExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/DateTimeExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/ExceptionExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/LockExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/MapExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/StringExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/extensions/ThrowableExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/http/AgRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/json/JsonUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/model/ErrorEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/model/LowerCaseMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/orm/AttributeNotLoadedException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/orm/Entity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/utils/MapUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/utils/ReflectionUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/utils/ValidationUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/utils/ZipUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/utils/reflections/ClassScanner.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/AssinadorXML.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/ElementXml.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/ElementXmlConverter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/NoActionHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/SchemaBuilder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/SchemaValidator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_core/src/main/kotlin/info/agilite/core/xml/SchemeValidationException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_shared/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/SpringInitListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/metadata/DicDados.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_shared/src/main/resources/migrations/R_00001.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/framework/agilite_kotlin_shared/src/main/resources/migrations/V_00002.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cgl/src/main/kotlin/info/agilite/cgl/adapter/web/Cgl2010Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cgl/src/main/kotlin/info/agilite/cgl/adapter/web/Cgl2010Controller.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2pobPH8fcVtZ4JZcJXIDr9TvdO6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Flutter.main.dart.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Fontes/FontesAgilite/Agilite/flutter&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="additionalArgs" value="--dart-define-from-file=./env/.dev.json" />
+      <option name="filePath" value="$PROJECT_DIR$/projects/erp/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="" />
+      <created>1733435350686</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733435350686</updated>
+    </task>
+    <servers />
+  </component>
+</project>

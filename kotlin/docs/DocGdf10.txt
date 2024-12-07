@@ -1,0 +1,30 @@
+Tabela: Gdf10 - Transmissões efetuadas
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+gdf10dtEmiss                     10.0 S Dat        Data de emissão
+gdf10hrEmiss                      6.0 S Tim        Hora de emissão
+gdf10sistema                      2.0 S Int        Sistema
+                                                   1 - NFSe
+gdf10tipoDoc                      2.0 S Int        Tipo de documento
+                                                   1 - Documento
+                                                   2 - Cancelamento
+                                                   3 - Carta de correção
+                                                   4 - Inutilização
+                                                   5 - Evento
+gdf10documento                    0.0 N Str        Documento armazenado
+gdf10statusProc                   3.0 S Int        Status do processamento
+                                                   0 - Aguardando proc assíncrono
+                                                   10 - Falha
+                                                   20 - Erro
+                                                   30 - Rejeitado
+                                                   100 - Aprovado
+gdf10protocolo                   40.0 S Str        Número protocolo
+gdf10cStat                       20.0 S Str        Código de retorno
+gdf10xMotivo                      0.0 S Str        Descrição do retorno
+gdf10uidTrack                   100.0 S Str        UID do Tracker armazenado externamente
+gdf10dados                        0.0 S Jsn        Resumo dos dados do documento
+gdf10regOrigem                    0.0 S Jsn        Origem do registro
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------

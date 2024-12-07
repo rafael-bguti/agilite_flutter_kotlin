@@ -1,0 +1,13 @@
+Tabela: Cas90 - Repositório de dados
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cas90codigo                     100.0 S Str        Código
+cas90descr                        0.0 N Str        Descrição do campo
+cas90grupo                        2.0 S Int        Grupo
+                                                   1 - Códigos de serviço
+                                                   2 - CNAE
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cas90_uk                      cas90codigo, cas90grupo

@@ -1,0 +1,12 @@
+Tabela: Cas65 - Empresa
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cas65cnpj                        14.0 S Str        Cnpj
+cas65nome                       100.0 S Str        Nome
+cas65cnae                        10.0 N Str        Código CNAE
+                                                   Obs: com90grupo = 02
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cas65_uk                      cas65cnpj

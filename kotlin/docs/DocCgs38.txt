@@ -1,0 +1,21 @@
+Tabela: Cgs38 - Forma de Pagamento/Recebimento
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs38empresa                     10.0 S Lng        Empresa
+cgs38nome                        30.0 S Str        Nome
+cgs38tipo                         1.0 S Int        Tipo
+                                                   0 - Recebimento
+                                                   1 - Pagamento
+cgs38gerar                        1.0 S Int        Geração do documento financeiro
+                                                   0 - Não gerar
+                                                   1 - Gerar em aberto
+                                                   2 - Gerar quitado
+cgs38forma                        2.0 S Int        Forma
+                                                   0 - Dinheiro
+                                                   1 - Boleto
+cgs38conta                       10.0 N Cgs45      Conta corrente para o lançamento financeiro
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs38_uk                      cgs38empresa, cgs38nome

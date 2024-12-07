@@ -1,0 +1,38 @@
+Tabela: Cgs80 - Entidade
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs80empresa                     10.0 S Lng        Empresa
+cgs80nome                       250.0 S Str        Nome ou Razão Social
+cgs80fantasia                   100.0 N Str        Nome Fantasia
+cgs80codigo                      15.0 N Str        Código
+cgs80tipo                         1.0 N Int        Tipo de contato
+                                                   0 - Pessoa Física
+                                                   1 - Pessoa Juridica
+                                                   2 - Estrangeiro
+cgs80ni                          20.0 N Str        CPF/CNPJ
+cgs80contribuinte                 1.0 N Int        Código contribuinte
+                                                   1 - Contribuinte ICMS
+                                                   2 - Isento de ICMS
+                                                   9 - Não contribuinte
+cgs80ie                          30.0 N Str        Inscrição estadual
+cgs80im                          30.0 N Str        Inscrição municipal
+cgs80cep                          8.0 N Str        CEP
+cgs80endereco                   200.0 N Str        Endereço
+cgs80bairro                      50.0 N Str        Bairro
+cgs80numero                      50.0 N Str        Número
+cgs80complemento                 50.0 N Str        Complemento
+cgs80uf                           2.0 N Str        UF
+cgs80municipio                   50.0 N Str        Município
+cgs80telefone                    20.0 N Str        Telefone
+cgs80celular                     20.0 N Str        Celular
+cgs80email                      200.0 N Str        E-Mail
+cgs80obs                          0.0 N Str        Observações
+cgs80cliente                      1.0 N Bol        Cliente
+cgs80fornecedor                   1.0 N Bol        Fornecedor
+cgs80transportadora               1.0 N Bol        Transportadora
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs80_uk                      cgs80empresa, cgs80codigo
+cgs80_uk1                     cgs80empresa, cgs80ni

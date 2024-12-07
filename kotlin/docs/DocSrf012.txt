@@ -1,0 +1,13 @@
+Tabela: Srf012 - Parcelamento
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+srf012doc                        10.0 S Srf01      Documento
+srf012forma                      10.0 S Cgs38      Forma de Pagamento/Recebimento
+srf012parcela                    10.0 S Int        Parcela
+srf012dtVenc                     10.0 S Dat        Data de vencimento
+srf012valor                      16.2 S Dec        Valor
+srf012documento                  10.0 N Scf02      Contas Pagar/receber
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------

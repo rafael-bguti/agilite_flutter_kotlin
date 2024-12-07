@@ -1,0 +1,14 @@
+Tabela: Srf011 - Itens
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+srf011doc                        10.0 S Srf01      Documento
+srf011item                       10.0 S Cgs50      Item
+srf011qtd                        16.6 S Dec        Quantidade
+srf011vlrUnit                    16.6 S Dec        Unitário
+srf011vlrTotal                   16.2 S Dec        Valor total
+srf011alqIss                      4.2 N Dec        Aliquota ISS
+srf011vlrIss                     16.2 N Dec        Valor do ISS
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------

@@ -1,0 +1,38 @@
+name: erp
+description: "Projeto principal do ERP"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.2
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  fl_chart: ^0.69.0
+  uuid: ^4.5.1
+  flutter_form_builder: ^9.5.0
+  agilite_flutter_boot:
+    path: ../../frameworks/agilite_flutter_boot
+  agilite_flutter_core:
+    path: ../../frameworks/agilite_flutter_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: HeaderFont
+      fonts:
+        - asset: assets/fonts/Exo2-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Exo2-Regular.ttf
+        - asset: assets/fonts/Exo2-Bold.ttf
+          weight: 600

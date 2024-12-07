@@ -1,0 +1,21 @@
+Tabela: Cgs18 - Natureza da Operação
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs18empresa                     10.0 S Lng        Empresa
+cgs18nome                        30.0 S Str        Nome
+cgs18tipo                         1.0 S Int        Tipo de Operação
+                                                   0 - Orçamento
+                                                   1 - Pedido
+                                                   2 - Nota Fiscal Produto
+                                                   3 - Nota Fiscal Serviço
+cgs18es                           1.0 S Int        Entrada/Saida
+                                                   0 - Entrada
+                                                   1 - Saída
+cgs18serie                        3.0 N Int        Série
+cgs18emitirDoc                    1.0 S Bol        Emitir documento fiscal
+cgs18alqIss                       4.2 N Dec        Aliquota ISS
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs18_uk                      cgs18empresa, cgs18nome

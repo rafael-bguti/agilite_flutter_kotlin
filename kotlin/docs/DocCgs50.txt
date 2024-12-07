@@ -1,0 +1,19 @@
+Tabela: Cgs50 - Itens e Serviços
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs50empresa                     10.0 S Lng        Empresa
+cgs50mps                          1.0 S Int        MPS(0,1,2)
+                                                   Obs: Campo interno para controle de MPS
+cgs50descr                        0.0 S Str        Descrição completa de serviços
+cgs50codigo                      15.0 N Str        Código
+cgs50preco                       16.2 N Dec        Preço
+cgs50unidade                     30.0 N Str        Unidade
+cgs50descrComp                    0.0 N Str        Descrição complementar
+cgs50obs                          0.0 N Str        Observações
+cgs50tipoServico                 10.0 N Str        Código do serviço conforme tabela de serviços
+                                                   Obs: Apenas serviço(mps=2) - com90grupo = 01
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs50_uk                      cgs50empresa, cgs50codigo

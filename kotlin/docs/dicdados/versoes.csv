@@ -1,3 +1,3 @@
 VERSAO,DTCRIA,ROOT,DESCR,SQLPRE,SQLPOS
 1,2024-12-01,S,"Versão inicial","CREATE TABLE IF NOT exists  db_migration(name VARCHAR(20) NOT NULL PRIMARY KEY, time_run timestamp not null);",
-2,2024-12-04,N,Versão inicial não ROOT,"CREATE TABLE IF NOT exists  db_migration(name VARCHAR(20) NOT NULL PRIMARY KEY, time_run timestamp not null);"
+2,2024-12-04,N,Versão inicial não ROOT,"CREATE TABLE IF NOT exists  db_migration(name VARCHAR(20) NOT NULL PRIMARY KEY, time_run timestamp not null);","DROP INDEX IF EXISTS cgs50_uk;CREATE UNIQUE INDEX cgs50_uk ON cgs50 (cgs50empresa, cgs50codigo);DROP INDEX IF EXISTS cgs80_uk;CREATE UNIQUE INDEX cgs80_uk ON cgs80 (cgs80empresa, cgs80codigo);"
