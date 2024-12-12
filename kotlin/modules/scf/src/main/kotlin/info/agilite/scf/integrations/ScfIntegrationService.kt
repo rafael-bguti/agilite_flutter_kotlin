@@ -3,10 +3,11 @@ package info.agilite.scf.integrations
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.scf.adapter.infra.ScfIntegrationRepository
 import info.agilite.scf.application.ScfBaseService
+import info.agilite.shared.entities.cgs.CGS18SCF_AO_CRIAR_O_DOCUMETO
 import info.agilite.shared.entities.srf.Srf01
+import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.shared.events.INTEGRACAO_OK
-import info.agilite.shared.events.INTEGRACAO_OK_SEM_LANCAMENTOS
-import info.agilite.shared.events.Srf01SavedEvent
+import info.agilite.shared.events.srf.Srf01SavedEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
@@ -19,10 +20,16 @@ class ScfIntegrationService(
   @EventListener
   fun onSrf01SavedEvent(event: Srf01SavedEvent) {
     val srf01 = event.srf01
-    if(!event.insert){
+    if(srf01.srf01integracaoScf == INTEGRACAO_NAO_EXECUTAR) return
+
+    if(!event.insert && srf01.srf01integracaoScf == INTEGRACAO_OK) {
       deletarLancamentosNoUpdateDoSrf01(srf01)
+      scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
     }
-    scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
+
+    if(event.insert && srf01.srf01natureza.cgs18scf == CGS18SCF_AO_CRIAR_O_DOCUMETO) {
+      scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
+    }
   }
 
   private fun deletarLancamentosNoUpdateDoSrf01(srf01: Srf01) {
@@ -52,13 +59,6 @@ class ScfIntegrationService(
 
     if (qtdDocsRemessa > 0) {
       throw ValidationException("Existem documentos de remessa bancária vinculados a este documento.")
-    }
-  }
-
-  private fun gerarLancamentos(srf01: Srf01) {
-    if (srf01.srf012s.isNullOrEmpty()) {
-      srf01.srf01integracaoScf = INTEGRACAO_OK_SEM_LANCAMENTOS
-      return
     }
   }
 }

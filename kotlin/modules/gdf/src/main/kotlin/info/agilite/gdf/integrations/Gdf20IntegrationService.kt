@@ -3,13 +3,13 @@ package info.agilite.gdf.integrations
 import info.agilite.boot.security.UserContext
 import info.agilite.gdf.adapter.infra.Gdf20Repository
 import info.agilite.shared.entities.gdf.Gdf20
-import info.agilite.shared.events.Srf2050EventLoteGerado
+import info.agilite.shared.events.srf.Srf2050EventLoteGerado
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 
 @Component
-class Gdf20FromSrf2050Integration(
+class Gdf20IntegrationService(
   private val gdf20repo: Gdf20Repository
 ) {
 

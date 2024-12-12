@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class Cas65Repository : RootRepository() {
+  fun findById(id: Long): Cas65 {
+    return findById(Cas65::class, id) ?: throw RuntimeException("Cas65 não encontrado com o id $id")
+  }
+
   fun findOrCreateDefault(): Cas65 {
     findById(Cas65::class, 0L)?.let { return it }
 

@@ -10,7 +10,6 @@ import info.agilite.shared.entities.scf.Scf11
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.entities.srf.Srf012
 import info.agilite.shared.events.INTEGRACAO_OK
-import info.agilite.shared.events.INTEGRACAO_OK_SEM_LANCAMENTOS
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -22,20 +21,13 @@ class ScfBaseService(
     val batchOperations = BatchOperations()
     scfRepo.inflate(srf01, "srf01natureza, srf012s.srf012forma")
 
-    if(srf01.srf01natureza.cgs18scf == CGS18SCF_NAO_GERAR) {
-      srf01.srf01integracaoScf = INTEGRACAO_OK_SEM_LANCAMENTOS
-      return
-    }
-
     val novosIdsScf02 = scfRepo.nextIds("scf02", srf01.srf012s!!.size)
     val novosIdsScf11 = scfRepo.nextIds("scf11", srf01.srf012s!!.size)
 
-    var gerouLancamentos = false
     srf01.srf012s!!.forEach { srf012 ->
       val cgs38 = srf012.srf012forma
 
       if (cgs38.cgs38gerar == CGS38GERAR_GERAR_EM_ABERTO || cgs38.cgs38gerar == CGS38GERAR_GERAR_QUITADO) {
-        gerouLancamentos = true
         val scf02 = gerarNovoDocumentoFinanceiro(novosIdsScf02.next(), srf01, srf01.srf01natureza, srf012, cgs38)
 
         if (cgs38.cgs38gerar == CGS38GERAR_GERAR_QUITADO) {
@@ -50,7 +42,7 @@ class ScfBaseService(
       }
     }
 
-    srf01.srf01integracaoScf = if(gerouLancamentos) INTEGRACAO_OK else INTEGRACAO_OK_SEM_LANCAMENTOS
+    srf01.srf01integracaoScf = INTEGRACAO_OK
   }
 
   private fun gerarNovoDocumentoFinanceiro(

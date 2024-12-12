@@ -10,7 +10,6 @@ cgs38tipo                         1.0 S Int        Tipo
                                                    0 - Recebimento
                                                    1 - Pagamento
 cgs38gerar                        1.0 S Int        Geração do documento financeiro
-                                                   0 - Não gerar
                                                    1 - Gerar em aberto
                                                    2 - Gerar quitado
 cgs38forma                        2.0 S Int        Forma

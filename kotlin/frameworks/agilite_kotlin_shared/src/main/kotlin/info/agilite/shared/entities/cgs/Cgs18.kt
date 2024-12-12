@@ -13,7 +13,7 @@ const val CGS18TIPO_NOTA_FISCAL_SERVICO = 3
 const val CGS18ES_ENTRADA = 0
 const val CGS18ES_SAIDA = 1
 const val CGS18SCF_NAO_GERAR = 0
-const val CGS18SCF_AO_SALVAR_O_DOCUMETO = 1
+const val CGS18SCF_AO_CRIAR_O_DOCUMETO = 1
 const val CGS18SCF_NA_APROVACAO_FISCAL = 2
 @EntityCacheable
 class Cgs18() : AbstractEntity(9) {

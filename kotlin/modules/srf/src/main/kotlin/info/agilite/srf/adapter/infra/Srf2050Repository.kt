@@ -21,6 +21,7 @@ class Srf2050Repository : RootRepository() {
           ${defaultWhere(SRF01_METADATA)}
           AND srf01tipo = $SRF01TIPO_NOTA_FISCAL_SERVICO
           AND srf01integracaoGdf = $INTEGRACAO_AGUARDANDO_O_INICIO
+          AND srf01loteNFSe IS NULL
         """),
       )
 

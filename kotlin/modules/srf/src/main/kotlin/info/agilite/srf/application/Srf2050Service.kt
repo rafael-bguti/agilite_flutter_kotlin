@@ -1,6 +1,7 @@
 package info.agilite.srf.application
 
 import info.agilite.boot.security.UserContext
+import info.agilite.cas.adapter.infra.Cas65Repository
 import info.agilite.core.certs.Certificado
 import info.agilite.core.certs.CertificadoFactory
 import info.agilite.core.exceptions.ValidationException
@@ -13,7 +14,7 @@ import info.agilite.core.xml.ElementXml
 import info.agilite.shared.entities.cas.Cas65
 import info.agilite.shared.entities.cgs.CGS80TIPO_PESSOA_FISICA
 import info.agilite.shared.entities.srf.Srf01
-import info.agilite.shared.events.Srf2050EventLoteGerado
+import info.agilite.shared.events.srf.Srf2050EventLoteGerado
 import info.agilite.srf.adapter.infra.Srf01Repository
 import info.agilite.srf.adapter.infra.Srf2050Repository
 import org.springframework.context.ApplicationEventPublisher
@@ -25,7 +26,8 @@ import java.time.LocalTime
 @Service
 class SRF2050Service(
   private val srf2050repo: Srf2050Repository,
-  private val srf01Repository: Srf01Repository,
+  private val srf01repo: Srf01Repository,
+  private val cas65repo: Cas65Repository,
   private val eventPublish: ApplicationEventPublisher,
 ) {
   fun emitirLoteXmlPrefeitura(srf01ids: List<Long>?, sseUid: String): String {
@@ -34,14 +36,14 @@ class SRF2050Service(
       throw ValidationException("Nenhuma nota fiscal encontrada para emitir lote")
     }
 
-    val cas65 = srf2050repo.findById(Cas65::class, UserContext.safeUser.empId) ?: throw RuntimeException("Empresa logada não encontrada")
+    val cas65 = cas65repo.findById(Cas65::class, UserContext.safeUser.empId) ?: throw RuntimeException("Empresa logada não encontrada")
     if(cas65.cas65municipio == null || cas65.cas65uf == null){
       throw ValidationException("Município ou UF não configurados para a empresa logada")
     }
-    val srf01s = srf01Repository.findWithEntidadeByIds(srf01idsEmitir)
+    val srf01s = srf01repo.findWithEntidadeByIds(srf01idsEmitir)
 
     val municipioEstado = "${cas65.cas65municipio}-${cas65.cas65uf}".uppercase()
-    val xml: String;
+    val xml: String
     if(municipioEstado == "ITATIBA-SP"){
        xml = GDF2020EmissorItatiba().emitirLoteXmlPrefeituraItatiba(cas65, srf01s, sseUid)
     }else{

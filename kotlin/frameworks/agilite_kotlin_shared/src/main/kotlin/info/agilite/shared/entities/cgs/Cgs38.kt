@@ -9,7 +9,6 @@ import java.math.BigDecimal
 
 const val CGS38TIPO_RECEBIMENTO = 0
 const val CGS38TIPO_PAGAMENTO = 1
-const val CGS38GERAR_NAO_GERAR = 0
 const val CGS38GERAR_GERAR_EM_ABERTO = 1
 const val CGS38GERAR_GERAR_QUITADO = 2
 const val CGS38FORMA_DINHEIRO = 0
@@ -140,7 +139,7 @@ val CGS38ID = FieldMetadata("cgs38id", 0, "ID", FieldTypeMetadata.id, 10.0, true
 val CGS38EMPRESA = FieldMetadata("cgs38empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS38NOME = FieldMetadata("cgs38nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
 val CGS38TIPO = FieldMetadata("cgs38tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Recebimento"),FieldOptionMetadata(1, "Pagamento")), null, null, null, true, true, false);
-val CGS38GERAR = FieldMetadata("cgs38gerar", 4, "Geração do documento financeiro", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Não gerar"),FieldOptionMetadata(1, "Gerar em aberto"),FieldOptionMetadata(2, "Gerar quitado")), null, null, null, true, true, false);
+val CGS38GERAR = FieldMetadata("cgs38gerar", 4, "Geração do documento financeiro", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(1, "Gerar em aberto"),FieldOptionMetadata(2, "Gerar quitado")), null, null, null, true, true, false);
 val CGS38FORMA = FieldMetadata("cgs38forma", 5, "Forma", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(0, "Dinheiro"),FieldOptionMetadata(1, "Boleto")), null, null, null, true, true, false);
 val CGS38CONTA = FieldMetadata("cgs38conta", 6, "Conta corrente para o lançamento financeiro", FieldTypeMetadata.fk, 10.0, false, "Cgs45", null, null, null, null, false, false, false);
  
