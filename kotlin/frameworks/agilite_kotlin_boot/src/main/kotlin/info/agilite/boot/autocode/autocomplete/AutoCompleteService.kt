@@ -41,7 +41,7 @@ class AutoCompleteService(
         params["search"] = "%${dto.query}%"
       }
       val entityMetadata = defaultMetadataRepository.loadEntityMetadata(autocompleteConfig.table)
-      select += AgiliteWhere.defaultWhere(entityMetadata,  "AND")
+      select += " AND ${AgiliteWhere.defaultWhere(entityMetadata)}"
     }
 
     select += " ORDER BY $columnsToSearch "

@@ -1,4 +1,6 @@
 Tabela: Cgs18 - Natureza da Operação
+Versão: 2 - Task: 
+Usa cache: SIM
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

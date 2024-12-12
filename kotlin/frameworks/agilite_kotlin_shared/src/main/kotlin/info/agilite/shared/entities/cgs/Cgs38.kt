@@ -2,6 +2,7 @@ package info.agilite.shared.entities.cgs;
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
+import info.agilite.boot.orm.annotations.EntityCacheable
 import info.agilite.shared.entities.scf.Scf10
 import java.math.BigDecimal
 //GERADOR INI
@@ -13,20 +14,21 @@ const val CGS38GERAR_GERAR_EM_ABERTO = 1
 const val CGS38GERAR_GERAR_QUITADO = 2
 const val CGS38FORMA_DINHEIRO = 0
 const val CGS38FORMA_BOLETO = 1
+@EntityCacheable
 class Cgs38() : AbstractEntity(7) {
   constructor(cgs38id: Long) : this() {
     this.cgs38id = cgs38id
   }
 
   constructor(
-    cgs38empresa: Long,
+    cgs38empresa: Long? = null,
     cgs38nome: String,
     cgs38tipo: Int,
     cgs38gerar: Int,
     cgs38forma: Int,
-    cgs38conta: Cgs45
+    cgs38conta: Cgs45? = null
   ) : this() {
-    this.cgs38empresa = cgs38empresa
+    if(cgs38empresa != null) this.cgs38empresa = cgs38empresa
     this.cgs38nome = cgs38nome
     this.cgs38tipo = cgs38tipo
     this.cgs38gerar = cgs38gerar
@@ -34,6 +36,9 @@ class Cgs38() : AbstractEntity(7) {
     this.cgs38conta = cgs38conta
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cgs38id: Long = -1L
     get() {

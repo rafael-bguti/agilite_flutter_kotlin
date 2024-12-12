@@ -63,12 +63,9 @@ class JwtExtractFilter(
       return null
     }
 
-    if(!authHeader.startsWith("Bearer ", ignoreCase = true)){
-      sendError(HttpStatus.UNAUTHORIZED.value(), TOKEN_INVALID_ERROR_MESSAGE, request, response)
-      return null
-    }
+    val bearer = authHeader.startsWith("Bearer ", ignoreCase = true)
 
-    val jwt = authHeader.substring(7)
+    val jwt = authHeader.substring( if(bearer) 7 else 0)
     if(jwt.isBlank()) {
       sendError(HttpStatus.UNAUTHORIZED.value(), TOKEN_INVALID_ERROR_MESSAGE, request, response)
       return null

@@ -1,4 +1,6 @@
 Tabela: Cgs40 - Categorias financeiras
+Versão: 2 - Task: 
+Usa cache: SIM
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

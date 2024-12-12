@@ -1,4 +1,6 @@
 Tabela: Rot01 - Contrato
+Versão: 1 - Task: 
+Usa cache: NÃO
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

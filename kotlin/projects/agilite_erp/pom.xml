@@ -25,7 +25,18 @@
   <dependencies>
     <dependency>
       <groupId>info.agilite</groupId>
-      <artifactId>cas</artifactId>
+      <artifactId>gdf</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.agilite</groupId>
+      <artifactId>scf</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.agilite</groupId>
+      <artifactId>srf</artifactId>
+      <version>${revision}</version>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>

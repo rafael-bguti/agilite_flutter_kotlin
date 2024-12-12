@@ -18,8 +18,12 @@ class DicDados : MetadataDatasource {
 
   override fun getEntityClass(entityName: String): KClass<*>? {
     val moduleName = entityName.substr(0, 3)
+    return try {
+      Class.forName("info.agilite.shared.entities.${moduleName.lowercase()}.${entityName.lowercase().localCapitalize()}").kotlin
+    } catch (e: ClassNotFoundException) {
+      null
+    }
 
-    return Class.forName("info.agilite.shared.entities.${moduleName.lowercase()}.${entityName.lowercase().localCapitalize()}").kotlin
   }
 
   override fun getEntity(entityName: String): EntityMetadata? {

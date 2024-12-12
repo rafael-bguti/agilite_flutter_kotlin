@@ -2,16 +2,15 @@ package info.agilite.boot.orm.repositories
 
 import info.agilite.core.json.JsonUtils
 import info.agilite.boot.jdbcDialect
-import info.agilite.boot.orm.AbstractEntity
-import info.agilite.boot.orm.EntityMappingContext
-import info.agilite.boot.orm.WhereAllEquals
-import info.agilite.boot.orm.WhereClause
+import info.agilite.boot.metadata.models.EntityMetadata
+import info.agilite.boot.orm.*
 import info.agilite.boot.orm.annotations.EntityCacheable
 import info.agilite.boot.orm.cache.DefaultEntityCache
 import info.agilite.boot.orm.jdbc.mappers.EntityDataClassRowMapper
 import info.agilite.boot.orm.jdbc.mappers.MapRowMapper
 import info.agilite.boot.orm.operations.*
 import info.agilite.boot.orm.query.DbQuery
+import info.agilite.boot.security.UserContext
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
@@ -34,23 +33,51 @@ abstract class RootRepository {
       null
     }
   }
-
-  fun <R: Any> list(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap(), mapper: RowMapper<R>? = null): List<R> {
-    return jdbc.query(query, params, mapper ?: EntityDataClassRowMapper(clazz.java))
+  fun <R: Any> uniqueSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): R? {
+    return try {
+      jdbc.queryForObject(query, params, clazz.java)
+    }catch(e: EmptyResultDataAccessException){
+      null
+    }
   }
-
   fun <R: Any> unique(query: DbQuery<R>): R? {
     val list = list(query)
     if(list.size > 1) throw Exception("Apenas um resultado era esperado, mas foram encontrados ${list.size}")
     return list.firstOrNull()
   }
 
-  fun <R: Any> list(query: DbQuery<R>): List<R> {
+  final fun uniqueMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): MutableMap<String, Any?>? {
+    return try {
+      jdbc.queryForObject(query, params, rowMapper ?: MapRowMapper())
+    }catch(e: EmptyResultDataAccessException){
+      null
+    }
+  }
+
+
+  fun <R: Any> list(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap(), mapper: RowMapper<R>? = null): List<R> {
+    return jdbc.query(query, params, mapper ?: EntityDataClassRowMapper(clazz.java))
+  }
+  protected fun <R: Any> list(query: DbQuery<R>): List<R> {
     distinctListMap(query).let { list ->
       if(list.isEmpty()) emptyList<R>()
 
       return list.map { JsonUtils.fromMap(it, query.clazz.java)  }
     }
+  }
+  fun listMap(query: DbQuery<*>, rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
+    return listMap(query.sql(), query.getParams(), rowMapper ?: MapRowMapper(onlyNonNull = false)).let {
+      if(it.isEmpty()) emptyList<MutableMap<String, Any?>>()
+
+      val oneToManyManager = query.oneToManyManager() ?: return it
+      oneToManyManager.distinct(it)
+    }
+  }
+  fun <R: Any> listSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): List<R> {
+    return jdbc.queryForList(query, params, clazz.java)
+  }
+  final fun listMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
+    return jdbc.query(query, params, rowMapper ?: MapRowMapper())
   }
 
   fun distinctMap(query: DbQuery<*>): MutableMap<String, Any?>? {
@@ -61,7 +88,6 @@ abstract class RootRepository {
       return list.first()
     }
   }
-
   fun distinctListMap(query: DbQuery<*>): List<MutableMap<String, Any?>> {
     listMap(query.sql(), query.getParams(), MapRowMapper(onlyNonNull = false)).let { list ->
       val oneToManyManager = query.oneToManyManager() ?: return list
@@ -69,39 +95,12 @@ abstract class RootRepository {
     }
   }
 
-  fun listMap(query: DbQuery<*>, rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
-    return listMap(query.sql(), query.getParams(), rowMapper ?: MapRowMapper(onlyNonNull = false)).let {
-      if(it.isEmpty()) emptyList<MutableMap<String, Any?>>()
-
-      val oneToManyManager = query.oneToManyManager() ?: return it
-      oneToManyManager.distinct(it)
-    }
-  }
-
-  fun <R: Any> uniqueSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): R? {
-    return try {
-      jdbc.queryForObject(query, params, clazz.java)
-    }catch(e: EmptyResultDataAccessException){
-      null
-    }
-  }
-  fun <R: Any> listSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): List<R> {
-    return jdbc.queryForList(query, params, clazz.java)
-  }
-
-  final fun uniqueMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): MutableMap<String, Any?>? {
-    return try {
-      jdbc.queryForObject(query, params, rowMapper ?: MapRowMapper())
-    }catch(e: EmptyResultDataAccessException){
-      null
-    }
-  }
-  final fun listMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
-    return jdbc.query(query, params, rowMapper ?: MapRowMapper())
-  }
-
   fun execute(query: String, params: Map<String, Any?> = emptyMap()): Int {
     return jdbc.update(query, params)
+  }
+
+  fun executeBatch(batchOperations: BatchOperations){
+    batchOperations.execute(this)
   }
 
   fun delete(tableName: String, id: Long, schema: String? = null): Int {
@@ -203,6 +202,11 @@ abstract class RootRepository {
     val sql = "SELECT $column FROM ${schemaAndTable.sql} WHERE ${schemaAndTable.table}id = $id"
     return uniqueSingleColumn(clazz, sql, emptyMap())
   }
+
+  fun defaultWhere(entityMetadata: EntityMetadata): String {
+    return AgiliteWhere.defaultWhere(entityMetadata)
+  }
+
 
   fun setTenant(tenant: String) {
     execute("SET search_path TO $tenant")

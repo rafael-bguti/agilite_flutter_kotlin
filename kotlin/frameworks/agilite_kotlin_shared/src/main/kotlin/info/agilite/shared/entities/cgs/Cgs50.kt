@@ -2,26 +2,28 @@ package info.agilite.shared.entities.cgs;
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
+import info.agilite.boot.orm.annotations.EntityCacheable
 import java.math.BigDecimal
 //GERADOR INI
 
+@EntityCacheable
 class Cgs50() : AbstractEntity(10) {
   constructor(cgs50id: Long) : this() {
     this.cgs50id = cgs50id
   }
 
   constructor(
-    cgs50empresa: Long,
+    cgs50empresa: Long? = null,
     cgs50mps: Int,
     cgs50descr: String,
-    cgs50codigo: String,
-    cgs50preco: BigDecimal,
-    cgs50unidade: String,
-    cgs50descrComp: String,
-    cgs50obs: String,
-    cgs50tipoServico: String
+    cgs50codigo: String? = null,
+    cgs50preco: BigDecimal? = null,
+    cgs50unidade: String? = null,
+    cgs50descrComp: String? = null,
+    cgs50obs: String? = null,
+    cgs50tipoServico: String? = null
   ) : this() {
-    this.cgs50empresa = cgs50empresa
+    if(cgs50empresa != null) this.cgs50empresa = cgs50empresa
     this.cgs50mps = cgs50mps
     this.cgs50descr = cgs50descr
     this.cgs50codigo = cgs50codigo
@@ -32,6 +34,9 @@ class Cgs50() : AbstractEntity(10) {
     this.cgs50tipoServico = cgs50tipoServico
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cgs50id: Long = -1L
     get() {

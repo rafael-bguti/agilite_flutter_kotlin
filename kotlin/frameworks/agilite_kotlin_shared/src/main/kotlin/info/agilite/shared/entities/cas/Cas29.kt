@@ -5,6 +5,7 @@ import info.agilite.boot.orm.AbstractEntity
 import java.math.BigDecimal
 //GERADOR INI
 
+
 class Cas29() : AbstractEntity(2) {
   constructor(cas29id: Long) : this() {
     this.cas29id = cas29id
@@ -16,6 +17,9 @@ class Cas29() : AbstractEntity(2) {
     this.cas29nome = cas29nome
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cas29id: Long = -1L
     get() {

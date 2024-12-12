@@ -18,17 +18,23 @@
     </parent>
 
     <modules>
-        <!-- Projetos MAIN -->
-        <module>projects/agilite_erp</module>
-
-        <!-- Modules -->
+        <!-- Modules - Shared -->
         <module>modules/rot</module>
         <module>modules/cas</module>
+        <module>modules/cgs</module>
+
+        <!-- Modules -->
+        <module>modules/gdf</module>
+        <module>modules/scf</module>
+        <module>modules/srf</module>
 
         <!-- Frameworks -->
         <module>frameworks/agilite_kotlin_boot</module>
         <module>frameworks/agilite_kotlin_core</module>
         <module>frameworks/agilite_kotlin_shared</module>
+
+        <!-- Projetos MAIN -->
+        <module>projects/agilite_erp</module>
     </modules>
 
     <properties>
@@ -83,6 +89,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -99,10 +111,9 @@
             </dependency>
             <dependency>
                 <groupId>info.agilite</groupId>
-                <artifactId>ccm</artifactId>
+                <artifactId>cgs</artifactId>
                 <version>${revision}</version>
             </dependency>
-
             <dependency>
                 <groupId>info.agilite</groupId>
                 <artifactId>agilite_kotlin_shared</artifactId>

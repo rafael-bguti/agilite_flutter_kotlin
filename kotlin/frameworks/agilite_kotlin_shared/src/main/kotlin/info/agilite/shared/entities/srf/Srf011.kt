@@ -6,22 +6,25 @@ import info.agilite.shared.entities.cgs.Cgs50
 import java.math.BigDecimal
 //GERADOR INI
 
-class Srf011() : AbstractEntity(8) {
+
+class Srf011() : AbstractEntity(9) {
   constructor(srf011id: Long) : this() {
     this.srf011id = srf011id
   }
 
   constructor(
-    srf011doc: Long,
+    srf011doc: Long? = null,
     srf011item: Cgs50,
+    srf011descr: String,
     srf011qtd: BigDecimal,
     srf011vlrUnit: BigDecimal,
     srf011vlrTotal: BigDecimal,
-    srf011alqIss: BigDecimal,
-    srf011vlrIss: BigDecimal
+    srf011alqIss: BigDecimal? = null,
+    srf011vlrIss: BigDecimal? = null
   ) : this() {
-    this.srf011doc = srf011doc
+    if(srf011doc != null) this.srf011doc = srf011doc
     this.srf011item = srf011item
+    this.srf011descr = srf011descr
     this.srf011qtd = srf011qtd
     this.srf011vlrUnit = srf011vlrUnit
     this.srf011vlrTotal = srf011vlrTotal
@@ -29,6 +32,21 @@ class Srf011() : AbstractEntity(8) {
     this.srf011vlrIss = srf011vlrIss
   }
 
+
+  //CUSTOM INI
+  constructor(
+    srf011item: Cgs50,
+    srf011descr: String? = null,
+    srf011qtd: BigDecimal,
+    srf011vlrUnit: BigDecimal,
+  ) : this(
+    srf011item = srf011item,
+    srf011descr = srf011descr ?: srf011item.cgs50descr,
+    srf011qtd = srf011qtd,
+    srf011vlrUnit = srf011vlrUnit,
+    srf011vlrTotal = srf011qtd * srf011vlrUnit,
+  )
+  //CUSTOM END
 
   var srf011id: Long = -1L
     get() {
@@ -60,9 +78,9 @@ class Srf011() : AbstractEntity(8) {
       field = value
     }
     
-  var srf011qtd: BigDecimal = BigDecimal("-1")
+  var srf011descr: String = "--defaultString--"
     get() {
-      validateLoaded(3, "srf011qtd", true)
+      validateLoaded(3, "srf011descr", true)
       return field
     }
     set(value){
@@ -70,9 +88,9 @@ class Srf011() : AbstractEntity(8) {
       field = value
     }
     
-  var srf011vlrUnit: BigDecimal = BigDecimal("-1")
+  var srf011qtd: BigDecimal = BigDecimal("-1")
     get() {
-      validateLoaded(4, "srf011vlrUnit", true)
+      validateLoaded(4, "srf011qtd", true)
       return field
     }
     set(value){
@@ -80,9 +98,9 @@ class Srf011() : AbstractEntity(8) {
       field = value
     }
     
-  var srf011vlrTotal: BigDecimal = BigDecimal("-1")
+  var srf011vlrUnit: BigDecimal = BigDecimal("-1")
     get() {
-      validateLoaded(5, "srf011vlrTotal", true)
+      validateLoaded(5, "srf011vlrUnit", true)
       return field
     }
     set(value){
@@ -90,9 +108,9 @@ class Srf011() : AbstractEntity(8) {
       field = value
     }
     
-  var srf011alqIss: BigDecimal? = null
+  var srf011vlrTotal: BigDecimal = BigDecimal("-1")
     get() {
-      validateLoaded(6, "srf011alqIss", false)
+      validateLoaded(6, "srf011vlrTotal", true)
       return field
     }
     set(value){
@@ -100,13 +118,23 @@ class Srf011() : AbstractEntity(8) {
       field = value
     }
     
-  var srf011vlrIss: BigDecimal? = null
+  var srf011alqIss: BigDecimal? = null
     get() {
-      validateLoaded(7, "srf011vlrIss", false)
+      validateLoaded(7, "srf011alqIss", false)
       return field
     }
     set(value){
       orm.changed(field, value, 7)
+      field = value
+    }
+    
+  var srf011vlrIss: BigDecimal? = null
+    get() {
+      validateLoaded(8, "srf011vlrIss", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 8)
       field = value
     }
     
@@ -131,6 +159,7 @@ class Srf011() : AbstractEntity(8) {
 }
 const val N_SRF011DOC = "srf011doc";
 const val N_SRF011ITEM = "srf011item";
+const val N_SRF011DESCR = "srf011descr";
 const val N_SRF011QTD = "srf011qtd";
 const val N_SRF011VLRUNIT = "srf011vlrUnit";
 const val N_SRF011VLRTOTAL = "srf011vlrTotal";
@@ -140,18 +169,19 @@ const val N_SRF011VLRISS = "srf011vlrIss";
 val SRF011ID = FieldMetadata("srf011id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SRF011DOC = FieldMetadata("srf011doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
 val SRF011ITEM = FieldMetadata("srf011item", 2, "Item", FieldTypeMetadata.fk, 10.0, true, "Cgs50", null, null, null, null, false, false, false);
-val SRF011QTD = FieldMetadata("srf011qtd", 3, "Quantidade", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
-val SRF011VLRUNIT = FieldMetadata("srf011vlrUnit", 4, "Unitário", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
-val SRF011VLRTOTAL = FieldMetadata("srf011vlrTotal", 5, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SRF011ALQISS = FieldMetadata("srf011alqIss", 6, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false);
-val SRF011VLRISS = FieldMetadata("srf011vlrIss", 7, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SRF011DESCR = FieldMetadata("srf011descr", 3, "Descrição", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
+val SRF011QTD = FieldMetadata("srf011qtd", 4, "Quantidade", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
+val SRF011VLRUNIT = FieldMetadata("srf011vlrUnit", 5, "Unitário", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
+val SRF011VLRTOTAL = FieldMetadata("srf011vlrTotal", 6, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
+val SRF011ALQISS = FieldMetadata("srf011alqIss", 7, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false);
+val SRF011VLRISS = FieldMetadata("srf011vlrIss", 8, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
  
 val SRF011_METADATA = EntityMetadata(
   name = "Srf011",
   descr = "Itens",
 
   fields = listOf(
-    SRF011ID,SRF011DOC,SRF011ITEM,SRF011QTD,SRF011VLRUNIT,SRF011VLRTOTAL,SRF011ALQISS,SRF011VLRISS,
+    SRF011ID,SRF011DOC,SRF011ITEM,SRF011DESCR,SRF011QTD,SRF011VLRUNIT,SRF011VLRTOTAL,SRF011ALQISS,SRF011VLRISS,
   ),
 
   keys = listOf(

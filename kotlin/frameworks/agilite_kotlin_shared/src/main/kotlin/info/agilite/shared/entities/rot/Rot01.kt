@@ -5,6 +5,7 @@ import info.agilite.boot.orm.AbstractEntity
 import java.math.BigDecimal
 //GERADOR INI
 
+
 class Rot01() : AbstractEntity(4) {
   constructor(rot01id: Long) : this() {
     this.rot01id = rot01id
@@ -20,6 +21,9 @@ class Rot01() : AbstractEntity(4) {
     this.rot01tenant = rot01tenant
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var rot01id: Long = -1L
     get() {

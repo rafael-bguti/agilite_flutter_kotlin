@@ -1,0 +1,11 @@
+Tabela: Gdf20 - Lote de envio de NFSe
+Versão: 2 - Task: 
+Usa cache: NÃO
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+gdf20empresa                     10.0 S Lng        Empresa
+gdf20dtEnvio                     10.0 S Dat        Data de emissão
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------

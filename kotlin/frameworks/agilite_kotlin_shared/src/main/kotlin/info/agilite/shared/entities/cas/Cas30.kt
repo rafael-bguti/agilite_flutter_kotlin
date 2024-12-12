@@ -4,6 +4,7 @@ import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
 //GERADOR INI
 
+
 class Cas30() : AbstractEntity(6) {
   constructor(cas30id: Long) : this() {
     this.cas30id = cas30id
@@ -14,7 +15,7 @@ class Cas30() : AbstractEntity(6) {
     cas30nome: String,
     cas30empAtiva: Cas65,
     cas30credencial: Cas29,
-    cas30interno: Boolean
+    cas30interno: Boolean? = null
   ) : this() {
     this.cas30autenticacao = cas30autenticacao
     this.cas30nome = cas30nome
@@ -23,6 +24,9 @@ class Cas30() : AbstractEntity(6) {
     this.cas30interno = cas30interno
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cas30id: Long = -1L
     get() {

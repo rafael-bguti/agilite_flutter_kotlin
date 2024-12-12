@@ -1,4 +1,6 @@
 Tabela: Cgs38 - Forma de Pagamento/Recebimento
+Versão: 2 - Task: 
+Usa cache: SIM
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

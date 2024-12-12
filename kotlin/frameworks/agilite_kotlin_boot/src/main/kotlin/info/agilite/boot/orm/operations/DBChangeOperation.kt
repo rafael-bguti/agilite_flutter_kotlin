@@ -6,6 +6,7 @@ import info.agilite.boot.metadata.models.OneToManyMetadata
 import info.agilite.core.model.LowerCaseMap
 import info.agilite.boot.orm.AgiliteWhere
 import info.agilite.boot.orm.repositories.RootRepository
+import info.agilite.boot.security.UserContext
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 
@@ -62,7 +63,7 @@ internal interface DBChangeOperation<T> {
       if (entityMetadata.entityHasEmpresaField()) {
         val fieldEmpName = "${entityMetadata.name.lowercase()}empresa"
         if (!localValues.containsKey(fieldEmpName)) {
-          localValues[fieldEmpName] = AgiliteWhere.getEmpresaId(entityMetadata)
+          localValues[fieldEmpName] = UserContext.user?.empId
         }
       }
     } catch (ignore: MetadataNotFoundException) {

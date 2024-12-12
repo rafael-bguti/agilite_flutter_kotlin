@@ -2,6 +2,8 @@ package info.agilite.core.extensions
 
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.min
 
 
@@ -69,4 +71,9 @@ fun String.encryptToPassword(steps: Int): String{
   } catch (e: Exception) {
     throw RuntimeException("Erro ao criptografar texto", e)
   }
+}
+
+// ----- PARSERS -----
+fun String.parseDate(pattern: String = "yyyyMMdd"): LocalDate {
+  return LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
 }

@@ -2,6 +2,7 @@ package info.agilite.shared.entities.cgs;
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
+import info.agilite.boot.orm.annotations.EntityCacheable
 import java.math.BigDecimal
 //GERADOR INI
 
@@ -11,21 +12,22 @@ const val CGS18TIPO_NOTA_FISCAL_PRODUTO = 2
 const val CGS18TIPO_NOTA_FISCAL_SERVICO = 3
 const val CGS18ES_ENTRADA = 0
 const val CGS18ES_SAIDA = 1
+@EntityCacheable
 class Cgs18() : AbstractEntity(8) {
   constructor(cgs18id: Long) : this() {
     this.cgs18id = cgs18id
   }
 
   constructor(
-    cgs18empresa: Long,
+    cgs18empresa: Long? = null,
     cgs18nome: String,
     cgs18tipo: Int,
     cgs18es: Int,
-    cgs18serie: Int,
+    cgs18serie: Int? = null,
     cgs18emitirDoc: Boolean,
-    cgs18alqIss: BigDecimal
+    cgs18alqIss: BigDecimal? = null
   ) : this() {
-    this.cgs18empresa = cgs18empresa
+    if(cgs18empresa != null) this.cgs18empresa = cgs18empresa
     this.cgs18nome = cgs18nome
     this.cgs18tipo = cgs18tipo
     this.cgs18es = cgs18es
@@ -34,6 +36,9 @@ class Cgs18() : AbstractEntity(8) {
     this.cgs18alqIss = cgs18alqIss
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cgs18id: Long = -1L
     get() {

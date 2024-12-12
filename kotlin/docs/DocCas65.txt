@@ -1,11 +1,21 @@
 Tabela: Cas65 - Empresa
+Versão: 2 - Task: 
+Usa cache: SIM
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
 cas65cnpj                        14.0 S Str        Cnpj
+cas65im                          20.0 N Str        Incrição Municipal
 cas65nome                       100.0 S Str        Nome
 cas65cnae                        10.0 N Str        Código CNAE
                                                    Obs: com90grupo = 02
+cas65cep                          8.0 N Str        CEP
+cas65endereco                   200.0 N Str        Endereço
+cas65bairro                      50.0 N Str        Bairro
+cas65numero                      50.0 N Str        Número
+cas65complemento                 50.0 N Str        Complemento
+cas65uf                           2.0 N Str        UF
+cas65municipio                   50.0 N Str        Município
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

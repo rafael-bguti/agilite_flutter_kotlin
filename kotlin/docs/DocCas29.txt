@@ -1,4 +1,6 @@
 Tabela: Cas29 - Credencial
+Versão: 2 - Task: 
+Usa cache: NÃO
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

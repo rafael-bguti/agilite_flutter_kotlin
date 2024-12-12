@@ -35,7 +35,7 @@ data class Certificado(
 
 
 object CertificadoFactory {
-  //TODO clear/remove do cache quando o usuario trocar o certficado no servidor
+  //TODO remove do cache quando o usuario trocar o certficado no servidor
   private val certificateCache = CacheBuilder.newBuilder()
     .maximumSize(CACHE_DE_CERTIFICADO_SIZE)
     .expireAfterWrite(CACHE_DE_CERTIFICADO_EXPIRE_HOUR, java.util.concurrent.TimeUnit.HOURS)

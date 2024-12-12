@@ -7,6 +7,7 @@ import java.math.BigDecimal
 
 const val CAS90GRUPO_CODIGOS_DE_SERVICO = 1
 const val CAS90GRUPO_CNAE = 2
+
 class Cas90() : AbstractEntity(4) {
   constructor(cas90id: Long) : this() {
     this.cas90id = cas90id
@@ -14,7 +15,7 @@ class Cas90() : AbstractEntity(4) {
 
   constructor(
     cas90codigo: String,
-    cas90descr: String,
+    cas90descr: String? = null,
     cas90grupo: Int
   ) : this() {
     this.cas90codigo = cas90codigo
@@ -22,6 +23,9 @@ class Cas90() : AbstractEntity(4) {
     this.cas90grupo = cas90grupo
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cas90id: Long = -1L
     get() {

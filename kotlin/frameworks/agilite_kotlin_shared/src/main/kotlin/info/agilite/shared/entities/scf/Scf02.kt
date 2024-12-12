@@ -11,31 +11,32 @@ import java.time.LocalDate
 
 const val SCF02TIPO_RECEBER = 0
 const val SCF02TIPO_PAGAR = 1
+
 class Scf02() : AbstractEntity(19) {
   constructor(scf02id: Long) : this() {
     this.scf02id = scf02id
   }
 
   constructor(
-    scf02empresa: Long,
+    scf02empresa: Long? = null,
     scf02tipo: Int,
     scf02forma: Cgs38,
     scf02entidade: Cgs80,
-    scf02nossoNum: Long,
-    scf02nossoNumDV: Int,
+    scf02nossoNum: Long? = null,
+    scf02nossoNumDV: Int? = null,
     scf02dtEmiss: LocalDate,
     scf02dtVenc: LocalDate,
-    scf02dtPagto: LocalDate,
-    scf02hist: String,
+    scf02dtPagto: LocalDate? = null,
+    scf02hist: String? = null,
     scf02valor: BigDecimal,
-    scf02multa: BigDecimal,
-    scf02juros: BigDecimal,
-    scf02encargos: BigDecimal,
-    scf02desconto: BigDecimal,
-    scf02regOrigem: LowerCaseMap,
-    scf02lancamento: Scf11
+    scf02multa: BigDecimal? = null,
+    scf02juros: BigDecimal? = null,
+    scf02encargos: BigDecimal? = null,
+    scf02desconto: BigDecimal? = null,
+    scf02regOrigem: LowerCaseMap? = null,
+    scf02lancamento: Scf11? = null
   ) : this() {
-    this.scf02empresa = scf02empresa
+    if(scf02empresa != null) this.scf02empresa = scf02empresa
     this.scf02tipo = scf02tipo
     this.scf02forma = scf02forma
     this.scf02entidade = scf02entidade
@@ -54,6 +55,9 @@ class Scf02() : AbstractEntity(19) {
     this.scf02lancamento = scf02lancamento
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var scf02id: Long = -1L
     get() {

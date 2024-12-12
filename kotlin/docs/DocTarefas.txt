@@ -1,3 +1,5 @@
 Tarefas --------------------------------
 ROT4001 - Apenas FrontEnd - Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
-CGL2010 - Processo - Login
+CAS2010 - Processo - Login
+SRF2030 - Processo - Importar documentos
+SRF2050 - Processo - Gerar XML Prefeitura

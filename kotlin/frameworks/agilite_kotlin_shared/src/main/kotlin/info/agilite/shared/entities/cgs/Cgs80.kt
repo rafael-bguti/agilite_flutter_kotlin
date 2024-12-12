@@ -2,7 +2,7 @@ package info.agilite.shared.entities.cgs;
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
-import java.math.BigDecimal
+import info.agilite.boot.orm.annotations.EntityCacheable
 //GERADOR INI
 
 const val CGS80TIPO_PESSOA_FISICA = 0
@@ -11,37 +11,38 @@ const val CGS80TIPO_ESTRANGEIRO = 2
 const val CGS80CONTRIBUINTE_CONTRIBUINTE_ICMS = 1
 const val CGS80CONTRIBUINTE_ISENTO_DE_ICMS = 2
 const val CGS80CONTRIBUINTE_NAO_CONTRIBUINTE = 9
+@EntityCacheable
 class Cgs80() : AbstractEntity(24) {
   constructor(cgs80id: Long) : this() {
     this.cgs80id = cgs80id
   }
 
   constructor(
-    cgs80empresa: Long,
+    cgs80empresa: Long? = null,
     cgs80nome: String,
-    cgs80fantasia: String,
-    cgs80codigo: String,
-    cgs80tipo: Int,
-    cgs80ni: String,
-    cgs80contribuinte: Int,
-    cgs80ie: String,
-    cgs80im: String,
-    cgs80cep: String,
-    cgs80endereco: String,
-    cgs80bairro: String,
-    cgs80numero: String,
-    cgs80complemento: String,
-    cgs80uf: String,
-    cgs80municipio: String,
-    cgs80telefone: String,
-    cgs80celular: String,
-    cgs80email: String,
-    cgs80obs: String,
-    cgs80cliente: Boolean,
-    cgs80fornecedor: Boolean,
-    cgs80transportadora: Boolean
+    cgs80fantasia: String? = null,
+    cgs80codigo: String? = null,
+    cgs80tipo: Int? = null,
+    cgs80ni: String? = null,
+    cgs80contribuinte: Int? = null,
+    cgs80ie: String? = null,
+    cgs80im: String? = null,
+    cgs80cep: String? = null,
+    cgs80endereco: String? = null,
+    cgs80bairro: String? = null,
+    cgs80numero: String? = null,
+    cgs80complemento: String? = null,
+    cgs80uf: String? = null,
+    cgs80municipio: String? = null,
+    cgs80telefone: String? = null,
+    cgs80celular: String? = null,
+    cgs80email: String? = null,
+    cgs80obs: String? = null,
+    cgs80cliente: Boolean? = null,
+    cgs80fornecedor: Boolean? = null,
+    cgs80transportadora: Boolean? = null
   ) : this() {
-    this.cgs80empresa = cgs80empresa
+    if(cgs80empresa != null) this.cgs80empresa = cgs80empresa
     this.cgs80nome = cgs80nome
     this.cgs80fantasia = cgs80fantasia
     this.cgs80codigo = cgs80codigo
@@ -66,6 +67,9 @@ class Cgs80() : AbstractEntity(24) {
     this.cgs80transportadora = cgs80transportadora
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var cgs80id: Long = -1L
     get() {

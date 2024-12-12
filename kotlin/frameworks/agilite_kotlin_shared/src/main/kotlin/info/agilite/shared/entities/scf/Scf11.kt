@@ -10,21 +10,22 @@ import java.time.LocalDate
 
 const val SCF11TIPO_RECEITA = 0
 const val SCF11TIPO_DESPESA = 1
+
 class Scf11() : AbstractEntity(8) {
   constructor(scf11id: Long) : this() {
     this.scf11id = scf11id
   }
 
   constructor(
-    scf11empresa: Long,
+    scf11empresa: Long? = null,
     scf11tipo: Int,
     scf11conta: Cgs45,
     scf11data: LocalDate,
     scf11valor: BigDecimal,
     scf11hist: String,
-    scf11regOrigem: LowerCaseMap
+    scf11regOrigem: LowerCaseMap? = null
   ) : this() {
-    this.scf11empresa = scf11empresa
+    if(scf11empresa != null) this.scf11empresa = scf11empresa
     this.scf11tipo = scf11tipo
     this.scf11conta = scf11conta
     this.scf11data = scf11data
@@ -33,6 +34,9 @@ class Scf11() : AbstractEntity(8) {
     this.scf11regOrigem = scf11regOrigem
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var scf11id: Long = -1L
     get() {

@@ -7,25 +7,29 @@ import java.math.BigDecimal
 import java.time.LocalDate
 //GERADOR INI
 
+
 class Scf021() : AbstractEntity(6) {
   constructor(scf021id: Long) : this() {
     this.scf021id = scf021id
   }
 
   constructor(
-    scf021doc: Long,
+    scf021doc: Long? = null,
     scf021remNumero: Int,
     scf021conta: Cgs45,
     scf021retData: LocalDate,
-    scf021dtPgto: LocalDate
+    scf021dtPgto: LocalDate? = null
   ) : this() {
-    this.scf021doc = scf021doc
+    if(scf021doc != null) this.scf021doc = scf021doc
     this.scf021remNumero = scf021remNumero
     this.scf021conta = scf021conta
     this.scf021retData = scf021retData
     this.scf021dtPgto = scf021dtPgto
   }
 
+
+  //CUSTOM INI
+  //CUSTOM END
 
   var scf021id: Long = -1L
     get() {

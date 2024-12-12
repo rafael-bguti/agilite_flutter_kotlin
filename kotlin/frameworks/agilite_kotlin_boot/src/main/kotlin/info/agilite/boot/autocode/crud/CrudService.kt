@@ -159,7 +159,7 @@ class DefaultCrudService<T>(
     val wherePadrao = getDefaultWhereOnList(entityMetadata)
     val where = buildString {
       append(" true ")
-      AgiliteWhere.defaultWhere(entityMetadata, "AND")
+      " AND ${AgiliteWhere.defaultWhere(entityMetadata)}"
       whereLikeSearchPair?.let { append(" AND ${it.first}") }
       whereDetailedFiltersPair?.let { append(" AND ${it.first}") }
       wherePadrao?.let { append(" AND ${it.first}") }

@@ -1,4 +1,6 @@
 Tabela: Cas90 - Repositório de dados
+Versão: 2 - Task: 
+Usa cache: NÃO
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------

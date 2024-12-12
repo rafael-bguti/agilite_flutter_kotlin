@@ -1,4 +1,6 @@
 Tabela: Rot10 - Autenticação
+Versão: 1 - Task: 
+Usa cache: NÃO
 
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
