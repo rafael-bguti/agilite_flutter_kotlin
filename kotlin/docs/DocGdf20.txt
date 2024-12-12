@@ -5,7 +5,9 @@ Usa cache: NÃO
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
 gdf20empresa                     10.0 S Lng        Empresa
+gdf20numero                      10.0 S Lng        Número do lote
 gdf20dtEnvio                     10.0 S Dat        Data de emissão
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
+gdf20_uk                      gdf20empresa, gdf20numero

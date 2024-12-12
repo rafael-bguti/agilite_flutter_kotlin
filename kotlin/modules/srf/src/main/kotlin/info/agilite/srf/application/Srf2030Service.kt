@@ -11,8 +11,8 @@ import info.agilite.core.exceptions.ValidationException
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.entities.cgs.Cgs50
 import info.agilite.shared.entities.srf.*
-import info.agilite.shared.events.INTEGRACAO_AGUARDANDO
-import info.agilite.shared.events.INTEGRACAO_NAO
+import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
+import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.srf.adapter.infra.Srf01Repository
 import info.agilite.srf.domain.SRF2030Doc
 import org.springframework.http.HttpStatus
@@ -63,7 +63,6 @@ class Srf2030Service(
       srf01entidade = cgs80,
       srf01vlrTotal = BigDecimal(0),
       srf01obs = doc.observacoes,
-      srf01integracaoScf = if(doc.formasRecebimento.isNullOrEmpty()) INTEGRACAO_NAO else INTEGRACAO_AGUARDANDO
     )
 
     srf01.srf011s = itens
@@ -73,7 +72,6 @@ class Srf2030Service(
     }catch (e: ValidationException) {
       throw ValidationException("Erro ao importar documento da linha ${doc.linha}: ${e.message}")
     }
-
   }
 
   private fun parseItens(doc: SRF2030Doc): Set<Srf011> {

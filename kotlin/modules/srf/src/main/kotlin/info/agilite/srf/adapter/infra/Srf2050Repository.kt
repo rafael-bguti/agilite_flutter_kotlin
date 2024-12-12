@@ -5,7 +5,7 @@ import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.shared.entities.srf.SRF01TIPO_NOTA_FISCAL_SERVICO
 import info.agilite.shared.entities.srf.SRF01_METADATA
-import info.agilite.shared.events.INTEGRACAO_AGUARDANDO
+import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
 import info.agilite.srf.adapter.web.Srf2050EmitirDto
 import org.springframework.stereotype.Repository
 
@@ -20,7 +20,7 @@ class Srf2050Repository : RootRepository() {
         where = WhereSimple("""
           ${defaultWhere(SRF01_METADATA)}
           AND srf01tipo = $SRF01TIPO_NOTA_FISCAL_SERVICO
-          AND srf01integracaoGdf = $INTEGRACAO_AGUARDANDO
+          AND srf01integracaoGdf = $INTEGRACAO_AGUARDANDO_O_INICIO
         """),
       )
 

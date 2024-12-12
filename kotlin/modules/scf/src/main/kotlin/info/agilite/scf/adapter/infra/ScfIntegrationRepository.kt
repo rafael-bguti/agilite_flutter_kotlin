@@ -4,12 +4,7 @@ import info.agilite.boot.orm.repositories.RootRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-class ScfFromSrf01IntegrationRepository : RootRepository() {
-
-  fun findSrf012ids(srf01id: Long): List<Long> {
-    return findSrf012ids(listOf(srf01id))
-  }
-
+class ScfIntegrationRepository : RootRepository() {
   fun findSrf012ids(srf01ids: List<Long>): List<Long> {
     return listSingleColumn(
       Long::class,

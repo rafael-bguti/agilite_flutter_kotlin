@@ -2,8 +2,7 @@ package info.agilite.srf.application
 
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.shared.entities.srf.Srf01
-import info.agilite.shared.events.srf.Srf01EventPosSave
-import info.agilite.shared.events.srf.Srf01EventPreSave
+import info.agilite.shared.events.Srf01SavedEvent
 import info.agilite.srf.adapter.infra.Srf01Repository
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
@@ -19,9 +18,9 @@ class Srf01BaseService(
     totalizar(srf01)
     validarPreSave(srf01)
 
-    eventPublish.publishEvent(Srf01EventPreSave(this, srf01.id == null, srf01))
+    val isInsert = srf01.id == null
     srf01repo.save(srf01)
-    eventPublish.publishEvent(Srf01EventPosSave(this, srf01.id == null, srf01))
+    eventPublish.publishEvent(Srf01SavedEvent(this, isInsert, srf01))
 
     if(srf01.isChanged){
       srf01repo.updateChanges(srf01)
@@ -34,7 +33,8 @@ class Srf01BaseService(
 
   private fun validarPreSave(srf01: Srf01){
     if(srf01.srf011s.isNullOrEmpty()) throw ValidationException("Documento sem itens")
-    if(srf01.srf012s?.isNotEmpty() == true){
+
+    if(!srf01.srf012s.isNullOrEmpty()){
       val totalFormas = srf01.srf012s!!.sumOf { it.srf012valor }
       if(totalFormas != srf01.srf01vlrTotal) throw ValidationException("Total das formas de recebimento/pagamento diferente do total do documento")
     }

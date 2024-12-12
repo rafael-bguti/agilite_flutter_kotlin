@@ -13,7 +13,7 @@ import info.agilite.core.xml.ElementXml
 import info.agilite.shared.entities.cas.Cas65
 import info.agilite.shared.entities.cgs.CGS80TIPO_PESSOA_FISICA
 import info.agilite.shared.entities.srf.Srf01
-import info.agilite.shared.events.srf.Srf2050EventLoteGerado
+import info.agilite.shared.events.Srf2050EventLoteGerado
 import info.agilite.srf.adapter.infra.Srf01Repository
 import info.agilite.srf.adapter.infra.Srf2050Repository
 import org.springframework.context.ApplicationEventPublisher

@@ -3,3 +3,4 @@ ROT4001 - Apenas FrontEnd - Splash Screen - Frontend - Utilizada para fazer o re
 CAS2010 - Processo - Login
 SRF2030 - Processo - Importar documentos
 SRF2050 - Processo - Gerar XML Prefeitura
+GDF2060 - Processo - Processar retorno lote NFSe prefeitura

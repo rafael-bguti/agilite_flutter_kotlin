@@ -14,6 +14,10 @@ cgs18tipo                         1.0 S Int        Tipo de Operação
 cgs18es                           1.0 S Int        Entrada/Saida
                                                    0 - Entrada
                                                    1 - Saída
+cgs18scf                          1.0 S Int        Quando gerar o SCF
+                                                   0 - Não gerar
+                                                   1 - Ao salvar o documeto
+                                                   2 - Na aprovacao fiscal
 cgs18serie                        3.0 N Int        Série
 cgs18emitirDoc                    1.0 S Bol        Emitir documento fiscal
 cgs18alqIss                       4.2 N Dec        Aliquota ISS

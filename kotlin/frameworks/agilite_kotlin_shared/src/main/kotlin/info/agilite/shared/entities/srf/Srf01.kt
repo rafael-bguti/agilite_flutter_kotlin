@@ -6,8 +6,8 @@ import info.agilite.shared.entities.cgs.Cgs18
 import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.cas.gdf.Gdf10
 import info.agilite.shared.entities.gdf.Gdf20
-import info.agilite.shared.events.INTEGRACAO_AGUARDANDO
-import info.agilite.shared.events.INTEGRACAO_NAO
+import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
+import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalTime
@@ -106,7 +106,6 @@ class Srf01() : AbstractEntity(33) {
     srf01vlrIss: BigDecimal? = null,
     srf01dfeAprov: Gdf10? = null,
     srf01dfeCancAprov: Gdf10? = null,
-    srf01integracaoScf: Int,
     srf01obs: String? = null
   ) : this(
     srf01empresa = srf01empresa,
@@ -135,8 +134,8 @@ class Srf01() : AbstractEntity(33) {
     srf01vlrIss = srf01vlrIss,
     srf01dfeAprov = srf01dfeAprov,
     srf01dfeCancAprov = srf01dfeCancAprov,
-    srf01integracaoScf = srf01integracaoScf,
-    srf01integracaoGdf = if (srf01natureza.cgs18emitirDoc) INTEGRACAO_AGUARDANDO else INTEGRACAO_NAO,
+    srf01integracaoScf = INTEGRACAO_AGUARDANDO_O_INICIO,
+    srf01integracaoGdf = INTEGRACAO_AGUARDANDO_O_INICIO,
     srf01obs = srf01obs,
   )
 
