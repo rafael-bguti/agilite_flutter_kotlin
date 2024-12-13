@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 private const val STEPS = 4
-private const val JWT_MINUTES_TO_EXPIRE_TOKEN: Long = 3 * 60
+private const val JWT_MINUTES_TO_EXPIRE_TOKEN: Long = 24 * 60
 private const val JWT_MINUTES_TO_EXPIRE_REFRESH_TOKEN: Long = 24 * 60 * 2
 
 @Service

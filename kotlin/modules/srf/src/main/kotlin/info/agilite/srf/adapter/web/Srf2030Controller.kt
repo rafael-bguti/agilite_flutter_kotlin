@@ -5,6 +5,7 @@ import info.agilite.boot.spring.RestMapping
 import info.agilite.boot.sse.HEADER_SSE_UID_NAME
 import info.agilite.srf.application.Srf2030Service
 import org.springframework.http.HttpStatus
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
@@ -16,6 +17,7 @@ class Srf2030Controller(
 ) {
 
   @PostMapping(consumes = ["multipart/form-data"])
+  @Transactional
   fun uploadFile(
     @RequestParam("file") file: MultipartFile,
     @RequestHeader(name = HEADER_SSE_UID_NAME, required = false) sseUid: String?,

@@ -1,20 +1,20 @@
-package info.agilite.scf.integrations
+package info.agilite.scf.listeners
 
 import info.agilite.core.exceptions.ValidationException
-import info.agilite.scf.adapter.infra.ScfIntegrationRepository
+import info.agilite.scf.adapter.infra.ScfListenerRepository
 import info.agilite.scf.application.ScfBaseService
 import info.agilite.shared.entities.cgs.CGS18SCF_AO_CRIAR_O_DOCUMETO
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.shared.events.INTEGRACAO_OK
-import info.agilite.shared.events.srf.Srf01SavedEvent
+import info.agilite.shared.events.Srf01SavedEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
 
 @Component
-class ScfIntegrationService(
-  private val repo: ScfIntegrationRepository,
+class ScfListenSrf01SavedEvent(
+  private val repo: ScfListenerRepository,
   private val scfBaseService: ScfBaseService,
 ) {
   @EventListener

@@ -9,7 +9,7 @@ interface JdbcDialect {
   fun castToString(columnName: String): String
   fun coalesceString(columnName: String): String
   fun autogenerateId(): Boolean
-  fun parseParamsToQuery(tableName: String, values: Map<String, Any?>): LowerCaseMap
+  fun parseParamsToQuery(tableName: String, values: Map<String, Any?>, addFieldsNotAddedInMap: Boolean = true): LowerCaseMap
   fun sequenceName(tableName: String): String
 }
 
@@ -26,12 +26,15 @@ class PostgresDialect : JdbcDialect {
     return true
   }
 
-  override fun parseParamsToQuery(tableName: String, values: Map<String, Any?>): LowerCaseMap {
+  override fun parseParamsToQuery(tableName: String, values: Map<String, Any?>, addFieldsNotAddedInMap: Boolean): LowerCaseMap {
     try {
       val result = LowerCaseMap()
       val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
 
       entityMetadata.fields.forEach { field ->
+        val fieldInOriginalMap = values.containsKey(field.name)
+        if (!fieldInOriginalMap && !addFieldsNotAddedInMap) return@forEach
+
         val value = values[field.name]
         result[field.name] = MetadataUtils.convertValueByField(field, value)
       }

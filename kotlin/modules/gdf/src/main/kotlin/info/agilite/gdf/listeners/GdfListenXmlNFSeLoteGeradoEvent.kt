@@ -1,20 +1,20 @@
-package info.agilite.gdf.integrations
+package info.agilite.gdf.listeners
 
 import info.agilite.boot.security.UserContext
 import info.agilite.gdf.adapter.infra.Gdf20Repository
 import info.agilite.shared.entities.gdf.Gdf20
-import info.agilite.shared.events.srf.Srf2050EventLoteGerado
+import info.agilite.shared.events.XmlNFSeLoteGeradoEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 
 @Component
-class Gdf20IntegrationService(
+class GdfListenXmlNFSeLoteGeradoEvent(
   private val gdf20repo: Gdf20Repository
 ) {
 
   @EventListener
-  fun onSrf2050LoteGerado(event: Srf2050EventLoteGerado) {
+  fun onSrf2050LoteGerado(event: XmlNFSeLoteGeradoEvent) {
     val maxNumero = gdf20repo.findMaxNumero()
     val gdf20 = Gdf20(
       gdf20empresa = UserContext.safeUser.empId,

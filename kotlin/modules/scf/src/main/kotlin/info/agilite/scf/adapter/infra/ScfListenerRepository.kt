@@ -1,15 +1,29 @@
 package info.agilite.scf.adapter.infra
 
+import info.agilite.boot.orm.AgiliteWhere
+import info.agilite.boot.orm.WhereSimple
+import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
+import info.agilite.shared.entities.cgs.CGS18SCF_NA_APROVACAO_FISCAL
+import info.agilite.shared.entities.srf.SRF01_METADATA
+import info.agilite.shared.entities.srf.Srf01
 import org.springframework.stereotype.Repository
 
 @Repository
-class ScfIntegrationRepository : RootRepository() {
-  fun findSrf012ids(srf01ids: List<Long>): List<Long> {
-    return listSingleColumn(
-      Long::class,
-      "SELECT srf012id FROM Srf012 WHERE srf012doc IN (:srf01Ids)",
-      mapOf("srf01Ids" to srf01ids)
+class ScfListenerRepository : RootRepository() {
+  fun buscarSrf01GerarScfNaProvacaoFiscal(srf01ids: List<Long>): List<Srf01> {
+    return list(
+      DbQueryBuilders.build(
+        Srf01::class,
+        "*, srf01natureza.*, srf012s.*",
+        where = WhereSimple(
+          """
+            srf01id IN (:srf01ids)
+            AND cgs18scf = $CGS18SCF_NA_APROVACAO_FISCAL
+          """,
+          mapOf("srf01ids" to srf01ids)
+        )
+      )
     )
   }
 

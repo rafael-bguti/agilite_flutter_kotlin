@@ -1,6 +1,8 @@
 package info.agilite.scf.application
 
 import info.agilite.boot.orm.BatchOperations
+import info.agilite.boot.orm.repositories.EmptyIdsList
+import info.agilite.boot.orm.repositories.IdsList
 import info.agilite.boot.security.UserContext
 import info.agilite.scf.adapter.infra.ScfBaseRepository
 import info.agilite.shared.RegOrigem
@@ -15,15 +17,15 @@ import java.time.LocalDate
 
 @Service
 class ScfBaseService(
-  private val scfRepo: ScfBaseRepository
+  private val scfRepo: ScfBaseRepository,
 ) {
   fun gerarLancamentosAPartirDoSrf01(srf01: Srf01) {
-    val batchOperations = BatchOperations()
     scfRepo.inflate(srf01, "srf01natureza, srf012s.srf012forma")
 
     val novosIdsScf02 = scfRepo.nextIds("scf02", srf01.srf012s!!.size)
-    val novosIdsScf11 = scfRepo.nextIds("scf11", srf01.srf012s!!.size)
+    val novosIdsScf11 = generateNewsSrf01ids(srf01.srf012s!!)
 
+    val batchOperations = BatchOperations()
     srf01.srf012s!!.forEach { srf012 ->
       val cgs38 = srf012.srf012forma
 
@@ -37,10 +39,12 @@ class ScfBaseService(
           batchOperations.insert(scf11, 0)
         }
         batchOperations.insert(scf02, 1)
+
       } else {
         throw NotImplementedError("Tipo de lançamento não implementado - ${cgs38.cgs38gerar}")
       }
     }
+    scfRepo.executeBatch(batchOperations)
 
     srf01.srf01integracaoScf = INTEGRACAO_OK
   }
@@ -84,7 +88,13 @@ class ScfBaseService(
       scf11hist = criarHistorico(srf01, cgs18)
       scf11regOrigem = RegOrigem("Scf02", scf02.scf02id).toMap()
     }
+  }
 
+  private fun generateNewsSrf01ids(srf012s: Set<Srf012>): IdsList {
+    val srf012sGerarQuitados = srf012s.filter { it.srf012forma?.cgs38gerar == CGS38GERAR_GERAR_QUITADO }
+    if(srf012sGerarQuitados.isEmpty()) return EmptyIdsList()
+
+    return scfRepo.nextIds("scf11", srf012sGerarQuitados.size)
   }
 
   private fun criarHistorico(srf01: Srf01, cgs18: Cgs18): String {

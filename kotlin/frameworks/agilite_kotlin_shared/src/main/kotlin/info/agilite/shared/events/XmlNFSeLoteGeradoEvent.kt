@@ -1,8 +1,8 @@
-package info.agilite.shared.events.srf
+package info.agilite.shared.events
 
 import org.springframework.context.ApplicationEvent
 
-data class Srf2050EventLoteGerado (
+data class XmlNFSeLoteGeradoEvent (
   val origem: Any,
   val xml: String,
   val srf01ids: List<Long>,

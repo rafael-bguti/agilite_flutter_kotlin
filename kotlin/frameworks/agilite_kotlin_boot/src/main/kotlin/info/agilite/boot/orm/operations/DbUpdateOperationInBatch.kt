@@ -14,9 +14,10 @@ class DbUpdateOperationInBatch(
   override fun execute(repository: RootRepository): Long {
     if(entities.isEmpty()) return 0
 
+    val isOrmAbstractEntity = entities.first() is AbstractEntity
     val tableNameAnsSchemaName = EntityMappingContext.getTableAndSchema(entities.first()::class.java)
     val listMaps = JsonUtils.convertValue(entities, object : TypeReference<List<Map<String, Any?>>>() {})
-    val localValues = listMaps.map { jdbcDialect.parseParamsToQuery(tableNameAnsSchemaName.table, it) }
+    val localValues = listMaps.map { jdbcDialect.parseParamsToQuery(tableNameAnsSchemaName.table, it, isOrmAbstractEntity) }
 
     val idName = "${tableNameAnsSchemaName.table.lowercase()}id"
     listMaps.find { it[idName] == null }?.let {

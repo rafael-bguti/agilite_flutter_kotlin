@@ -1,4 +1,4 @@
-package info.agilite.shared.events.srf
+package info.agilite.shared.events
 
 import info.agilite.shared.entities.srf.Srf01
 import org.springframework.context.ApplicationEvent
