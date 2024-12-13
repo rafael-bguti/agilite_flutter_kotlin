@@ -23,7 +23,7 @@ class MultitenantFilter(
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
     UserContext.user?.let {
       if(it.tenantId != null){
-        repository.execute("SET search_path TO ${it.tenantId}")
+        repository.setTenant(it.tenantId)
       }
     }
 

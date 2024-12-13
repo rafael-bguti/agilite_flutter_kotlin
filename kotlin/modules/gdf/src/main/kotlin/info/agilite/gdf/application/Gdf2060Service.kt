@@ -8,10 +8,14 @@ import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.xml.ElementXmlConverter
 import info.agilite.gdf.adapter.infra.Gdf2060Repository
 import info.agilite.gdf.adapter.infra.Gdf20Repository
+import info.agilite.shared.RegOrigem
+import info.agilite.shared.entities.gdf.*
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.shared.events.Srf01FiscalAprovadoEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
+import java.time.LocalDate
+import java.time.LocalTime
 
 @Service
 class Gdf2060Service(
@@ -56,12 +60,26 @@ class Gdf2060Service(
         throw ValidationException("RPS ${rps.serieRps}-${rps.numeroRps} não encontrado no lote de processamento")
       }
 
-      if (dadosSrf01Processar.srf01numero != rps.numeroNFSe) {
-        dadosSrf01Processar.srf01numero = rps.numeroNFSe
-        dadosSrf01Processar.srf01integracaoGdf = INTEGRACAO_OK
-        srf01ids.add(dadosSrf01Processar.srf01id)
-        batch.update(dadosSrf01Processar)
-      }
+      val gdf20 = Gdf10(
+        gdf10empresa = UserContext.safeUser.empId,
+        gdf10dtEmiss = LocalDate.now(),
+        gdf10hrEmiss = LocalTime.now(),
+        gdf10sistema = GDF10SISTEMA_NFSE,
+        gdf10tipoDoc = GDF10TIPODOC_DOCUMENTO,
+        gdf10statusProc = GDF10STATUSPROC_APROVADO,
+        gdf10protocolo = rps.protocolo,
+        gdf10cStat = "100",
+        gdf10xMotivo = "NFSe emitida com sucesso",
+        gdf10regOrigem = RegOrigem("Srf01", dadosSrf01Processar.srf01id).toMap(),
+      )
+      gdf2060repo.save(gdf20)
+
+      dadosSrf01Processar.srf01integracaoGdf = INTEGRACAO_OK
+      dadosSrf01Processar.srf01numero = rps.numeroNFSe
+      dadosSrf01Processar.srf01dfeAprov = gdf20.gdf10id
+      batch.update(dadosSrf01Processar)
+
+      srf01ids.add(dadosSrf01Processar.srf01id)
     }
     gdf2060repo.executeBatch(batch)
     gdf20repo.delete(gdf20id)
@@ -84,8 +102,9 @@ class Gdf2060Service(
       val numeroNFSe = nfse.findChildValue("InfNfse.Numero") ?: throw ValidationException("Número da NFSe não encontrado na nota $index")
       val serieRps = nfse.findChildValue("InfDeclaracaoPrestacaoServico.Rps.IdentificacaoRps.Serie") ?: throw ValidationException("Série do RPS não encontrado na nota $index")
       val numeroRps = nfse.findChildValue("InfDeclaracaoPrestacaoServico.Rps.IdentificacaoRps.Numero") ?: throw ValidationException("Número do RPS não encontrado na nota $index")
+      val protocolo = nfse.findChildValue("InfNfse.CodigoVerificacao") ?: throw ValidationException("CodigoVerificacao da NFSe não encontrado na nota $index")
 
-      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt()))
+      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt(), protocolo))
     }
 
     return result
@@ -96,6 +115,7 @@ data class DadosRps(
   val numeroRps: Int,
   val serieRps: Int?,
   val numeroNFSe: Int,
+  val protocolo: String,
 )
 
 @DbTable("Srf01")
@@ -104,4 +124,5 @@ data class DadosSrf01ProcessarRetorno (
   val srf01serie: Int?,
   var srf01numero: Int,
   var srf01integracaoGdf: Int,
+  var srf01dfeAprov: Long?,
 )

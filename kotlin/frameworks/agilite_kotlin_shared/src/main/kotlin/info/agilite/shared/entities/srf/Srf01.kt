@@ -2,16 +2,17 @@ package info.agilite.shared.entities.srf;
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
+import info.agilite.shared.entities.cgs.CGS18SCF_NAO_GERAR
 import info.agilite.shared.entities.cgs.Cgs18
 import info.agilite.shared.entities.cgs.Cgs80
-import info.agilite.shared.entities.cas.gdf.Gdf10
-import info.agilite.shared.entities.cgs.CGS18SCF_NAO_GERAR
+import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.gdf.Gdf20
 import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalTime
+
 //GERADOR INI
 
 const val SRF01TIPO_ORCAMENTO = 0
