@@ -4,14 +4,12 @@ import info.agilite.boot.orm.BatchOperations
 import info.agilite.boot.security.UserContext
 import info.agilite.cas.adapter.infra.Cas65Repository
 import info.agilite.core.exceptions.ValidationException
-import info.agilite.core.json.JsonUtils
 import info.agilite.core.xml.ElementXmlConverter
 import info.agilite.shared.RegOrigem
 import info.agilite.shared.entities.gdf.GDF10SISTEMA_NFSE
 import info.agilite.shared.entities.gdf.GDF10STATUSPROC_APROVADO
 import info.agilite.shared.entities.gdf.GDF10TIPODOC_DOCUMENTO
 import info.agilite.shared.entities.gdf.Gdf10
-import info.agilite.shared.entities.srf.N_SRF01DTEMISS
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.shared.events.Srf01FiscalProcessadoEvent
@@ -43,13 +41,13 @@ class Srf2051Service(
     processarDadosDoRetornoDasNFSe(dadosRps)
   }
 
-  private fun processarDadosDoRetornoDasNFSe(dadosRps: List<DadosRps>) {
-    if (dadosRps.isEmpty()) throw ValidationException("Nenhum RPS encontrado no retorno")
+  private fun processarDadosDoRetornoDasNFSe(dadosRpsPrefeitura: List<DadosRps>) {
+    if (dadosRpsPrefeitura.isEmpty()) throw ValidationException("Nenhum RPS encontrado no retorno")
     val srf01processarRetorno = srf2051repo.findNFSeParaProcessar()
 
     val batch = BatchOperations()
-    for (index in dadosRps.indices) {
-      val rps = dadosRps[index]
+    for (index in dadosRpsPrefeitura.indices) {
+      val rps = dadosRpsPrefeitura[index]
       val srf01ByRPS = srf01processarRetorno.find { srf01 ->
         srf01.srf01serie == rps.serieRps &&
             srf01.srf01numero == rps.numeroRps
