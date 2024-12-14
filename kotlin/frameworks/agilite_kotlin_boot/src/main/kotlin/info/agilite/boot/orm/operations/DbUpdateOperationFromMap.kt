@@ -29,7 +29,7 @@ internal class DbUpdateOperationFromMap(
     val query = "UPDATE $localSchema$tableName SET $fields WHERE $idName = :id"
 
     val updatedCount = repository.execute(query, params)
-    DefaultEntityCache.invalidateById(tableName, idValue)
+    DefaultEntityCache.invalidate(tableName, idValue)
     if(oneToMany.isNotEmpty()){
       processOneToManyUpdateCascade(oneToMany, localValues, repository, schema, idValue, true, outMapOfUidToCascade)
     }

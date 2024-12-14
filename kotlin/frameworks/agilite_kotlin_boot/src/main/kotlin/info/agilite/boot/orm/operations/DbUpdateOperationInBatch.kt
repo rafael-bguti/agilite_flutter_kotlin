@@ -23,7 +23,7 @@ class DbUpdateOperationInBatch(
     val idName = "${tableNameAnsSchemaName.table.lowercase()}id"
     listMaps.forEach {
       if(it[idName] == null ) throw Exception("Id não informado o ID da entidade ${tableNameAnsSchemaName.table}")
-      DefaultEntityCache.invalidateById(tableNameAnsSchemaName.table, it[idName] as Long);
+      DefaultEntityCache.invalidate(tableNameAnsSchemaName.table, it[idName] as Long);
     }
 
     val oneToMany = findOneToManyByTableName(tableNameAnsSchemaName.table)

@@ -1,6 +1,5 @@
 package info.agilite.boot.orm.repositories
 
-import info.agilite.core.json.JsonUtils
 import info.agilite.boot.jdbcDialect
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.orm.*
@@ -10,10 +9,8 @@ import info.agilite.boot.orm.jdbc.mappers.EntityDataClassRowMapper
 import info.agilite.boot.orm.jdbc.mappers.MapRowMapper
 import info.agilite.boot.orm.operations.*
 import info.agilite.boot.orm.query.DbQuery
-import info.agilite.boot.security.UserContext
+import info.agilite.core.json.JsonUtils
 import info.agilite.core.utils.ReflectionUtils
-import jdk.internal.vm.vector.VectorSupport.insert
-import jdk.jfr.internal.consumer.EventLog.update
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.RowMapper
@@ -25,9 +22,6 @@ import kotlin.reflect.KClass
 @Repository
 abstract class RootRepository {
   @Autowired lateinit var jdbc: NamedParameterJdbcTemplate
-
-  val entityCache
-    get() = DefaultEntityCache
 
   fun <R: Any> unique(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<R>? = null): R? {
     return try {
@@ -181,12 +175,12 @@ abstract class RootRepository {
 
   //------- Métodos úteis --------
   fun <R: Any> findById(clazz: KClass<R>, idValue: Long, rowMapper: RowMapper<R>? = null, cacheable: Boolean? = null): R? {
-    val useCache = cacheable ?: isCacheable(clazz)
+    val useCache = (cacheable ?: isCacheable(clazz)) && AbstractEntity::class.java.isAssignableFrom(clazz.java)
     if(useCache){
       val tableAndDefaultSchema = EntityMappingContext.getTableAndSchema(clazz.java)
-      return entityCache.getOrPut(tableAndDefaultSchema.table, idValue.toString()) {
-        executeFindById(clazz, idValue, rowMapper)
-      }
+      return DefaultEntityCache.getOrPut(tableAndDefaultSchema.table, idValue) {
+        executeFindById(clazz, idValue, rowMapper) as AbstractEntity?
+      } as R?
     }else{
       return executeFindById(clazz, idValue, rowMapper)
     }

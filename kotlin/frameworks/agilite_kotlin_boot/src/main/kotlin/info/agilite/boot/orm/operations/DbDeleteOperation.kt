@@ -12,7 +12,7 @@ internal class DbDeleteOperation(
     val localSchema = schema?.let { "$it." } ?: ""
     val result = repository.execute("DELETE FROM $localSchema$tableName WHERE ${tableName}id IN (:ids)", mapOf("ids" to ids))
 
-    ids.map{it.toString()}.forEach { DefaultEntityCache.invalidate(tableName, it) }
+    ids.forEach { DefaultEntityCache.invalidate(tableName, it) }
     return result
   }
 }

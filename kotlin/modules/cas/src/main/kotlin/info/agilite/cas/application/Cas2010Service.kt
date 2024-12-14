@@ -27,7 +27,6 @@ class Cas2010Service(
   fun login(userOrEmail: String, password: String): Cas2010Model {
     val auth = authService.authenticate(userOrEmail, password)
     cas30repository.setTenant(auth.rot01tenant)
-    cas30repository.invalidateCache(auth.rot10id)
     val cas30 = cas30repository.findByCas30autenticacao(auth.rot10id) ?: createInternalCas30ByRot10(auth)
 
     return  Cas2010Model(

@@ -1,6 +1,6 @@
 package info.agilite.boot.orm
 
-import com.sun.tools.javac.code.Kinds.KindSelector.VAL
+import info.agilite.boot.orm.cache.DefaultEntityCache
 import info.agilite.boot.orm.operations.DbExecuteOperationInBatch
 import info.agilite.boot.orm.operations.DbInsertOperationInBatch
 import info.agilite.boot.orm.operations.DbUpdateOperationInBatch
@@ -31,6 +31,8 @@ open class BatchOperations(
     if(!changedValues.containsKey("${tableName}id")){
       throw Exception("Id não informado na entidade ${entity.javaClass.simpleName}")
     }
+
+    DefaultEntityCache.invalidate(tableName, changedValues["${tableName}id"] as Long)
 
     val sql = "UPDATE ${tableName} SET ${changedValues.keys.joinToString { "$it = :$it" }} WHERE ${tableName}id = :${tableName}id"
     customOperation(sql, changedValues, executionOrder)
