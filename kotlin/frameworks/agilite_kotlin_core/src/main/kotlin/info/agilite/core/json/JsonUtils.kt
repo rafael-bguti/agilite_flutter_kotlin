@@ -55,8 +55,9 @@ object JsonUtils {
   }
 
   fun inflateORM(entity: Entity, map: Map<String, Any?>){
+    val oldAttChanged = entity.getAttChangedIndexes().toSet()
     objectMapper.readerForUpdating(entity).readValue<Any>(objectMapper.writeValueAsString(map))
-    clearEntityChanges(entity)
+    clearEntityChanges(entity, oldAttChanged)
   }
 
   fun <T> fromJson(json: String, clazz: Class<T>): T {
@@ -96,12 +97,11 @@ object JsonUtils {
     }
   }
 
-  private fun clearEntityChanges(value: Any?){
+  private fun clearEntityChanges(value: Any?, oldAttChanged: Set<Int>? = null){
     if(value == null) return
     if(value is Entity){
-      value.clearChanges()
-    }
-    if(value is Collection<*>){
+      value.clearChanges(false, oldAttChanged)
+    }else if(value is Collection<*>){
       value.forEach { clearEntityChanges(it) }
     }
   }

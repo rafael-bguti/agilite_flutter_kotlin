@@ -1,5 +1,6 @@
 package info.agilite.boot.orm
 
+import info.agilite.boot.jdbcDialect
 import info.agilite.boot.orm.cache.DefaultEntityCache
 import info.agilite.boot.orm.operations.DbExecuteOperationInBatch
 import info.agilite.boot.orm.operations.DbInsertOperationInBatch
@@ -27,10 +28,11 @@ open class BatchOperations(
 
   fun updateChange(entity: AbstractEntity, executionOrder: Int? = null) {
     val tableName = entity.javaClass.simpleName.lowercase()
-    val changedValues = entity.extractMapOfChagedProperties(false)
+    var changedValues = entity.extractMapOfChagedProperties(false)
     if(!changedValues.containsKey("${tableName}id")){
       throw Exception("Id não informado na entidade ${entity.javaClass.simpleName}")
     }
+    changedValues = jdbcDialect.parseParamsToQuery(tableName, changedValues, false)
 
     DefaultEntityCache.invalidate(tableName, changedValues["${tableName}id"] as Long)
 

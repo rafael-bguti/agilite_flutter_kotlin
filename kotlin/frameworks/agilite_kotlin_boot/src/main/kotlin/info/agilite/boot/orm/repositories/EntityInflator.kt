@@ -136,11 +136,6 @@ internal class EntityInflator(
           processNestedJoinName(it, attributesToLoad)
           break
         }
-
-//        value = getValue(value!!, property)
-//        if(value == null) break
-//        if(value.isPartLoaded){
-//        }
       }
     }
   }

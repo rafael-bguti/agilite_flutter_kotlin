@@ -21,7 +21,7 @@ class ScfBaseService(
   private val scfRepo: ScfBaseRepository,
 ) {
   fun gerarLancamentosAPartirDoSrf01(srf01: Srf01) {
-    scfRepo.inflate(srf01, "srf01integracaoScf, srf01natureza, srf012s.srf012forma")
+    scfRepo.inflate(srf01, "srf01natureza, srf012s")
     if(srf01.srf01integracaoScf == INTEGRACAO_NAO_EXECUTAR) return
     if(srf01.srf012s.isNullOrEmpty()) return
 

@@ -28,35 +28,19 @@ class Srf2051Service(
   private val eventPublish: ApplicationEventPublisher,
 ) {
   fun processarRetornoLoteNFse(bytes: ByteArray, contentType: String?) {
-    val data = srf2051repo.findNFSeParaProcessar()
+    val cas65 = cas65repo.findById(UserContext.safeUser.empId)
+    if (cas65.cas65municipio == null || cas65.cas65uf == null) {
+      throw RuntimeException("Município ou UF não configurados para a empresa logada")
+    }
+    val municipioEstado = "${cas65.cas65municipio}-${cas65.cas65uf}".uppercase()
+    val dadosRps: List<DadosRps>
+    if (municipioEstado == "ITATIBA-SP") {
+      dadosRps = extrairDadosRetornoItatiba(bytes, contentType)
+    } else {
+      throw RuntimeException("Não é possível processar retorno de lotes de NFSe para o município de ${cas65.cas65municipio}-${cas65.cas65uf}")
+    }
 
-    val srf01 = data.first()
-    cas65repo.inflate(srf01, "srf01natureza")
-    cas65repo.inflate(srf01, "srf012s")
-//    cas65repo.inflate(srf01, "srf012s.srf012forma")
-
-    println(JsonUtils.toJson(srf01.srf01natureza ?: ""))
-
-    println(JsonUtils.toJson(srf01.srf012s ?: ""))
-
-    println(srf01.srf012s?.map { it.srf012forma.cgs38nome }?.joinToString())
-
-//    cas65repo.inflate(srf01, "srf012s.srf012forma")
-
-
-//    val cas65 = cas65repo.findById(UserContext.safeUser.empId)
-//    if (cas65.cas65municipio == null || cas65.cas65uf == null) {
-//      throw RuntimeException("Município ou UF não configurados para a empresa logada")
-//    }
-//    val municipioEstado = "${cas65.cas65municipio}-${cas65.cas65uf}".uppercase()
-//    val dadosRps: List<DadosRps>
-//    if (municipioEstado == "ITATIBA-SP") {
-//      dadosRps = extrairDadosRetornoItatiba(bytes, contentType)
-//    } else {
-//      throw RuntimeException("Não é possível processar retorno de lotes de NFSe para o município de ${cas65.cas65municipio}-${cas65.cas65uf}")
-//    }
-//
-//    processarDadosDoRetornoDasNFSe(dadosRps)
+    processarDadosDoRetornoDasNFSe(dadosRps)
   }
 
   private fun processarDadosDoRetornoDasNFSe(dadosRps: List<DadosRps>) {

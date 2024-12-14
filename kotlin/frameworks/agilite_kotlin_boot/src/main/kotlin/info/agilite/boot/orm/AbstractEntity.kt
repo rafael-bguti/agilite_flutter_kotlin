@@ -77,12 +77,19 @@ abstract class AbstractEntity(
     })
   }
 
-  override fun clearChanges(executeToCascade: Boolean) {
+  override fun clearChanges(executeToCascade: Boolean, oldAttChanged: Set<Int>?) {
     ormController.attChanged.clear()
+    if(oldAttChanged != null){
+      ormController.attChanged.addAll(oldAttChanged)
+    }
 
     if(executeToCascade){
       doInCascades (false) { _, entity -> entity.clearChanges() }
     }
+  }
+
+  override fun getAttChangedIndexes(): Set<Int> {
+    return attChanged
   }
 
   internal fun dbSaved(executeToCascade: Boolean = true) {

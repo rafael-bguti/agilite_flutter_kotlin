@@ -10,9 +10,9 @@ import info.agilite.cgs.adapter.infra.Cgs80Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.entities.cgs.Cgs50
-import info.agilite.shared.entities.srf.*
-import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
-import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
+import info.agilite.shared.entities.srf.Srf01
+import info.agilite.shared.entities.srf.Srf011
+import info.agilite.shared.entities.srf.Srf012
 import info.agilite.srf.adapter.infra.Srf01Repository
 import info.agilite.srf.domain.SRF2030Doc
 import org.springframework.http.HttpStatus

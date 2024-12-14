@@ -19,7 +19,7 @@ class Srf2051Repository : RootRepository() {
     return list(
       DbQueryBuilders.build(
         Srf01::class,
-        "srf01id, srf01serie, srf01numero, srf01integracaoGdf, srf01dfeAprov, srf01nome, srf01ni, srf01vlrTotal, srf01natureza.cgs18id, srf01natureza.cgs18nome",
+        "srf01id, srf01serie, srf01numero, srf01integracaoGdf, srf01dfeAprov, srf01nome, srf01ni, srf01vlrTotal",
         where = WhereSimple(
           """ 
             ${AgiliteWhere.defaultWhere(SRF01_METADATA)}
