@@ -24,6 +24,7 @@ class ScfListenSrf01SavedEvent(
 
     if(!event.insert && srf01.srf01integracaoScf == INTEGRACAO_OK) {
       deletarLancamentosNoUpdateDoSrf01(srf01)
+
       scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
     }
 

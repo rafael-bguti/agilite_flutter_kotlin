@@ -11,6 +11,7 @@ import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.scf.Scf11
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.entities.srf.Srf012
+import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.shared.events.INTEGRACAO_OK
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -20,11 +21,12 @@ class ScfBaseService(
   private val scfRepo: ScfBaseRepository,
 ) {
   fun gerarLancamentosAPartirDoSrf01(srf01: Srf01) {
-    scfRepo.inflate(srf01, "srf01natureza, srf012s.srf012forma")
+    scfRepo.inflate(srf01, "srf01integracaoScf, srf01natureza, srf012s.srf012forma")
+    if(srf01.srf01integracaoScf == INTEGRACAO_NAO_EXECUTAR) return
+    if(srf01.srf012s.isNullOrEmpty()) return
 
     val novosIdsScf02 = scfRepo.nextIds("scf02", srf01.srf012s!!.size)
     val novosIdsScf11 = generateNewsSrf01ids(srf01.srf012s!!)
-
     val batchOperations = BatchOperations()
     srf01.srf012s!!.forEach { srf012 ->
       val cgs38 = srf012.srf012forma

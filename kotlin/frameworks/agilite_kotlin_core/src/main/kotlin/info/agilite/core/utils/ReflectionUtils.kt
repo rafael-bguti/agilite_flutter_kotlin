@@ -2,7 +2,10 @@ package info.agilite.core.utils
 
 import info.agilite.core.extensions.splitToList
 import info.agilite.core.orm.Entity
+import org.checkerframework.checker.units.qual.A
 import org.springframework.beans.BeanUtils
+import javax.lang.model.util.Elements.Origin
+import kotlin.reflect.full.memberProperties
 
 class ReflectionUtils {
   companion object {
@@ -67,6 +70,20 @@ class ReflectionUtils {
 
       return readMethod.invoke(entity) as T?
 
+    }
+
+    fun <O: Any, D: Any> copyAtts(origin: O, destiny: D): D {
+      val originAtts = origin::class.memberProperties.associateBy { it.name }
+      val destinyAtts = destiny::class.memberProperties.associateBy { it.name }
+
+      for ((propName, originProp) in originAtts) {
+        val destinyProp = destinyAtts[propName] ?: continue
+        val value = originProp.getter.call(origin)
+
+        destinyProp.call(value)
+      }
+
+      return destiny
     }
   }
 }

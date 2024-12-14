@@ -36,4 +36,5 @@ internal class DbUpdateOperationFromMap(
 
     return updatedCount
   }
+
 }

@@ -35,4 +35,8 @@ class ORMController(
     attChanged.clear()
     dbSaved = true
   }
+
+  internal fun isAttLoaded(attIndex: Int): Boolean {
+    return attLoaded.contains(attIndex)
+  }
 }

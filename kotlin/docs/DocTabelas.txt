@@ -12,7 +12,6 @@ Cgs45 - Contas de bancos
 Cgs50 - Itens e Serviços
 Cgs80 - Entidade
 Gdf10 - Transmissões efetuadas
-Gdf20 - Lote de envio de NFSe
 Scf02 - Documento a pagar/receber
 Scf021 - Integração Bancária
 Scf11 - Lançamentos financeiros

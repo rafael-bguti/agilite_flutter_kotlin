@@ -285,6 +285,7 @@ const val N_SCF02ENCARGOS = "scf02encargos";
 const val N_SCF02DESCONTO = "scf02desconto";
 const val N_SCF02REGORIGEM = "scf02regOrigem";
 const val N_SCF02LANCAMENTO = "scf02lancamento";
+const val N_SCF021S = "scf021s";
 
 val SCF02ID = FieldMetadata("scf02id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SCF02EMPRESA = FieldMetadata("scf02empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

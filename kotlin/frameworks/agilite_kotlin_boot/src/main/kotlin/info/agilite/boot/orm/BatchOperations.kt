@@ -1,5 +1,6 @@
 package info.agilite.boot.orm
 
+import com.sun.tools.javac.code.Kinds.KindSelector.VAL
 import info.agilite.boot.orm.operations.DbExecuteOperationInBatch
 import info.agilite.boot.orm.operations.DbInsertOperationInBatch
 import info.agilite.boot.orm.operations.DbUpdateOperationInBatch
@@ -22,6 +23,17 @@ open class BatchOperations(
 
   fun update(entity: Any, executionOrder: Int? = null) {
     operations.add(Operation(entity::class, OperationType.UPDATE, entity, executionOrder ?: operations.size))
+  }
+
+  fun updateChange(entity: AbstractEntity, executionOrder: Int? = null) {
+    val tableName = entity.javaClass.simpleName.lowercase()
+    val changedValues = entity.extractMapOfChagedProperties(false)
+    if(!changedValues.containsKey("${tableName}id")){
+      throw Exception("Id não informado na entidade ${entity.javaClass.simpleName}")
+    }
+
+    val sql = "UPDATE ${tableName} SET ${changedValues.keys.joinToString { "$it = :$it" }} WHERE ${tableName}id = :${tableName}id"
+    customOperation(sql, changedValues, executionOrder)
   }
 
   fun customOperation(sql: String, params: Map<String, Any?>, executionOrder: Int? = null) {

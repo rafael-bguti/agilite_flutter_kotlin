@@ -1,9 +1,10 @@
 package info.agilite.shared.events
 
+import info.agilite.shared.entities.srf.Srf01
 import org.springframework.context.ApplicationEvent
 
-data class XmlNFSeLoteGeradoEvent (
+class Srf01FiscalProcessadoEvent(
   val origem: Any,
-  val xml: String,
-  val srf01ids: List<Long>,
+  val srf01: Srf01,
+  val protocoloPrefeitura: String,
 ): ApplicationEvent(origem)

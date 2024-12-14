@@ -14,7 +14,7 @@ import info.agilite.core.xml.ElementXml
 import info.agilite.shared.entities.cas.Cas65
 import info.agilite.shared.entities.cgs.CGS80TIPO_PESSOA_FISICA
 import info.agilite.shared.entities.srf.Srf01
-import info.agilite.shared.events.XmlNFSeLoteGeradoEvent
+import info.agilite.shared.events.INTEGRACAO_EM_ANDAMENTO
 import info.agilite.srf.adapter.infra.Srf01Repository
 import info.agilite.srf.adapter.infra.Srf2050Repository
 import org.springframework.context.ApplicationEventPublisher
@@ -49,8 +49,8 @@ class SRF2050Service(
     }else{
       throw ValidationException("Não é possível emitir lotes de NFSe para o município de ${cas65.cas65municipio}-${cas65.cas65uf}")
     }
-    eventPublish.publishEvent(XmlNFSeLoteGeradoEvent(this, xml, srf01idsEmitir))
 
+    srf2050repo.updateIntegracaoGdf(srf01s.map { it.srf01id }, INTEGRACAO_EM_ANDAMENTO)
     return xml
   }
 }

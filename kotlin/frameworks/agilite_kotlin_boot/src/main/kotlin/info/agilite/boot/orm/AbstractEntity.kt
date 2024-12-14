@@ -7,6 +7,8 @@ import info.agilite.boot.applicationContext
 import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.orm.repositories.DefaultRepository
+import info.agilite.core.json.JsonUtils
+import info.agilite.core.model.LowerCaseMap
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.reflect.full.memberProperties
 
@@ -67,11 +69,19 @@ abstract class AbstractEntity(
     doInCascades { _, entity -> entity.createUidsToCascadeOrm(uuidGen) }
   }
 
+  fun extractMapOfChagedProperties(includeOneToMany: Boolean = true): LowerCaseMap {
+    val chagedPropertiesName = loadChangedPropertieNames(includeOneToMany)
+
+    return LowerCaseMap.of(JsonUtils.toMapWithNull(this).filterKeys {
+      it.lowercase() == "${javaClass.simpleName}id".lowercase() || chagedPropertiesName.contains(it.lowercase())
+    })
+  }
+
   override fun clearChanges(executeToCascade: Boolean) {
     ormController.attChanged.clear()
 
     if(executeToCascade){
-      doInCascades { _, entity -> entity.clearChanges() }
+      doInCascades (false) { _, entity -> entity.clearChanges() }
     }
   }
 
@@ -93,9 +103,16 @@ abstract class AbstractEntity(
     doInCascades { _, entity -> entity.setIdsByUidToCascadeOrm(mapOfUidToCascade) }
   }
 
-  private fun doInCascades(process: (index: Int, chid: AbstractEntity) -> Unit ){
+  private fun doInCascades(autoInflate: Boolean = true, process: (index: Int, chid: AbstractEntity) -> Unit ){
     val oneToMany = defaultMetadataRepository.loadEntityMetadata(this.javaClass.simpleName).oneToMany
     for (childKey in oneToMany.keys) {
+      val oneToMany = oneToMany[childKey]!!
+      if(orm.isPartLoaded()){
+        if(!orm.isAttLoaded(oneToMany.attIndex) && !autoInflate){
+          return
+        }
+      }
+
       val property = this::class.memberProperties.find { it.name == childKey }
       val childList = property!!.getter.call(this)
 
@@ -109,7 +126,42 @@ abstract class AbstractEntity(
     }
   }
 
+  internal fun isAttLoaded(attName: String): Boolean {
+    getMetadata().fields.forEach { field ->
+      if(field.name.lowercase() == attName.lowercase()){
+        return orm.isAttLoaded(field.attIndex)
+      }
+    }
+    getMetadata().oneToMany.forEach { (name, oneToMany) ->
+      if(name.lowercase() == attName.lowercase()){
+        return orm.isAttLoaded(oneToMany.attIndex)
+      }
+    }
+    throw RuntimeException("Attribute $attName not found in ${this.javaClass.simpleName}")
+  }
+
   fun autoInflate(){
     applicationContext.getBean(DefaultRepository::class.java).inflate(this)
+  }
+
+  private fun loadChangedPropertieNames(includeOneToMany: Boolean): Set<String> {
+    val metadata = this.getMetadata()
+    val setOfChangedProperties = this.attChanged
+    val result = mutableSetOf<String>()
+    metadata.fields.forEach { field ->
+      if (setOfChangedProperties.contains(field.attIndex)) {
+        result.add(field.name.lowercase())
+      }
+    }
+
+    if(includeOneToMany) {
+      metadata.oneToMany.entries.forEach { oneToMany ->
+        if (setOfChangedProperties.contains(oneToMany.value.attIndex)) {
+          result.add(oneToMany.key.lowercase())
+        }
+      }
+    }
+
+    return result
   }
 }

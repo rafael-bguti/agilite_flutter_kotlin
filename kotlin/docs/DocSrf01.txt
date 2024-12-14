@@ -36,7 +36,6 @@ srf01vlrTotal                    16.2 S Dec        Valor total
 srf01vlrIss                      16.2 N Dec        Valor do ISS
 srf01dfeAprov                    10.0 N Gdf10      Registro de DFE aprovado
 srf01dfeCancAprov                10.0 N Gdf10      Registro de DFE de Cancelamento Aprovado
-srf01loteNFSe                    10.0 N Gdf20      Lote de NFSe
 srf01integracaoScf                1.0 S Int        Integração com o SCF
                                                    (Utilize as constantes da classe IntegracaoStatus)
                                                    0 - Não

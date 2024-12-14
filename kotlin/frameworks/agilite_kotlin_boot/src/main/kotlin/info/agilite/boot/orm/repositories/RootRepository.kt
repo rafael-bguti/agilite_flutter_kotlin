@@ -226,6 +226,16 @@ abstract class RootRepository {
     jdbc.update("SET search_path TO $tenant", emptyMap<String, Any>())
   }
 
+  /***
+   * Carrega as propriedades de um objeto que não foram carregadas.
+   * É possível carregar os ManyToOne em qualquer nível, porém OneToMany só é possível carregar o primeiro nível.
+   * Exemplo supondo que se tenha carregado apenas o srf01id, srf01tipo, srf01nome
+   * Ao chamar:
+   *  1. repo.inflate(srf01) - vai carregar todas as propriedades do Srf01 e vai carregar os ManyToOne e OneToMany do srf01 apenas com ID
+   *  2. repo.inflate(srf01, "srf012") - igual ao anterior, mas vai carregar o OneToMany srf012 com todas as propriedades e as Fk do Srf012 apenas com Id
+   *  3. repo.inflate(srf01, "srf01natureza") - igual ao 1., mas vai carregar todas as propriedades do ManyToOne srf01natureza
+   *  4. repo.inflate(srf01, "srf012.srf012forma") - vai dar erro, pois não pode inflar ForeingKeys de um OneToMany
+   */
   fun inflate(entity: AbstractEntity, joins: String? = null) {
     EntityInflator(this).inflate(entity, joins)
   }

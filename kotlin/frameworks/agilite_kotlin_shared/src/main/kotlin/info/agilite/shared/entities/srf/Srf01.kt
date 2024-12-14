@@ -6,13 +6,11 @@ import info.agilite.shared.entities.cgs.CGS18SCF_NAO_GERAR
 import info.agilite.shared.entities.cgs.Cgs18
 import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.gdf.Gdf10
-import info.agilite.shared.entities.gdf.Gdf20
 import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalTime
-
 //GERADOR INI
 
 const val SRF01TIPO_ORCAMENTO = 0
@@ -22,7 +20,7 @@ const val SRF01TIPO_NOTA_FISCAL_SERVICO = 3
 const val SRF01ES_ENTRADA = 0
 const val SRF01ES_SAIDA = 1
 
-class Srf01() : AbstractEntity(33) {
+class Srf01() : AbstractEntity(32) {
   constructor(srf01id: Long) : this() {
     this.srf01id = srf01id
   }
@@ -54,7 +52,6 @@ class Srf01() : AbstractEntity(33) {
     srf01vlrIss: BigDecimal? = null,
     srf01dfeAprov: Gdf10? = null,
     srf01dfeCancAprov: Gdf10? = null,
-    srf01loteNFSe: Gdf20? = null,
     srf01integracaoScf: Int,
     srf01integracaoGdf: Int,
     srf01obs: String? = null
@@ -85,7 +82,6 @@ class Srf01() : AbstractEntity(33) {
     this.srf01vlrIss = srf01vlrIss
     this.srf01dfeAprov = srf01dfeAprov
     this.srf01dfeCancAprov = srf01dfeCancAprov
-    this.srf01loteNFSe = srf01loteNFSe
     this.srf01integracaoScf = srf01integracaoScf
     this.srf01integracaoGdf = srf01integracaoGdf
     this.srf01obs = srf01obs
@@ -414,19 +410,19 @@ class Srf01() : AbstractEntity(33) {
       field = value
     }
     
-  var srf01loteNFSe: Gdf20? = null
+  var srf01integracaoScf: Int = 0
     get() {
-      validateLoaded(27, "srf01loteNFSe", false)
-      return field
+      validateLoaded(27, "srf01integracaoScf", true)
+      return field ?: 0
     }
     set(value){
       orm.changed(field, value, 27)
       field = value
     }
     
-  var srf01integracaoScf: Int = 0
+  var srf01integracaoGdf: Int = 0
     get() {
-      validateLoaded(28, "srf01integracaoScf", true)
+      validateLoaded(28, "srf01integracaoGdf", true)
       return field ?: 0
     }
     set(value){
@@ -434,19 +430,19 @@ class Srf01() : AbstractEntity(33) {
       field = value
     }
     
-  var srf01integracaoGdf: Int = 0
+  var srf01obs: String? = null
     get() {
-      validateLoaded(29, "srf01integracaoGdf", true)
-      return field ?: 0
+      validateLoaded(29, "srf01obs", false)
+      return field
     }
     set(value){
       orm.changed(field, value, 29)
       field = value
     }
     
-  var srf01obs: String? = null
+  var srf011s: Set<Srf011>? = null
     get() {
-      validateLoaded(30, "srf01obs", false)
+      validateLoaded(30, "srf011s", false)
       return field
     }
     set(value){
@@ -454,23 +450,13 @@ class Srf01() : AbstractEntity(33) {
       field = value
     }
     
-  var srf011s: Set<Srf011>? = null
+  var srf012s: Set<Srf012>? = null
     get() {
-      validateLoaded(31, "srf011s", false)
+      validateLoaded(31, "srf012s", false)
       return field
     }
     set(value){
       orm.changed(field, value, 31)
-      field = value
-    }
-    
-  var srf012s: Set<Srf012>? = null
-    get() {
-      validateLoaded(32, "srf012s", false)
-      return field
-    }
-    set(value){
-      orm.changed(field, value, 32)
       field = value
     }
     
@@ -519,10 +505,11 @@ const val N_SRF01VLRTOTAL = "srf01vlrTotal";
 const val N_SRF01VLRISS = "srf01vlrIss";
 const val N_SRF01DFEAPROV = "srf01dfeAprov";
 const val N_SRF01DFECANCAPROV = "srf01dfeCancAprov";
-const val N_SRF01LOTENFSE = "srf01loteNFSe";
 const val N_SRF01INTEGRACAOSCF = "srf01integracaoScf";
 const val N_SRF01INTEGRACAOGDF = "srf01integracaoGdf";
 const val N_SRF01OBS = "srf01obs";
+const val N_SRF011S = "srf011s";
+const val N_SRF012S = "srf012s";
 
 val SRF01ID = FieldMetadata("srf01id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SRF01EMPRESA = FieldMetadata("srf01empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
@@ -551,17 +538,16 @@ val SRF01VLRTOTAL = FieldMetadata("srf01vlrTotal", 23, "Valor total", FieldTypeM
 val SRF01VLRISS = FieldMetadata("srf01vlrIss", 24, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
 val SRF01DFEAPROV = FieldMetadata("srf01dfeAprov", 25, "Registro de DFE aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false);
 val SRF01DFECANCAPROV = FieldMetadata("srf01dfeCancAprov", 26, "Registro de DFE de Cancelamento Aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false);
-val SRF01LOTENFSE = FieldMetadata("srf01loteNFSe", 27, "Lote de NFSe", FieldTypeMetadata.fk, 10.0, false, "Gdf20", null, null, null, null, false, false, false);
-val SRF01INTEGRACAOSCF = FieldMetadata("srf01integracaoScf", 28, "Integração com o SCF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
-val SRF01INTEGRACAOGDF = FieldMetadata("srf01integracaoGdf", 29, "Integração com o GDF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
-val SRF01OBS = FieldMetadata("srf01obs", 30, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val SRF01INTEGRACAOSCF = FieldMetadata("srf01integracaoScf", 27, "Integração com o SCF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
+val SRF01INTEGRACAOGDF = FieldMetadata("srf01integracaoGdf", 28, "Integração com o GDF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
+val SRF01OBS = FieldMetadata("srf01obs", 29, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
  
 val SRF01_METADATA = EntityMetadata(
   name = "Srf01",
   descr = "Documentos Fiscais",
 
   fields = listOf(
-    SRF01ID,SRF01EMPRESA,SRF01NATUREZA,SRF01TIPO,SRF01ES,SRF01EP,SRF01NUMERO,SRF01SERIE,SRF01DTEMISS,SRF01HREMISS,SRF01ENTIDADE,SRF01NOME,SRF01NI,SRF01IE,SRF01IM,SRF01CEP,SRF01ENDERECO,SRF01BAIRRO,SRF01ENDNUMERO,SRF01COMPLEMENTO,SRF01UF,SRF01MUNICIPIO,SRF01DTCANC,SRF01VLRTOTAL,SRF01VLRISS,SRF01DFEAPROV,SRF01DFECANCAPROV,SRF01LOTENFSE,SRF01INTEGRACAOSCF,SRF01INTEGRACAOGDF,SRF01OBS,
+    SRF01ID,SRF01EMPRESA,SRF01NATUREZA,SRF01TIPO,SRF01ES,SRF01EP,SRF01NUMERO,SRF01SERIE,SRF01DTEMISS,SRF01HREMISS,SRF01ENTIDADE,SRF01NOME,SRF01NI,SRF01IE,SRF01IM,SRF01CEP,SRF01ENDERECO,SRF01BAIRRO,SRF01ENDNUMERO,SRF01COMPLEMENTO,SRF01UF,SRF01MUNICIPIO,SRF01DTCANC,SRF01VLRTOTAL,SRF01VLRISS,SRF01DFEAPROV,SRF01DFECANCAPROV,SRF01INTEGRACAOSCF,SRF01INTEGRACAOGDF,SRF01OBS,
   ),
 
   keys = listOf(
@@ -569,8 +555,8 @@ val SRF01_METADATA = EntityMetadata(
   ),
 
   oneToMany = mapOf(
-    "srf011s" to OneToManyMetadata(31, Srf011::class.java, "srf011doc"),
-    "srf012s" to OneToManyMetadata(32, Srf012::class.java, "srf012doc"),
+    "srf011s" to OneToManyMetadata(30, Srf011::class.java, "srf011doc"),
+    "srf012s" to OneToManyMetadata(31, Srf012::class.java, "srf012doc"),
   )
 )
 

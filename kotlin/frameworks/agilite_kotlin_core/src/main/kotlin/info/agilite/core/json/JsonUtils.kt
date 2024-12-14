@@ -54,11 +54,6 @@ object JsonUtils {
     return objectMapper.convertValue(obj, object : TypeReference<T>() {})
   }
 
-  fun inflateORM(entity: Entity, other: Entity){
-    objectMapper.readerForUpdating(entity).readValue<Any>(toJson(other))
-    clearEntityChanges(entity)
-  }
-
   fun inflateORM(entity: Entity, map: Map<String, Any?>){
     objectMapper.readerForUpdating(entity).readValue<Any>(objectMapper.writeValueAsString(map))
     clearEntityChanges(entity)
