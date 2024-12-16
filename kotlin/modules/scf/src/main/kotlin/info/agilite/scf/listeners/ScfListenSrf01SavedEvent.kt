@@ -2,7 +2,7 @@ package info.agilite.scf.listeners
 
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.scf.adapter.infra.ScfListenerRepository
-import info.agilite.scf.application.ScfBaseService
+import info.agilite.scf.application.ScfFromSrfBaseService
 import info.agilite.shared.entities.cgs.CGS18SCF_AO_CRIAR_O_DOCUMETO
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 @Component
 class ScfListenSrf01SavedEvent(
   private val repo: ScfListenerRepository,
-  private val scfBaseService: ScfBaseService,
+  private val scfFromSrfBaseService: ScfFromSrfBaseService,
 ) {
   @EventListener
   fun onSrf01SavedEvent(event: Srf01SavedEvent) {
@@ -25,11 +25,11 @@ class ScfListenSrf01SavedEvent(
     if(!event.insert && srf01.srf01integracaoScf == INTEGRACAO_OK) {
       deletarLancamentosNoUpdateDoSrf01(srf01)
 
-      scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
+      scfFromSrfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
     }
 
     if(event.insert && srf01.srf01natureza.cgs18scf == CGS18SCF_AO_CRIAR_O_DOCUMETO) {
-      scfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
+      scfFromSrfBaseService.gerarLancamentosAPartirDoSrf01(srf01)
     }
   }
 

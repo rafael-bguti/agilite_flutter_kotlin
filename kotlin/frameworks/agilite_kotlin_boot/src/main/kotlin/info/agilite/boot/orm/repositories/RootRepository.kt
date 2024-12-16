@@ -55,11 +55,11 @@ abstract class RootRepository {
   fun <R: Any> list(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap(), mapper: RowMapper<R>? = null): List<R> {
     return jdbc.query(query, params, mapper ?: EntityDataClassRowMapper(clazz.java))
   }
-  protected fun <R: Any> list(query: DbQuery<R>): List<R> {
+  protected fun <R: Any> list(query: DbQuery<R>, clazz: Class<R>? = null ): List<R> {
     distinctListMap(query).let { list ->
       if(list.isEmpty()) emptyList<R>()
 
-      return list.map { JsonUtils.fromMap(it, query.clazz.java)  }
+      return list.map { JsonUtils.fromMap(it, clazz ?: query.clazz.java)  }
     }
   }
   fun listMap(query: DbQuery<*>, rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {

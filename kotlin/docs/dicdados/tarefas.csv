@@ -2,6 +2,7 @@
 NOME,TIPO,DESCRIÇÃO
 ROT4001,Fro,Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
 CAS2010,Pro,Login
+SCF2010,Pro,Enviar boletos ao Banco
 SRF2030,Pro,Importar documentos
 SRF2050,Pro,Gerar XML NFSe Prefeitura
 SRF2051,Pro,Processar retorno NFSe Prefeitura

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
-class ScfBaseService(
+class ScfFromSrfBaseService(
   private val scfRepo: ScfBaseRepository,
 ) {
   fun gerarLancamentosAPartirDoSrf01(srf01: Srf01) {
