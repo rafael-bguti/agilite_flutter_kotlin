@@ -27,6 +27,7 @@
         <module>modules/gdf</module>
         <module>modules/scf</module>
         <module>modules/srf</module>
+        <module>modules/agilite_integradores</module>
 
         <!-- Frameworks -->
         <module>frameworks/agilite_kotlin_boot</module>
@@ -127,6 +128,11 @@
             <dependency>
                 <groupId>info.agilite</groupId>
                 <artifactId>agilite_kotlin_core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.agilite</groupId>
+                <artifactId>agilite_integradores</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

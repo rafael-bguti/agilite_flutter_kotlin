@@ -5,10 +5,9 @@ Usa cache: NÃO
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
 scf021doc                        10.0 S Scf02      Documento
-scf021remNumero                  10.0 S Int        Número da remessa
+scf021remNumero                   0.0 S Str        Id da remessa
 scf021conta                      10.0 S Cgs45      Conta bancária
-scf021retData                    10.0 S Dat        Data do retorno
-scf021dtPgto                     10.0 N Dat        Data de pagamento
+scf021dtBaixa                    10.0 N Dat        Data de pagamento
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

@@ -8,23 +8,21 @@ import java.time.LocalDate
 //GERADOR INI
 
 
-class Scf021() : AbstractEntity(6) {
+class Scf021() : AbstractEntity(5) {
   constructor(scf021id: Long) : this() {
     this.scf021id = scf021id
   }
 
   constructor(
     scf021doc: Long? = null,
-    scf021remNumero: Int,
+    scf021remNumero: String,
     scf021conta: Cgs45,
-    scf021retData: LocalDate,
-    scf021dtPgto: LocalDate? = null
+    scf021dtBaixa: LocalDate? = null
   ) : this() {
     if(scf021doc != null) this.scf021doc = scf021doc
     this.scf021remNumero = scf021remNumero
     this.scf021conta = scf021conta
-    this.scf021retData = scf021retData
-    this.scf021dtPgto = scf021dtPgto
+    this.scf021dtBaixa = scf021dtBaixa
   }
 
 
@@ -51,7 +49,7 @@ class Scf021() : AbstractEntity(6) {
       field = value
     }
     
-  var scf021remNumero: Int = -1
+  var scf021remNumero: String = "--defaultString--"
     get() {
       validateLoaded(2, "scf021remNumero", true)
       return field
@@ -71,23 +69,13 @@ class Scf021() : AbstractEntity(6) {
       field = value
     }
     
-  var scf021retData: LocalDate = LocalDate.now()
+  var scf021dtBaixa: LocalDate? = null
     get() {
-      validateLoaded(4, "scf021retData", true)
+      validateLoaded(4, "scf021dtBaixa", false)
       return field
     }
     set(value){
       orm.changed(field, value, 4)
-      field = value
-    }
-    
-  var scf021dtPgto: LocalDate? = null
-    get() {
-      validateLoaded(5, "scf021dtPgto", false)
-      return field
-    }
-    set(value){
-      orm.changed(field, value, 5)
       field = value
     }
     
@@ -113,22 +101,20 @@ class Scf021() : AbstractEntity(6) {
 const val N_SCF021DOC = "scf021doc";
 const val N_SCF021REMNUMERO = "scf021remNumero";
 const val N_SCF021CONTA = "scf021conta";
-const val N_SCF021RETDATA = "scf021retData";
-const val N_SCF021DTPGTO = "scf021dtPgto";
+const val N_SCF021DTBAIXA = "scf021dtBaixa";
 
 val SCF021ID = FieldMetadata("scf021id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SCF021DOC = FieldMetadata("scf021doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF021REMNUMERO = FieldMetadata("scf021remNumero", 2, "Número da remessa", FieldTypeMetadata.int, 10.0, true, null, null, null, null, null, false, false, false);
+val SCF021REMNUMERO = FieldMetadata("scf021remNumero", 2, "Id da remessa", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
 val SCF021CONTA = FieldMetadata("scf021conta", 3, "Conta bancária", FieldTypeMetadata.fk, 10.0, true, "Cgs45", null, null, null, null, false, false, false);
-val SCF021RETDATA = FieldMetadata("scf021retData", 4, "Data do retorno", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF021DTPGTO = FieldMetadata("scf021dtPgto", 5, "Data de pagamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
+val SCF021DTBAIXA = FieldMetadata("scf021dtBaixa", 4, "Data de pagamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
  
 val SCF021_METADATA = EntityMetadata(
   name = "Scf021",
   descr = "Integração Bancária",
 
   fields = listOf(
-    SCF021ID,SCF021DOC,SCF021REMNUMERO,SCF021CONTA,SCF021RETDATA,SCF021DTPGTO,
+    SCF021ID,SCF021DOC,SCF021REMNUMERO,SCF021CONTA,SCF021DTBAIXA,
   ),
 
   keys = listOf(

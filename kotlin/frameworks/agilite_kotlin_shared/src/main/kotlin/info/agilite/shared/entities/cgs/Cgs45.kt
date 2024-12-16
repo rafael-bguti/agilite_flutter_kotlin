@@ -4,20 +4,24 @@ import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
 import info.agilite.boot.orm.annotations.EntityCacheable
 import java.math.BigDecimal
+import java.time.LocalDate
+
 //GERADOR INI
 
 @EntityCacheable
-class Cgs45() : AbstractEntity(3) {
+class Cgs45() : AbstractEntity(4) {
   constructor(cgs45id: Long) : this() {
     this.cgs45id = cgs45id
   }
 
   constructor(
     cgs45empresa: Long? = null,
-    cgs45nome: String
+    cgs45nome: String,
+    cgs45dtUltProcRetorno: LocalDate? = null
   ) : this() {
     if(cgs45empresa != null) this.cgs45empresa = cgs45empresa
     this.cgs45nome = cgs45nome
+    this.cgs45dtUltProcRetorno = cgs45dtUltProcRetorno
   }
 
 
@@ -54,6 +58,16 @@ class Cgs45() : AbstractEntity(3) {
       field = value
     }
     
+  var cgs45dtUltProcRetorno: LocalDate? = null
+    get() {
+      validateLoaded(3, "cgs45dtUltProcRetorno", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 3)
+      field = value
+    }
+    
 
   override var id: Long?
     @JsonIgnore get() = if(!isIdDefined()) null else cgs45id
@@ -75,17 +89,19 @@ class Cgs45() : AbstractEntity(3) {
 }
 const val N_CGS45EMPRESA = "cgs45empresa";
 const val N_CGS45NOME = "cgs45nome";
+const val N_CGS45DTULTPROCRETORNO = "cgs45dtUltProcRetorno";
 
 val CGS45ID = FieldMetadata("cgs45id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS45EMPRESA = FieldMetadata("cgs45empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS45NOME = FieldMetadata("cgs45nome", 2, "Descrição", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
+val CGS45DTULTPROCRETORNO = FieldMetadata("cgs45dtUltProcRetorno", 3, "Data do ultimo processamento de retorno do banco", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
  
 val CGS45_METADATA = EntityMetadata(
   name = "Cgs45",
   descr = "Contas de bancos",
 
   fields = listOf(
-    CGS45ID,CGS45EMPRESA,CGS45NOME,
+    CGS45ID,CGS45EMPRESA,CGS45NOME,CGS45DTULTPROCRETORNO,
   ),
 
   keys = listOf(

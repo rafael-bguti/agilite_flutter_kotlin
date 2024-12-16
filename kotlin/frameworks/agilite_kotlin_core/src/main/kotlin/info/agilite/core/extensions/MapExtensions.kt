@@ -1,5 +1,8 @@
 package info.agilite.core.extensions
 
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
+
 fun Map<String, *>.nest (): MutableMap<String, Any?> {
     val result = mutableMapOf<String, Any?>()
     this.entries.forEach {
@@ -32,3 +35,8 @@ fun Map<String, *>.nestedValue(key: String): Any? {
 
     return leaf?.get(keyList.last())
 }
+
+fun Map<String, String>.toHttpFormData(): String =
+  entries.joinToString("&") { (key, value) ->
+    "${URLEncoder.encode(key, StandardCharsets.UTF_8)}=${URLEncoder.encode(value, StandardCharsets.UTF_8)}"
+  }
