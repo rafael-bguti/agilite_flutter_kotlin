@@ -21,6 +21,7 @@ cgs18scf                          1.0 S Int        Quando gerar o SCF
 cgs18serie                        3.0 N Int        Série
 cgs18emitirDoc                    1.0 S Bol        Emitir documento fiscal
 cgs18alqIss                       4.2 N Dec        Aliquota ISS
+cgs18modeloEmail                 10.0 N Cgs15      Modelo de e-mail
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

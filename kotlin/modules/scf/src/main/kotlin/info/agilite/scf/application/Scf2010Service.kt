@@ -1,35 +1,47 @@
 package info.agilite.scf.application
 
+import info.agilite.boot.orm.BatchOperations
 import info.agilite.cgs.adapter.infra.Cgs38Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.integradores.bancos.IntegradorBancoFactory
 import info.agilite.integradores.bancos.models.*
+import info.agilite.scf.adapter.infra.Scf021Repository
 import info.agilite.scf.adapter.infra.Scf02Repository
 import info.agilite.scf.utils.toBancoConfig
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.entities.scf.Scf02
+import info.agilite.shared.entities.scf.Scf021
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 
 @Service
 class Scf2010Service(
   private val scf02repo: Scf02Repository,
+  private val scf021repo: Scf021Repository,
   private val cgs38repo: Cgs38Repository
 ) {
 
-  fun enviarBoletosParaBanco() {
+  fun enviarBoletosParaBanco(cgs38id: Long) {
     val scf02s = scf02repo.buscarDadosBoletosParaEnviarAoBanco()
-    if(scf02s.isNullOrEmpty())throw ValidationException("Nenhum boleto encontrado para ser enviado ao banco")
+    if(scf02s.isEmpty())throw ValidationException("Nenhum boleto encontrado para ser enviado ao banco")
 
-    val boletos = scf02s.map { scf02 ->
-      scf02.toBoleto()
-    }
-
-    //TODO receber o ID do CGS38 do cliente
-    val bancoConfig = cgs38repo.findById(Cgs38::class, 1L)!!.toBancoConfig()
-
+    val cgs38 = cgs38repo.findById(Cgs38::class, cgs38id) ?: throw ValidationException("Forma de Pagamento/Recebimento não encontrada")
+    val bancoConfig = cgs38.toBancoConfig()
     val integrador = IntegradorBancoFactory.getIntegradorBoletos(bancoConfig)
-    integrador.enviarBoletos(boletos)
+
+    for(scf02 in scf02s) {
+      val boleto = scf02.toBoleto()
+      val retorno = integrador.enviarBoleto(boleto)
+
+      val scf021 = Scf021(
+        scf021doc = scf02.scf02id,
+        scf021remNumero = retorno.codigoSolicitacao,
+        scf021conta = cgs38.cgs38conta!!,
+      )
+
+      scf021repo.insertInNewTransaction(scf021)
+    }
   }
 
   private fun Scf02.toBoleto() = Boleto(
@@ -50,12 +62,12 @@ class Scf2010Service(
       complemento = scf02entidade.cgs80complemento,
     ),
     multa = MoraMulta(
-      valor = BigDecimal(2),
-      tipo = TipoValor.PERCENTUAL,
+      taxa = BigDecimal(2),
+      codigo = TipoValor.PERCENTUAL,
     ),
     mora = MoraMulta(
-      valor = BigDecimal(1),
-      tipo = TipoValor.PERCENTUAL,
+      taxa = BigDecimal(1),
+      codigo = TipoValor.TAXAMENSAL,
     ),
   )
 }

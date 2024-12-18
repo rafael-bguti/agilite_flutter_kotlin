@@ -49,6 +49,7 @@ srf01integracaoGdf                1.0 S Int        Integração com o GDF
                                                    2 - Em Andamento
                                                    3 - Ok
 srf01obs                          0.0 N Str        Observações
+srf01dtEmail                     10.0 N Dat        Data do envio do e-mail
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

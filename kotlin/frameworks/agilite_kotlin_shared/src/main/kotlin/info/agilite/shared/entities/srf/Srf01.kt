@@ -20,7 +20,7 @@ const val SRF01TIPO_NOTA_FISCAL_SERVICO = 3
 const val SRF01ES_ENTRADA = 0
 const val SRF01ES_SAIDA = 1
 
-class Srf01() : AbstractEntity(32) {
+class Srf01() : AbstractEntity(33) {
   constructor(srf01id: Long) : this() {
     this.srf01id = srf01id
   }
@@ -54,7 +54,8 @@ class Srf01() : AbstractEntity(32) {
     srf01dfeCancAprov: Gdf10? = null,
     srf01integracaoScf: Int,
     srf01integracaoGdf: Int,
-    srf01obs: String? = null
+    srf01obs: String? = null,
+    srf01dtEmail: LocalDate? = null
   ) : this() {
     if(srf01empresa != null) this.srf01empresa = srf01empresa
     this.srf01natureza = srf01natureza
@@ -85,6 +86,7 @@ class Srf01() : AbstractEntity(32) {
     this.srf01integracaoScf = srf01integracaoScf
     this.srf01integracaoGdf = srf01integracaoGdf
     this.srf01obs = srf01obs
+    this.srf01dtEmail = srf01dtEmail
   }
 
 
@@ -440,9 +442,9 @@ class Srf01() : AbstractEntity(32) {
       field = value
     }
     
-  var srf011s: Set<Srf011>? = null
+  var srf01dtEmail: LocalDate? = null
     get() {
-      validateLoaded(30, "srf011s", false)
+      validateLoaded(30, "srf01dtEmail", false)
       return field
     }
     set(value){
@@ -450,13 +452,23 @@ class Srf01() : AbstractEntity(32) {
       field = value
     }
     
-  var srf012s: Set<Srf012>? = null
+  var srf011s: Set<Srf011>? = null
     get() {
-      validateLoaded(31, "srf012s", false)
+      validateLoaded(31, "srf011s", false)
       return field
     }
     set(value){
       orm.changed(field, value, 31)
+      field = value
+    }
+    
+  var srf012s: Set<Srf012>? = null
+    get() {
+      validateLoaded(32, "srf012s", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 32)
       field = value
     }
     
@@ -508,6 +520,7 @@ const val N_SRF01DFECANCAPROV = "srf01dfeCancAprov";
 const val N_SRF01INTEGRACAOSCF = "srf01integracaoScf";
 const val N_SRF01INTEGRACAOGDF = "srf01integracaoGdf";
 const val N_SRF01OBS = "srf01obs";
+const val N_SRF01DTEMAIL = "srf01dtEmail";
 const val N_SRF011S = "srf011s";
 const val N_SRF012S = "srf012s";
 
@@ -541,13 +554,14 @@ val SRF01DFECANCAPROV = FieldMetadata("srf01dfeCancAprov", 26, "Registro de DFE 
 val SRF01INTEGRACAOSCF = FieldMetadata("srf01integracaoScf", 27, "Integração com o SCF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
 val SRF01INTEGRACAOGDF = FieldMetadata("srf01integracaoGdf", 28, "Integração com o GDF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
 val SRF01OBS = FieldMetadata("srf01obs", 29, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val SRF01DTEMAIL = FieldMetadata("srf01dtEmail", 30, "Data do envio do e-mail", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
  
 val SRF01_METADATA = EntityMetadata(
   name = "Srf01",
   descr = "Documentos Fiscais",
 
   fields = listOf(
-    SRF01ID,SRF01EMPRESA,SRF01NATUREZA,SRF01TIPO,SRF01ES,SRF01EP,SRF01NUMERO,SRF01SERIE,SRF01DTEMISS,SRF01HREMISS,SRF01ENTIDADE,SRF01NOME,SRF01NI,SRF01IE,SRF01IM,SRF01CEP,SRF01ENDERECO,SRF01BAIRRO,SRF01ENDNUMERO,SRF01COMPLEMENTO,SRF01UF,SRF01MUNICIPIO,SRF01DTCANC,SRF01VLRTOTAL,SRF01VLRISS,SRF01DFEAPROV,SRF01DFECANCAPROV,SRF01INTEGRACAOSCF,SRF01INTEGRACAOGDF,SRF01OBS,
+    SRF01ID,SRF01EMPRESA,SRF01NATUREZA,SRF01TIPO,SRF01ES,SRF01EP,SRF01NUMERO,SRF01SERIE,SRF01DTEMISS,SRF01HREMISS,SRF01ENTIDADE,SRF01NOME,SRF01NI,SRF01IE,SRF01IM,SRF01CEP,SRF01ENDERECO,SRF01BAIRRO,SRF01ENDNUMERO,SRF01COMPLEMENTO,SRF01UF,SRF01MUNICIPIO,SRF01DTCANC,SRF01VLRTOTAL,SRF01VLRISS,SRF01DFEAPROV,SRF01DFECANCAPROV,SRF01INTEGRACAOSCF,SRF01INTEGRACAOGDF,SRF01OBS,SRF01DTEMAIL,
   ),
 
   keys = listOf(
@@ -555,8 +569,8 @@ val SRF01_METADATA = EntityMetadata(
   ),
 
   oneToMany = mapOf(
-    "srf011s" to OneToManyMetadata(30, Srf011::class.java, "srf011doc"),
-    "srf012s" to OneToManyMetadata(31, Srf012::class.java, "srf012doc"),
+    "srf011s" to OneToManyMetadata(31, Srf011::class.java, "srf011doc"),
+    "srf012s" to OneToManyMetadata(32, Srf012::class.java, "srf012doc"),
   )
 )
 

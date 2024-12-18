@@ -5,7 +5,6 @@ import info.agilite.boot.orm.AbstractEntity
 import info.agilite.boot.orm.annotations.EntityCacheable
 import java.math.BigDecimal
 import java.time.LocalDate
-
 //GERADOR INI
 
 @EntityCacheable

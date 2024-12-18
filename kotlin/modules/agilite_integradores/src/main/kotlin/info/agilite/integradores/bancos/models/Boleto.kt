@@ -3,6 +3,10 @@ package info.agilite.integradores.bancos.models
 import java.math.BigDecimal
 import java.time.LocalDate
 
+data class RetornoEnvioBoleto(
+  val codigoSolicitacao: String,
+)
+
 data class Boleto(
   val seuNumero: String,
   val valorNominal: BigDecimal,
@@ -34,10 +38,11 @@ data class Pagador(
 enum class TipoValor {
   PERCENTUAL,
   FIXO,
+  TAXAMENSAL
 }
 data class MoraMulta(
-  val valor: BigDecimal,
-  val tipo: TipoValor,
+  val taxa: BigDecimal,
+  val codigo: TipoValor,
 )
 
 data class Mensagem(

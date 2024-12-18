@@ -31,6 +31,25 @@ private const val SERVER_ERROR_BASE = 500
 private const val INTER_TOO_MANY_REQUESTS = 429
 
 object BancoInterHttpClientBuilder {
+  fun callPost(url: String, bancoConfig: BancoInterConfig, scope: String, body: String): String {
+    val httpClient = build(bancoConfig)
+    val token = GetTokenBancoInter.execute(bancoConfig, scope)
+
+    val requestBuilder = HttpRequest.newBuilder()
+      .uri(URI.create(url))
+      .header("Content-Type", "application/json")
+      .header("Authorization", "Bearer ${token.access_token}")
+      .POST(HttpRequest.BodyPublishers.ofString(body))
+
+    if(bancoConfig.contaCorrente != null){
+      requestBuilder.headers("x-conta-corrente", bancoConfig.contaCorrente)
+    }
+
+    val request = requestBuilder.build()
+    val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+    return handleResponse(response)
+  }
+
   fun callGet(url: String, bancoConfig: BancoInterConfig, scope: String, requestParam: Map<String, String>): String {
     val httpClient = build(bancoConfig)
     val token = GetTokenBancoInter.execute(bancoConfig, scope)

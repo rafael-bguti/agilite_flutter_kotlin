@@ -1,0 +1,14 @@
+Tabela: Cgs15 - Modelo de e-mail
+Versão: 2 - Task: 
+Usa cache: SIM
+
+Coluna                        Tamanho R Tipo       Descrição
+---------------------------------------------------------------------------------------------------------
+cgs15empresa                     10.0 S Lng        Empresa
+cgs15nome                        30.0 S Str        Nome
+cgs15modelo                     200.0 N Str        Modelo de e-mail
+cgs15titulo                     100.0 N Str        Título do e-mail
+
+Índice                        Tipo Campos
+---------------------------------------------------------------------------------------------------------
+cgs15_uk                      cgs15empresa, cgs15nome

@@ -251,7 +251,7 @@ abstract class RootRepository {
     }
   }
 
-  private fun validarTransacaoAberta() {
+  internal fun validarTransacaoAberta() {
     if(!TransactionSynchronizationManager.isActualTransactionActive()){
       throw Exception("Transação não está aberta")
     }

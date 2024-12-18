@@ -4,11 +4,9 @@ import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.metadata.exceptions.MetadataNotFoundException
 import info.agilite.boot.metadata.models.OneToManyMetadata
 import info.agilite.core.model.LowerCaseMap
-import info.agilite.boot.orm.AgiliteWhere
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.boot.security.UserContext
 import info.agilite.core.utils.ReflectionUtils
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 
 
 internal interface DBChangeOperation<T> {
@@ -71,20 +69,30 @@ internal interface DBChangeOperation<T> {
     }
   }
 
-  fun buildSimpleJdbcInsert(repository: RootRepository, tableName: String, useGenerateId: Boolean, schema: String?): SimpleJdbcInsert {
-    return SimpleJdbcInsert(repository.jdbcTemplate).let {
+  fun buildSimpleJdbcInsert(tableName: String, autoGenerateId: Boolean, schema: String?): String {
+    return buildString {
+      append("INSERT INTO ")
       if(schema != null) {
-        it.withSchemaName(schema)
+        append(schema)
+        append(".")
       }
-      if(useGenerateId){
-        it.usingGeneratedKeyColumns("${tableName.lowercase()}id")
-      }
-      it.withTableName(tableName)
+      append(tableName)
+      append(" (")
 
       val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
-      val startIndex = if(useGenerateId) 1 else 0
-      val columnNames = entityMetadata.fields.subList(startIndex, entityMetadata.fields.size).map { it.name }
-      it.usingColumns(*columnNames.toTypedArray())
+      val startIndex = if(autoGenerateId) 1 else 0
+      val columnNames = entityMetadata.fields.subList(startIndex, entityMetadata.fields.size).map { it.name.lowercase() }
+
+      append(columnNames.joinToString(", "))
+      append(") VALUES (")
+      append(columnNames.joinToString(", ") {
+        ":$it"
+      })
+      append(")")
+
+      if(autoGenerateId) {
+        append(" RETURNING ${tableName.lowercase()}id")
+      }
     }
   }
 }

@@ -45,8 +45,10 @@ class Scf02Repository: RootRepository() {
           AgiliteWhere.defaultWhere(SCF02_METADATA) +
               " AND $N_SCF02TIPO = $SCF02TIPO_RECEBER" +
               " AND $N_CGS38FORMA = $CGS38FORMA_BOLETO" +
-              " AND $N_SCF02LANCAMENTO IS NULL"
+              " AND $N_SCF02LANCAMENTO IS NULL" +
+              " AND $N_SCF021REMNUMERO IS NULL"
         ),
+        simpleJoin = "LEFT JOIN Scf021 ON scf021doc = scf02id"
       ),
     )
   }

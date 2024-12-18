@@ -2,6 +2,7 @@ package info.agilite.srf.application
 
 import info.agilite.boot.orm.BatchOperations
 import info.agilite.boot.security.UserContext
+import info.agilite.boot.sse.SSeService
 import info.agilite.cas.adapter.infra.Cas65Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.xml.ElementXmlConverter
@@ -27,6 +28,7 @@ class Srf2051Service(
 ) {
   fun processarRetornoLoteNFse(bytes: ByteArray, contentType: String?) {
     val cas65 = cas65repo.findById(UserContext.safeUser.empId)
+
     if (cas65.cas65municipio == null || cas65.cas65uf == null) {
       throw RuntimeException("Município ou UF não configurados para a empresa logada")
     }

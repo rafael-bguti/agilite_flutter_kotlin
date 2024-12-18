@@ -6,6 +6,7 @@ import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.metadata.exceptions.FieldMetadataNotFoundException
 import info.agilite.boot.orm.EntityMappingContext
 import info.agilite.boot.orm.WhereClause
+import info.agilite.boot.orm.annotations.DbSimpleJoin
 import info.agilite.boot.orm.jdbc.mappers.OneToMany
 import info.agilite.boot.orm.jdbc.mappers.OneToManyManager
 import java.lang.reflect.Field
@@ -26,8 +27,9 @@ data class DbQuery<T: Any>(
     val columns = processColumns()
     val processedOrderBy = processOrderBy()
     return """ SELECT $columns 
-      | FROM ${EntityMappingContext.getTableAndSchemaQuery(clazz.java)} ${processJoins()}
-      | ${simpleJoin ?: ""}
+      | FROM ${EntityMappingContext.getTableAndSchemaQuery(clazz.java)} 
+      | ${processJoins()}
+      | ${processSimpleJoin(clazz.java, simpleJoin)}
       | ${where?.where("WHERE") ?: ""}
       | ${scraps ?: ""}
       | $processedOrderBy
@@ -71,6 +73,32 @@ data class DbQuery<T: Any>(
   }
   private fun hasOneToMany(): Boolean {
     return fetchJoins?.any { it.processedIsOneToManyJoin } ?: false
+  }
+
+  private fun processSimpleJoin(clazz: Class<T>, simpleJoin: String?): String {
+    if(simpleJoin != null)return simpleJoin
+
+    val annotation = clazz.getAnnotation(DbSimpleJoin::class.java)
+    if(annotation != null){
+      val fields = annotation.fieldNames.splitToList()
+
+      val joinResult = StringBuilder();
+      for(field in fields){
+        val fieldName = field.substringAfter(":")
+        val fieldJoinType = field.substringBefore(":", "")
+
+        val fieldMetadata = defaultMetadataRepository.loadFieldMetadata(fieldName)
+        val joinType = fieldJoinType.let {
+          it.ifBlank {
+            if (fieldMetadata.required) "INNER" else "LEFT"
+          }
+        }
+
+        joinResult.append(" $joinType JOIN ${fieldMetadata.foreignKeyEntity} ON $fieldName = ${fieldMetadata.foreignKeyEntity}id ")
+      }
+      return joinResult.toString()
+    }
+    return ""
   }
 
   private val columnId: String

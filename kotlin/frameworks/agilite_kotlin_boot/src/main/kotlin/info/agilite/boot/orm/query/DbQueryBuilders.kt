@@ -2,13 +2,17 @@ package info.agilite.boot.orm.query
 
 import info.agilite.core.extensions.splitToList
 import info.agilite.boot.orm.WhereClause
+import info.agilite.boot.orm.annotations.DbSimpleJoin
+import info.agilite.boot.orm.annotations.DbTable
 import kotlin.reflect.KClass
+
+
 
 class DbQueryBuilders {
   companion object {
     fun <T: Any> build(
       clazz: KClass<T>,
-      columns: String,
+      columns: String = "*",
       simpleJoin: String? = null,
       where: WhereClause? = null,
       scraps: String? = null,
@@ -66,4 +70,5 @@ private class InternalJoinBuilder(
     }
     return join
   }
+
 }

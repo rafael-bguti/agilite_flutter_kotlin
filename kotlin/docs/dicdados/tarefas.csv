@@ -7,3 +7,4 @@ SCF2011,Pro,Processar retorno de boletos
 SRF2030,Pro,Importar documentos
 SRF2050,Pro,Gerar XML NFSe Prefeitura
 SRF2051,Pro,Processar retorno NFSe Prefeitura
+SRF2060,Pro,Enviar e-mail dos documentos

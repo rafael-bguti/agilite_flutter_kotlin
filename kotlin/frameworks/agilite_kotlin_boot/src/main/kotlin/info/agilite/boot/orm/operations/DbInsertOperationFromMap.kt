@@ -22,14 +22,15 @@ internal class DbInsertOperationFromMap(
     val idName = "${tableName.lowercase()}id"
     var id: Long? = localValues.getLong(idName)
 
-    val jdbcInsert = buildSimpleJdbcInsert(repository, tableName, id == null, schema)
+    val jdbcInsert = buildSimpleJdbcInsert(tableName, id == null, schema)
     if(id == null){
-      id = jdbcInsert.executeAndReturnKey(params).toLong()
+      repository.validarTransacaoAberta()//TODO colocar dentro do JDBC
+      id = repository.uniqueSingleColumn(Long::class, jdbcInsert, params)
     }else{
-      jdbcInsert.execute(params)
+      repository.execute(jdbcInsert, params)
     }
 
-    ReflectionUtils.setIdValue(values, id, tableName)
+    ReflectionUtils.setIdValue(values, id!!, tableName)
     if(oneToMany.isNotEmpty()){
       processOneToManyUpdateCascade(oneToMany, localValues, repository, schema, id, false, outMapOfUidToCascade)
     }

@@ -11,7 +11,6 @@ import kotlin.reflect.KClass
 /**
  * Atenção o Batch tem algumas limitações:
  * 1. Ele não executa as operações cascades de Insert e Update de listas filhas da entidade
- * 2. Ele não seta os ids gerados no banco de dados nas entidades inseridas
  */
 
 open class BatchOperations(
