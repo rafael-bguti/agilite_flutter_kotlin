@@ -5,7 +5,8 @@ Usa cache: SIM
 Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
 cgs18empresa                     10.0 S Lng        Empresa
-cgs18nome                        30.0 S Str        Nome
+cgs18codigo                      10.0 S Str        Código
+cgs18nome                       100.0 S Str        Nome
 cgs18tipo                         1.0 S Int        Tipo de Operação
                                                    0 - Orçamento
                                                    1 - Pedido
@@ -25,4 +26,4 @@ cgs18modeloEmail                 10.0 N Cgs15      Modelo de e-mail
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
-cgs18_uk                      cgs18empresa, cgs18nome
+cgs18_uk                      cgs18empresa, cgs18codigo, cgs18nome

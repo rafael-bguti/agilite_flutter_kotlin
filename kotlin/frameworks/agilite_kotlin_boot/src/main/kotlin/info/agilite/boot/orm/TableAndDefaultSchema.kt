@@ -1,6 +1,6 @@
 package info.agilite.boot.orm
 
-internal data class TableAndDefaultSchema(
+data class TableAndDefaultSchema(
   val table: String,
   val defaultSchema: String? = null,
 

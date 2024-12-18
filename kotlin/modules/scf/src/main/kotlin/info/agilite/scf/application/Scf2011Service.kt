@@ -45,11 +45,11 @@ class Scf2011Service(
   fun baixarBoletosRecebidos(cgs38: Cgs38, cobranca: List<BoletoRecebido>, batch: BatchOperations, resultado: MutableList<BoletoProcessado>) {
     val codigosRetornoDoBanco = cobranca.map { it.codigoSolicitacao }
     val listDocsProcessar = scf02repo.buscarDocumentosByScf021remNumero(codigosRetornoDoBanco, cgs38.cgs38conta!!.cgs45id) ?: emptyList()
-    val mapDocsByCodRecebimento = listDocsProcessar.associateBy { it.scf021remNumero }
+    val mapDocsByRemNumero = listDocsProcessar.associateBy { it.scf021remNumero }
     val scf11ids = scf02repo.nextIds("scf11", listDocsProcessar.size)
 
     cobranca.forEach { cobranca ->
-      val scf2011RetornoDto = mapDocsByCodRecebimento[cobranca.codigoSolicitacao]
+      val scf2011RetornoDto = mapDocsByRemNumero[cobranca.codigoSolicitacao]
       if(scf2011RetornoDto == null){
         resultado.add(BoletoProcessado(cobranca, false, "Cobranca não encontrado no Sistema"))
         return@forEach

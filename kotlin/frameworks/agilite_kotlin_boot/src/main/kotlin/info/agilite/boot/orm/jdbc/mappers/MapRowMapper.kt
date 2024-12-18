@@ -7,7 +7,7 @@ import org.springframework.jdbc.support.JdbcUtils
 import java.sql.ResultSet
 
 class MapRowMapper(
-  private val nested: Boolean = true,
+  private val nested: Boolean = false,
   private val onlyNonNull: Boolean = true,
 ) : RowMapper<MutableMap<String, Any?>>{
 

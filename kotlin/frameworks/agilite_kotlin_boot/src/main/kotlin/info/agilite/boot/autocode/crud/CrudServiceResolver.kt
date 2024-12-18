@@ -14,7 +14,7 @@ object CrudServiceResolver {
         val className = taskName.substringAfter(".")
 
         val simpleClassName = "${className.localCapitalize()}CrudService"
-        Class.forName("info.agilite.erp.modules.${moduleName.lowercase()}.services.crud.$simpleClassName")
+        Class.forName("info.agilite.erp.modules.${moduleName.lowercase()}.integrators.crud.$simpleClassName")
       } catch (e: ClassNotFoundException) {
         DefaultCrudService::class.java
       }

@@ -50,13 +50,14 @@ object BancoInterHttpClientBuilder {
     return handleResponse(response)
   }
 
-  fun callGet(url: String, bancoConfig: BancoInterConfig, scope: String, requestParam: Map<String, String>): String {
+  fun callGet(url: String, bancoConfig: BancoInterConfig, scope: String, requestParam: Map<String, String>? = null): String {
     val httpClient = build(bancoConfig)
     val token = GetTokenBancoInter.execute(bancoConfig, scope)
-    val formData = requestParam.toQueryParams()
+    val formData = requestParam?.toQueryParams()
+    val urlBuild = if(formData == null) url else "$url?$formData"
 
     val requestBuilder = HttpRequest.newBuilder()
-      .uri(URI.create("$url?$formData"))
+      .uri(URI.create("$urlBuild"))
       .header("Content-Type", "application/json")
       .header("Authorization", "Bearer ${token.access_token}")
       .GET()

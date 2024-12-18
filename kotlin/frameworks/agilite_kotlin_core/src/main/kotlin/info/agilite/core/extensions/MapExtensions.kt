@@ -1,5 +1,6 @@
 package info.agilite.core.extensions
 
+import info.agilite.core.model.LowerCaseMap
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -19,6 +20,10 @@ fun Map<String, *>.nest (): MutableMap<String, Any?> {
     }
 
     return result
+}
+
+fun Map<String, *>.toLowerCase(): LowerCaseMap {
+    return LowerCaseMap.of(this)
 }
 
 fun Map<String, *>.nestedValue(key: String): Any? {

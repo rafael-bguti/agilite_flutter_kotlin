@@ -1,14 +1,12 @@
 package info.agilite.shared.entities.cgs;
-
 import com.fasterxml.jackson.annotation.JsonIgnore
 import info.agilite.boot.metadata.models.*
 import info.agilite.boot.orm.AbstractEntity
 import info.agilite.boot.orm.annotations.EntityCacheable
-
 //GERADOR INI
 
 @EntityCacheable
-class Cgs15() : AbstractEntity(5) {
+class Cgs15() : AbstractEntity(8) {
   constructor(cgs15id: Long) : this() {
     this.cgs15id = cgs15id
   }
@@ -16,13 +14,19 @@ class Cgs15() : AbstractEntity(5) {
   constructor(
     cgs15empresa: Long? = null,
     cgs15nome: String,
-    cgs15modelo: String? = null,
-    cgs15titulo: String? = null
+    cgs15template: String,
+    cgs15titulo: String? = null,
+    cgs15fromName: String? = null,
+    cgs15replayTo: String? = null,
+    cgs15replayToName: String? = null
   ) : this() {
     if(cgs15empresa != null) this.cgs15empresa = cgs15empresa
     this.cgs15nome = cgs15nome
-    this.cgs15modelo = cgs15modelo
+    this.cgs15template = cgs15template
     this.cgs15titulo = cgs15titulo
+    this.cgs15fromName = cgs15fromName
+    this.cgs15replayTo = cgs15replayTo
+    this.cgs15replayToName = cgs15replayToName
   }
 
 
@@ -59,9 +63,9 @@ class Cgs15() : AbstractEntity(5) {
       field = value
     }
     
-  var cgs15modelo: String? = null
+  var cgs15template: String = "--defaultString--"
     get() {
-      validateLoaded(3, "cgs15modelo", false)
+      validateLoaded(3, "cgs15template", true)
       return field
     }
     set(value){
@@ -76,6 +80,36 @@ class Cgs15() : AbstractEntity(5) {
     }
     set(value){
       orm.changed(field, value, 4)
+      field = value
+    }
+    
+  var cgs15fromName: String? = null
+    get() {
+      validateLoaded(5, "cgs15fromName", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 5)
+      field = value
+    }
+    
+  var cgs15replayTo: String? = null
+    get() {
+      validateLoaded(6, "cgs15replayTo", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 6)
+      field = value
+    }
+    
+  var cgs15replayToName: String? = null
+    get() {
+      validateLoaded(7, "cgs15replayToName", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 7)
       field = value
     }
     
@@ -100,21 +134,27 @@ class Cgs15() : AbstractEntity(5) {
 }
 const val N_CGS15EMPRESA = "cgs15empresa";
 const val N_CGS15NOME = "cgs15nome";
-const val N_CGS15MODELO = "cgs15modelo";
+const val N_CGS15TEMPLATE = "cgs15template";
 const val N_CGS15TITULO = "cgs15titulo";
+const val N_CGS15FROMNAME = "cgs15fromName";
+const val N_CGS15REPLAYTO = "cgs15replayTo";
+const val N_CGS15REPLAYTONAME = "cgs15replayToName";
 
 val CGS15ID = FieldMetadata("cgs15id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS15EMPRESA = FieldMetadata("cgs15empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS15NOME = FieldMetadata("cgs15nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
-val CGS15MODELO = FieldMetadata("cgs15modelo", 3, "Modelo de e-mail", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false);
+val CGS15TEMPLATE = FieldMetadata("cgs15template", 3, "Template de e-mail", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
 val CGS15TITULO = FieldMetadata("cgs15titulo", 4, "Título do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS15FROMNAME = FieldMetadata("cgs15fromName", 5, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS15REPLAYTO = FieldMetadata("cgs15replayTo", 6, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS15REPLAYTONAME = FieldMetadata("cgs15replayToName", 7, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
  
 val CGS15_METADATA = EntityMetadata(
   name = "Cgs15",
   descr = "Modelo de e-mail",
 
   fields = listOf(
-    CGS15ID,CGS15EMPRESA,CGS15NOME,CGS15MODELO,CGS15TITULO,
+    CGS15ID,CGS15EMPRESA,CGS15NOME,CGS15TEMPLATE,CGS15TITULO,CGS15FROMNAME,CGS15REPLAYTO,CGS15REPLAYTONAME,
   ),
 
   keys = listOf(

@@ -10,8 +10,9 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
-typealias RemovalListener = (entity: AbstractEntity) -> Unit
+typealias RemovalListener = (tenant: String, entity: AbstractEntity) -> Unit
 
+//TODO mudar o evento de remoção adicionando q o evento é remove all
 object DefaultEntityCache {
   private val lock = ReentrantReadWriteLock()
   private val read: Lock = lock.readLock()
@@ -64,8 +65,9 @@ object DefaultEntityCache {
 
   private fun onInvalidate(notification: RemovalNotification<String, AbstractEntity>) {
     val entity = notification.value
+    val tenantName = UserContext.user?.tenantId ?: "root"
     removalListeners.forEach {
-      it(notification.value as AbstractEntity)
+      it(tenantName, notification.value as AbstractEntity)
     }
   }
 

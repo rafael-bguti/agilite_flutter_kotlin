@@ -10,6 +10,7 @@ import info.agilite.boot.orm.jdbc.mappers.MapRowMapper
 import info.agilite.boot.orm.operations.*
 import info.agilite.boot.orm.query.DbQuery
 import info.agilite.core.json.JsonUtils
+import info.agilite.core.model.LowerCaseMap
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
@@ -73,6 +74,7 @@ abstract class RootRepository {
   fun <R: Any> listSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): List<R> {
     return jdbc.queryForList(query, params, clazz.java)
   }
+  //TODO ver a possibilidade de trocar o retorno de List<MutableMap<String, Any?>> para List<LowercaseMap>
   final fun listMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
     return jdbc.query(query, params, rowMapper ?: MapRowMapper())
   }
@@ -86,7 +88,7 @@ abstract class RootRepository {
     }
   }
   fun distinctListMap(query: DbQuery<*>): List<MutableMap<String, Any?>> {
-    listMap(query.sql(), query.getParams(), MapRowMapper(onlyNonNull = false)).let { list ->
+    listMap(query.sql(), query.getParams(), MapRowMapper(onlyNonNull = false, nested = true)).let { list ->
       val oneToManyManager = query.oneToManyManager() ?: return list
       return oneToManyManager.distinct(list)
     }

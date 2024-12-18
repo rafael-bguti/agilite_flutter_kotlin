@@ -6,8 +6,11 @@ Coluna                        Tamanho R Tipo       Descrição
 ---------------------------------------------------------------------------------------------------------
 cgs15empresa                     10.0 S Lng        Empresa
 cgs15nome                        30.0 S Str        Nome
-cgs15modelo                     200.0 N Str        Modelo de e-mail
+cgs15template                     0.0 S Str        Template de e-mail
 cgs15titulo                     100.0 N Str        Título do e-mail
+cgs15fromName                   100.0 N Str        Remetente do e-mail
+cgs15replayTo                   100.0 N Str        Responder para
+cgs15replayToName               100.0 N Str        Responder para
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

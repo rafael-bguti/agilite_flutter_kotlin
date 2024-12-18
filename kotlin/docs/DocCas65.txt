@@ -16,6 +16,14 @@ cas65numero                      50.0 N Str        Número
 cas65complemento                 50.0 N Str        Complemento
 cas65uf                           2.0 N Str        UF
 cas65municipio                   50.0 N Str        Município
+cas65mailHost                   100.0 N Str        Host do servidor de e-mail
+cas65mailPort                     5.0 N Int        Porta do servidor de e-mail
+cas65mailUser                   100.0 N Str        Usuário do servidor de e-mail
+cas65mailPass                   100.0 N Str        Senha do servidor de e-mail
+cas65mailFrom                   100.0 N Str        Remetente do e-mail
+cas65mailFromName               100.0 N Str        Remetente do e-mail
+cas65mailReplyTo                100.0 N Str        Responder para
+cas65mailTLS                      1.0 N Bol        Usar TLS
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

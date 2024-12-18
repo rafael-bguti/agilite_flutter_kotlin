@@ -19,7 +19,7 @@ class Srf01Repository : RootRepository() {
     return uniqueSingleColumn(Long::class, sql)?.toInt() ?: 0
   }
 
-  fun findWithEntidadeByIds(srf01ids: List<Long>): List<Srf01> {
+  fun findByIds(srf01ids: List<Long>): List<Srf01> {
     return list(
       DbQueryBuilders.build(
         Srf01::class,
@@ -28,4 +28,15 @@ class Srf01Repository : RootRepository() {
       )
     )
   }
+
+  fun findWithEntidadeByIds(srf01ids: List<Long>): List<Srf01> {
+    return list(
+      DbQueryBuilders.build(
+        Srf01::class,
+        "*, srf01.srf01entidade",
+        where = WhereSimple("srf01id IN (${srf01ids.joinToString()})")
+      )
+    )
+  }
+
 }
