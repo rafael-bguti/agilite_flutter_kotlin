@@ -3,6 +3,7 @@ package info.agilite.core.extensions
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.min
 
@@ -21,6 +22,12 @@ fun String.localDecapitalize () : String {
 
 fun String?.nullIfEmpty () : String? {
   return if(this.isNullOrEmpty()) null else this
+}
+
+fun String.removeFromLast(count: Int): String {
+  if(count >= this.length) return ""
+
+  return this.substring(0, this.length - count)
 }
 
 fun String.substringBetween (delimiterStart: String, delimiterEnd: String ) : String {
@@ -74,6 +81,16 @@ fun String.encryptToPassword(steps: Int): String{
 }
 
 // ----- PARSERS -----
-fun String.parseDate(pattern: String = "yyyyMMdd"): LocalDate {
+fun String.parseDate(pattern: String = "yyyy-MM-dd"): LocalDate {
   return LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
+}
+
+fun String.parseDateTime(pattern: String = "yyyy-MM-dd'T'HH:mm:ss"): LocalDateTime {
+  val normalize = if(this.contains('.')) {
+    this.substringBefore('.') + "." + this.substringAfter('.').padEnd(3, '0').take(3)
+  } else {
+    this
+  }
+
+  return LocalDateTime.parse(normalize, DateTimeFormatter.ofPattern(pattern))
 }

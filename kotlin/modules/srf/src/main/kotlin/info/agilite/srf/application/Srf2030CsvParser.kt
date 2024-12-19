@@ -48,7 +48,7 @@ object Srf2030CsvParser {
           if(docs.isEmpty()){
             throw ValidationException("Forma de recebimento da linha $i sem documento.")
           }
-          docs.last().formasRecebimento.add(SRF2030DocFormaRecebimento(line[1], line[2].parseDate(), line[3].toBigDecimal()))
+          docs.last().formasRecebimento.add(SRF2030DocFormaRecebimento(line[1], line[2].parseDate("yyyyMMdd"), line[3].toBigDecimal()))
         }
         else -> {
           throw ValidationException("Linha: $i. Tipo de linha inválido.")

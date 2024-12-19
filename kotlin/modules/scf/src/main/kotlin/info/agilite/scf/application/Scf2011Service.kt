@@ -75,11 +75,11 @@ class Scf2011Service(
         it.scf021dtBaixa = LocalDate.now()
       }
 
-      batch.updateChange(scf021, 2)
+      batch.updateChanges(scf021, 2)
       resultado.add(BoletoProcessado(cobranca, true, "Baixa realizada com sucesso"))
     }
 
     cgs38.cgs38conta!!.cgs45dtUltProcRetorno = LocalDate.now()
-    batch.updateChange(cgs38.cgs38conta!!, 3)
+    batch.updateChanges(cgs38.cgs38conta!!, 3)
   }
 }

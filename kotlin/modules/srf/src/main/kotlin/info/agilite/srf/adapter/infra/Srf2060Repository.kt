@@ -7,11 +7,16 @@ import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.core.json.JsonUtils
 import info.agilite.core.utils.ReflectionUtils
 import info.agilite.shared.entities.cgs.Cgs15
+import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.cgs.N_CGS18MODELOEMAIL
+import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.srf.N_SRF01DTEMAIL
+import info.agilite.shared.entities.srf.N_SRF01INTEGRACAOGDF
 import info.agilite.shared.entities.srf.SRF01_METADATA
 import info.agilite.shared.entities.srf.Srf01
+import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
+import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.srf.domain.Srf2060Doc
 import info.agilite.srf.domain.Srf2060Mail
 import org.springframework.stereotype.Repository
@@ -26,6 +31,7 @@ class Srf2060Repository : RootRepository() {
         where = WhereSimple(
           AgiliteWhere.defaultWhere(SRF01_METADATA) +
           " AND $N_CGS18MODELOEMAIL IS NOT NULL " +
+          " AND $N_SRF01INTEGRACAOGDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)" +
           " AND $N_SRF01DTEMAIL IS NULL "
         )
       )
@@ -34,10 +40,12 @@ class Srf2060Repository : RootRepository() {
 
   fun findDocsToSendMail(srf01ids: List<Long>): List<Srf2060Doc> {
     val sql = """
-      SELECT srf01.*, cgs15.*, scf02.*
+      SELECT srf01.*, gdf10.*, cgs15.*, scf02id
       FROM Srf01
       LEFT JOIN Srf012 ON srf012doc = srf01id
+      LEFT JOIN Gdf10 ON srf01dfeAprov = gdf10id
       LEFT JOIN Scf02 ON (scf02regOrigem->>'tab' = 'srf012' AND (scf02regOrigem->>'id')::BIGINT = srf012id)
+      INNER JOIN Cgs80 ON srf01entidade = cgs80id
       INNER JOIN Cgs18 ON srf01natureza = cgs18id
       INNER JOIN Cgs15 ON cgs18modeloEmail = cgs15id
       WHERE Srf01Id IN (:srf01ids)
@@ -52,6 +60,8 @@ class Srf2060Repository : RootRepository() {
       if(lastSrf2060Doc?.srf01?.id != srf01id) {
         lastSrf2060Doc = Srf2060Doc(
           JsonUtils.fromMap(it, Srf01::class.java),
+          JsonUtils.fromMap(it, Cgs80::class.java),
+          JsonUtils.fromMap(it, Gdf10::class.java),
           JsonUtils.fromMap(it, Cgs15::class.java),
           mutableListOf()
         )

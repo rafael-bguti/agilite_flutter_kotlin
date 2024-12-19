@@ -126,6 +126,7 @@ Gdf10,Transmissões efetuadas,,,,,2,
 ,cStat,Código de retorno,S,str,20.0,2,,,,,,,,,
 ,xMotivo,Descrição do retorno,S,str,0.0,2,,,,,,,,,
 ,uidTrack,UID do Tracker armazenado externamente,N,str,100.0,2,,,,,,,,,
+,linkPdf,Link para o PDF gerado,N,str,0.0,2,,,,,,,,,v
 ,regOrigem,Origem do registro,S,jsn,0.0,2,,,,,,,,,
 Scf02,Documento a pagar/receber,,,,,2,
 ,empresa,Empresa,S,lng,10.0,2,,,,,,,,,

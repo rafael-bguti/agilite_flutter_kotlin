@@ -3,12 +3,14 @@ package info.agilite.boot.orm.query
 import info.agilite.core.extensions.concatIfNotNull
 import info.agilite.core.extensions.splitToList
 import info.agilite.boot.defaultMetadataRepository
+import info.agilite.boot.metadata.MetadataUtils
 import info.agilite.boot.metadata.exceptions.FieldMetadataNotFoundException
 import info.agilite.boot.orm.EntityMappingContext
 import info.agilite.boot.orm.WhereClause
 import info.agilite.boot.orm.annotations.DbSimpleJoin
 import info.agilite.boot.orm.jdbc.mappers.OneToMany
 import info.agilite.boot.orm.jdbc.mappers.OneToManyManager
+import info.agilite.core.extensions.removeFromLast
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 
@@ -86,15 +88,18 @@ data class DbQuery<T: Any>(
       for(field in fields){
         val fieldName = field.substringAfter(":")
         val fieldJoinType = field.substringBefore(":", "")
-
         val fieldMetadata = defaultMetadataRepository.loadFieldMetadata(fieldName)
+        val fkTableName = fieldMetadata.foreignKeyEntity.let {
+          it ?: //Fk para o Parent, no metadata não tem a entidade
+          MetadataUtils.extractEntityNameFromFieldName(fieldName).removeFromLast(1)
+        }
         val joinType = fieldJoinType.let {
           it.ifBlank {
             if (fieldMetadata.required) "INNER" else "LEFT"
           }
         }
 
-        joinResult.append(" $joinType JOIN ${fieldMetadata.foreignKeyEntity} ON $fieldName = ${fieldMetadata.foreignKeyEntity}id ")
+        joinResult.append(" $joinType JOIN $fkTableName ON $fieldName = ${fkTableName}id ")
       }
       return joinResult.toString()
     }

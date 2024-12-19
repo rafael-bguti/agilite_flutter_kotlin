@@ -2,9 +2,11 @@ package info.agilite.srf.application
 
 import info.agilite.boot.orm.BatchOperations
 import info.agilite.boot.security.UserContext
-import info.agilite.boot.sse.SSeService
 import info.agilite.cas.adapter.infra.Cas65Repository
 import info.agilite.core.exceptions.ValidationException
+import info.agilite.core.extensions.format
+import info.agilite.core.extensions.orExc
+import info.agilite.core.extensions.parseDateTime
 import info.agilite.core.xml.ElementXmlConverter
 import info.agilite.shared.RegOrigem
 import info.agilite.shared.entities.gdf.GDF10SISTEMA_NFSE
@@ -60,16 +62,16 @@ class Srf2051Service(
 
       srf01ByRPS.srf01integracaoGdf = INTEGRACAO_OK
       srf01ByRPS.srf01numero = rps.numeroNFSe
-      srf01ByRPS.srf01dfeAprov = createGdf10(rps.protocolo, srf01ByRPS)
+      srf01ByRPS.srf01dfeAprov = createGdf10(rps.protocolo, srf01ByRPS, rps)
 
       eventPublish.publishEvent(Srf01FiscalProcessadoEvent(this, srf01ByRPS, rps.protocolo))
-      batch.updateChange(srf01ByRPS)
+      batch.updateChanges(srf01ByRPS)
     }
 
     srf2051repo.executeBatch(batch)
   }
 
-  private fun createGdf10(protocolo: String, srf01: Srf01): Gdf10{
+  private fun createGdf10(protocolo: String, srf01: Srf01, dadosRps: DadosRps): Gdf10{
     val gdf10 = Gdf10(
       gdf10empresa = UserContext.safeUser.empId,
       gdf10dtEmiss = LocalDate.now(),
@@ -80,6 +82,7 @@ class Srf2051Service(
       gdf10protocolo = protocolo,
       gdf10cStat = "100",
       gdf10xMotivo = "NFSe emitida com sucesso",
+      gdf10linkPdf = dadosRps.linkPDF,
       gdf10regOrigem = RegOrigem("Srf01", srf01.srf01id).toMap(),
     )
 
@@ -108,7 +111,12 @@ class Srf2051Service(
       val protocolo = nfse.findChildValue("InfNfse.CodigoVerificacao")
         ?: throw ValidationException("CodigoVerificacao da NFSe não encontrado na nota $index")
 
-      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt(), protocolo))
+      val tomador = nfse.findFirstChildValue("TomadorServico.IdentificacaoTomador.CpfCnpj.Cnpj", "TomadorServico.IdentificacaoTomador.CpfCnpj.Cpf").orExc("TomadorServico não localizado na NFSe")
+      val prestador = nfse.findFirstChildValue("Prestador.CpfCnpj.Cnpj", "Prestador.CpfCnpj.Cpf").orExc("Prestador não localizado na NFSe")
+      val dataEmissao = nfse.findChildValue("InfNfse.DataEmissao")?.parseDateTime("yyyy-MM-dd'T'HH:mm:ss.SSS").orExc("DataEmissao não localizado na NFSe")
+
+      val link = "https://iss.itatiba.sp.gov.br/Exportar/NotaPrestado?tp=0&h=$protocolo&tomador=$tomador&prestador=$prestador&data=${dataEmissao.format("ddMMyyyy")}&numero=$numeroNFSe"
+      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt(), protocolo, link))
     }
 
     return result
@@ -120,4 +128,5 @@ data class DadosRps(
   val serieRps: Int?,
   val numeroNFSe: Int,
   val protocolo: String,
+  val linkPDF: String,
 )

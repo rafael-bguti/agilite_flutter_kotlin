@@ -31,14 +31,16 @@ class IntegradorDeBoletosBancoInter(
   }
 
   override fun emitirPDF(codigoSolicitacao: String): ByteArray {
-    val base64 = BancoInterHttpClientBuilder.callGet("${bancoConfig.getUrl()}$PATH_BOLETO/$codigoSolicitacao/pdf", bancoConfig, SCOPE)
-    return Base64.getDecoder().decode(base64)
+    val response = BancoInterHttpClientBuilder.callGet("${bancoConfig.getUrl()}$PATH_BOLETO/$codigoSolicitacao/pdf", bancoConfig, SCOPE)
+    val map = JsonUtils.fromJson(response, Map::class.java)
+
+    return Base64.getDecoder().decode(map["pdf"] as String)
   }
 
   private fun buscarBoletosPaginados(pagina: Int, vctoInicial: LocalDate, vctoFinal: LocalDate, cobrancas: MutableList<BoletoRecebido>) {
     val requestParams = mapOf(
-      "dataInicial" to vctoInicial.format("yyyy-MM-dd"),
-      "dataFinal" to vctoFinal.format("yyyy-MM-dd"),
+      "dataInicial" to vctoInicial.format(),
+      "dataFinal" to vctoFinal.format(),
       "filtrarDataPor" to "VENCIMENTO",
       "situacao" to "RECEBIDO",
       "paginacao.paginaAtual" to "0",

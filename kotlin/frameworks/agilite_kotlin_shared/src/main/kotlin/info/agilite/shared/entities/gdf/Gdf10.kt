@@ -19,7 +19,7 @@ const val GDF10STATUSPROC_ERRO = 20
 const val GDF10STATUSPROC_REJEITADO = 30
 const val GDF10STATUSPROC_APROVADO = 100
 
-class Gdf10() : AbstractEntity(13) {
+class Gdf10() : AbstractEntity(14) {
   constructor(gdf10id: Long) : this() {
     this.gdf10id = gdf10id
   }
@@ -36,6 +36,7 @@ class Gdf10() : AbstractEntity(13) {
     gdf10cStat: String,
     gdf10xMotivo: String,
     gdf10uidTrack: String? = null,
+    gdf10linkPdf: String? = null,
     gdf10regOrigem: LowerCaseMap
   ) : this() {
     if(gdf10empresa != null) this.gdf10empresa = gdf10empresa
@@ -49,6 +50,7 @@ class Gdf10() : AbstractEntity(13) {
     this.gdf10cStat = gdf10cStat
     this.gdf10xMotivo = gdf10xMotivo
     this.gdf10uidTrack = gdf10uidTrack
+    this.gdf10linkPdf = gdf10linkPdf
     this.gdf10regOrigem = gdf10regOrigem
   }
 
@@ -176,13 +178,23 @@ class Gdf10() : AbstractEntity(13) {
       field = value
     }
     
-  var gdf10regOrigem: LowerCaseMap = LowerCaseMap()
+  var gdf10linkPdf: String? = null
     get() {
-      validateLoaded(12, "gdf10regOrigem", true)
+      validateLoaded(12, "gdf10linkPdf", false)
       return field
     }
     set(value){
       orm.changed(field, value, 12)
+      field = value
+    }
+    
+  var gdf10regOrigem: LowerCaseMap = LowerCaseMap()
+    get() {
+      validateLoaded(13, "gdf10regOrigem", true)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 13)
       field = value
     }
     
@@ -216,6 +228,7 @@ const val N_GDF10PROTOCOLO = "gdf10protocolo";
 const val N_GDF10CSTAT = "gdf10cStat";
 const val N_GDF10XMOTIVO = "gdf10xMotivo";
 const val N_GDF10UIDTRACK = "gdf10uidTrack";
+const val N_GDF10LINKPDF = "gdf10linkPdf";
 const val N_GDF10REGORIGEM = "gdf10regOrigem";
 
 val GDF10ID = FieldMetadata("gdf10id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
@@ -230,14 +243,15 @@ val GDF10PROTOCOLO = FieldMetadata("gdf10protocolo", 8, "Número protocolo", Fie
 val GDF10CSTAT = FieldMetadata("gdf10cStat", 9, "Código de retorno", FieldTypeMetadata.string, 20.0, true, null, null, null, null, null, false, false, false);
 val GDF10XMOTIVO = FieldMetadata("gdf10xMotivo", 10, "Descrição do retorno", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
 val GDF10UIDTRACK = FieldMetadata("gdf10uidTrack", 11, "UID do Tracker armazenado externamente", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val GDF10REGORIGEM = FieldMetadata("gdf10regOrigem", 12, "Origem do registro", FieldTypeMetadata.json, 0.0, true, null, null, null, null, null, false, false, false);
+val GDF10LINKPDF = FieldMetadata("gdf10linkPdf", 12, "Link para o PDF gerado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val GDF10REGORIGEM = FieldMetadata("gdf10regOrigem", 13, "Origem do registro", FieldTypeMetadata.json, 0.0, true, null, null, null, null, null, false, false, false);
  
 val GDF10_METADATA = EntityMetadata(
   name = "Gdf10",
   descr = "Transmissões efetuadas",
 
   fields = listOf(
-    GDF10ID,GDF10EMPRESA,GDF10DTEMISS,GDF10HREMISS,GDF10SISTEMA,GDF10TIPODOC,GDF10DOCUMENTO,GDF10STATUSPROC,GDF10PROTOCOLO,GDF10CSTAT,GDF10XMOTIVO,GDF10UIDTRACK,GDF10REGORIGEM,
+    GDF10ID,GDF10EMPRESA,GDF10DTEMISS,GDF10HREMISS,GDF10SISTEMA,GDF10TIPODOC,GDF10DOCUMENTO,GDF10STATUSPROC,GDF10PROTOCOLO,GDF10CSTAT,GDF10XMOTIVO,GDF10UIDTRACK,GDF10LINKPDF,GDF10REGORIGEM,
   ),
 
   keys = listOf(

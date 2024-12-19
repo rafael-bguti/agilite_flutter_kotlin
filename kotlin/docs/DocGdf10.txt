@@ -26,6 +26,8 @@ gdf10protocolo                   40.0 S Str        Número protocolo
 gdf10cStat                       20.0 S Str        Código de retorno
 gdf10xMotivo                      0.0 S Str        Descrição do retorno
 gdf10uidTrack                   100.0 N Str        UID do Tracker armazenado externamente
+gdf10linkPdf                      0.0 N Str        Link para o PDF gerado
+                                                   Obs: v
 gdf10regOrigem                    0.0 S Jsn        Origem do registro
 
 Índice                        Tipo Campos

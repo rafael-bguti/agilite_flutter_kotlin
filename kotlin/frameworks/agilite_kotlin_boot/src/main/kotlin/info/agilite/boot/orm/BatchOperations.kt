@@ -25,7 +25,7 @@ open class BatchOperations(
     operations.add(Operation(entity::class, OperationType.UPDATE, entity, executionOrder ?: operations.size))
   }
 
-  fun updateChange(entity: AbstractEntity, executionOrder: Int? = null) {
+  fun updateChanges(entity: AbstractEntity, executionOrder: Int? = null) {
     val tableName = entity.javaClass.simpleName.lowercase()
     var changedValues = entity.extractMapOfChagedProperties(false)
     if(!changedValues.containsKey("${tableName}id")){
