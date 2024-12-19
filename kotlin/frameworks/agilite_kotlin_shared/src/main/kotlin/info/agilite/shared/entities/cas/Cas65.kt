@@ -292,25 +292,25 @@ class Cas65() : AbstractEntity(20) {
 
   override fun getMetadata() = CAS65_METADATA
 }
-const val N_CAS65CNPJ = "cas65cnpj";
-const val N_CAS65IM = "cas65im";
-const val N_CAS65NOME = "cas65nome";
-const val N_CAS65CNAE = "cas65cnae";
-const val N_CAS65CEP = "cas65cep";
-const val N_CAS65ENDERECO = "cas65endereco";
-const val N_CAS65BAIRRO = "cas65bairro";
-const val N_CAS65NUMERO = "cas65numero";
-const val N_CAS65COMPLEMENTO = "cas65complemento";
-const val N_CAS65UF = "cas65uf";
-const val N_CAS65MUNICIPIO = "cas65municipio";
-const val N_CAS65MAILHOST = "cas65mailHost";
-const val N_CAS65MAILPORT = "cas65mailPort";
-const val N_CAS65MAILUSER = "cas65mailUser";
-const val N_CAS65MAILPASS = "cas65mailPass";
-const val N_CAS65MAILFROM = "cas65mailFrom";
-const val N_CAS65MAILFROMNAME = "cas65mailFromName";
-const val N_CAS65MAILREPLYTO = "cas65mailReplyTo";
-const val N_CAS65MAILTLS = "cas65mailTLS";
+const val N_CAS65_CNPJ = "cas65cnpj";
+const val N_CAS65_IM = "cas65im";
+const val N_CAS65_NOME = "cas65nome";
+const val N_CAS65_CNAE = "cas65cnae";
+const val N_CAS65_CEP = "cas65cep";
+const val N_CAS65_ENDERECO = "cas65endereco";
+const val N_CAS65_BAIRRO = "cas65bairro";
+const val N_CAS65_NUMERO = "cas65numero";
+const val N_CAS65_COMPLEMENTO = "cas65complemento";
+const val N_CAS65_UF = "cas65uf";
+const val N_CAS65_MUNICIPIO = "cas65municipio";
+const val N_CAS65_MAIL_HOST = "cas65mailHost";
+const val N_CAS65_MAIL_PORT = "cas65mailPort";
+const val N_CAS65_MAIL_USER = "cas65mailUser";
+const val N_CAS65_MAIL_PASS = "cas65mailPass";
+const val N_CAS65_MAIL_FROM = "cas65mailFrom";
+const val N_CAS65_MAIL_FROM_NAME = "cas65mailFromName";
+const val N_CAS65_MAIL_REPLY_TO = "cas65mailReplyTo";
+const val N_CAS65_MAIL_TLS = "cas65mailTLS";
 
 val CAS65ID = FieldMetadata("cas65id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CAS65CNPJ = FieldMetadata("cas65cnpj", 1, "Cnpj", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false);

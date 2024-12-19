@@ -86,9 +86,9 @@ class Cas90() : AbstractEntity(4) {
 
   override fun getMetadata() = CAS90_METADATA
 }
-const val N_CAS90CODIGO = "cas90codigo";
-const val N_CAS90DESCR = "cas90descr";
-const val N_CAS90GRUPO = "cas90grupo";
+const val N_CAS90_CODIGO = "cas90codigo";
+const val N_CAS90_DESCR = "cas90descr";
+const val N_CAS90_GRUPO = "cas90grupo";
 
 val CAS90ID = FieldMetadata("cas90id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CAS90CODIGO = FieldMetadata("cas90codigo", 1, "Código", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, true, true, true);

@@ -157,15 +157,15 @@ class Cgs50() : AbstractEntity(10) {
 
   override fun getMetadata() = CGS50_METADATA
 }
-const val N_CGS50EMPRESA = "cgs50empresa";
-const val N_CGS50MPS = "cgs50mps";
-const val N_CGS50DESCR = "cgs50descr";
-const val N_CGS50CODIGO = "cgs50codigo";
-const val N_CGS50PRECO = "cgs50preco";
-const val N_CGS50UNIDADE = "cgs50unidade";
-const val N_CGS50DESCRCOMP = "cgs50descrComp";
-const val N_CGS50OBS = "cgs50obs";
-const val N_CGS50TIPOSERVICO = "cgs50tipoServico";
+const val N_CGS50_EMPRESA = "cgs50empresa";
+const val N_CGS50_MPS = "cgs50mps";
+const val N_CGS50_DESCR = "cgs50descr";
+const val N_CGS50_CODIGO = "cgs50codigo";
+const val N_CGS50_PRECO = "cgs50preco";
+const val N_CGS50_UNIDADE = "cgs50unidade";
+const val N_CGS50_DESCR_COMP = "cgs50descrComp";
+const val N_CGS50_OBS = "cgs50obs";
+const val N_CGS50_TIPO_SERVICO = "cgs50tipoServico";
 
 val CGS50ID = FieldMetadata("cgs50id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS50EMPRESA = FieldMetadata("cgs50empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

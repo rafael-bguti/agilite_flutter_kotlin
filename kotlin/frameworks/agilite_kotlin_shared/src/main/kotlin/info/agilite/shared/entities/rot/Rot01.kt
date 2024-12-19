@@ -84,9 +84,9 @@ class Rot01() : AbstractEntity(4) {
 
   override fun getMetadata() = ROT01_METADATA
 }
-const val N_ROT01CNPJ = "rot01cnpj";
-const val N_ROT01RS = "rot01rs";
-const val N_ROT01TENANT = "rot01tenant";
+const val N_ROT01_CNPJ = "rot01cnpj";
+const val N_ROT01_RS = "rot01rs";
+const val N_ROT01_TENANT = "rot01tenant";
 
 val ROT01ID = FieldMetadata("rot01id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val ROT01CNPJ = FieldMetadata("rot01cnpj", 1, "CNPJ", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false);

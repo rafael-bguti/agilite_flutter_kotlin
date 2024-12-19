@@ -128,12 +128,12 @@ class Cgs38() : AbstractEntity(7) {
 
   override fun getMetadata() = CGS38_METADATA
 }
-const val N_CGS38EMPRESA = "cgs38empresa";
-const val N_CGS38NOME = "cgs38nome";
-const val N_CGS38TIPO = "cgs38tipo";
-const val N_CGS38GERAR = "cgs38gerar";
-const val N_CGS38FORMA = "cgs38forma";
-const val N_CGS38CONTA = "cgs38conta";
+const val N_CGS38_EMPRESA = "cgs38empresa";
+const val N_CGS38_NOME = "cgs38nome";
+const val N_CGS38_TIPO = "cgs38tipo";
+const val N_CGS38_GERAR = "cgs38gerar";
+const val N_CGS38_FORMA = "cgs38forma";
+const val N_CGS38_CONTA = "cgs38conta";
 
 val CGS38ID = FieldMetadata("cgs38id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS38EMPRESA = FieldMetadata("cgs38empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

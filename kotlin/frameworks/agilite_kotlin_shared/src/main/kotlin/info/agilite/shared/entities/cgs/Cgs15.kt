@@ -132,13 +132,13 @@ class Cgs15() : AbstractEntity(8) {
 
   override fun getMetadata() = CGS15_METADATA
 }
-const val N_CGS15EMPRESA = "cgs15empresa";
-const val N_CGS15NOME = "cgs15nome";
-const val N_CGS15TEMPLATE = "cgs15template";
-const val N_CGS15TITULO = "cgs15titulo";
-const val N_CGS15FROMNAME = "cgs15fromName";
-const val N_CGS15REPLAYTO = "cgs15replayTo";
-const val N_CGS15REPLAYTONAME = "cgs15replayToName";
+const val N_CGS15_EMPRESA = "cgs15empresa";
+const val N_CGS15_NOME = "cgs15nome";
+const val N_CGS15_TEMPLATE = "cgs15template";
+const val N_CGS15_TITULO = "cgs15titulo";
+const val N_CGS15_FROM_NAME = "cgs15fromName";
+const val N_CGS15_REPLAY_TO = "cgs15replayTo";
+const val N_CGS15_REPLAY_TO_NAME = "cgs15replayToName";
 
 val CGS15ID = FieldMetadata("cgs15id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS15EMPRESA = FieldMetadata("cgs15empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

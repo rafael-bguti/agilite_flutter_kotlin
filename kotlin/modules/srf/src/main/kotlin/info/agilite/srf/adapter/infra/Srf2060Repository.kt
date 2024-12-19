@@ -1,19 +1,16 @@
 package info.agilite.srf.adapter.infra
 
-import info.agilite.boot.orm.AgiliteWhere
-import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.boot.orm.where
 import info.agilite.core.json.JsonUtils
-import info.agilite.core.utils.ReflectionUtils
 import info.agilite.shared.entities.cgs.Cgs15
 import info.agilite.shared.entities.cgs.Cgs80
-import info.agilite.shared.entities.cgs.N_CGS18MODELOEMAIL
+import info.agilite.shared.entities.cgs.N_CGS18_MODELO_EMAIL
 import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.scf.Scf02
-import info.agilite.shared.entities.srf.N_SRF01DTEMAIL
-import info.agilite.shared.entities.srf.N_SRF01INTEGRACAOGDF
+import info.agilite.shared.entities.srf.N_SRF01_DT_EMAIL
+import info.agilite.shared.entities.srf.N_SRF01_INTEGRACAO_GDF
 import info.agilite.shared.entities.srf.SRF01_METADATA
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
@@ -32,9 +29,9 @@ class Srf2060Repository : RootRepository() {
         where = where {
           and {
             default(SRF01_METADATA)
-            simple(" $N_CGS18MODELOEMAIL IS NOT NULL ")
-            simple(" $N_SRF01INTEGRACAOGDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)")
-            simple(" $N_SRF01DTEMAIL IS NULL ")
+            simple(" $N_CGS18_MODELO_EMAIL IS NOT NULL ")
+            simple(" $N_SRF01_INTEGRACAO_GDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)")
+            simple(" $N_SRF01_DT_EMAIL IS NULL ")
           }
         }
       )

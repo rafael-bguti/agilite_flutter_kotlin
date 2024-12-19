@@ -137,13 +137,13 @@ class Scf11() : AbstractEntity(8) {
 
   override fun getMetadata() = SCF11_METADATA
 }
-const val N_SCF11EMPRESA = "scf11empresa";
-const val N_SCF11TIPO = "scf11tipo";
-const val N_SCF11CONTA = "scf11conta";
-const val N_SCF11DATA = "scf11data";
-const val N_SCF11VALOR = "scf11valor";
-const val N_SCF11HIST = "scf11hist";
-const val N_SCF11REGORIGEM = "scf11regOrigem";
+const val N_SCF11_EMPRESA = "scf11empresa";
+const val N_SCF11_TIPO = "scf11tipo";
+const val N_SCF11_CONTA = "scf11conta";
+const val N_SCF11_DATA = "scf11data";
+const val N_SCF11_VALOR = "scf11valor";
+const val N_SCF11_HIST = "scf11hist";
+const val N_SCF11_REG_ORIGEM = "scf11regOrigem";
 
 val SCF11ID = FieldMetadata("scf11id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SCF11EMPRESA = FieldMetadata("scf11empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

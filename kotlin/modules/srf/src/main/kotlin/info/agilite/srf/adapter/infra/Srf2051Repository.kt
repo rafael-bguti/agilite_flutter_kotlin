@@ -19,8 +19,8 @@ class Srf2051Repository : RootRepository() {
         where = WhereSimple(
           """ 
             ${AgiliteWhere.defaultWhere(SRF01_METADATA)}
-            AND $N_SRF01INTEGRACAOGDF = $INTEGRACAO_EM_ANDAMENTO
-            AND $N_SRF01TIPO = $SRF01TIPO_NOTA_FISCAL_SERVICO
+            AND $N_SRF01_INTEGRACAO_GDF = $INTEGRACAO_EM_ANDAMENTO
+            AND $N_SRF01_TIPO = $SRF01TIPO_NOTA_FISCAL_SERVICO
           """.trimIndent()
         ),
         orderBy = { " ORDER BY srf01id" },

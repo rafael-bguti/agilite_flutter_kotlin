@@ -27,8 +27,8 @@ class Cgs38Repository() : RootRepository() {
         "*, cgs38conta.*",
         where = WhereSimple(
           AgiliteWhere.defaultWhere(CGS38_METADATA) +
-          " AND $N_CGS38FORMA = $CGS38FORMA_BOLETO " +
-          " AND $N_CGS38TIPO = $CGS38TIPO_RECEBIMENTO "
+          " AND $N_CGS38_FORMA = $CGS38FORMA_BOLETO " +
+          " AND $N_CGS38_TIPO = $CGS38TIPO_RECEBIMENTO "
         ))
     )
   }

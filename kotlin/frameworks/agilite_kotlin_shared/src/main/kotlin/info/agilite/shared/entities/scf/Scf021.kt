@@ -98,10 +98,10 @@ class Scf021() : AbstractEntity(5) {
 
   override fun getMetadata() = SCF021_METADATA
 }
-const val N_SCF021DOC = "scf021doc";
-const val N_SCF021REMNUMERO = "scf021remNumero";
-const val N_SCF021CONTA = "scf021conta";
-const val N_SCF021DTBAIXA = "scf021dtBaixa";
+const val N_SCF021_DOC = "scf021doc";
+const val N_SCF021_REM_NUMERO = "scf021remNumero";
+const val N_SCF021_CONTA = "scf021conta";
+const val N_SCF021_DT_BAIXA = "scf021dtBaixa";
 
 val SCF021ID = FieldMetadata("scf021id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SCF021DOC = FieldMetadata("scf021doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

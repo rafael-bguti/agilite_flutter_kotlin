@@ -107,11 +107,11 @@ class Cas30() : AbstractEntity(6) {
 
   override fun getMetadata() = CAS30_METADATA
 }
-const val N_CAS30AUTENTICACAO = "cas30autenticacao";
-const val N_CAS30NOME = "cas30nome";
-const val N_CAS30EMPATIVA = "cas30empAtiva";
-const val N_CAS30CREDENCIAL = "cas30credencial";
-const val N_CAS30INTERNO = "cas30interno";
+const val N_CAS30_AUTENTICACAO = "cas30autenticacao";
+const val N_CAS30_NOME = "cas30nome";
+const val N_CAS30_EMP_ATIVA = "cas30empAtiva";
+const val N_CAS30_CREDENCIAL = "cas30credencial";
+const val N_CAS30_INTERNO = "cas30interno";
 
 val CAS30ID = FieldMetadata("cas30id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CAS30AUTENTICACAO = FieldMetadata("cas30autenticacao", 1, "Autenticação (Rot10id)", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

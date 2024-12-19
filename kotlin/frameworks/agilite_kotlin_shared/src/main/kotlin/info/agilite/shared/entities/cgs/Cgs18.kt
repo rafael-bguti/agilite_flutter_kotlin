@@ -178,16 +178,16 @@ class Cgs18() : AbstractEntity(11) {
 
   override fun getMetadata() = CGS18_METADATA
 }
-const val N_CGS18EMPRESA = "cgs18empresa";
-const val N_CGS18CODIGO = "cgs18codigo";
-const val N_CGS18NOME = "cgs18nome";
-const val N_CGS18TIPO = "cgs18tipo";
-const val N_CGS18ES = "cgs18es";
-const val N_CGS18SCF = "cgs18scf";
-const val N_CGS18SERIE = "cgs18serie";
-const val N_CGS18EMITIRDOC = "cgs18emitirDoc";
-const val N_CGS18ALQISS = "cgs18alqIss";
-const val N_CGS18MODELOEMAIL = "cgs18modeloEmail";
+const val N_CGS18_EMPRESA = "cgs18empresa";
+const val N_CGS18_CODIGO = "cgs18codigo";
+const val N_CGS18_NOME = "cgs18nome";
+const val N_CGS18_TIPO = "cgs18tipo";
+const val N_CGS18_ES = "cgs18es";
+const val N_CGS18_SCF = "cgs18scf";
+const val N_CGS18_SERIE = "cgs18serie";
+const val N_CGS18_EMITIR_DOC = "cgs18emitirDoc";
+const val N_CGS18_ALQ_ISS = "cgs18alqIss";
+const val N_CGS18_MODELO_EMAIL = "cgs18modeloEmail";
 
 val CGS18ID = FieldMetadata("cgs18id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS18EMPRESA = FieldMetadata("cgs18empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

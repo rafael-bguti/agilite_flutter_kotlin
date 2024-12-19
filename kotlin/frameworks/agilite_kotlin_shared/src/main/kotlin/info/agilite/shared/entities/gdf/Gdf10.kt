@@ -217,19 +217,19 @@ class Gdf10() : AbstractEntity(14) {
 
   override fun getMetadata() = GDF10_METADATA
 }
-const val N_GDF10EMPRESA = "gdf10empresa";
-const val N_GDF10DTEMISS = "gdf10dtEmiss";
-const val N_GDF10HREMISS = "gdf10hrEmiss";
-const val N_GDF10SISTEMA = "gdf10sistema";
-const val N_GDF10TIPODOC = "gdf10tipoDoc";
-const val N_GDF10DOCUMENTO = "gdf10documento";
-const val N_GDF10STATUSPROC = "gdf10statusProc";
-const val N_GDF10PROTOCOLO = "gdf10protocolo";
-const val N_GDF10CSTAT = "gdf10cStat";
-const val N_GDF10XMOTIVO = "gdf10xMotivo";
-const val N_GDF10UIDTRACK = "gdf10uidTrack";
-const val N_GDF10LINKPDF = "gdf10linkPdf";
-const val N_GDF10REGORIGEM = "gdf10regOrigem";
+const val N_GDF10_EMPRESA = "gdf10empresa";
+const val N_GDF10_DT_EMISS = "gdf10dtEmiss";
+const val N_GDF10_HR_EMISS = "gdf10hrEmiss";
+const val N_GDF10_SISTEMA = "gdf10sistema";
+const val N_GDF10_TIPO_DOC = "gdf10tipoDoc";
+const val N_GDF10_DOCUMENTO = "gdf10documento";
+const val N_GDF10_STATUS_PROC = "gdf10statusProc";
+const val N_GDF10_PROTOCOLO = "gdf10protocolo";
+const val N_GDF10_C_STAT = "gdf10cStat";
+const val N_GDF10_X_MOTIVO = "gdf10xMotivo";
+const val N_GDF10_UID_TRACK = "gdf10uidTrack";
+const val N_GDF10_LINK_PDF = "gdf10linkPdf";
+const val N_GDF10_REG_ORIGEM = "gdf10regOrigem";
 
 val GDF10ID = FieldMetadata("gdf10id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val GDF10EMPRESA = FieldMetadata("gdf10empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

@@ -86,9 +86,9 @@ class Cgs45() : AbstractEntity(4) {
 
   override fun getMetadata() = CGS45_METADATA
 }
-const val N_CGS45EMPRESA = "cgs45empresa";
-const val N_CGS45NOME = "cgs45nome";
-const val N_CGS45DTULTPROCRETORNO = "cgs45dtUltProcRetorno";
+const val N_CGS45_EMPRESA = "cgs45empresa";
+const val N_CGS45_NOME = "cgs45nome";
+const val N_CGS45_DT_ULT_PROC_RETORNO = "cgs45dtUltProcRetorno";
 
 val CGS45ID = FieldMetadata("cgs45id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS45EMPRESA = FieldMetadata("cgs45empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

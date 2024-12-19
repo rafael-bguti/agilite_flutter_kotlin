@@ -268,23 +268,23 @@ class Scf02() : AbstractEntity(19) {
 
   override fun getMetadata() = SCF02_METADATA
 }
-const val N_SCF02EMPRESA = "scf02empresa";
-const val N_SCF02TIPO = "scf02tipo";
-const val N_SCF02FORMA = "scf02forma";
-const val N_SCF02ENTIDADE = "scf02entidade";
-const val N_SCF02NOSSONUM = "scf02nossoNum";
-const val N_SCF02NOSSONUMDV = "scf02nossoNumDV";
-const val N_SCF02DTEMISS = "scf02dtEmiss";
-const val N_SCF02DTVENC = "scf02dtVenc";
-const val N_SCF02DTPAGTO = "scf02dtPagto";
-const val N_SCF02HIST = "scf02hist";
-const val N_SCF02VALOR = "scf02valor";
-const val N_SCF02MULTA = "scf02multa";
-const val N_SCF02JUROS = "scf02juros";
-const val N_SCF02ENCARGOS = "scf02encargos";
-const val N_SCF02DESCONTO = "scf02desconto";
-const val N_SCF02REGORIGEM = "scf02regOrigem";
-const val N_SCF02LANCAMENTO = "scf02lancamento";
+const val N_SCF02_EMPRESA = "scf02empresa";
+const val N_SCF02_TIPO = "scf02tipo";
+const val N_SCF02_FORMA = "scf02forma";
+const val N_SCF02_ENTIDADE = "scf02entidade";
+const val N_SCF02_NOSSO_NUM = "scf02nossoNum";
+const val N_SCF02_NOSSO_NUM_DV = "scf02nossoNumDV";
+const val N_SCF02_DT_EMISS = "scf02dtEmiss";
+const val N_SCF02_DT_VENC = "scf02dtVenc";
+const val N_SCF02_DT_PAGTO = "scf02dtPagto";
+const val N_SCF02_HIST = "scf02hist";
+const val N_SCF02_VALOR = "scf02valor";
+const val N_SCF02_MULTA = "scf02multa";
+const val N_SCF02_JUROS = "scf02juros";
+const val N_SCF02_ENCARGOS = "scf02encargos";
+const val N_SCF02_DESCONTO = "scf02desconto";
+const val N_SCF02_REG_ORIGEM = "scf02regOrigem";
+const val N_SCF02_LANCAMENTO = "scf02lancamento";
 const val N_SCF021S = "scf021s";
 
 val SCF02ID = FieldMetadata("scf02id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);

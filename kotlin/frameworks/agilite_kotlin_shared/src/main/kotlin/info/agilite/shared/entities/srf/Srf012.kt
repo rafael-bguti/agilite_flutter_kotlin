@@ -123,12 +123,12 @@ class Srf012() : AbstractEntity(7) {
 
   override fun getMetadata() = SRF012_METADATA
 }
-const val N_SRF012DOC = "srf012doc";
-const val N_SRF012FORMA = "srf012forma";
-const val N_SRF012PARCELA = "srf012parcela";
-const val N_SRF012DTVENC = "srf012dtVenc";
-const val N_SRF012VALOR = "srf012valor";
-const val N_SRF012DOCUMENTO = "srf012documento";
+const val N_SRF012_DOC = "srf012doc";
+const val N_SRF012_FORMA = "srf012forma";
+const val N_SRF012_PARCELA = "srf012parcela";
+const val N_SRF012_DT_VENC = "srf012dtVenc";
+const val N_SRF012_VALOR = "srf012valor";
+const val N_SRF012_DOCUMENTO = "srf012documento";
 
 val SRF012ID = FieldMetadata("srf012id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val SRF012DOC = FieldMetadata("srf012doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);

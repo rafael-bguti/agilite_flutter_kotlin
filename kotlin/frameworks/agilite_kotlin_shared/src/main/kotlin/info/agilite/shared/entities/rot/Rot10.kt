@@ -120,12 +120,12 @@ class Rot10() : AbstractEntity(7) {
 
   override fun getMetadata() = ROT10_METADATA
 }
-const val N_ROT10CONTRATO = "rot10contrato";
-const val N_ROT10EMAIL = "rot10email";
-const val N_ROT10SENHA = "rot10senha";
-const val N_ROT10TOKEN = "rot10token";
-const val N_ROT10REFRESHTOKEN = "rot10refreshToken";
-const val N_ROT10ROLES = "rot10roles";
+const val N_ROT10_CONTRATO = "rot10contrato";
+const val N_ROT10_EMAIL = "rot10email";
+const val N_ROT10_SENHA = "rot10senha";
+const val N_ROT10_TOKEN = "rot10token";
+const val N_ROT10_REFRESH_TOKEN = "rot10refreshToken";
+const val N_ROT10_ROLES = "rot10roles";
 
 val ROT10ID = FieldMetadata("rot10id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val ROT10CONTRATO = FieldMetadata("rot10contrato", 1, "Contrato", FieldTypeMetadata.fk, 10.0, true, "Rot01", null, null, null, null, false, false, false);
