@@ -53,4 +53,4 @@ srf01dtEmail                     10.0 N Dat        Data do envio do e-mail
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
-srf01_uk                      srf01empresa, srf01natureza, srf01numero, srf01serie
+srf01_uk                      srf01empresa, srf01natureza, srf01numero, coalesce(srf01serie)

@@ -543,7 +543,7 @@ ALTER TABLE srf01 ADD COLUMN IF NOT EXISTS srf01obs TEXT ;
 ALTER TABLE srf01 ADD COLUMN IF NOT EXISTS srf01dtemail DATE ;
 
 DROP INDEX IF EXISTS srf01_uk;
-CREATE UNIQUE INDEX srf01_uk ON srf01 (srf01empresa, srf01natureza, srf01numero, srf01serie);
+CREATE UNIQUE INDEX srf01_uk ON srf01 (srf01empresa, srf01natureza, srf01numero, COALESCE(srf01serie, 0));
 DROP INDEX IF EXISTS srf01_mk;
 CREATE INDEX srf01_mk ON srf01 (srf01empresa, srf01natureza, srf01numero, srf01serie);
 
