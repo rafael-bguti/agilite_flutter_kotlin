@@ -66,7 +66,7 @@ abstract class AbstractEntity(
   internal fun createUidsToCascadeOrm(uuidGen: AtomicLong) {
     uidToOrm = uuidGen.incrementAndGet()
 
-    doInCascades { _, entity -> entity.createUidsToCascadeOrm(uuidGen) }
+    doInCascades(false) { _, entity -> entity.createUidsToCascadeOrm(uuidGen) }
   }
 
   fun extractMapOfChagedProperties(includeOneToMany: Boolean = true): LowerCaseMap {
@@ -95,7 +95,7 @@ abstract class AbstractEntity(
   internal fun dbSaved(executeToCascade: Boolean = true) {
     ormController.setDbSaved()
     if(executeToCascade){
-      doInCascades { _, entity -> entity.dbSaved() }
+      doInCascades (false) { _, entity -> entity.dbSaved() }
     }
   }
 
@@ -107,7 +107,7 @@ abstract class AbstractEntity(
       this.id = insertedId
     }
 
-    doInCascades { _, entity -> entity.setIdsByUidToCascadeOrm(mapOfUidToCascade) }
+    doInCascades(false) { _, entity -> entity.setIdsByUidToCascadeOrm(mapOfUidToCascade) }
   }
 
   private fun doInCascades(autoInflate: Boolean = true, process: (index: Int, chid: AbstractEntity) -> Unit ){

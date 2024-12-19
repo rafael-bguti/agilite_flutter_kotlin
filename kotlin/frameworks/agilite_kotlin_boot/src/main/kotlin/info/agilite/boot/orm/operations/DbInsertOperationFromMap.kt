@@ -24,7 +24,6 @@ internal class DbInsertOperationFromMap(
 
     val jdbcInsert = buildSimpleJdbcInsert(tableName, id == null, schema)
     if(id == null){
-      repository.validarTransacaoAberta()//TODO colocar dentro do JDBC
       id = repository.uniqueSingleColumn(Long::class, jdbcInsert, params)
     }else{
       repository.execute(jdbcInsert, params)

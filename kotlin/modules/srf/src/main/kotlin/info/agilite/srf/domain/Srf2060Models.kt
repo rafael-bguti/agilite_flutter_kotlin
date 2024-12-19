@@ -24,7 +24,7 @@ data class Srf2060Mail(
   val srf01nome: String,
 ){
   fun validarPraEnviarEmail(): String? {
-    if(cgs80email == null) return "Email não informado para o documento ${srf01nome}"
+    if(cgs80email == null) return "Email não informado para o documento $srf01nome"
     return null
   }
 }

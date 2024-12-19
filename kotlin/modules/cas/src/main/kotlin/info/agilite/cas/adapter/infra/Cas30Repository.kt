@@ -13,7 +13,7 @@ class Cas30Repository : RootRepository() {
     return unique(
       DbQueryBuilders.build(
         Cas30::class,
-        "*, cas30empAtiva.*",
+        "cas30nome, cas30empAtiva.cas65id, cas30empAtiva.cas65nome",
         where = WhereAllEquals(mapOf(N_CAS30AUTENTICACAO to cas30autenticacao))
       )
     )

@@ -10,19 +10,16 @@ import info.agilite.boot.orm.jdbc.mappers.MapRowMapper
 import info.agilite.boot.orm.operations.*
 import info.agilite.boot.orm.query.DbQuery
 import info.agilite.core.json.JsonUtils
-import info.agilite.core.model.LowerCaseMap
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.RowMapper
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
-import org.springframework.transaction.support.TransactionSynchronizationManager
 import kotlin.reflect.KClass
 
 @Repository
 abstract class RootRepository {
-  @Autowired lateinit var jdbc: NamedParameterJdbcTemplate
+  @Autowired lateinit var jdbc: JdbcConnection
 
   fun <R: Any> unique(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<R>? = null): R? {
     return try {
@@ -95,26 +92,21 @@ abstract class RootRepository {
   }
 
   fun execute(query: String, params: Map<String, Any?> = emptyMap()): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return jdbc.update(query, params)
   }
 
   fun executeBatch(batchOperations: BatchOperations){
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     batchOperations.execute(this)
   }
 
   fun delete(tableName: String, id: Long, schema: String? = null): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return delete(tableName, listOf(id), schema)
   }
   fun delete(tableName: String, ids: List<Long>, schema: String? = null): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return DbDeleteOperation(tableName, ids, schema).execute(this)
   }
 
   fun save(entity: Any) {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     if(entity is Map<*, *>)   {
       throw Exception("Não é permitido utilizar um Map no método insertOrUpdate por entity, utilize o método que recebe um Map")
     }
@@ -128,7 +120,6 @@ abstract class RootRepository {
   }
 
   fun save(tableName: String, values: Map<String, Any?>, schema: String? = null) {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     if(values["${tableName.lowercase()}id"] != null){
       update(tableName, values, schema)
     }else {
@@ -136,7 +127,6 @@ abstract class RootRepository {
     }
   }
   fun insert(entity: Any) {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     if(entity is Map<*, *>)   {
       throw Exception("Não é permitido utilizar um Map no método insert por entity, utilize o método que recebe um Map")
     }
@@ -144,11 +134,9 @@ abstract class RootRepository {
     DbInsertOperationFromEntity(entity).execute(this)
   }
   fun insert(tableName: String, values: Map<String, Any?>, schema: String? = null): Long {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return DbInsertOperationFromMap(tableName, values, schema).execute(this)
   }
   fun update(entity: Any): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     if(entity is Map<*, *>)   {
       throw Exception("Não é permitido utilizar um Map no método update por entity, utilize o método que recebe um Map")
     }
@@ -156,11 +144,9 @@ abstract class RootRepository {
     return DbUpdateOperationFromEntity(entity).execute(this)
   }
   fun update(tableName: String, values: Map<String, Any?>, schema: String? = null ): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return DbUpdateOperationFromMap(tableName, values, schema).execute(this)
   }
   fun updateChanges(entity: AbstractEntity): Int {
-    validarTransacaoAberta()//TODO colocar dentro do JDBC
     return DbUpdateChangesOperationFromEntity(entity).execute(this)
   }
 
@@ -172,8 +158,6 @@ abstract class RootRepository {
       IdsList(listSingleColumn(Long::class,"SELECT nextval('$seqName') FROM generate_series(1, $qtdIds)").toMutableList())
     }
   }
-
-  internal val jdbcTemplate get() = jdbc.jdbcTemplate
 
   //------- Métodos úteis --------
   fun <R: Any> findById(clazz: KClass<R>, idValue: Long, rowMapper: RowMapper<R>? = null, cacheable: Boolean? = null): R? {
@@ -219,7 +203,7 @@ abstract class RootRepository {
 
 
   fun setTenant(tenant: String) {
-    jdbc.update("SET search_path TO $tenant", emptyMap<String, Any>())
+    jdbc.updateIgnoreTransaction("SET search_path TO $tenant", emptyMap<String, Any>())
   }
 
   /***
@@ -250,12 +234,6 @@ abstract class RootRepository {
   fun isCacheable(clazz: KClass<*>): Boolean {
     return classIsCacheable.getOrPut(clazz) {
       clazz.java.isAnnotationPresent(EntityCacheable::class.java)
-    }
-  }
-
-  internal fun validarTransacaoAberta() {
-    if(!TransactionSynchronizationManager.isActualTransactionActive()){
-      throw Exception("Transação não está aberta")
     }
   }
 }

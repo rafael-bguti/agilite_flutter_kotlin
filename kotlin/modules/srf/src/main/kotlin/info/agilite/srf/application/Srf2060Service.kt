@@ -3,7 +3,6 @@ package info.agilite.srf.application
 import info.agilite.boot.mail.Mail
 import info.agilite.boot.mail.MailAttachment
 import info.agilite.boot.mail.MailSenderService
-import info.agilite.boot.orm.BatchOperations
 import info.agilite.boot.security.UserContext
 import info.agilite.boot.templates.TemplateService
 import info.agilite.core.exceptions.ValidationException
@@ -24,7 +23,6 @@ import java.time.LocalDate
 @Service
 class Srf2060Service(
   val repository: Srf2060Repository,
-  val srf01repo: Srf01Repository,
   val mailSender: MailSenderService,
   val templateService: TemplateService,
   val scf02PdfGenerator: Scf02GeradorPDFIntegrator,
@@ -48,7 +46,7 @@ class Srf2060Service(
       val mail = Mail(
         subject = docToSend.cgs15.cgs15titulo.orExc("Titulo do email não informado no CGS15"),
         html = html,
-        to = docToSend.cgs80.cgs80email!!,
+        to = "rafael@multitecsistemas.com.br",//docToSend.cgs80.cgs80email!!,
         fromName = docToSend.cgs15.cgs15fromName,
         replyTo = docToSend.cgs15.cgs15replayTo,
         replyToName = docToSend.cgs15.cgs15replayToName,
@@ -72,7 +70,7 @@ class Srf2060Service(
   }
 
   private fun criarCorpoDoEmail(docToSend: Srf2060Doc): String {
-    val mesReferencia = docToSend.srf01.srf01dtEmiss.plusDays(-1).format("MMMM 'de' yyyy").localCapitalize()
+    val mesReferencia = docToSend.srf01.srf01dtEmiss.plusMonths(-1).format("MMMM 'de' yyyy").localCapitalize()
 
     val html = templateService.processTemplate(
       docToSend.cgs15.cgs15nome,

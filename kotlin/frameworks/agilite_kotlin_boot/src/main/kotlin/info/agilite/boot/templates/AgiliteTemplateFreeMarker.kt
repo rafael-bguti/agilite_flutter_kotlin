@@ -24,7 +24,7 @@ class AgiliteTemplateFreeMarker() {
   fun buildTemplate(templateName: String, templateContent: String): Template {
     val schema = UserContext?.user?.tenantId ?: "root"
     val finalName = "$schema-$templateName"
-    stringTemplateLoader.putTemplate(finalName, templateContent) // TODO voltar o ultimo parametro para 0L
+    stringTemplateLoader.putTemplate(finalName, templateContent, 0L)
 
     return configuration.getTemplate(finalName)
   }

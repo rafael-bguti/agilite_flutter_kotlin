@@ -25,6 +25,8 @@ internal class DbUpdateOperationFromMap(
     val params = jdbcDialect.parseParamsToQuery(tableName, localValues)
     params["id"] = idValue
 
+    if(fields.isEmpty()) return 0
+
     val localSchema = schema?.let { "$it." } ?: ""
     val query = "UPDATE $localSchema$tableName SET $fields WHERE $idName = :id"
 

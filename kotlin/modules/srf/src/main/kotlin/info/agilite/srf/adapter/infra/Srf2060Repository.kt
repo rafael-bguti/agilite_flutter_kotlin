@@ -40,7 +40,7 @@ class Srf2060Repository : RootRepository() {
 
   fun findDocsToSendMail(srf01ids: List<Long>): List<Srf2060Doc> {
     val sql = """
-      SELECT srf01.*, gdf10.*, cgs15.*, scf02id
+      SELECT srf01.*, gdf10.*, cgs15.*, cgs80.*, scf02.*
       FROM Srf01
       LEFT JOIN Srf012 ON srf012doc = srf01id
       LEFT JOIN Gdf10 ON srf01dfeAprov = gdf10id
