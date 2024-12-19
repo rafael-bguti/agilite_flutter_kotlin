@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan
 ])
 class AgiliteERPApplication
 
-//TODO implementar os eventos que geram o financeiro
 fun main(args: Array<String>) {
   runApplication<AgiliteERPApplication>(*args)
 }

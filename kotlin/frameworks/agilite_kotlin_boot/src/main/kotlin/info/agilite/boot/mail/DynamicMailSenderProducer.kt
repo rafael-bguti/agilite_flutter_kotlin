@@ -1,17 +1,26 @@
 package info.agilite.boot.mail
 
 import com.google.common.cache.CacheBuilder
+import info.agilite.boot.orm.cache.DefaultEntityCache
+import info.agilite.boot.security.UserContext
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.JavaMailSenderImpl
-import org.springframework.stereotype.Component
 import java.time.Duration
 import java.util.*
 
 object DynamicMailSenderProducer {
-  private val cache = CacheBuilder.newBuilder().expireAfterWrite(Duration.ofMinutes(30)).build<Long, JavaMailSender>()
+  private val cache = CacheBuilder.newBuilder().expireAfterWrite(Duration.ofMinutes(30)).build<String, JavaMailSender>()
+
+  init{
+    DefaultEntityCache.addInvalidateListener { it ->
+      if(it.entity.javaClass.simpleName.equals("Cas65", true)){
+        cache.invalidate(computeKey(it.entity.id!!))
+      }
+    }
+  }
 
   fun getMailSender(config: SmtpConfig): JavaMailSender {
-    return cache.get(config.empresaId) {
+    return cache.get(computeKey( config.empresaId)) {
       criarJavaMailSender(config)
     }
   }
@@ -31,6 +40,10 @@ object DynamicMailSenderProducer {
       )
     }
     return sender
+  }
+
+  private fun computeKey(id: Long): String {
+    return UserContext.safeTentantId + id
   }
 }
 

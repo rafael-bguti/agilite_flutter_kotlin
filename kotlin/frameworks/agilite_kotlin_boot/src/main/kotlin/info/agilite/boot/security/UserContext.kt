@@ -12,6 +12,9 @@ object UserContext {
   val safeUser : UserDetail
     get() = userThreadLocal.get() ?: throw RuntimeException("Usuário não autenticado.")
 
+  val safeTentantId: String
+    get() = user?.tenantId ?: "root"
+
   val tenantId: String?
     get() = userThreadLocal.get()?.tenantId
 
