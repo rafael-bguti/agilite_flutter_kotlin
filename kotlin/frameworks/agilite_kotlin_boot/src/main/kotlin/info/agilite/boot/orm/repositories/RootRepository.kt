@@ -172,14 +172,14 @@ abstract class RootRepository {
     }
   }
 
-  fun <R: Any> uniqueByWhere(clazz: KClass<R>, where: WhereClause, rowMapper: RowMapper<R>? = null): R? {
+  fun <R: Any> uniqueByWhere(clazz: KClass<R>, where: Where, rowMapper: RowMapper<R>? = null): R? {
     val columns = EntityMappingContext.getColumnsQuery(clazz.java).joinToString()
     val dbQuery = DbQuery(clazz, columns, where = where)
 
     return unique(dbQuery)
   }
 
-  fun <R: Any> listByWhere(clazz: KClass<R>, where: WhereClause, simpleJoin: String? = null,  rowMapper: RowMapper<R>? = null): List<R> {
+  fun <R: Any> listByWhere(clazz: KClass<R>, where: Where, simpleJoin: String? = null, rowMapper: RowMapper<R>? = null): List<R> {
     val columns = EntityMappingContext.getColumnsQuery(clazz.java).joinToString()
     val dbQuery = DbQuery(
       clazz,
@@ -225,7 +225,7 @@ abstract class RootRepository {
     val tableAndDefaultSchema = EntityMappingContext.getTableAndSchema(clazz.java)
     val idColumnName = "${tableAndDefaultSchema.table}id"
     val columns = EntityMappingContext.getColumnsQuery(clazz.java).joinToString()
-    val dbQuery = DbQuery(clazz, columns, where = WhereAllEquals(mapOf(idColumnName to idValue)))
+    val dbQuery = DbQuery(clazz, columns, where = WhereEquals(idColumnName, idValue))
 
     return unique(dbQuery)
   }

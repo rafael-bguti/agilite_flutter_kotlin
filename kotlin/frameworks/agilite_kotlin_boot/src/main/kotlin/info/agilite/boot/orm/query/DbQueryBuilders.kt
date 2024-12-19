@@ -1,9 +1,7 @@
 package info.agilite.boot.orm.query
 
 import info.agilite.core.extensions.splitToList
-import info.agilite.boot.orm.WhereClause
-import info.agilite.boot.orm.annotations.DbSimpleJoin
-import info.agilite.boot.orm.annotations.DbTable
+import info.agilite.boot.orm.Where
 import kotlin.reflect.KClass
 
 
@@ -14,7 +12,7 @@ class DbQueryBuilders {
       clazz: KClass<T>,
       columns: String = "*",
       simpleJoin: String? = null,
-      where: WhereClause? = null,
+      where: Where? = null,
       scraps: String? = null,
       orderBy: (() -> String)? = null,
       limitQuery: String? = null,

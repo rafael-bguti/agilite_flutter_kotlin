@@ -1,15 +1,11 @@
 package info.agilite.srf.adapter.infra
 
 import info.agilite.boot.orm.AgiliteWhere
-import info.agilite.boot.orm.BatchOperations
-import info.agilite.boot.orm.WhereAllEquals
 import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.shared.entities.srf.*
-import info.agilite.shared.events.INTEGRACAO_AGUARDANDO_O_INICIO
 import info.agilite.shared.events.INTEGRACAO_EM_ANDAMENTO
-import info.agilite.srf.adapter.web.Srf2050EmitirDto
 import org.springframework.stereotype.Repository
 
 @Repository

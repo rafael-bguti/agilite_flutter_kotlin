@@ -4,6 +4,7 @@ import info.agilite.boot.orm.AgiliteWhere
 import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
+import info.agilite.boot.orm.where
 import info.agilite.scf.adapter.dto.Scf2011RetornoDto
 import info.agilite.shared.entities.cgs.CGS38FORMA_BOLETO
 import info.agilite.shared.entities.cgs.N_CGS38FORMA
@@ -25,12 +26,15 @@ class Scf02Repository: RootRepository() {
       DbQueryBuilders.build(
         Scf2011RetornoDto::class,
         "*",
-        where = WhereSimple(
-          AgiliteWhere.defaultWhere(SCF02_METADATA) +
-              " AND $N_SCF021REMNUMERO IN (:scf021remNumeros)" +
-              " AND $N_SCF021CONTA = $cgs45id",
-          mapOf("scf021remNumeros" to scf021remNumeros)
-        ),
+        where = where {
+          and {
+            default(SCF02_METADATA)
+            simple(" $N_SCF021REMNUMERO IN (:scf021remNumeros)",
+              "scf021remNumeros", scf021remNumeros,
+            )
+            simple(" $N_SCF021CONTA = $cgs45id")
+          }
+        },
         simpleJoin = "INNER JOIN Scf021 ON scf021doc = scf02id"
       )
     )
@@ -41,13 +45,15 @@ class Scf02Repository: RootRepository() {
       DbQueryBuilders.build(
         Scf02::class,
         colunas,
-        where = WhereSimple(
-          AgiliteWhere.defaultWhere(SCF02_METADATA) +
-              " AND $N_SCF02TIPO = $SCF02TIPO_RECEBER" +
-              " AND $N_CGS38FORMA = $CGS38FORMA_BOLETO" +
-              " AND $N_SCF02LANCAMENTO IS NULL" +
-              " AND $N_SCF021REMNUMERO IS NULL"
-        ),
+        where = where {
+          and {
+            default(SCF02_METADATA)
+            simple(" $N_SCF02TIPO = $SCF02TIPO_RECEBER")
+            simple(" $N_CGS38FORMA = $CGS38FORMA_BOLETO")
+            simple(" $N_SCF02LANCAMENTO IS NULL")
+            simple(" $N_SCF021REMNUMERO IS NULL")
+          }
+        },
         simpleJoin = "LEFT JOIN Scf021 ON scf021doc = scf02id"
       ),
     )

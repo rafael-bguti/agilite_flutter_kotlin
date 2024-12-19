@@ -4,6 +4,7 @@ import info.agilite.boot.orm.AgiliteWhere
 import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
+import info.agilite.boot.orm.where
 import info.agilite.core.json.JsonUtils
 import info.agilite.core.utils.ReflectionUtils
 import info.agilite.shared.entities.cgs.Cgs15
@@ -28,12 +29,14 @@ class Srf2060Repository : RootRepository() {
     return list(
       DbQueryBuilders.build(
         Srf2060Mail::class,
-        where = WhereSimple(
-          AgiliteWhere.defaultWhere(SRF01_METADATA) +
-          " AND $N_CGS18MODELOEMAIL IS NOT NULL " +
-          " AND $N_SRF01INTEGRACAOGDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)" +
-          " AND $N_SRF01DTEMAIL IS NULL "
-        )
+        where = where {
+          and {
+            default(SRF01_METADATA)
+            simple(" $N_CGS18MODELOEMAIL IS NOT NULL ")
+            simple(" $N_SRF01INTEGRACAOGDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)")
+            simple(" $N_SRF01DTEMAIL IS NULL ")
+          }
+        }
       )
     )
   }

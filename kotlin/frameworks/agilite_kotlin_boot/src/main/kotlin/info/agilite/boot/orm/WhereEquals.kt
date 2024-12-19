@@ -1,11 +1,14 @@
 package info.agilite.boot.orm
 
-class WhereAllEquals(
-  override val params: Map<String, Any?>?,
-) : WhereClause {
+import info.agilite.core.utils.MapUtils
+
+class WhereEquals(
+  private vararg val values: Any
+) : Where {
+  override val params: Map<String, Any?> = MapUtils.newStringMap(*values)
+
   override fun where(whereAndOr: String): String {
-    if (params.orEmpty().isEmpty()) return ""
-    return " $whereAndOr ${params!!.entries.joinToString(" AND ") { clause(it) }} "
+    return " $whereAndOr ${params.entries.joinToString(" AND ") { clause(it) }} "
   }
 
   private fun clause(entry: Map.Entry<String, Any?> ): String {

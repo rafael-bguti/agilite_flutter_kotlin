@@ -6,7 +6,7 @@ import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.metadata.MetadataUtils
 import info.agilite.boot.metadata.exceptions.FieldMetadataNotFoundException
 import info.agilite.boot.orm.EntityMappingContext
-import info.agilite.boot.orm.WhereClause
+import info.agilite.boot.orm.Where
 import info.agilite.boot.orm.annotations.DbSimpleJoin
 import info.agilite.boot.orm.jdbc.mappers.OneToMany
 import info.agilite.boot.orm.jdbc.mappers.OneToManyManager
@@ -19,7 +19,7 @@ data class DbQuery<T: Any>(
   val columns: String? = null,
   val fetchJoins: List<DbJoin>? = emptyList<DbJoin>(),
   val simpleJoin: String? = null,
-  val where: WhereClause? = null,
+  val where: Where? = null,
   val scraps: String? = null,
   val orderBy: (() -> String)? = null,
   val limitQuery: String? = null,
