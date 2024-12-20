@@ -8,9 +8,9 @@ import kotlin.math.max
 
 
 class MultiNFeRepository {
-    fun localizarContratosMultiNFe(cnpjLicencas: List<String>): Map<String, ContratosMultinfe> {
+    fun localizarContratosMultiNFe(cnpjLicencas: List<String>): Map<String, ContratoMultiNFe> {
         val cnn = conectarNoBancoDoMultiNFe();
-        val contratos = mutableMapOf<String, ContratosMultinfe>()
+        val contratos = mutableMapOf<String, ContratoMultiNFe>()
         for(cnpj in cnpjLicencas) {
             val sql = """
                 SELECT aa101.*, COALESCE(aa10cnpjcob, aa10cnpj) as cnpjCob 
@@ -39,8 +39,8 @@ class MultiNFeRepository {
 
             if(rows.size == 0) continue
 
-            var contratoNFe: ContratoMultinfe? = null
-            var contratoCTe: ContratoMultinfe? = null
+            var contratoNFe: SitemaContratoMultiNFe? = null
+            var contratoCTe: SitemaContratoMultiNFe? = null
 
             val cnpjCob = rows[0]["cnpjcob"] as String
             for(row in rows){
@@ -49,7 +49,7 @@ class MultiNFeRepository {
                     continue
                 }
 
-                val contrato = ContratoMultinfe(
+                val contrato = SitemaContratoMultiNFe(
                     mensalidade = (row["aa101vlrmensal"] as Number).toDouble(),
                     qtdDocsInclusoNaMensalidade = (row["aa101qtdenvio"] as Number).toInt(),
                     valorPorDocAdicional = max((row["aa101adienvio"] as Number).toDouble(), (row["aa101adiarm"] as Number).toDouble()),
@@ -61,7 +61,7 @@ class MultiNFeRepository {
             }
 
             if(contratoNFe != null || contratoCTe != null){
-                contratos.put(cnpj, ContratosMultinfe(
+                contratos.put(cnpj, ContratoMultiNFe(
                     cnpjCob,
                     nfe = contratoNFe,
                     cte = contratoCTe,

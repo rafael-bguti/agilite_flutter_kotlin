@@ -14,7 +14,7 @@ class TFS4Repository {
     val revendas = mutableMapOf<String, ConsumoTFS4Revenda>()
     for (consumo in consumos) {
       val revendaCnpj = consumo["revendacnpj"] as String
-      val revendaRs = consumo["revenda"] as String
+      val revendaRs = consumo["revendars"] as String
       if (!revendas.containsKey(revendaCnpj)) {
         revendas[revendaCnpj] = ConsumoTFS4Revenda(revendaCnpj, revendaRs, mutableListOf())
       }
@@ -23,19 +23,12 @@ class TFS4Repository {
     val consumoPorLicenca = consumos.groupBy { it["licencacnpj"] as String }
     consumoPorLicenca.forEach { licencaEntry ->
       val consumosPorEmpresa = licencaEntry.value.map { consumo ->
-        ConsumoTFS4Empresa(
+        Consumo(
           consumo["empresacnpj"] as String,
           consumo["empresana"] as String,
-          (consumo["consumonfe"] as Number).toInt(),
-          (consumo["consumomdfe"] as Number).toInt(),
-          (consumo["consumocte"] as Number).toInt(),
-          (consumo["consumoreinf"] as Number).toInt(),
-          (consumo["consumoesocial"] as Number).toInt(),
-          consumo["lastnfeid"] != null,
-          consumo["lastmdfeid"] != null,
-          consumo["lastcteid"] != null,
-          consumo["lastesocialid"] != null,
-          consumo["lastreinfid"] != null,
+          sistemaDFe = SistemaDFe.fromValue(consumo.getInteger("sistemadfe")!!),
+          qtd = consumo.getInteger("consumo")!!,
+          possuiArmazenamentoAnterior = consumo.getLong("maxid") != null
         )
       }.toMutableList()
 
@@ -57,49 +50,25 @@ class TFS4Repository {
       DateTimeFormatter.ofPattern("yyyy-MM-dd")
     )
     val sql = """
-        WITH consumosNFe AS (
-        	SELECT count(*) as consumoNFe, empresa_id FROM documentos WHERE sistema_dfe = 10 AND dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado' group by empresa_id
-        ), consumosMDFe AS (
-        	SELECT count(*) as consumoMDFe, empresa_id FROM documentos WHERE sistema_dfe = 20 AND dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado' group by empresa_id
-        ), consumosCTe AS (
-        	SELECT count(*) as consumoCTe, empresa_id FROM documentos WHERE sistema_dfe = 30 AND dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado' group by empresa_id
-        ), consumosESocial AS (
-        	SELECT count(*) as consumoESocial, empresa_id FROM documentos WHERE sistema_dfe = 40 AND dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado' group by empresa_id
-        ), consumosReinf AS (
-        	SELECT count(*) as consumoReinf, empresa_id FROM documentos WHERE sistema_dfe = 50 AND dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado' group by empresa_id
-        ), hasNFe AS (
-            SELECT MAX(dcm_id) as lastNFeId, empresa_id FROM documentos WHERE sistema_dfe = 10 group by empresa_id
-        ), hasMDFe AS (
-            SELECT MAX(dcm_id) as lastMDFeId, empresa_id  FROM documentos WHERE sistema_dfe = 20 group by empresa_id
-        ), hasCTe AS (
-            SELECT MAX(dcm_id) as lastCTeId, empresa_id FROM documentos WHERE sistema_dfe = 30 group by empresa_id
-        ), hasESocial AS (
-            SELECT MAX(dcm_id) as lastESocialId, empresa_id FROM documentos WHERE sistema_dfe = 40 group by empresa_id
-        ), hasReinf AS (
-            SELECT MAX(dcm_id) as lastReinfId, empresa_id FROM documentos WHERE sistema_dfe = 50 group by empresa_id
-        )
-
-        select con.licenca_num as licencanum, con.licenca_cnpj as licencacnpj, con.licenca_rs as licencars,
-        emp.cnpj as empresacnpj, emp.rs as empresana, 
-        coalesce(consumoNFe, 0) as consumoNFe, coalesce(consumoMDFe, 0) as consumoMDFe, coalesce(consumoCTe, 0) as consumoCTe, 
-        coalesce(consumoESocial, 0) as consumoESocial, coalesce(consumoReinf, 0) as consumoReinf,
-        hasNFe.lastNFeId, hasMDFe.lastMDFeId, hasCTe.lastCTeId, hasESocial.lastESocialId, hasReinf.lastReinfId,
-        rev.rs as revenda, rev.cnpj as revendacnpj
-        from contratos as con
-        inner join revendas as rev ON rev.rvn_id = con.revenda_id
-        inner join empresas as emp on emp.contrato_id = con.cnt_id
-        left join consumosNFe as nfe on nfe.empresa_id = emp.emp_id
-        left join consumosMDFe as mdfe on mdfe.empresa_id = emp.emp_id
-        left join consumosCTe as cte on cte.empresa_id = emp.emp_id
-        left join consumosESocial as esocial on esocial.empresa_id = emp.emp_id
-        left join consumosReinf as reinf on reinf.empresa_id = emp.emp_id
-        left join hasNFe as hasnfe on hasnfe.empresa_id = emp.emp_id
-        left join hasMDFe as hasmdfe on hasmdfe.empresa_id = emp.emp_id
-        left join hasCTe as hascte on hascte.empresa_id = emp.emp_id
-        left join hasESocial as hasesocial on hasesocial.empresa_id = emp.emp_id
-        left join hasReinf as hasreinf on hasreinf.empresa_id = emp.emp_id
-        where con.active = true
-        order by cnt_id, emp_id
+      WITH consumos AS(
+        select count(*) as consumo, sistema_dfe, empresa_id
+        from documentos d 
+        WHERE dt_hr_armazenamento BETWEEN '$iniMesAnoFormatado' and '$fimMesAnoFormatado'
+        group by sistema_dfe, empresa_id
+      ), maxids as (
+        select MAX(d.dcm_id) as maxid, sistema_dfe, empresa_id
+        from documentos d 
+        group by sistema_dfe, empresa_id
+      )
+      select m.maxid as maxid, coalesce(consumo, 0) as consumo, m.sistema_dfe as sistemadfe, con.licenca_num as licencanum, 
+      con.licenca_cnpj as licencacnpj, con.licenca_rs as licencars, emp.cnpj as empresacnpj, emp.rs as empresana,
+      rev.rs as revendars, rev.cnpj as revendacnpj
+      from maxids as m
+      inner join empresas as emp on emp.emp_id = m.empresa_id
+      inner join contratos as con on emp.contrato_id = con.cnt_id
+      inner join revendas as rev ON rev.rvn_id = con.revenda_id
+      left join consumos as c on c.empresa_id = m.empresa_id and c.sistema_dfe = m.sistema_dfe
+      order by cnt_id, emp_id
         """.trimIndent()
 
     val result: MutableList<Map<String, Any?>> = mutableListOf()

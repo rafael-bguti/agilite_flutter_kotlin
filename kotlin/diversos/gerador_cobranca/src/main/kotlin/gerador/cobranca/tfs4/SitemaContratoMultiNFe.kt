@@ -1,12 +1,12 @@
 package gerador.cobranca.tfs4
 
-data class ContratosMultinfe (
+data class ContratoMultiNFe (
     val cnpjCobranca: String,
-    val nfe: ContratoMultinfe?,
-    val cte: ContratoMultinfe?,
+    val nfe: SitemaContratoMultiNFe?,
+    val cte: SitemaContratoMultiNFe?,
 )
 
-data class ContratoMultinfe(
+data class SitemaContratoMultiNFe(
     val mensalidade: Double,
     val qtdDocsInclusoNaMensalidade: Int,
     val valorPorDocAdicional: Double,
