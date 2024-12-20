@@ -29,7 +29,7 @@ object Srf2030CsvParser {
           if(line.size < 3) {
             throw ValidationException("Linha: $i Linha inválida, quantidade de colunas deve ser 3 ou 4. ($line)")
           }
-          docs.add(SRF2030Doc(i, tipo, line[1], line[2], line.getOrNull(3)))
+          docs.add(SRF2030Doc(tipo, line[1], line[2], line.getOrNull(3)))
         }
         10 -> {
           if(line.size != 5) {

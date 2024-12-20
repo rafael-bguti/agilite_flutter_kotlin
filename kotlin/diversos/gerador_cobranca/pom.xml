@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>agilite_erp</artifactId>
+  <artifactId>gerador_cobranca</artifactId>
   <version>${revision}</version>
 
 
@@ -25,17 +25,7 @@
   <dependencies>
     <dependency>
       <groupId>info.agilite</groupId>
-      <artifactId>gdf</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>info.agilite</groupId>
-      <artifactId>scf</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>info.agilite</groupId>
-      <artifactId>srf</artifactId>
+      <artifactId>agilite_integradores</artifactId>
       <version>${revision}</version>
     </dependency>
     <dependency>

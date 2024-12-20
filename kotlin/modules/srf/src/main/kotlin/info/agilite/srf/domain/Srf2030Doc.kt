@@ -5,7 +5,6 @@ import java.time.LocalDate
 
 //Documento para importar
 class SRF2030Doc(
-  val linha: Int,
   val tipo: Int,
   val nomeNatureza: String,
   val niEntidade: String,

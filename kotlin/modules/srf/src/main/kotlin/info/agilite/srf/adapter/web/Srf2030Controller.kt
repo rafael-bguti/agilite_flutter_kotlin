@@ -20,11 +20,10 @@ class Srf2030Controller(
   @Transactional
   fun uploadFile(
     @RequestParam("file") file: MultipartFile,
-    @RequestHeader(name = HEADER_SSE_UID_NAME, required = false) sseUid: String?,
   ) {
     if (file.isEmpty) {
       throw ClientException(HttpStatus.BAD_REQUEST, "O arquivo está vazio.")
     }
-    srf2030Service.doImport(String(file.bytes), file.contentType, sseUid ?: "")
+    srf2030Service.doImport(String(file.bytes), file.contentType)
   }
 }

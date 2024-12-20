@@ -2,7 +2,7 @@ package info.agilite.srf.application
 
 import info.agilite.boot.exceptions.ClientException
 import info.agilite.boot.security.UserContext
-import info.agilite.boot.sse.SSeService
+import info.agilite.boot.sse.SseEmitter
 import info.agilite.cgs.adapter.infra.Cgs18Repository
 import info.agilite.cgs.adapter.infra.Cgs38Repository
 import info.agilite.cgs.adapter.infra.Cgs50Repository
@@ -28,9 +28,10 @@ class Srf2030Service(
   private val cgs38repo: Cgs38Repository,
   private val cgs80repo: Cgs80Repository,
   private val cgs50repo: Cgs50Repository,
+  private val sseEmitter: SseEmitter
 ) {
 
-  fun doImport(content: String, contentType: String?, sseUid: String) {
+  fun doImport(content: String, contentType: String?) {
     lateinit var docs: List<SRF2030Doc>
     if(contentType?.equals("text/csv", true) == true) {
       docs = Srf2030CsvParser.parseFromCsv(content)
@@ -39,18 +40,18 @@ class Srf2030Service(
     }
 
     for(index in docs.indices) {
-      SSeService.sendMsg(sseUid, "Importando documento $index/${docs.size}")
-      importDoc(docs[index])
+      sseEmitter.sendMessage("Importando documento $index/${docs.size}")
+      importDoc(index, docs[index])
     }
   }
 
-  private fun importDoc(doc: SRF2030Doc) {
+  private fun importDoc(index: Int, doc: SRF2030Doc) {
     val user = UserContext.safeUser
-    val cgs18 = cgs18repo.findByNome(doc.nomeNatureza) ?: throw ValidationException("Natureza não encontrada: ${doc.nomeNatureza} no documento da linha ${doc.linha}")
-    val cgs80 = cgs80repo.findByNi(doc.niEntidade) ?: throw ValidationException("Entidade não encontrada: ${doc.niEntidade} no documento da linha ${doc.linha}")
+    val cgs18 = cgs18repo.findByNome(doc.nomeNatureza) ?: throw ValidationException("Natureza não encontrada: ${doc.nomeNatureza} no ${index}º documento")
+    val cgs80 = cgs80repo.findByNi(doc.niEntidade) ?: throw ValidationException("Entidade não encontrada: ${doc.niEntidade} no ${index}º documento")
 
     val maxSrf01Numero = srf01repo.findMaxNumero()
-    val itens = parseItens(doc)
+    val itens = parseItens(index, doc)
 
     val srf01 = Srf01(
       srf01empresa = user.empId,
@@ -66,21 +67,21 @@ class Srf2030Service(
     )
 
     srf01.srf011s = itens
-    srf01.srf012s = parseFormaRecebimento(doc)
+    srf01.srf012s = parseFormaRecebimento(index, doc)
     try {
       srf01BaseService.save(srf01)
     }catch (e: ValidationException) {
-      throw ValidationException("Erro ao importar documento da linha ${doc.linha}: ${e.message}")
+      throw ValidationException("Erro ao importar ${index}º documento: ${e.message}")
     }
   }
 
-  private fun parseItens(doc: SRF2030Doc): Set<Srf011> {
+  private fun parseItens(index: Int, doc: SRF2030Doc): Set<Srf011> {
     if(doc.itens.isEmpty()) {
-      throw ValidationException("Documento sem itens na linha ${doc.linha}")
+      throw ValidationException("${index}º documento sem itens")
     }
 
     return doc.itens.map {
-      val cgs50id = cgs50repo.findIdByCodigo(it.codigoItem) ?: throw ValidationException("Item não encontrado: ${it.codigoItem} no documento da linha ${doc.linha}")
+      val cgs50id = cgs50repo.findIdByCodigo(it.codigoItem) ?: throw ValidationException("Item não encontrado: ${it.codigoItem} no ${index}º documento")
 
       Srf011(
         srf011item = Cgs50(cgs50id),
@@ -91,13 +92,13 @@ class Srf2030Service(
     }.toSet()
   }
 
-  private fun parseFormaRecebimento(doc: SRF2030Doc): Set<Srf012> {
+  private fun parseFormaRecebimento(index: Int, doc: SRF2030Doc): Set<Srf012> {
     if(doc.formasRecebimento.isEmpty()) {
-      throw ValidationException("Documento sem formas de recebimento na linha ${doc.linha}")
+      throw ValidationException("${index}º documento sem formas de recebimento")
     }
 
     return doc.formasRecebimento.map {
-      val cgs38id = cgs38repo.findIdByNome(it.nomeFormaRecebimento) ?: throw ValidationException("Forma de recebimento não encontrada: ${it.nomeFormaRecebimento} no documento da linha ${doc.linha}")
+      val cgs38id = cgs38repo.findIdByNome(it.nomeFormaRecebimento) ?: throw ValidationException("Forma de recebimento não encontrada: ${it.nomeFormaRecebimento} no ${index}º documento")
 
       Srf012(
         srf012forma = Cgs38(cgs38id),
