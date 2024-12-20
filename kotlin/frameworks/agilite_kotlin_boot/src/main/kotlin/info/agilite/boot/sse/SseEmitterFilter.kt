@@ -16,7 +16,14 @@ class SseEmitterFilter() : OncePerRequestFilter() {
   }
 
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-    filterChain.doFilter(request, response)
+    try{
+      filterChain.doFilter(request, response)
+    } finally {
+      completeSse(request)
+    }
+  }
+
+  private fun completeSse(request: HttpServletRequest) {
     val sseUid = request.getHeader(HEADER_SSE_UID_NAME)
     if(sseUid != null) {
       SSeService.complete(sseUid)
