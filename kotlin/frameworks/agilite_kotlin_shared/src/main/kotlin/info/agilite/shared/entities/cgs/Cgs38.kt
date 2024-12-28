@@ -14,7 +14,7 @@ const val CGS38GERAR_GERAR_QUITADO = 2
 const val CGS38FORMA_DINHEIRO = 0
 const val CGS38FORMA_BOLETO = 1
 @EntityCacheable
-class Cgs38() : AbstractEntity(7) {
+class Cgs38() : AbstractEntity(11) {
   constructor(cgs38id: Long) : this() {
     this.cgs38id = cgs38id
   }
@@ -25,7 +25,11 @@ class Cgs38() : AbstractEntity(7) {
     cgs38tipo: Int,
     cgs38gerar: Int,
     cgs38forma: Int,
-    cgs38conta: Cgs45? = null
+    cgs38conta: Cgs45? = null,
+    cgs38apiClientId: String? = null,
+    cgs38apiClientSecret: String? = null,
+    cgs38apiCert: String? = null,
+    cgs38apiKey: String? = null
   ) : this() {
     if(cgs38empresa != null) this.cgs38empresa = cgs38empresa
     this.cgs38nome = cgs38nome
@@ -33,6 +37,10 @@ class Cgs38() : AbstractEntity(7) {
     this.cgs38gerar = cgs38gerar
     this.cgs38forma = cgs38forma
     this.cgs38conta = cgs38conta
+    this.cgs38apiClientId = cgs38apiClientId
+    this.cgs38apiClientSecret = cgs38apiClientSecret
+    this.cgs38apiCert = cgs38apiCert
+    this.cgs38apiKey = cgs38apiKey
   }
 
 
@@ -109,6 +117,46 @@ class Cgs38() : AbstractEntity(7) {
       field = value
     }
     
+  var cgs38apiClientId: String? = null
+    get() {
+      validateLoaded(7, "cgs38apiClientId", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 7)
+      field = value
+    }
+    
+  var cgs38apiClientSecret: String? = null
+    get() {
+      validateLoaded(8, "cgs38apiClientSecret", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 8)
+      field = value
+    }
+    
+  var cgs38apiCert: String? = null
+    get() {
+      validateLoaded(9, "cgs38apiCert", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 9)
+      field = value
+    }
+    
+  var cgs38apiKey: String? = null
+    get() {
+      validateLoaded(10, "cgs38apiKey", false)
+      return field
+    }
+    set(value){
+      orm.changed(field, value, 10)
+      field = value
+    }
+    
 
   override var id: Long?
     @JsonIgnore get() = if(!isIdDefined()) null else cgs38id
@@ -134,6 +182,10 @@ const val N_CGS38_TIPO = "cgs38tipo";
 const val N_CGS38_GERAR = "cgs38gerar";
 const val N_CGS38_FORMA = "cgs38forma";
 const val N_CGS38_CONTA = "cgs38conta";
+const val N_CGS38_API_CLIENT_ID = "cgs38apiClientId";
+const val N_CGS38_API_CLIENT_SECRET = "cgs38apiClientSecret";
+const val N_CGS38_API_CERT = "cgs38apiCert";
+const val N_CGS38_API_KEY = "cgs38apiKey";
 
 val CGS38ID = FieldMetadata("cgs38id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
 val CGS38EMPRESA = FieldMetadata("cgs38empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
@@ -142,13 +194,17 @@ val CGS38TIPO = FieldMetadata("cgs38tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0
 val CGS38GERAR = FieldMetadata("cgs38gerar", 4, "Geração do documento financeiro", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(1, "Gerar em aberto"),FieldOptionMetadata(2, "Gerar quitado")), null, null, null, true, true, false);
 val CGS38FORMA = FieldMetadata("cgs38forma", 5, "Forma", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(0, "Dinheiro"),FieldOptionMetadata(1, "Boleto")), null, null, null, true, true, false);
 val CGS38CONTA = FieldMetadata("cgs38conta", 6, "Conta corrente para o lançamento financeiro", FieldTypeMetadata.fk, 10.0, false, "Cgs45", null, null, null, null, false, false, false);
+val CGS38APICLIENTID = FieldMetadata("cgs38apiClientId", 7, "Client ID da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS38APICLIENTSECRET = FieldMetadata("cgs38apiClientSecret", 8, "Client Secret da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS38APICERT = FieldMetadata("cgs38apiCert", 9, "Dados do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val CGS38APIKEY = FieldMetadata("cgs38apiKey", 10, "Dados da key do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
  
 val CGS38_METADATA = EntityMetadata(
   name = "Cgs38",
   descr = "Forma de Pagamento/Recebimento",
 
   fields = listOf(
-    CGS38ID,CGS38EMPRESA,CGS38NOME,CGS38TIPO,CGS38GERAR,CGS38FORMA,CGS38CONTA,
+    CGS38ID,CGS38EMPRESA,CGS38NOME,CGS38TIPO,CGS38GERAR,CGS38FORMA,CGS38CONTA,CGS38APICLIENTID,CGS38APICLIENTSECRET,CGS38APICERT,CGS38APIKEY,
   ),
 
   keys = listOf(

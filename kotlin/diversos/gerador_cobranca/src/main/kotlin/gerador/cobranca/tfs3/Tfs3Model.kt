@@ -29,7 +29,7 @@ data class Tfs3Evento(
         ItemCobranca(
           codigo = CODIGO_ITEM_TFS3,
           descricao = obs,
-          quantidade = totalEventos,
+          quantidade = 1,
           valor = valor
         )
       ),

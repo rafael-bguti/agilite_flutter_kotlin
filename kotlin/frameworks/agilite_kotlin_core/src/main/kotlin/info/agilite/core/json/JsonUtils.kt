@@ -80,6 +80,10 @@ object JsonUtils {
     return result
   }
 
+  fun toFormatedJson(obj: Any): String {
+    return onlyNonNullMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj)
+  }
+
   fun string2ListMap(json: String): List<Map<String, Any?>> {
     if (json.isBlank()) return emptyList()
     return try {

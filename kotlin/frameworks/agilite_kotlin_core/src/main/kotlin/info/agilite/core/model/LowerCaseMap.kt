@@ -108,25 +108,23 @@ class LowerCaseMap : HashMap<String, Any?> {
   }
 
   // ---- Getters auxilizares ----
+  fun getBoolean(key: String): Boolean? {
+    val result = get(key) ?: return null
+    if (result is Boolean) return result
+
+    return compute(key) { _, v -> (v.toString()).toBoolean() } as Boolean
+  }
+
   fun getLong(key: String): Long? {
     val result = get(key) ?: return null
     if (result is Long) return result
-
-    return if(result is String){
-      result.toLong()
-    } else {
-      compute(key) { k, v -> (result as Number).toLong() } as Long
-    }
+    return compute(key) { k, v -> (result.toString()).toLong() } as Long
   }
 
   fun getInteger(key: String): Int? {
     val result = get(key) ?: return null
     if (result is Int) return result
-    return if (result is String) {
-      result.toInt()
-    } else {
-      compute(key) { _, v -> (v as Number).toInt() } as Int
-    }
+    return compute(key) { _, v -> (v.toString()).toInt() } as Int
   }
 
   fun getBigDecimal(key: String): BigDecimal? {

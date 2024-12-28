@@ -1,5 +1,6 @@
 package info.agilite.scf.integrators
 
+import info.agilite.core.exceptions.ValidationException
 import info.agilite.integradores.bancos.IntegradorBancoFactory
 import info.agilite.scf.adapter.infra.Scf02PdfGeneratorRepository
 import info.agilite.scf.utils.toBancoConfig
@@ -18,7 +19,11 @@ class Scf02PdfGeneratorIntegratorImpl(
 
     val result = mutableMapOf<Long, Scf02AnexoCobranca>()
     dadosBoleto.groupBy { it.cgs38id }.forEach { entry ->
-      val cgs38 = Cgs38(entry.key) // TODO obter o objeto completo do banco para montar o acesso à API, hoje o acesso é só de testes por isso está funcionando
+      val cgs38 = repo.findById(Cgs38::class, entry.key)
+      if(cgs38?.cgs38apiClientId == null){
+        throw ValidationException("Forma de Pagamento não configurada para geração de boleto")
+      }
+
       val bancoConfig = cgs38.toBancoConfig()
       val integrador = IntegradorBancoFactory.getIntegradorBoletos(bancoConfig)
 

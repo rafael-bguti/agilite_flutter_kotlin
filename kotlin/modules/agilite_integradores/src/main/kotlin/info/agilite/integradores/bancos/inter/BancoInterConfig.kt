@@ -7,8 +7,8 @@ private const val urlHomologacao: String = "https://cdpj-sandbox.partners.uatint
 class BancoInterConfig(
   val clientId: String,
   val clientSecret: String,
-  val certPath: String,
-  val keyPath: String,
+  val certData: String,
+  val keyData: String,
   val homologando: Boolean,
   val contaCorrente: String ?= null,
 ) : BancoConfig {

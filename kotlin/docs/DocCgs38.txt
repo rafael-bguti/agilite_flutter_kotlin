@@ -16,6 +16,10 @@ cgs38forma                        2.0 S Int        Forma
                                                    0 - Dinheiro
                                                    1 - Boleto
 cgs38conta                       10.0 N Cgs45      Conta corrente para o lançamento financeiro
+cgs38apiClientId                100.0 N Str        Client ID da API de pagamento
+cgs38apiClientSecret            100.0 N Str        Client Secret da API de pagamento
+cgs38apiCert                      0.0 N Str        Dados do certificado
+cgs38apiKey                       0.0 N Str        Dados da key do certificado
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------

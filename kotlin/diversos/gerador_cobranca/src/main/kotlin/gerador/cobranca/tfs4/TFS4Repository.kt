@@ -8,20 +8,11 @@ import java.sql.DriverManager
 import java.time.format.DateTimeFormatter
 
 class TFS4Repository {
-  fun localizarConsumos(): List<ConsumoTFS4Revenda> {
+  fun localizarConsumos(): MutableList<ConsumoTFS4Licenca> {
     val consumos = findConsumos()
 
-    val revendas = mutableMapOf<String, ConsumoTFS4Revenda>()
-    for (consumo in consumos) {
-      val revendaCnpj = consumo["revendacnpj"] as String
-      val revendaRs = consumo["revendars"] as String
-      if (!revendas.containsKey(revendaCnpj)) {
-        revendas[revendaCnpj] = ConsumoTFS4Revenda(revendaCnpj, revendaRs, mutableListOf())
-      }
-    }
-
     val consumoPorLicenca = consumos.groupBy { it["licencacnpj"] as String }
-    consumoPorLicenca.forEach { licencaEntry ->
+    return consumoPorLicenca.map { licencaEntry ->
       val consumosPorEmpresa = licencaEntry.value.map { consumo ->
         Consumo(
           consumo["empresacnpj"] as String,
@@ -32,16 +23,19 @@ class TFS4Repository {
         )
       }.toMutableList()
 
-      val consumosPorLicenca = ConsumoTFS4Licenca(
+      ConsumoTFS4Licenca(
         licencaEntry.value[0]["licencanum"] as String,
         licencaEntry.value[0]["licencacnpj"] as String,
         licencaEntry.value[0]["licencars"] as String,
+        Revenda(
+          licencaEntry.value[0]["revendacnpj"] as String,
+          licencaEntry.value[0]["revendars"] as String,
+        ),
+        cobrarDiretamenteDoCliente = licencaEntry.value[0].getBoolean("cobrcliente") ?: false,
+        cnpjCobrancaSAM4DiretoCliente = licencaEntry.value[0]["cnpjcobcliente"] as String?,
         consumosPorEmpresa,
       )
-      revendas[licencaEntry.value[0]["revendacnpj"] as String]!!.licencas.add(consumosPorLicenca)
-    }
-
-    return revendas.values.toList()
+    }.toMutableList()
   }
 
   private fun findConsumos(): List<LowerCaseMap> {
@@ -61,7 +55,7 @@ class TFS4Repository {
         group by sistema_dfe, empresa_id
       )
       select m.maxid as maxid, coalesce(consumo, 0) as consumo, m.sistema_dfe as sistemadfe, con.licenca_num as licencanum, 
-      con.licenca_cnpj as licencacnpj, con.licenca_rs as licencars, emp.cnpj as empresacnpj, emp.rs as empresana,
+      con.licenca_cnpj as licencacnpj, con.licenca_rs as licencars, con.cobrar_cliente as cobrcliente, con.cnpjcobcliente as cnpjcobcliente, emp.cnpj as empresacnpj, emp.rs as empresana,
       rev.rs as revendars, rev.cnpj as revendacnpj
       from maxids as m
       inner join empresas as emp on emp.emp_id = m.empresa_id

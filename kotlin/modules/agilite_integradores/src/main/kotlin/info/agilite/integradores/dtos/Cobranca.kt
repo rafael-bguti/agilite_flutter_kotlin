@@ -8,7 +8,12 @@ data class Cobranca(
   val cliente: Cliente,
   val itens: List<ItemCobranca>,
   val formasPagamento: List<FormaPagamento>,
-)
+  val obs: String? = null,
+){
+  fun total(): BigDecimal {
+    return itens.sumOf { it.valor }
+  }
+}
 data class ItemCobranca(
   val codigo: String,
   val descricao: String,
@@ -30,6 +35,6 @@ data class Cliente(
 
 data class FormaPagamento(
   val nomeFormaPagamento: String,
-  val dataVencimento: LocalDate,
-  val valor: BigDecimal,
+  var dataVencimento: LocalDate,
+  var valor: BigDecimal,
 )

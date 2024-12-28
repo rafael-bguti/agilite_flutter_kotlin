@@ -26,7 +26,7 @@ data class MNFeCobranca(
         ItemCobranca(
           codigo = CODIGO_ITEM_MULTINFE,
           descricao = it.descr,
-          quantidade = it.qtd,
+          quantidade = 1,
           valor = it.total
         )
       },

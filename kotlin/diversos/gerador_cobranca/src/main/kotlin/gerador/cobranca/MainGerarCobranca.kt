@@ -1,11 +1,14 @@
 package gerador.cobranca
 
+import com.google.common.io.Files
 import gerador.cobranca.mensais.GeradorContatosMensais
-import gerador.cobranca.model.Faturamento
 import gerador.cobranca.multinfe.GeradorCobrancaMultinfe
 import gerador.cobranca.tfs4.GeradorCobrancaTFS4
 import gerador.cobranca.tfs3.GeradorCobrancaTFS3
-import gerador.cobranca.tfs4.TFS4Repository
+import info.agilite.core.extensions.moveUntilUtilDay
+import info.agilite.core.json.JsonUtils
+import info.agilite.integradores.dtos.Cobranca
+import java.io.File
 import java.math.BigDecimal
 import java.time.LocalDate
 
@@ -14,59 +17,69 @@ const val CODIGO_ITEM_MULTINFE = "2"
 const val CODIGO_ITEM_TFS3 = "3"
 const val CODIGO_ITEM_MANUTENCAO_NUVEM = "4";
 const val CODIGO_ITEM_DPIL = "5";
+const val CODIGO_ITEM_PROGRAMACAO = "6";
+const val CODIGO_ITEM_TFS4_CLI = "7";
 
-const val NATUREZA_TFS4_REV = "Tfs4Rev";
-const val NATUREZA_TFS4_BY_TFS3 = "Tfs4ByTfs3";
-const val NATUREZA_MNFE = "Mnfe"
-const val NATUREZA_TFS3 = "Tfs3"
-const val NATUREZA_NUVEM = "ManutNuvem";
-const val NATUREZA_DPIL = "Dpil";
+const val NATUREZA_TFS4_REV = "TFS4_REV";
+const val NATUREZA_TFS4_CLI = "TFS4_CLI";
+const val NATUREZA_MNFE = "MNFE"
+const val NATUREZA_MNFE_IN_SAM4 = "MNFE_IN_SAM4"
+const val NATUREZA_TFS3 = "TFS3"
+const val NATUREZA_NUVEM = "MANUT_NUVEM";
+const val NATUREZA_DPIL = "DPIL";
+const val NATUREZA_SOFTWARE = "SOFTWARE";
+const val NATUREZA_FREELA = "FREELA";
 
 const val NOME_FORMA_PAGAMENTO_BOLETO = "Boleto Inter"
 val mesAnoReferencia = LocalDate.now().minusMonths(1)
 
 fun main() {
   GerarCobranca().gerarCobranca()
+
 }
 
-val faturamentos = mutableListOf<Faturamento>()
+val cobrancasGeradas = mutableListOf<Cobranca>()
+val documentosNaoPagos = mutableListOf<DocumentosEmitidosDTO>()
 class GerarCobranca {
   fun gerarCobranca() {
-
-
     println("Gerando cobrança MultiNFe...")
-    val cobrancasMultiNFe = GeradorCobrancaMultinfe().gerar()
-    faturamentos.addAll(cobrancasMultiNFe)
-    println("Cobranças MultiNFe geradas: ${cobrancasMultiNFe.size}")
+    GeradorCobrancaMultinfe().gerar()
 
     println("Gerando cobrança TFS3...")
-    val cobrancasTFS3 = GeradorCobrancaTFS3().gerar()
-    faturamentos.addAll(cobrancasTFS3)
-    println("Cobranças TFS3 geradas: ${cobrancasTFS3.size}")
+    GeradorCobrancaTFS3().gerar()
 
     println("Gerando cobrança Mensais...")
-    val cobrancasContratos = GeradorContatosMensais().gerarCobrancasMensais()
-    faturamentos.addAll(cobrancasContratos)
-    println("Cobranças Mensais: ${cobrancasContratos.size}")
+    GeradorContatosMensais().gerarCobrancasMensais()
 
     println("Ajustando Cobranças...")
     ajustarCobrancas()
 
     println("Gerando cobranças no MultiNFe a partir do SAM4...")
-    val cobrancasTFS4 = gerarCobrancasDoTFS4()
-    faturamentos.addAll(cobrancasTFS4)
-    println("Cobranças MultiNFe by SAM4: ${cobrancasTFS4.size}")
+    GeradorCobrancaTFS4().gerar()
 
-//    ajustarVencimento();
+    ajustarVencimento()
+    Files.write(JsonUtils.toJson(cobrancasGeradas).toByteArray(), File("c:\\lixo\\cobrancas\\cobrancas.json"))
+    println("Arquivo criado em: c:\\lixo\\cobrancas\\cobrancas.json")
+    println("VALOR TOTAL: ${cobrancasGeradas.sumOf { it.total() }}")
+
+    println("\n\n")
+    println("* * * * * * * * A T E N Ç Ã O * * * * * * * *")
+    println("* * * * CLIENTES USANDO SEM PAGAR * * * * * *")
+    println(documentosNaoPagos.joinToString("\n"))
+    println("* * * * CLIENTES USANDO SEM PAGAR * * * * * *")
+    println("* * * * * * * * A T E N Ç Ã O * * * * * * * *")
+
   }
 
-  private fun gerarCobrancasDoTFS4(): List<Faturamento>{
-    val consumosTFS4PorRevenda = TFS4Repository().localizarConsumos()
-    val cobrancasMultiNfeViaTFS4 = GeradorCobrancaTFS4().gerar(consumosTFS4PorRevenda);
-
-    return cobrancasMultiNfeViaTFS4
+  private fun ajustarVencimento(){
+    cobrancasGeradas.forEach { cob ->
+      cob.formasPagamento.forEach {
+        if(it.dataVencimento.dayOfMonth == 20){
+         it.dataVencimento = it.dataVencimento.moveUntilUtilDay()
+        }
+      }
+    }
   }
-
 
   private fun ajustarCobrancas() {
     ajustarCNPJMaliber()
@@ -75,18 +88,21 @@ class GerarCobranca {
   }
 
   private fun ajustarCNPJMaliber(){
-    faturamentos.forEach {
-      if(it.cobranca.cliente.cnpj == "47938840000163"){// Tapecol
-        it.cobranca.cliente.cnpj = "47938840000325"
+    cobrancasGeradas.forEach {
+      if(it.cliente.cnpj == "47938840000163"){// Tapecol
+        it.cliente.cnpj = "47938840000325"
       }
     }
   }
 
   private fun ajustarSindicatoCapivari(){
-    //SINDICATO DOS TRABALHADORES ASSALARIADOS
-    faturamentos.forEach { fat ->
-      if(fat.cobranca.cliente.cnpj == "46927133000109" && fat.cobranca.natureza ==  NATUREZA_TFS3){
-        fat.cobranca.itens.forEach {
+    //SINDICATO DOS TRABALHADORES ASSALARIADOS DE CAPIVARI
+    cobrancasGeradas.forEach { cob ->
+      if(cob.cliente.cnpj == "46927133000109" && cob.natureza ==  NATUREZA_TFS3){
+        cob.itens.forEach {
+          it.valor = it.valor.multiply(BigDecimal("0.9"))
+        }
+        cob.formasPagamento.forEach {
           it.valor = it.valor.multiply(BigDecimal("0.9"))
         }
       }
@@ -95,10 +111,8 @@ class GerarCobranca {
   private fun gerarNovosTitulos(){
 
     //Silcon Materiais Elétricos e Hidraulicos
-    faturamentos.add(
-      Faturamento(
-        Utils.buildCobranca(NATUREZA_TFS3, "43279058000129", CODIGO_ITEM_TFS3, "Serviço de suporte em informática", BigDecimal("61.6")
-      )
+    cobrancasGeradas.add(
+      Utils.buildCobranca(NATUREZA_TFS3, "43279058000129", CODIGO_ITEM_TFS3, "Serviço de suporte em informática", BigDecimal("61.6")
     ))
   }
 }

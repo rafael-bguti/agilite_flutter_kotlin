@@ -26,4 +26,4 @@ cgs18modeloEmail                 10.0 N Cgs15      Modelo de e-mail
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
-cgs18_uk                      cgs18empresa, cgs18codigo, cgs18nome
+cgs18_uk                      cgs18empresa, cgs18codigo

@@ -118,6 +118,7 @@ val SCF021_METADATA = EntityMetadata(
   ),
 
   keys = listOf(
+    KeyMetadata("scf021_uk", KeyMetadataType.uk, "scf021remNumero"),
   ),
 
   oneToMany = mapOf(

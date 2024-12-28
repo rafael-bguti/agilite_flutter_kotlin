@@ -1,7 +1,6 @@
 package info.agilite.integradores.bancos.inter
 
 import com.fasterxml.jackson.core.JsonProcessingException
-import com.sun.tools.example.debug.expr.ExpressionParserConstants.THROW
 import info.agilite.core.exceptions.ToManyRequestException
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.json.JsonUtils
@@ -72,7 +71,7 @@ object BancoInterHttpClientBuilder {
   }
 
   fun build(config: BancoInterConfig): HttpClient {
-    val sslContext = buildSSLContext(config.certPath, config.keyPath)
+    val sslContext = buildSSLContext(config.certData, config.keyData)
     val sslParameters = SSLParameters().apply { needClientAuth = true }
     val httpClient = createHttpClient(sslContext, sslParameters)
 
@@ -106,13 +105,13 @@ object BancoInterHttpClientBuilder {
       .connectTimeout(Duration.ofSeconds(60))
       .build()
 
-  private fun buildSSLContext(crtPath: String, keyPath: String): SSLContext {
-    val cert = Files.readAllBytes(Path.of(crtPath))
-    val key = Files.readAllBytes(Path.of(keyPath))
-      .toString(Charsets.UTF_8)
+  private fun buildSSLContext(crtData: String, keyData: String): SSLContext {
+    val cert = crtData.toByteArray(Charsets.UTF_8)
+    val key = keyData
       .replace("-----BEGIN PRIVATE KEY-----", "")
       .replace("-----END PRIVATE KEY-----", "")
       .replace("\n", "")
+      .replace("\r", "")
       .toByteArray(Charsets.UTF_8)
 
     val certificateFactory = CertificateFactory.getInstance("X.509")

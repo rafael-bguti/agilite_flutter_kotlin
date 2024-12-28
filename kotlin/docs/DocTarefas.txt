@@ -4,6 +4,7 @@ CAS2010 - Processo - Login
 SCF2010 - Processo - Enviar boletos ao Banco
 SCF2011 - Processo - Processar retorno de boletos
 SRF2030 - Processo - Importar documentos
+SRF2031 - Apenas Backend - API Financeira
 SRF2050 - Processo - Gerar XML NFSe Prefeitura
 SRF2051 - Processo - Processar retorno NFSe Prefeitura
 SRF2060 - Processo - Enviar e-mail dos documentos

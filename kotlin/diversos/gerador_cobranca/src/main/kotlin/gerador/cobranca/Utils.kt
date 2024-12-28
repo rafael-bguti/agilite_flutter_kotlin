@@ -9,12 +9,12 @@ import java.time.LocalDate
 
 class Utils {
   companion object {
-    fun buildCobranca(natureza: String, cnpj: String, codigoItem: String, descrItem: String, valor: BigDecimal): Cobranca{
+    fun buildCobranca(natureza: String, cnpj: String, codigoItem: String, descrItem: String, valor: BigDecimal, forma: String = NOME_FORMA_PAGAMENTO_BOLETO): Cobranca{
       return Cobranca(
         natureza = natureza,
         cliente = Cliente(cnpj = cnpj),
         itens = listOf(ItemCobranca(codigo = codigoItem, descricao = descrItem, quantidade = 1, valor = valor)),
-        formasPagamento = listOf(FormaPagamento(nomeFormaPagamento = NOME_FORMA_PAGAMENTO_BOLETO, dataVencimento = LocalDate.now().withDayOfMonth(20), valor = valor))
+        formasPagamento = listOf(FormaPagamento(nomeFormaPagamento = forma, dataVencimento = LocalDate.now().withDayOfMonth(20), valor = valor))
       )
     }
   }

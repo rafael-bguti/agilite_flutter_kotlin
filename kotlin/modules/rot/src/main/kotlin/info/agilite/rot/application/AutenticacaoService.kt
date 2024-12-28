@@ -3,7 +3,7 @@ package info.agilite.rot.application
 import info.agilite.boot.exceptions.ClientException
 import info.agilite.boot.security.JwtService
 import info.agilite.boot.security.UserDetailCache
-import info.agilite.core.extensions.encryptToPassword
+import info.agilite.core.utils.CypherUtils
 import info.agilite.rot.adapter.infra.Rot10Repository
 import info.agilite.rot.domain.AuthenticateModel
 import org.springframework.http.HttpStatus
@@ -42,7 +42,7 @@ class AutenticacaoService(
 
   private fun validatePassword(password: String, autenticado: AuthenticateModel) {
     val root10senha = autenticado.rot10senha
-    val cryptPassword = password.encryptToPassword(STEPS)
+    val cryptPassword = CypherUtils.encryptToPassword(password, STEPS)
     if (root10senha != cryptPassword) throw ClientException(HttpStatus.UNAUTHORIZED, "Usuário ou senha inválidos")
   }
 }

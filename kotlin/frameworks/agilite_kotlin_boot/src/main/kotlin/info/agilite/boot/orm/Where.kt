@@ -5,18 +5,3 @@ interface Where{
   val params: Map<String, Any?>?
 }
 
-class Teste {
-
-  fun teste() {
-    where {
-      and {
-        or {
-
-        }
-        eq("id", 2)
-      }
-      eq("id", 1)
-    }
-  }
-}
-

@@ -210,7 +210,7 @@ val CGS18_METADATA = EntityMetadata(
   ),
 
   keys = listOf(
-    KeyMetadata("cgs18_uk", KeyMetadataType.uk, "cgs18empresa, cgs18codigo, cgs18nome"),
+    KeyMetadata("cgs18_uk", KeyMetadataType.uk, "cgs18empresa, cgs18codigo"),
   ),
 
   oneToMany = mapOf(

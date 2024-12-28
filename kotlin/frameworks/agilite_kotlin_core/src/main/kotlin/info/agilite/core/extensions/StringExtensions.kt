@@ -65,21 +65,6 @@ fun String.maxLenght(max: Int): String {
   return if (this.length > max) this.substring(0, max) else this
 }
 
-fun String.encryptToPassword(steps: Int): String{
-  return try {
-    var chave = this
-    val md: MessageDigest = MessageDigest.getInstance("SHA-256")
-    for (i in 0 until steps) {
-      val strSnh: ByteArray = chave.toByteArray()
-      md.update(strSnh)
-      chave = BigInteger(1, md.digest()).toString(16)
-    }
-    chave
-  } catch (e: Exception) {
-    throw RuntimeException("Erro ao criptografar texto", e)
-  }
-}
-
 // ----- PARSERS -----
 fun String.parseDate(pattern: String = "yyyy-MM-dd"): LocalDate {
   return LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))

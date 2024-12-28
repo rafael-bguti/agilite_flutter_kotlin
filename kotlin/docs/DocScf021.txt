@@ -11,3 +11,4 @@ scf021dtBaixa                    10.0 N Dat        Data de pagamento
 
 Índice                        Tipo Campos
 ---------------------------------------------------------------------------------------------------------
+scf021_uk                     scf021remNumero

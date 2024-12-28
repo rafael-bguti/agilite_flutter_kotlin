@@ -5,17 +5,25 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 fun LocalDate.format(pattern: String = "yyyy-MM-dd"): String {
-    return this.format(DateTimeFormatter.ofPattern(pattern))
+  return this.format(DateTimeFormatter.ofPattern(pattern))
 }
 
 fun LocalDateTime.format(pattern: String = "yyyy-MM-dd'T'HH:mm:yy"): String {
-    return this.format(DateTimeFormatter.ofPattern(pattern))
+  return this.format(DateTimeFormatter.ofPattern(pattern))
 }
 
 fun LocalDate.formatPtBR(): String {
-    return this.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+  return this.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 }
 
 fun LocalDateTime.formatISO(): String {
-    return this.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+  return this.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+}
+
+fun LocalDate.moveUntilUtilDay(): LocalDate {
+  var date = this
+  while (date.dayOfWeek.value > 5) {
+    date = date.plusDays(1)
+  }
+  return date
 }

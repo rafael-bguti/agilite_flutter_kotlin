@@ -5,13 +5,11 @@ import gerador.cobranca.tfs4.GeradorValoresTFS4.preco
 
 class ProcessadorDefaultTFS4() : Processador() {
   override fun processarValores(licenca: ConsumoTFS4Licenca) {
-    licenca.processado = true
-
     processarNFeMDFe(licenca)
     processarCTe(licenca)
     processarESocialReinf(licenca)
 
-    licenca.processado = true;
+    licenca.totalizar()
   }
 
   private fun processarNFeMDFe(licenca: ConsumoTFS4Licenca) {
@@ -19,6 +17,7 @@ class ProcessadorDefaultTFS4() : Processador() {
 
     var contratosMultinfe = contratoMultiNFe[licenca.licencaCNPJ]
     if (contratosMultinfe?.nfe != null) {
+      licenca.contratoMultiNFe = contratosMultinfe
       processarPeloContratoDoMultiNFe(licenca, contratosMultinfe.nfe!!, setOf(SistemaDFe.NFe, SistemaDFe.MDFe))
     } else {
       processar(licenca, setOf(SistemaDFe.NFe, SistemaDFe.MDFe))
@@ -70,7 +69,7 @@ class ProcessadorDefaultTFS4() : Processador() {
     licenca.historicoConsumo.add(
       HistoricoConsumo(
         licenca.montarHistorico(sistemas) + ". Cobrança pelo contrato do MultiNFE-SAM3",
-        preco(qtdDocs)
+        valorNFe.toBigDecimal()
       )
     )
   }

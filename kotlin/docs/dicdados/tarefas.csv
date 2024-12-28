@@ -4,7 +4,9 @@ ROT4001,Fro,Splash Screen - Frontend - Utilizada para fazer o redirecionamento i
 CAS2010,Pro,Login
 SCF2010,Pro,Enviar boletos ao Banco
 SCF2011,Pro,Processar retorno de boletos
+SCF5001,Bac,API
 SRF2030,Pro,Importar documentos
 SRF2050,Pro,Gerar XML NFSe Prefeitura
 SRF2051,Pro,Processar retorno NFSe Prefeitura
 SRF2060,Pro,Enviar e-mail dos documentos
+SRF5001,Bac,API
