@@ -12,7 +12,7 @@ import java.time.LocalDate
 const val SCF02TIPO_RECEBER = 0
 const val SCF02TIPO_PAGAR = 1
 
-class Scf02() : AbstractEntity(19) {
+class Scf02() : AbstractEntity(18) {
   constructor(scf02id: Long) : this() {
     this.scf02id = scf02id
   }
@@ -26,7 +26,6 @@ class Scf02() : AbstractEntity(19) {
     scf02nossoNumDV: Int? = null,
     scf02dtEmiss: LocalDate,
     scf02dtVenc: LocalDate,
-    scf02dtPagto: LocalDate? = null,
     scf02hist: String? = null,
     scf02valor: BigDecimal,
     scf02multa: BigDecimal? = null,
@@ -44,7 +43,6 @@ class Scf02() : AbstractEntity(19) {
     this.scf02nossoNumDV = scf02nossoNumDV
     this.scf02dtEmiss = scf02dtEmiss
     this.scf02dtVenc = scf02dtVenc
-    this.scf02dtPagto = scf02dtPagto
     this.scf02hist = scf02hist
     this.scf02valor = scf02valor
     this.scf02multa = scf02multa
@@ -149,9 +147,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02dtPagto: LocalDate? = null
+  var scf02hist: String? = null
     get() {
-      validateLoaded(9, "scf02dtPagto", false)
+      validateLoaded(9, "scf02hist", false)
       return field
     }
     set(value){
@@ -159,9 +157,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02hist: String? = null
+  var scf02valor: BigDecimal = BigDecimal("-1")
     get() {
-      validateLoaded(10, "scf02hist", false)
+      validateLoaded(10, "scf02valor", true)
       return field
     }
     set(value){
@@ -169,9 +167,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02valor: BigDecimal = BigDecimal("-1")
+  var scf02multa: BigDecimal? = null
     get() {
-      validateLoaded(11, "scf02valor", true)
+      validateLoaded(11, "scf02multa", false)
       return field
     }
     set(value){
@@ -179,9 +177,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02multa: BigDecimal? = null
+  var scf02juros: BigDecimal? = null
     get() {
-      validateLoaded(12, "scf02multa", false)
+      validateLoaded(12, "scf02juros", false)
       return field
     }
     set(value){
@@ -189,9 +187,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02juros: BigDecimal? = null
+  var scf02encargos: BigDecimal? = null
     get() {
-      validateLoaded(13, "scf02juros", false)
+      validateLoaded(13, "scf02encargos", false)
       return field
     }
     set(value){
@@ -199,9 +197,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02encargos: BigDecimal? = null
+  var scf02desconto: BigDecimal? = null
     get() {
-      validateLoaded(14, "scf02encargos", false)
+      validateLoaded(14, "scf02desconto", false)
       return field
     }
     set(value){
@@ -209,9 +207,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02desconto: BigDecimal? = null
+  var scf02regOrigem: LowerCaseMap? = null
     get() {
-      validateLoaded(15, "scf02desconto", false)
+      validateLoaded(15, "scf02regOrigem", false)
       return field
     }
     set(value){
@@ -219,9 +217,9 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02regOrigem: LowerCaseMap? = null
+  var scf02lancamento: Scf11? = null
     get() {
-      validateLoaded(16, "scf02regOrigem", false)
+      validateLoaded(16, "scf02lancamento", false)
       return field
     }
     set(value){
@@ -229,23 +227,13 @@ class Scf02() : AbstractEntity(19) {
       field = value
     }
     
-  var scf02lancamento: Scf11? = null
+  var scf021s: Set<Scf021>? = null
     get() {
-      validateLoaded(17, "scf02lancamento", false)
+      validateLoaded(17, "scf021s", false)
       return field
     }
     set(value){
       orm.changed(field, value, 17)
-      field = value
-    }
-    
-  var scf021s: Set<Scf021>? = null
-    get() {
-      validateLoaded(18, "scf021s", false)
-      return field
-    }
-    set(value){
-      orm.changed(field, value, 18)
       field = value
     }
     
@@ -276,7 +264,6 @@ const val N_SCF02_NOSSO_NUM = "scf02nossoNum";
 const val N_SCF02_NOSSO_NUM_DV = "scf02nossoNumDV";
 const val N_SCF02_DT_EMISS = "scf02dtEmiss";
 const val N_SCF02_DT_VENC = "scf02dtVenc";
-const val N_SCF02_DT_PAGTO = "scf02dtPagto";
 const val N_SCF02_HIST = "scf02hist";
 const val N_SCF02_VALOR = "scf02valor";
 const val N_SCF02_MULTA = "scf02multa";
@@ -296,29 +283,28 @@ val SCF02NOSSONUM = FieldMetadata("scf02nossoNum", 5, "Nosso Número", FieldType
 val SCF02NOSSONUMDV = FieldMetadata("scf02nossoNumDV", 6, "DV do Nosso Número", FieldTypeMetadata.int, 1.0, false, null, null, null, null, null, false, false, false);
 val SCF02DTEMISS = FieldMetadata("scf02dtEmiss", 7, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
 val SCF02DTVENC = FieldMetadata("scf02dtVenc", 8, "Data de vencimento", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF02DTPAGTO = FieldMetadata("scf02dtPagto", 9, "Data da baixa", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
-val SCF02HIST = FieldMetadata("scf02hist", 10, "Histórico", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val SCF02VALOR = FieldMetadata("scf02valor", 11, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SCF02MULTA = FieldMetadata("scf02multa", 12, "Valor da Multa", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02JUROS = FieldMetadata("scf02juros", 13, "Valor de Juros", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02ENCARGOS = FieldMetadata("scf02encargos", 14, "Valor de Encargos", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02DESCONTO = FieldMetadata("scf02desconto", 15, "Valor de Desconto", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02REGORIGEM = FieldMetadata("scf02regOrigem", 16, "Registro de Origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false);
-val SCF02LANCAMENTO = FieldMetadata("scf02lancamento", 17, "Lancamento de quitação", FieldTypeMetadata.fk, 10.0, false, "Scf11", null, null, null, null, false, false, false);
+val SCF02HIST = FieldMetadata("scf02hist", 9, "Histórico", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val SCF02VALOR = FieldMetadata("scf02valor", 10, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
+val SCF02MULTA = FieldMetadata("scf02multa", 11, "Valor da Multa", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SCF02JUROS = FieldMetadata("scf02juros", 12, "Valor de Juros", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SCF02ENCARGOS = FieldMetadata("scf02encargos", 13, "Valor de Encargos", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SCF02DESCONTO = FieldMetadata("scf02desconto", 14, "Valor de Desconto", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SCF02REGORIGEM = FieldMetadata("scf02regOrigem", 15, "Registro de Origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false);
+val SCF02LANCAMENTO = FieldMetadata("scf02lancamento", 16, "Lancamento de quitação", FieldTypeMetadata.fk, 10.0, false, "Scf11", null, null, null, null, false, false, false);
  
 val SCF02_METADATA = EntityMetadata(
   name = "Scf02",
   descr = "Documento a pagar/receber",
 
   fields = listOf(
-    SCF02ID,SCF02EMPRESA,SCF02TIPO,SCF02FORMA,SCF02ENTIDADE,SCF02NOSSONUM,SCF02NOSSONUMDV,SCF02DTEMISS,SCF02DTVENC,SCF02DTPAGTO,SCF02HIST,SCF02VALOR,SCF02MULTA,SCF02JUROS,SCF02ENCARGOS,SCF02DESCONTO,SCF02REGORIGEM,SCF02LANCAMENTO,
+    SCF02ID,SCF02EMPRESA,SCF02TIPO,SCF02FORMA,SCF02ENTIDADE,SCF02NOSSONUM,SCF02NOSSONUMDV,SCF02DTEMISS,SCF02DTVENC,SCF02HIST,SCF02VALOR,SCF02MULTA,SCF02JUROS,SCF02ENCARGOS,SCF02DESCONTO,SCF02REGORIGEM,SCF02LANCAMENTO,
   ),
 
   keys = listOf(
   ),
 
   oneToMany = mapOf(
-    "scf021s" to OneToManyMetadata(18, Scf021::class.java, "scf021doc"),
+    "scf021s" to OneToManyMetadata(17, Scf021::class.java, "scf021doc"),
   )
 )
 

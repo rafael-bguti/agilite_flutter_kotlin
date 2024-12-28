@@ -5,7 +5,6 @@ import info.agilite.core.exceptions.ValidationException
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.entities.cgs.N_CGS80_NI
 import info.agilite.shared.entities.scf.*
-import org.springframework.core.annotation.MergedAnnotationPredicates.unique
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
@@ -33,7 +32,7 @@ class Scf5001Repository: RootRepository() {
       SELECT scf02dtVenc
       FROM Scf02
       INNER JOIN Cgs80 ON cgs80id = scf02entidade
-      WHERE $N_SCF02_DT_VENC < :hoje AND $N_SCF02_DT_PAGTO is null 
+      WHERE $N_SCF02_DT_VENC < :hoje AND $N_SCF02_LANCAMENTO is null 
       AND $N_CGS80_NI = :cnpj AND $N_SCF02_TIPO = $SCF02TIPO_RECEBER
     """.trimIndent()
 

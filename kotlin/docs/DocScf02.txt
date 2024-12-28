@@ -14,7 +14,6 @@ scf02nossoNum                    12.0 N Lng        Nosso Número
 scf02nossoNumDV                   1.0 N Int        DV do Nosso Número
 scf02dtEmiss                     10.0 S Dat        Data de emissão
 scf02dtVenc                      10.0 S Dat        Data de vencimento
-scf02dtPagto                     10.0 N Dat        Data da baixa
 scf02hist                         0.0 N Str        Histórico
 scf02valor                       16.2 S Dec        Valor
 scf02multa                       16.2 N Dec        Valor da Multa

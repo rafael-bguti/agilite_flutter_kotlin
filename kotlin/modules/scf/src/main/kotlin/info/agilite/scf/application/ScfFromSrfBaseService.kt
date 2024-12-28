@@ -37,8 +37,6 @@ class ScfFromSrfBaseService(
         if (cgs38.cgs38gerar == CGS38GERAR_GERAR_QUITADO) {
           val scf11 = gerarNovoLancamentoFinanceiro(novosIdsScf11.next(), srf01, srf01.srf01natureza, srf012, cgs38, scf02)
           scf02.scf02lancamento = scf11
-          scf02.scf02dtPagto = LocalDate.now()
-
           batchOperations.insert(scf11, 0)
         }
         batchOperations.insert(scf02, 1)

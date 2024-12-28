@@ -12,7 +12,7 @@ class Srf5001Response (
 
   val srf012valor: BigDecimal,
 
-  val scf02dtPagto: LocalDate?,
+  val scf11data: LocalDate?,
   var scf02dtVenc: LocalDate,
 
   var srf01numero: Int,
