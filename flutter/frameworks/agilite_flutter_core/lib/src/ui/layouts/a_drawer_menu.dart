@@ -96,15 +96,20 @@ class _AMenuLinkState extends State<_AMenuLink> {
                     color: itemColor,
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    widget.item.title ?? '',
-                    style: textTheme!.bodyMedium!.copyWith(
-                      color: itemColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      widget.item.title ?? '',
+                      style: textTheme!.bodyMedium!.copyWith(
+                        color: itemColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
-                  if (_isGroup) const Spacer(),
+                  //if (_isGroup) const Spacer(),
                   if (_isGroup)
                     AnimatedRotation(
                       key: ValueKey('ICON_${widget.item.id}'),

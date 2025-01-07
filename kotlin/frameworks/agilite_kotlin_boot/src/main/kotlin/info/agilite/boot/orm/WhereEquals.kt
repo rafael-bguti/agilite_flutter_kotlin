@@ -8,6 +8,7 @@ class WhereEquals(
   override val params: Map<String, Any?> = MapUtils.newStringMap(*values)
 
   override fun where(whereAndOr: String): String {
+    if(params.isEmpty()) return " $whereAndOr true "
     return " $whereAndOr ${params.entries.joinToString(" AND ") { clause(it) }} "
   }
 

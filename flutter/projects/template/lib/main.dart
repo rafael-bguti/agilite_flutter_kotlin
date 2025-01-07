@@ -14,5 +14,6 @@ void main() async {
     appTitle: 'Agilite Flutter Boot',
     routes: routes,
     themeMode: ThemeMode.light,
+    storageName: 'template_agilite',
   ));
 }

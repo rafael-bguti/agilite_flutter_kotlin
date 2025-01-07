@@ -20,16 +20,16 @@ class Cgs38Repository() : RootRepository() {
     )
   }
 
-  fun findAllToBoletos(): List<Cgs38> {
-    return list(
+  fun findToBaixarBoletosById(cgs38id: Long): Cgs38? {
+    return unique(
       DbQueryBuilders.build(
         Cgs38::class,
         "*, cgs38conta.*",
         where = WhereSimple(
           AgiliteWhere.defaultWhere(CGS38_METADATA) +
-          " AND $N_CGS38_FORMA = $CGS38FORMA_BOLETO " +
-          " AND $N_CGS38_TIPO = $CGS38TIPO_RECEBIMENTO "
-        ))
+          " AND cgs38id = $cgs38id "
+        ),
+      )
     )
   }
 }

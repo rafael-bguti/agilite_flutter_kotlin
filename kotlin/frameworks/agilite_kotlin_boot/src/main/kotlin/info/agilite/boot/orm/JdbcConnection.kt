@@ -42,7 +42,7 @@ class JdbcConnection(
   }
 
   fun <T> query(sql: String, paramMap: Map<String, *>, rse: ResultSetExtractor<T>): T? {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     return jdbc.query(sql, paramMap, rse)
   }
 
@@ -57,7 +57,7 @@ class JdbcConnection(
   }
 
   fun query(sql: String, paramMap: Map<String, *>, rch: RowCallbackHandler) {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     jdbc.query(sql, paramMap, rch)
   }
 
@@ -72,7 +72,7 @@ class JdbcConnection(
   }
 
   fun <T> query(sql: String, paramMap: Map<String, *>, rowMapper: RowMapper<T>): List<T> {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     return jdbc.query(sql, paramMap, rowMapper)
   }
 
@@ -94,7 +94,7 @@ class JdbcConnection(
   }
 
   fun <T> queryForObject(sql: String, paramMap: Map<String, *>, rowMapper: RowMapper<T>): T? {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     return jdbc.queryForObject(sql, paramMap, rowMapper)
   }
 
@@ -103,7 +103,7 @@ class JdbcConnection(
   }
 
   fun <T> queryForObject(sql: String, paramMap: Map<String, *>, requiredType: Class<T>): T? {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     return jdbc.queryForObject(sql, paramMap, requiredType)
   }
 
@@ -120,7 +120,7 @@ class JdbcConnection(
   }
 
   fun <T> queryForList(sql: String, paramMap: Map<String, *>, elementType: Class<T>): List<T> {
-    logarSQL(sql)
+    logarSQL(sql, paramMap)
     return jdbc.queryForList(sql, paramMap, elementType)
   }
 
@@ -184,7 +184,7 @@ class JdbcConnection(
     return jdbc.batchUpdate(sql, batchArgs, generatedKeyHolder, keyColumnNames)
   }
 
-  private fun logarSQL(sql: String) {
+  private fun logarSQL(sql: String, paramMap: Map<String, *>? = null) {
     if(LOGGER.isDebugEnabled){
       val stack = Thread.currentThread().stackTrace.filter {
         it.className.startsWith("info.agilite")
@@ -197,7 +197,9 @@ class JdbcConnection(
       | 
       |  
       |+     ************************** SQL **************************
-      |+       ${sql.replace("\n", "\n+       ")}
+      |       ${sql.replace("\n", "\n       ")}
+      |+     --- Params ---
+      |+       ${paramMap?.map { "${it.key} = ${it.value}" }?.joinToString(", ")}
       |+     --- Stack ---
       |+       ${stack.replace("\n", "\n+       ")}
       |+     ************************** END **************************

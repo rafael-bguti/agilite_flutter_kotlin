@@ -30,7 +30,7 @@ class Scf02Repository: RootRepository() {
             simple(" $N_SCF021_REM_NUMERO IN (:scf021remNumeros)",
               "scf021remNumeros", scf021remNumeros,
             )
-            simple(" $N_SCF021_CONTA = $cgs45id")
+            eq(N_SCF021_CONTA, cgs45id)
           }
         },
         simpleJoin = "INNER JOIN Scf021 ON scf021doc = scf02id"

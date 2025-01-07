@@ -22,6 +22,14 @@ class WhereBuilder {
         wheres += WhereSimple(filter, MapUtils.newStringMap(*params))
     }
 
+    fun isNotNull(field: String) {
+        wheres += WhereNotNull(field)
+    }
+
+    fun isNull(field: String) {
+        wheres += WhereNull(field)
+    }
+
     fun and(block: WhereBuilder.() -> Unit) {
         val andConditions = WhereBuilder().apply(block).build()
         wheres += WhereAnd(*andConditions.toTypedArray())

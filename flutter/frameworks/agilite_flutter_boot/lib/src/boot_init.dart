@@ -13,18 +13,17 @@ class Boot {
   }
 }
 
-// //TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
 void _configErrorLog() {
-  FlutterError.onError = (errorDetails) {
-    debugPrint('Virgiii - FlutterError.onError');
-    debugPrint('Error on [FlutterError.onError]: $errorDetails');
+  // FlutterError.onError = (details) {
+  //   debugPrint('Virgiii - FlutterError.onError');
+  //   FlutterError.presentError(details);
+  //   // TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
+  // };
 
-    runOnNextBuild(() {
-      AError.defaultCatch(errorDetails.exception, errorDetails.stack ?? StackTrace.current);
-    });
-  };
+  ErrorWidget.builder = (errorDetails) => const Text('ERROR!!!');
 
   PlatformDispatcher.instance.onError = (error, stack) {
+    // //TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
     debugPrint('Virgiii - PlatformDispatcher.instance.onError');
     debugPrint('Error on [FlutterError.onError]: $error');
     debugPrint('Stack on [FlutterError.onError]: $stack');

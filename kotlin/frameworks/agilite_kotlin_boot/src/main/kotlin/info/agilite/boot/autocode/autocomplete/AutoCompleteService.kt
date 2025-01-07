@@ -19,33 +19,45 @@ class AutoCompleteService(
     val columnsToSelect: String = autocompleteConfig.columnsToSelect
 
     val params = mutableMapOf<String, Any?>()
-    var select = " SELECT ${autocompleteConfig.table.lowercase()}id, $columnsToSelect FROM ${autocompleteConfig.table} WHERE true "
-    if(dto.defaultWhere != null){
-      select += " AND ${dto.defaultWhere.filter} "
-      params.putAll(dto.defaultWhere.params ?: emptyMap())
-    }
-    if(autocompleteConfig.defaultWhere != null){
-      select += " AND ${autocompleteConfig.defaultWhere.filter} "
-      params.putAll(autocompleteConfig.defaultWhere.params ?: emptyMap())
-    }
+    
+    var select = buildString {
+      append(" SELECT ${autocompleteConfig.table.lowercase()}id, $columnsToSelect FROM ${autocompleteConfig.table} ")
 
-    val columnsToSearch = autocompleteConfig.columnsToView ?: columnsToSelect
-    if(!dto.ids.isNullOrEmpty()){
-      select += " AND ${autocompleteConfig.table.lowercase()}id IN (:ids) "
-      params["ids"] = dto.ids
-    }else {
-      if (!dto.query.isNullOrBlank()) {
-        select += " AND ( "
-        select += columnsToSearch.split(",").joinToString(" OR ") { "$it ILIKE :search" }
-        select += " ) "
-        params["search"] = "%${dto.query}%"
+      if(autocompleteConfig.simpleJoin != null){
+        append(autocompleteConfig.simpleJoin)
+      }  
+
+      append(" WHERE TRUE ")
+
+      if(dto.defaultWhere != null){
+        append(" AND ${dto.defaultWhere.filter} ")
+        params.putAll(dto.defaultWhere.params ?: emptyMap())
       }
-      val entityMetadata = defaultMetadataRepository.loadEntityMetadata(autocompleteConfig.table)
-      select += " AND ${AgiliteWhere.defaultWhere(entityMetadata)}"
+
+      if(autocompleteConfig.defaultWhere != null){
+        append(autocompleteConfig.defaultWhere.where("AND"))
+        params.putAll(autocompleteConfig.defaultWhere.params ?: emptyMap())
+      }
+
+      val columnsToSearch = autocompleteConfig.columnsToView ?: columnsToSelect
+      if(!dto.ids.isNullOrEmpty()){
+        append(" AND ${autocompleteConfig.table.lowercase()}id IN (:ids) ")
+        params["ids"] = dto.ids
+      }else {
+        if (!dto.query.isNullOrBlank()) {
+          append(" AND ( ")
+          append(columnsToSearch.split(",").joinToString(" OR ") { "$it ILIKE :search" })
+          append(" ) ")
+          params["search"] = "%${dto.query}%"
+        }
+        val entityMetadata = defaultMetadataRepository.loadEntityMetadata(autocompleteConfig.table)
+        append(" AND ${AgiliteWhere.defaultWhere(entityMetadata)}")
+      }
+
+      append(" ORDER BY $columnsToSearch ")
+      append(" LIMIT 50")
     }
 
-    select += " ORDER BY $columnsToSearch "
-    select += " LIMIT 50"
     val data = repository.listMap(select, params)
 
     val columnsToLabel = (autocompleteConfig.columnsToView ?: columnsToSelect).splitToList(",")

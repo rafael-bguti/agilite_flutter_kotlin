@@ -5,28 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/FrontEnd Agilite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FrontEnd Agilite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cas/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cas/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cgs/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cgs/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/gdf/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/gdf/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/rot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/rot/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/adapter/web/Srf2030Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/adapter/web/Srf2030Controller.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030CsvParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030CsvParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030Service.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/domain/Srf2030Doc.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/domain/Srf2030Doc.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/boot_init.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/boot_init.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/metadata/repository/metadata_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/metadata/repository/metadata_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/models/lowercase_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/models/lowercase_map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/layouts/a_drawer_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/layouts/a_drawer_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/layouts/a_full_layout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/layouts/a_full_layout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/env/.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/env/.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/lib/src/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/src/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/template/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/template/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/AutoCompleteService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/autocode/autocomplete/AutoCompleteService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/AutocompleteConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/metadata/models/AutocompleteConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/JdbcConnection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/JdbcConnection.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereAnd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereAnd.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereEquals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereEquals.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereOr.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/WhereOr.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/metadata/DicDados.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/metadata/DicDados.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/bancos/inter/IntegradorDeBoletosBancoInter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/bancos/inter/IntegradorDeBoletosBancoInter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/bancos/models/BoletoRecebido.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/bancos/models/BoletoRecebido.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/adapter/infra/Cgs38Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/adapter/infra/Cgs38Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/dto/Scf2011RetornoDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/dto/Scf2011RetornoDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/infra/Scf02Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/infra/Scf02Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/web/Scf2011Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/web/Scf2011Controller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/application/Scf2011Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/application/Scf2011Service.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2060Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2060Service.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kotlin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -44,6 +69,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Flutter.main.dart (1).executor&quot;: &quot;Debug&quot;,
     &quot;Flutter.main.dart.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -53,8 +79,8 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Fontes/FontesAgilite/Agilite/flutter/frameworks/agilite_flutter_core/lib/src/sse&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3229885&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
@@ -63,8 +89,16 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\sse" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\scf\lib\tasks\scf2011" />
+      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\scf\lib" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/projects/template/lib/main.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="additionalArgs" value="--dart-define-from-file=./env/.dev.json" />
       <option name="filePath" value="$PROJECT_DIR$/projects/erp/lib/main.dart" />
@@ -73,6 +107,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Flutter.main.dart (1)" />
       </list>
     </recent_temporary>
   </component>

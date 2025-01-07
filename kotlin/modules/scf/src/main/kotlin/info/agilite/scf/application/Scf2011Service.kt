@@ -20,23 +20,24 @@ class Scf2011Service(
   private val cgs38repo: Cgs38Repository,
   private val scf02repo: Scf02Repository,
 ) {
-  fun processarBoletosPagos(): List<BoletoProcessado> {
-    val cgs38s = cgs38repo.findAllToBoletos()
+  fun processarBoletosPagos(cgs38id: Long): List<BoletoProcessado> {
+    val cgs38 = cgs38repo.findToBaixarBoletosById(cgs38id) ?: throw Exception("Forma de pagamento não encontrada")
 
     val batch = BatchOperations()
-
     val result: MutableList<BoletoProcessado> = mutableListOf()
-    for(cgs38 in cgs38s) {
-      val integrador = IntegradorBancoFactory.getIntegradorBoletos(cgs38.toBancoConfig())
+    val integrador = IntegradorBancoFactory.getIntegradorBoletos(cgs38.toBancoConfig())
 
-      val dataInicial = cgs38.cgs38conta!!.cgs45dtUltProcRetorno ?: LocalDate.now().plusDays(-90)
-      val dataFinal = LocalDate.now()
+    val dataInicial = cgs38.cgs38conta!!.cgs45dtUltProcRetorno ?: LocalDate.now().plusDays(-90)
+    val dataFinal = LocalDate.now()
 
-      val boletos = integrador.buscarBoletosPagos(dataInicial, dataFinal)
-      if(boletos != null){
-        baixarBoletosRecebidos(cgs38, boletos, batch, result)
-      }
+    val boletos = integrador.buscarBoletosPagos(dataInicial, dataFinal)
+    if(boletos != null){
+      baixarBoletosRecebidos(cgs38, boletos, batch, result)
     }
+
+    cgs38.cgs38conta!!.cgs45dtUltProcRetorno = LocalDate.now()
+    batch.updateChanges(cgs38.cgs38conta!!, 3)
+
     scf02repo.executeBatch(batch)
 
     return result
@@ -51,7 +52,18 @@ class Scf2011Service(
     cobranca.forEach { cobranca ->
       val scf2011RetornoDto = mapDocsByRemNumero[cobranca.codigoSolicitacao]
       if(scf2011RetornoDto == null){
-        resultado.add(BoletoProcessado(cobranca, false, "Cobranca não encontrado no Sistema"))
+        resultado.add(BoletoProcessado(null, null, cobranca, false, "Boleto pago no banco, mas não encontrado no sistema"))
+        return@forEach
+      }
+
+      if(scf2011RetornoDto.scf02lancamento != null){
+        resultado.add(BoletoProcessado(
+          scf2011RetornoDto.scf02nossoNum,
+          scf2011RetornoDto.scf02dtVenc,
+          cobranca,
+          false,
+          "Boleto pago no banco, mas já estava baixado no sistema"
+        ))
         return@forEach
       }
 
@@ -59,7 +71,7 @@ class Scf2011Service(
         scf11empresa = UserContext.safeUser.empId,
         scf11tipo = scf2011RetornoDto.scf02tipo,
         scf11conta = cgs38.cgs38conta!!,
-        scf11data = LocalDate.now(),
+        scf11data = cobranca.dataSituacao,
         scf11valor = cobranca.valorTotalRecebido,
         scf11hist = "Baixa do documento de número ${scf2011RetornoDto.scf02nossoNum} ",
         scf11regOrigem = RegOrigem("Scf02", scf2011RetornoDto.scf02id).toMap()
@@ -76,10 +88,12 @@ class Scf2011Service(
       }
 
       batch.updateChanges(scf021, 2)
-      resultado.add(BoletoProcessado(cobranca, true, "Baixa realizada com sucesso"))
+      resultado.add(BoletoProcessado(
+        scf2011RetornoDto.scf02nossoNum,
+        scf2011RetornoDto.scf02dtVenc,
+        cobranca,
+        true,
+        "Baixa realizada com sucesso"))
     }
-
-    cgs38.cgs38conta!!.cgs45dtUltProcRetorno = LocalDate.now()
-    batch.updateChanges(cgs38.cgs38conta!!, 3)
   }
 }

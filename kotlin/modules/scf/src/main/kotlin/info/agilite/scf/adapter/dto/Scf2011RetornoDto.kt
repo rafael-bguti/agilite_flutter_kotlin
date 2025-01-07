@@ -12,6 +12,7 @@ data class Scf2011RetornoDto(
   val scf02id: Long,
   val scf02tipo: Int,
   val scf02nossoNum: String?,
+  val scf02dtVenc: LocalDate,
   var scf02dtPagto: LocalDate?,
 
   var scf02lancamento: Scf11?,

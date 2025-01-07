@@ -82,4 +82,11 @@ class LowercaseMap extends MapBase<String, dynamic> {
     if (value == null) return defaultValue;
     return value.toString();
   }
+
+  DateTime? getDateTime(String key, [DateTime? defaultValue]) {
+    var value = this[key];
+    if (value == null) return defaultValue;
+    if (value is DateTime) return value;
+    return DateTime.parse(value.toString());
+  }
 }

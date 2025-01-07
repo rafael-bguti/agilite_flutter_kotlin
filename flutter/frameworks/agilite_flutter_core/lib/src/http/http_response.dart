@@ -17,9 +17,17 @@ class HttpResponse {
           'Server response is null',
         )
       : bodyString.toMap();
-  List<LowercaseMap> get bodyListLowerCaseMap => bodyString.toListLowercaseMap();
+  List<LowercaseMap> get bodyListLowerCaseMap => !hasBody
+      ? throw UnexpectedException(
+          'Server response is null',
+        )
+      : bodyString.toListLowercaseMap();
 
-  List<Map<String, dynamic>> get bodyList => bodyString.toListMap();
+  List<Map<String, dynamic>> get bodyList => !hasBody
+      ? throw UnexpectedException(
+          'Server response is null',
+        )
+      : bodyString.toListMap();
 
   int get statusCode => _response.statusCode;
   String? get reasonPhrase => _response.reasonPhrase;

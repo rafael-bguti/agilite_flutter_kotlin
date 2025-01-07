@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 const kMinWidthMenuFixed = 1280.0;
 const _kTopbarHeight = 64.0;
-const kSidebarWidth = 255.0;
+const kSidebarWidth = 300.0;
 
 FullLayoutFacade fullLayoutFacade = FullLayoutFacade();
 

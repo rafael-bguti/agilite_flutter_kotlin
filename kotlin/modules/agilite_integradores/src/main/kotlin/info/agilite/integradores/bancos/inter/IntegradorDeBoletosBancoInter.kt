@@ -41,7 +41,7 @@ class IntegradorDeBoletosBancoInter(
     val requestParams = mapOf(
       "dataInicial" to vctoInicial.format(),
       "dataFinal" to vctoFinal.format(),
-      "filtrarDataPor" to "VENCIMENTO",
+      "filtrarDataPor" to "PAGAMENTO",
       "situacao" to "RECEBIDO",
       "paginacao.paginaAtual" to "0",
       "ordenarPor" to "IDENTIFICADOR"

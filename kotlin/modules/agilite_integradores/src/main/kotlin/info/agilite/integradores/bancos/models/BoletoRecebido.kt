@@ -4,7 +4,10 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 data class BoletoProcessado (
-  val boleto: BoletoRecebido,
+  val numero: String?,
+  val dataVencimento: LocalDate?,
+
+  val recebimento: BoletoRecebido,
 
   val baixadoComSucesso: Boolean,
   val status: String,

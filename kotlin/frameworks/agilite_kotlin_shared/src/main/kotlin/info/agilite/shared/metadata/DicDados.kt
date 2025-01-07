@@ -5,16 +5,37 @@ import info.agilite.boot.metadata.models.AutocompleteConfig
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.metadata.models.tasks.TaskMetadata
 import info.agilite.boot.orm.AbstractEntity
+import info.agilite.boot.orm.where
 import info.agilite.core.extensions.localCapitalize
 import info.agilite.core.extensions.substr
+import info.agilite.core.model.LowerCaseMap
 import info.agilite.core.utils.ReflectionUtils
+import info.agilite.shared.entities.cgs.*
+import jdk.dynalink.linker.support.Guards.isNotNull
+import javax.management.Query.and
+import javax.management.Query.eq
 import kotlin.reflect.KClass
 import kotlin.reflect.full.declaredMemberProperties
 
 private val entitiesMetadataCache = mutableMapOf<String, EntityMetadata>()
 
 class DicDados : MetadataDatasource {
-  val customAutocompleteConfig = mapOf<String, AutocompleteConfig>()
+  private val customAutocompleteConfig = LowerCaseMap.of(mapOf<String, AutocompleteConfig>(
+     "cgs38RecBoletoComApi" to AutocompleteConfig(
+       field = CGS38NOME,
+       columnsToSelect = "cgs38nome",
+       table = "Cgs38",
+       defaultWhere = where {
+         and {
+           eq(
+             N_CGS38_TIPO, CGS38TIPO_RECEBIMENTO,
+             N_CGS38_FORMA, CGS38FORMA_BOLETO,
+           )
+           isNotNull(N_CGS38_API_CLIENT_ID)
+         }
+       },
+     )
+  ))
 
   override fun getEntityClass(entityName: String): KClass<*>? {
     val moduleName = entityName.substr(0, 3)
@@ -41,6 +62,6 @@ class DicDados : MetadataDatasource {
   }
 
   override fun getAutocompleteConfigByFieldName(fieldName: String): AutocompleteConfig? {
-    return customAutocompleteConfig[fieldName.lowercase()]
+    return customAutocompleteConfig[fieldName] as AutocompleteConfig?
   }
 }

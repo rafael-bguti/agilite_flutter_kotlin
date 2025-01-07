@@ -24,7 +24,7 @@ class HttpMetadataRepositoryAdapter implements MetadataRepository {
       return;
     }
 
-    final response = await provider.post('/public/metadata/entity', body: entities);
+    final response = await provider.post('/public/metadata/load', body: entities);
     final loadedFields = response.bodyListLowerCaseMap.map((element) {
       return FieldMetadata.fromJson(element);
     }).toList();

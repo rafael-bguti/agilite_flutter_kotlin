@@ -22,6 +22,7 @@ class MenuBuilder : UserMenuBuilder {
       )),
       FrontEndMenuItem.group(4, "Processos", children = listOf(
         FrontEndMenuItem.item(41, "Transmissor Fiscal", "/gdf2010", 0xe491),
+        FrontEndMenuItem.item(42, "Retorno dos boletos", "/scf2011", 0xf523),
       ))
     )
   }

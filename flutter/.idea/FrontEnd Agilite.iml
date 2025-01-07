@@ -21,6 +21,9 @@
       <excludeFolder url="file://$MODULE_DIR$/projects/template/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/projects/template/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/projects/template/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/scf/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/scf/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/scf/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
