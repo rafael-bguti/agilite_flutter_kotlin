@@ -27,8 +27,8 @@ class AGrid extends StatelessWidget {
     super.key,
   }) : _gridSizes = GridSizes(areas, recursiveGrid);
 
-  AGrid.rows(
-    List<AGridRow> rows, {
+  AGrid.rows({
+    required List<AGridRow> rows,
     this.recursiveGrid = true,
     this.spacing = 8,
     this.crossAxisAlignment = WrapCrossAlignment.start,

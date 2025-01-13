@@ -40,6 +40,10 @@ class WhereBuilder {
         wheres += WhereOr(*orConditions.toTypedArray())
     }
 
+    fun add(where: Where) {
+        wheres += where
+    }
+
     fun build(): List<Where> = wheres
 }
 

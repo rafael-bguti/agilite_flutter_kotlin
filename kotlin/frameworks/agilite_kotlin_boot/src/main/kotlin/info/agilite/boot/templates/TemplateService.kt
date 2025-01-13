@@ -10,7 +10,7 @@ class TemplateService(
   fun processTemplate(
     templateName: String,
     templateContent: String,
-    dados: Map<String, Any>
+    dados: Map<String, Any?>
   ): String {
 
     val template =  freemarker.buildTemplate(templateName, templateContent)

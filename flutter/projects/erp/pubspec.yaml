@@ -18,6 +18,8 @@ dependencies:
     path: ../../frameworks/agilite_flutter_core
   scf:
     path: ../../modules/scf
+  srf:
+    path: ../../modules/srf
 
 dev_dependencies:
   flutter_test:

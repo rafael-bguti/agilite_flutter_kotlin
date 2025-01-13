@@ -4,8 +4,8 @@ class AGridRow {
   final String areas;
   final List<Widget> children;
 
-  AGridRow(
-    this.areas,
-    this.children,
-  );
+  AGridRow({
+    required this.areas,
+    required this.children,
+  });
 }

@@ -50,6 +50,6 @@ class AFormState extends State<AForm> {
   }
 
   FieldController<dynamic>? getControllerByName(String name) {
-    return _controller.getControllerByName(name);
+    return _controller.getController(name);
   }
 }

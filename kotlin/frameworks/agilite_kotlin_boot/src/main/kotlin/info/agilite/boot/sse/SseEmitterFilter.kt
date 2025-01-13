@@ -12,7 +12,7 @@ const val HEADER_SSE_UID_NAME: String = "X-SSE-UID"
 class SseEmitterFilter() : OncePerRequestFilter() {
   override fun shouldNotFilter(request: HttpServletRequest): Boolean {
     val path = request.servletPath
-    return path.startsWith("/api/public/")
+    return path.startsWith("/api/public/") || request.getHeader(HEADER_SSE_UID_NAME) == null
   }
 
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {

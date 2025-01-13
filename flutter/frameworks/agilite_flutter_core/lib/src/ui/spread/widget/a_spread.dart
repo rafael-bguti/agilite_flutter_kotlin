@@ -39,6 +39,8 @@ class ASpread extends StatefulWidget {
 
   final String? labelTextToValidationMessage;
 
+  final List<Map<String, dynamic?>>? initialData;
+
   const ASpread.controller(
     this.controller, {
     this.rowBuilder,
@@ -60,7 +62,8 @@ class ASpread extends StatefulWidget {
         readOnly = null,
         onCellStopEdit = null,
         onControllerCreated = null,
-        labelTextToValidationMessage = null;
+        labelTextToValidationMessage = null,
+        initialData = null;
 
   const ASpread.columns(
     String this.name,
@@ -82,6 +85,7 @@ class ASpread extends StatefulWidget {
     this.labelButtonAddNew = 'Adicionar nova linha',
     this.labelTextToValidationMessage,
     this.rowWrapperBuilder,
+    this.initialData,
     super.key,
   }) : controller = null;
 
@@ -109,6 +113,10 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
 
     for (var column in spreadController.columns) {
       column.spreadController = spreadController;
+    }
+
+    if (widget.initialData != null) {
+      spreadController.fillFromList(widget.initialData!);
     }
   }
 
@@ -198,10 +206,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(24.0),
-            child: Text('Nenhum registro localizado', style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
           if (!controller.readOnly) _buttonAddNewLine(),
         ],
       );
@@ -515,7 +519,7 @@ class SpreadMoreDetail {
   }
 
   void focusFirstField(SpreadController controller) {
-    controller.moreDetailFormController.getControllerByName(controller.columns.first.name)?.requestFocus();
+    controller.moreDetailFormController.getController(controller.columns.first.name)?.requestFocus();
   }
 
   Widget _defaultMoreDetailBodyBuilder(BuildContext context, int rowIndex, SpreadController controller) {

@@ -1,6 +1,6 @@
 package info.agilite.shared.integrators
 
-interface Scf02GeradorPDFIntegrator {
+interface Scf02GeradorPDFToEmail {
   fun gerarAnexoCobranca(scf02ids: List<Long>): Map<Long, Scf02AnexoCobranca>?
 }
 class Scf02AnexoCobranca (

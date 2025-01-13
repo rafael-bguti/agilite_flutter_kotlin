@@ -7,6 +7,13 @@ import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.srf.Srf01
+import java.time.LocalDate
+
+class Srf2060Filter(
+  val emissIni: LocalDate?,
+  val emissFim: LocalDate?,
+  val reenviar: Boolean?,
+)
 
 @DbTable("srf01")
 @DbSimpleJoin("srf01entidade, srf01natureza, INNER:cgs18modeloEmail")
@@ -22,6 +29,10 @@ data class Srf2060Mail(
 
   val srf01id: Long,
   val srf01nome: String,
+
+  val srf01integracaoScf: Int,
+  val srf01integracaoGdf: Int,
+  val srf01dtEmail: LocalDate?
 ){
   fun validarPraEnviarEmail(): String? {
     if(cgs80email == null) return "Email não informado para o documento $srf01nome"
@@ -32,7 +43,7 @@ data class Srf2060Mail(
 class Srf2060Doc(
   val srf01: Srf01,
   val cgs80: Cgs80,
-  val gdf10: Gdf10,
+  val gdf10: Gdf10?,
   val cgs15: Cgs15,
   val scf02s: MutableList<Scf02>
 )

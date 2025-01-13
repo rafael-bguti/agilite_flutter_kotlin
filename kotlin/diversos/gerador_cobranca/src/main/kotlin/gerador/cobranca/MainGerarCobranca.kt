@@ -35,7 +35,6 @@ val mesAnoReferencia = LocalDate.now().minusMonths(1)
 
 fun main() {
   GerarCobranca().gerarCobranca()
-
 }
 
 val cobrancasGeradas = mutableListOf<Cobranca>()
@@ -69,6 +68,7 @@ class GerarCobranca {
     println("* * * * CLIENTES USANDO SEM PAGAR * * * * * *")
     println("* * * * * * * * A T E N Ç Ã O * * * * * * * *")
 
+    println("Arquivo de cobrança gerado com sucesso! -> c:\\lixo\\cobrancas\\cobrancas.json")
   }
 
   private fun ajustarVencimento(){
@@ -88,8 +88,9 @@ class GerarCobranca {
   }
 
   private fun ajustarCNPJMaliber(){
+    //TODO Jan de 2025 não funcionou
     cobrancasGeradas.forEach {
-      if(it.cliente.cnpj == "47938840000163"){// Tapecol
+      if(it.cliente.cnpj == "47938840000163"){// Maliber
         it.cliente.cnpj = "47938840000325"
       }
     }

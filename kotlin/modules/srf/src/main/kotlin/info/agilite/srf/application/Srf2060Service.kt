@@ -3,31 +3,30 @@ package info.agilite.srf.application
 import info.agilite.boot.mail.Mail
 import info.agilite.boot.mail.MailAttachment
 import info.agilite.boot.mail.MailSenderService
+import info.agilite.boot.mail.SmtpConfig
 import info.agilite.boot.security.UserContext
+import info.agilite.boot.sse.SseEmitter
 import info.agilite.boot.templates.TemplateService
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.extensions.format
 import info.agilite.core.extensions.localCapitalize
 import info.agilite.core.extensions.orExc
 import info.agilite.shared.entities.cas.Cas65
-import info.agilite.shared.integrators.Scf02GeradorPDFIntegrator
+import info.agilite.shared.integrators.Scf02GeradorPDFToEmail
 import info.agilite.srf.adapter.infra.Srf2060Repository
 import info.agilite.srf.domain.Srf2060Doc
 import info.agilite.srf.domain.Srf2060Mail
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Propagation
-import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDate
 
 @Service
 class Srf2060Service(
   val repository: Srf2060Repository,
   val mailSender: MailSenderService,
   val templateService: TemplateService,
-  val scf02PdfGenerator: Scf02GeradorPDFIntegrator,
+  val scf02PdfGenerator: Scf02GeradorPDFToEmail,
+  val sse: SseEmitter,
 ) {
 
-  @Transactional(propagation = Propagation.REQUIRES_NEW)
   fun enviarEmailDocumentos(srf2060s: List<Srf2060Mail>) {
     val validationMessage = srf2060s.map { it.validarPraEnviarEmail() }.filterNotNull().joinToString("\n")
     if (validationMessage.isNotBlank()) throw ValidationException(validationMessage)
@@ -38,24 +37,30 @@ class Srf2060Service(
     val listaDeSrf2060Doc = repository.findDocsToSendMail(srf01ids)
 
     for (docToSend in listaDeSrf2060Doc) {
-      val html = criarCorpoDoEmail(docToSend)
-
-      val attachments = criarAnexos(docToSend)
-
-      val mail = Mail(
-        subject = docToSend.cgs15.cgs15titulo.orExc("Titulo do email não informado no CGS15"),
-        html = html,
-        to = docToSend.cgs80.cgs80email!!,
-        fromName = docToSend.cgs15.cgs15fromName,
-        replyTo = docToSend.cgs15.cgs15replayTo,
-        replyToName = docToSend.cgs15.cgs15replayToName,
-        attachments = attachments
-      )
-      mailSender.sendHtml(smptConfig, mail)
-
-      docToSend.srf01.srf01dtEmail = LocalDate.now()
-      repository.updateChanges(docToSend.srf01)
+      sse.sendMessage("Enviando email para ${docToSend.cgs80.cgs80email}")
+      doSendMail(docToSend, smptConfig)
     }
+
+  }
+
+  fun doSendMail(docToSend: Srf2060Doc, smptConfig: SmtpConfig) {
+    val html = criarCorpoDoEmail(docToSend)
+
+    val attachments = criarAnexos(docToSend)
+
+    val mail = Mail(
+      subject = docToSend.cgs15.cgs15titulo.orExc("Titulo do email não informado no CGS15"),
+      html = html,
+      to = "rafael@multitecsistemas.com.br", //docToSend.cgs80.cgs80email!!,
+      fromName = docToSend.cgs15.cgs15fromName,
+      replyTo = docToSend.cgs15.cgs15replayTo,
+      replyToName = docToSend.cgs15.cgs15replayToName,
+      attachments = attachments,
+//      bcc = "rafael@multitecsistemas.com.br"//TODO teste
+    )
+    mailSender.sendHtml(smptConfig, mail)
+
+    repository.updateEmailSent(docToSend.srf01)
   }
 
   private fun criarAnexos(docToSend: Srf2060Doc): MutableList<MailAttachment> {

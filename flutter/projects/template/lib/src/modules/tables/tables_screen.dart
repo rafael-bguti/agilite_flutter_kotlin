@@ -42,7 +42,7 @@ class _UsersSpreadState extends State<UsersSpread> {
   void initState() {
     super.initState();
     runOnNextBuild(() {
-      (formController.getControllerByName("sprUsers") as SpreadController?)?.fillFromList(users.map((e) => e.toJson()).toList());
+      (formController.getController("sprUsers") as SpreadController?)?.fillFromList(users.map((e) => e.toJson()).toList());
     });
   }
 
@@ -76,9 +76,8 @@ class _UsersSpreadState extends State<UsersSpread> {
     final wrapper = Container(
       key: ValueKey('row$rowIndex'),
       height: controller.rowHeight,
-      decoration: rowIndex == 2
-          ? tableRowDecoration.copyWith(color: Colors.red.withOpacity(0.4))
-          : tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
+      decoration:
+          rowIndex == 2 ? tableRowDecoration.copyWith(color: Colors.red.withOpacity(0.4)) : tableRowDecoration.copyWith(color: isSelected ? primaryColor.withOpacity(0.2) : null),
       child: rowContent,
     );
 
@@ -158,7 +157,7 @@ class _SimpleSpreadEditavelState extends State<SimpleSpreadEditavel> {
   void initState() {
     super.initState();
     runOnNextBuild(() {
-      (formController.getControllerByName("sprNaoEditavel") as SpreadController?)?.fillFromList([
+      (formController.getController("sprNaoEditavel") as SpreadController?)?.fillFromList([
         {
           "nome": "João",
           "idade": 30,
@@ -199,10 +198,8 @@ class _SimpleSpreadEditavelState extends State<SimpleSpreadEditavel> {
 List<User> users = [
   User("https://i.pravatar.cc/150?img=1", 'Ollie Wallace', 'lorna.kirlin@nora.biz', null, 'Manager', '285-626-6050', '16 February 2019', false),
   User("https://i.pravatar.cc/150?img=5", 'Gilbert Barrett', 'paolo.zieme@gmail.com', null, 'Admin', '462-060-7408', '17 February 2019', false),
-  User("https://i.pravatar.cc/150?img=8", 'Tony Parks', 'vida.glover@gmail.com', Company('Frontend Matter Inc', 'Leuschkefurt'), 'Admin', '169-769-4821',
-      '18 February 2019', true),
-  User("https://i.pravatar.cc/150?img=9", 'Billy Nunez', 'annabell.kris@yahoo.com', Company('Huma Huma Inc.', 'Huma Huma Inc.'), 'User', '239-721-3649',
-      '19 February 2019', true),
+  User("https://i.pravatar.cc/150?img=8", 'Tony Parks', 'vida.glover@gmail.com', Company('Frontend Matter Inc', 'Leuschkefurt'), 'Admin', '169-769-4821', '18 February 2019', true),
+  User("https://i.pravatar.cc/150?img=9", 'Billy Nunez', 'annabell.kris@yahoo.com', Company('Huma Huma Inc.', 'Huma Huma Inc.'), 'User', '239-721-3649', '19 February 2019', true),
 ];
 
 class User {

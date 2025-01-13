@@ -14,7 +14,7 @@ abstract class HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout,
-    String? sseUid,
+    void Function(String message)? onSseMessage,
   });
 
   Future<HttpResponse> post(
@@ -23,7 +23,7 @@ abstract class HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout,
-    String? sseUid,
+    void Function(String message)? onSseMessage,
   });
 
   Future<HttpResponse> put(
@@ -32,6 +32,7 @@ abstract class HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout,
+    void Function(String message)? onSseMessage,
   });
 
   Future<HttpResponse> delete(
@@ -44,6 +45,8 @@ abstract class HttpProvider {
 typedef AuthorizationTokenGetter = FutureOr<String?> Function();
 
 class HttpProviderImpl extends HttpProvider {
+  final SseProvider? sseProvider;
+
   static String? authorizationHeaderKey = 'Authorization';
 
   final AuthorizationTokenGetter? authorizationTokenGetter;
@@ -54,6 +57,7 @@ class HttpProviderImpl extends HttpProvider {
     this.authorizationTokenGetter,
     this.responseHandler,
     this.defaultHeaders,
+    this.sseProvider,
   });
 
   @override
@@ -77,7 +81,7 @@ class HttpProviderImpl extends HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout = const Duration(seconds: 60),
-    String? sseUid,
+    void Function(String message)? onSseMessage,
   }) {
     return _go(
       'get',
@@ -86,7 +90,7 @@ class HttpProviderImpl extends HttpProvider {
       headers: headers,
       responseHandler: this.responseHandler ?? responseHandler,
       timeout: timeout,
-      sseUid: sseUid,
+      onSseMessage: onSseMessage,
     );
   }
 
@@ -97,7 +101,7 @@ class HttpProviderImpl extends HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout = const Duration(seconds: 60),
-    String? sseUid,
+    void Function(String message)? onSseMessage,
   }) {
     return _go(
       'post',
@@ -106,7 +110,7 @@ class HttpProviderImpl extends HttpProvider {
       headers: headers,
       responseHandler: this.responseHandler ?? responseHandler,
       timeout: timeout,
-      sseUid: sseUid,
+      onSseMessage: onSseMessage,
     );
   }
 
@@ -117,6 +121,7 @@ class HttpProviderImpl extends HttpProvider {
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
     Duration timeout = const Duration(seconds: 60),
+    void Function(String message)? onSseMessage,
   }) {
     return _go(
       'put',
@@ -125,6 +130,7 @@ class HttpProviderImpl extends HttpProvider {
       headers: headers,
       responseHandler: this.responseHandler ?? responseHandler,
       timeout: timeout,
+      onSseMessage: onSseMessage,
     );
   }
 
@@ -135,13 +141,14 @@ class HttpProviderImpl extends HttpProvider {
     dynamic data,
     Map<String, String>? headers,
     HttpResponseHandler? responseHandler,
-    String? sseUid,
+    void Function(String message)? onSseMessage,
   }) async {
     debugPrint(' ---> method -> $path -> $data');
 
     Map<String, String> localHeaders = await _configureHeader(headers);
-    if (sseUid != null) {
-      localHeaders['X-SSE-UID'] = sseUid;
+    if (onSseMessage != null) {
+      final receiver = await sseProvider!.createReceiver(onSseMessage);
+      localHeaders['X-SSE-UID'] = receiver.uuid;
     }
 
     Uri uri;

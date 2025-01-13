@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 class AColumnString extends ASpreadColumn<String> {
   final int? maxLength;
+  final String? Function(dynamic value)? parser;
+
   AColumnString(
     super.name,
     super.label, {
@@ -10,9 +12,24 @@ class AColumnString extends ASpreadColumn<String> {
     this.maxLength,
     super.req,
     super.validators,
+    super.alignment,
+    this.parser,
   });
   final FocusNode _editingFocusNode = FocusNode();
   final TextEditingController _editingController = TextEditingController();
+
+  @override
+  String? valueFromJson(dynamic value) {
+    if (parser != null) {
+      return parser!(value);
+    }
+
+    return value == null
+        ? null
+        : value is String?
+            ? value
+            : "$value";
+  }
 
   @override
   Widget buildEditCell(BuildContext context, int row) {

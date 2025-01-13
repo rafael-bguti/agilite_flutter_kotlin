@@ -8,7 +8,7 @@ import java.sql.ResultSet
 
 class MapRowMapper(
   private val nested: Boolean = false,
-  private val onlyNonNull: Boolean = true,
+  private val onlyNonNull: Boolean = false,
 ) : RowMapper<MutableMap<String, Any?>>{
 
   override fun mapRow(rs: ResultSet, rowNum: Int): MutableMap<String, Any?> {

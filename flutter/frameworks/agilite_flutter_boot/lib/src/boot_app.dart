@@ -81,12 +81,13 @@ class _BootAppState extends State<BootApp> {
 
 Storage get storage => _storageCache ??= HiveStorage(_storageName ?? 'new_agilite_boot');
 AuthService get authService => _authServiceCache ??= StorageAuthServiceImpl(storage);
-HttpProvider get httpProvider => _httpProviderCache ??= HttpProviderImpl(authorizationTokenGetter: () => authService.loadLoggedToken());
-SseProvider get sseProvider => _sseProviderCache ??= SseProviderImpl();
+HttpProvider get httpProvider => _httpProviderCache ??= HttpProviderImpl(
+      authorizationTokenGetter: () => authService.loadLoggedToken(),
+      sseProvider: SseProviderImpl(),
+    );
 
 Storage? _storageCache;
 AuthService? _authServiceCache;
 HttpProvider? _httpProviderCache;
-SseProvider? _sseProviderCache;
 
 String? _storageName;

@@ -64,6 +64,7 @@ class ScfFromSrfBaseService(
       scf02empresa = UserContext.safeUser.empId
       scf02tipo = cgs38.cgs38tipo
       scf02forma = cgs38
+      scf02nossoNum = srf01.srf01numero.toLong()
       scf02entidade = srf01.srf01entidade
       scf02dtEmiss = LocalDate.now()
       scf02dtVenc = srf012.srf012dtVenc

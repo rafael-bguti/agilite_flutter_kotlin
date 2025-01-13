@@ -33,7 +33,7 @@ class Srf01Repository : RootRepository() {
     return list(
       DbQueryBuilders.build(
         Srf01::class,
-        "*, srf01.srf01entidade",
+        "*, srf01entidade",
         where = WhereSimple("srf01id IN (${srf01ids.joinToString()})")
       )
     )

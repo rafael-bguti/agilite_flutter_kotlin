@@ -18,9 +18,9 @@ class MailSenderService {
     val mimeMessage: MimeMessage = mailSender.createMimeMessage()
     val helper = MimeMessageHelper(mimeMessage, true, "UTF-8")
 
-    mail.to.splitToList().forEach { helper.addTo(it) }
-    mail.cc?.let { ccs -> ccs.splitToList().forEach { helper.addCc(it) }}
-    mail.bcc?.let { bccs -> bccs.splitToList().forEach { helper.addBcc(it) }}
+    mail.to.splitToList(";").forEach { helper.addTo(it) }
+    mail.cc?.let { ccs -> ccs.splitToList(";").forEach { helper.addCc(it) }}
+    mail.bcc?.let { bccs -> bccs.splitToList(";").forEach { helper.addBcc(it) }}
 
 
     if(mail.replyTo != null) {

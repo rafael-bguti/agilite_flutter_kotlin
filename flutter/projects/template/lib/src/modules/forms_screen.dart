@@ -151,41 +151,56 @@ class _SimpleFormState extends State<SimpleForm> {
         AForm(
           formController,
           child: AGrid.rows(
-            [
-              AGridRow('6, 6', [
-                const ATextField.string("nome", labelText: "First Name", req: true),
-                const ATextField.string("sobrenome", labelText: "Last Name", req: true),
-              ]),
-              AGridRow('4-4-4, 8-8-8', [
-                const ATextField.string("estado", labelText: "State", maxLength: 2, req: true),
-                const ATextField.string("cidade", labelText: "City", req: true),
-              ]),
-              AGridRow('12', [
-                const ABoolField("accept", labelText: "Agree to terms and conditions", renderType: ABoolRenderType.checkbox),
-              ]),
-              AGridRow('12', [
-                const AFormValidationPanel(),
-              ]),
-              AGridRow('12', [
-                ASpacingRow(
-                  children: [
-                    ElevatedButton(
-                      style: primaryButtonStyle,
-                      onPressed: _enviar,
-                      child: const Text("Submit"),
-                    ),
-                    ElevatedButton(
-                      onPressed: _preencher,
-                      child: const Text("Show Values"),
-                    ),
-                    ElevatedButton(
-                      style: warningButtonStyle,
-                      onPressed: _clear,
-                      child: const Text("Clear"),
-                    ),
-                  ],
-                ),
-              ])
+            rows: [
+              AGridRow(
+                areas: '6, 6',
+                children: [
+                  const ATextField.string("nome", labelText: "First Name", req: true),
+                  const ATextField.string("sobrenome", labelText: "Last Name", req: true),
+                ],
+              ),
+              AGridRow(
+                areas: '4-4-4, 8-8-8',
+                children: [
+                  const ATextField.string("estado", labelText: "State", maxLength: 2, req: true),
+                  const ATextField.string("cidade", labelText: "City", req: true),
+                ],
+              ),
+              AGridRow(
+                areas: '12',
+                children: [
+                  const ABoolField("accept", labelText: "Agree to terms and conditions", renderType: ABoolRenderType.checkbox),
+                ],
+              ),
+              AGridRow(
+                areas: '12',
+                children: [
+                  const AFormValidationPanel(),
+                ],
+              ),
+              AGridRow(
+                areas: '12',
+                children: [
+                  ASpacingRow(
+                    children: [
+                      ElevatedButton(
+                        style: primaryButtonStyle,
+                        onPressed: _enviar,
+                        child: const Text("Submit"),
+                      ),
+                      ElevatedButton(
+                        onPressed: _preencher,
+                        child: const Text("Show Values"),
+                      ),
+                      ElevatedButton(
+                        style: warningButtonStyle,
+                        onPressed: _clear,
+                        child: const Text("Clear"),
+                      ),
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
         ),

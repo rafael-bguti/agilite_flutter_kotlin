@@ -131,7 +131,7 @@ class SpreadController extends FieldController<SpreadModel> {
   @override
   get jsonValue {
     if (value.isNotEmpty) {
-      final result = value.toDataMap();
+      final result = value.toListMap();
       for (var row in result) {
         for (final column in columns) {
           row[column.name] = column.valueToJson(row[column.name]);
@@ -140,6 +140,10 @@ class SpreadController extends FieldController<SpreadModel> {
       return result;
     }
     return null;
+  }
+
+  List<Map<String, dynamic>> get listData {
+    return jsonValue as List<Map<String, dynamic>>? ?? [];
   }
 
   @override
@@ -678,7 +682,7 @@ class SpreadModel {
     _rows[rowindex] = SpreadRow(values);
   }
 
-  List<Map<String, dynamic>> toDataMap() => _rows.map((e) => {...e._dataMap}).toList();
+  List<Map<String, dynamic>> toListMap() => _rows.map((e) => {...e._dataMap}).toList();
 
   int get length => _rows.length;
 
@@ -748,7 +752,7 @@ class SpreadRow {
     _removeValidationMessage(columnName);
   }
 
-  Map<String, dynamic> get _dataMap => _data;
+  Map<String, dynamic?> get _dataMap => _data;
 
   void remove(String columnName) {
     _data.remove(columnName);

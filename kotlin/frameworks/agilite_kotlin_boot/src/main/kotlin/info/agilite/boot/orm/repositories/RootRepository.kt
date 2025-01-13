@@ -68,13 +68,16 @@ abstract class RootRepository {
       oneToManyManager.distinct(it)
     }
   }
-  fun <R: Any> listSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): List<R> {
-    return jdbc.queryForList(query, params, clazz.java)
-  }
-  //TODO ver a possibilidade de trocar o retorno de List<MutableMap<String, Any?>> para List<LowercaseMap>
+
   final fun listMap(query: String, params: Map<String, Any?> = emptyMap(), rowMapper: RowMapper<MutableMap<String, Any?>>? = null): List<MutableMap<String, Any?>> {
     return jdbc.query(query, params, rowMapper ?: MapRowMapper())
   }
+
+  fun <R: Any> listSingleColumn(clazz: KClass<R>, query: String, params: Map<String, Any?> = emptyMap()): List<R> {
+    return jdbc.queryForList(query, params, clazz.java)
+  }
+
+
 
   fun distinctMap(query: DbQuery<*>): MutableMap<String, Any?>? {
     distinctListMap(query).let { list ->
@@ -148,6 +151,10 @@ abstract class RootRepository {
   }
   fun updateChanges(entity: AbstractEntity): Int {
     return DbUpdateChangesOperationFromEntity(entity).execute(this)
+  }
+
+  fun ignoreNextTransactionValidation(){
+    jdbc.ignoreNextTransaction()
   }
 
   fun nextIds(tableName: String, qtdIds: Int = 1): IdsList {

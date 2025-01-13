@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:agilite_flutter_core/core.dart';
 import 'package:http/http.dart' as http;
-import 'package:uuid/uuid.dart';
 
 abstract class SseProvider {
   Future<SseReceiver> createReceiver(void Function(String message)? onMessage);

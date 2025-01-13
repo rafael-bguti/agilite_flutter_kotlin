@@ -42,7 +42,7 @@ class FormController {
     return _mapControllers.containsKey(name);
   }
 
-  FieldController<dynamic>? getControllerByName(String name) {
+  FieldController<dynamic>? getController(String name) {
     return _mapControllers[name];
   }
 
@@ -108,7 +108,7 @@ class FormController {
     _value.addAll(data);
 
     for (var key in data.keys) {
-      final field = getControllerByName(key);
+      final field = getController(key);
       if (field != null) {
         field.fillFromJson(_value);
       }
@@ -156,7 +156,7 @@ class FormController {
 
   // ---- Utils to FieldController ----
   void setControllerValue(String controllerName, dynamic value) {
-    final controller = getControllerByName(controllerName);
+    final controller = getController(controllerName);
     if (controller == null) {
       throw 'Controller $controllerName não encontrado';
     }
@@ -164,10 +164,22 @@ class FormController {
   }
 
   dynamic getControllerValue(String controllerName) {
-    final controller = getControllerByName(controllerName);
+    final controller = getController(controllerName);
     if (controller == null) {
       throw 'Controller $controllerName não encontrado';
     }
     return controller.value;
+  }
+
+  // ---- Get especific controller ----
+  SpreadController getSpreadController(String controllerName) {
+    final controller = getController(controllerName);
+    if (controller == null) {
+      throw 'Controller $controllerName não encontrado';
+    }
+    if (controller is SpreadController) {
+      return controller;
+    }
+    throw 'Controller $controllerName não é um SpreadController';
   }
 }

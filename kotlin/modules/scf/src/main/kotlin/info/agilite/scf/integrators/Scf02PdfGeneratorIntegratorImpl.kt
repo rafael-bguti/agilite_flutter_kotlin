@@ -6,14 +6,16 @@ import info.agilite.scf.adapter.infra.Scf02PdfGeneratorRepository
 import info.agilite.scf.utils.toBancoConfig
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.integrators.Scf02AnexoCobranca
-import info.agilite.shared.integrators.Scf02GeradorPDFIntegrator
+import info.agilite.shared.integrators.Scf02GeradorPDFToEmail
 import org.springframework.stereotype.Service
 
 @Service
 class Scf02PdfGeneratorIntegratorImpl(
   val repo: Scf02PdfGeneratorRepository
-) : Scf02GeradorPDFIntegrator {
+) : Scf02GeradorPDFToEmail {
   override fun gerarAnexoCobranca(scf02ids: List<Long>): Map<Long, Scf02AnexoCobranca>? {
+    if(scf02ids.isEmpty()) return null
+
     val dadosBoleto = repo.findScf02GerarPDF(scf02ids)
     if(dadosBoleto.isEmpty()) return null
 

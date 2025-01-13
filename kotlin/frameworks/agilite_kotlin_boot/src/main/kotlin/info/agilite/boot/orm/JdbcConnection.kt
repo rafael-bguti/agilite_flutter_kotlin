@@ -1,6 +1,7 @@
 package info.agilite.boot.orm
 
 import org.slf4j.LoggerFactory
+import org.springframework.core.NamedThreadLocal
 import org.springframework.jdbc.core.PreparedStatementCallback
 import org.springframework.jdbc.core.ResultSetExtractor
 import org.springframework.jdbc.core.RowCallbackHandler
@@ -18,8 +19,7 @@ class JdbcConnection(
   private val jdbc: NamedParameterJdbcTemplate,
 ) {
   private val LOGGER = LoggerFactory.getLogger(JdbcConnection::class.java)
-
-  val jdbcTemplate = jdbc.jdbcTemplate
+  private val currentTransactionIgnore = ThreadLocal<Boolean>()
 
   fun <T> execute(sql: String, paramSource: SqlParameterSource, action: PreparedStatementCallback<T>): T? {
     validarTransacaoAberta()
@@ -150,6 +150,8 @@ class JdbcConnection(
     return jdbc.update(sql, paramMap)
   }
 
+
+
   internal fun updateIgnoreTransaction(sql: String, paramMap: Map<String, *>): Int {
     return jdbc.update(sql, paramMap)
   }
@@ -209,7 +211,15 @@ class JdbcConnection(
     }
   }
 
+  fun ignoreNextTransaction(){
+    currentTransactionIgnore.set(true)
+  }
   internal fun validarTransacaoAberta() {
+    if(currentTransactionIgnore.get() == true){
+      currentTransactionIgnore.set(false)
+      return
+    }
+
     if(!TransactionSynchronizationManager.isActualTransactionActive()){
       throw Exception("Transação não está aberta")
     }

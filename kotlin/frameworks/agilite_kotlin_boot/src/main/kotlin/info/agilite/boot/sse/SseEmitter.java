@@ -8,6 +8,7 @@ public class SseEmitter {
     }
 
     public void sendMessage(String message) {
+        System.out.println("Sending message to " + uuid + ": " + message);
         SSeService.INSTANCE.sendMsg(uuid, message);
     }
 }

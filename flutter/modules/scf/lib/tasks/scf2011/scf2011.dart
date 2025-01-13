@@ -119,10 +119,10 @@ class _BoletoCard extends StatelessWidget {
         children: [
           Expanded(
             child: AGrid.rows(
-              [
+              rows: [
                 AGridRow(
-                  '2-4, 4-10, 4-12',
-                  [
+                  areas: '2-4, 4-10, 4-12',
+                  children: [
                     ASpacingColumn(
                       mainAxisSize: MainAxisSize.min,
                       spacing: 8,

@@ -17,8 +17,8 @@ class ACrudPanelFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return AGrid.rows(
       crossAxisAlignment: WrapCrossAlignment.center,
-      [
-        AGridRow("3, 9", [
+      rows: [
+        AGridRow(areas: "3, 9", children: [
           ASearchField(
             CrudController.searchName,
             onSearchChanged: (_) => crudController.doRefresh(),

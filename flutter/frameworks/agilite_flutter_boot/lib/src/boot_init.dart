@@ -14,13 +14,14 @@ class Boot {
 }
 
 void _configErrorLog() {
-  // FlutterError.onError = (details) {
-  //   debugPrint('Virgiii - FlutterError.onError');
-  //   FlutterError.presentError(details);
-  //   // TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
-  // };
+  FlutterError.onError = (details) {
+    debugPrint('Virgiii - FlutterError.onError');
+    FlutterError.presentError(details);
+    // TODO - MVP - Implementar Crashlytics / S3 / Bugsnag
+  };
 
-  ErrorWidget.builder = (errorDetails) => const Text('ERROR!!!');
+  // TODO - Criar um componente de erro customizado e habilitar ele aqui quando estiver em produção
+  //ErrorWidget.builder = (errorDetails) => const Text('ERROR!!!');
 
   PlatformDispatcher.instance.onError = (error, stack) {
     // //TODO - MVP - Implementar Crashlytics / S3 / Bugsnag

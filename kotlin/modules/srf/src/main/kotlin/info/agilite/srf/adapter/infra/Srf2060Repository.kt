@@ -1,5 +1,6 @@
 package info.agilite.srf.adapter.infra
 
+import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.boot.orm.where
@@ -16,13 +17,35 @@ import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.srf.domain.Srf2060Doc
+import info.agilite.srf.domain.Srf2060Filter
 import info.agilite.srf.domain.Srf2060Mail
+import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder.simple
 import org.springframework.stereotype.Repository
+import java.time.LocalDate
 
 @Repository
 class Srf2060Repository : RootRepository() {
 
-  fun buscarDadosDocumentosParaEnviarEmail(): List<Srf2060Mail> {
+  fun updateEmailSent(srf01: Srf01) {
+    srf01.srf01dtEmail = LocalDate.now()
+
+    //Ignora a validação de transação, pois o sistema precisa salvar essa alteração sem transação
+    //para que se der erro no próximo envio de email, esse já está salvo
+    ignoreNextTransactionValidation()
+    updateChanges(srf01)
+  }
+
+  fun buscarDadosDocumentosParaEnviarEmail(filter: Srf2060Filter): List<Srf2060Mail> {
+    var whereEmiss = WhereSimple("true")
+    if(filter.emissIni != null && filter.emissFim != null) {
+      whereEmiss = WhereSimple("srf01dtEmiss BETWEEN :emissIni AND :emissFim", mapOf("emissIni" to filter.emissIni, "emissFim" to filter.emissFim))
+    }
+
+    var whereReenv = WhereSimple(" $N_SRF01_DT_EMAIL IS NULL ")
+    if(filter.reenviar == true){
+      whereReenv = WhereSimple("true")
+    }
+
     return list(
       DbQueryBuilders.build(
         Srf2060Mail::class,
@@ -31,7 +54,8 @@ class Srf2060Repository : RootRepository() {
             default(SRF01_METADATA)
             simple(" $N_CGS18_MODELO_EMAIL IS NOT NULL ")
             simple(" $N_SRF01_INTEGRACAO_GDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)")
-            simple(" $N_SRF01_DT_EMAIL IS NULL ")
+            add(whereEmiss)
+            add(whereReenv)
           }
         }
       )
@@ -44,7 +68,7 @@ class Srf2060Repository : RootRepository() {
       FROM Srf01
       LEFT JOIN Srf012 ON srf012doc = srf01id
       LEFT JOIN Gdf10 ON srf01dfeAprov = gdf10id
-      LEFT JOIN Scf02 ON (scf02regOrigem->>'tab' = 'srf012' AND (scf02regOrigem->>'id')::BIGINT = srf012id)
+      LEFT JOIN Scf02 ON srf012documento = scf02id
       INNER JOIN Cgs80 ON srf01entidade = cgs80id
       INNER JOIN Cgs18 ON srf01natureza = cgs18id
       INNER JOIN Cgs15 ON cgs18modeloEmail = cgs15id
@@ -61,7 +85,7 @@ class Srf2060Repository : RootRepository() {
         lastSrf2060Doc = Srf2060Doc(
           JsonUtils.fromMap(it, Srf01::class.java),
           JsonUtils.fromMap(it, Cgs80::class.java),
-          JsonUtils.fromMap(it, Gdf10::class.java),
+          if(it["gdf10id"] != null) JsonUtils.fromMap(it, Gdf10::class.java) else null,
           JsonUtils.fromMap(it, Cgs15::class.java),
           mutableListOf()
         )

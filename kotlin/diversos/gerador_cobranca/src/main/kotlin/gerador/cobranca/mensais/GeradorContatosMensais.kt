@@ -25,7 +25,7 @@ class GeradorContatosMensais {
       Utils.buildCobranca(
         NATUREZA_SOFTWARE, "52104228000125",
         CODIGO_ITEM_PROGRAMACAO, "Programação",
-        BigDecimal(8000)
+        BigDecimal(8000),
       ),
 
       //Multitec Dentro
@@ -51,14 +51,16 @@ class GeradorContatosMensais {
         "10483676000137",
         CODIGO_ITEM_MANUTENCAO_NUVEM,
         "Manutenção nuvem Potencial",
-        BigDecimal(400)
+        BigDecimal(400),
+        obs = "Servidores Soluc e Maleo"
       )),//Marcelo nuvem Hostgator
       (Utils.buildCobranca(
         NATUREZA_FREELA,
         "10483676000137",
         CODIGO_ITEM_MANUTENCAO_NUVEM,
         "Manutenção nuvem Maisverdes",
-        BigDecimal(730)
+        BigDecimal(730),
+        obs = "Manutenção nuvem Maisverdes"
       )),//Marcelo nuvem Maisverdes
     )
   }
