@@ -36,7 +36,7 @@ class DoubleController extends FormFieldController<double?> {
         ) {
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-        if (createdBySpread) return;
+        if (createBySpreadColumn) return;
         String? text = _buildTextNumberOnFocusGained();
         if (text != null) {
           textEditingController.text = text;

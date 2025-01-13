@@ -39,7 +39,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
     super.validators,
     super.labelText,
     super.req,
-    super.createdBySpread,
+    super.createBySpreadColumn,
     super.autoFocus,
     this.showAllOptions = false,
     this.keyValueConverter = const KeyValueConverter(),
@@ -142,7 +142,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
   }
 
   void selectAllText([bool selectIfCreatedBySpread = false]) {
-    if (createdBySpread && !selectIfCreatedBySpread) return;
+    if (createBySpreadColumn && !selectIfCreatedBySpread) return;
     if (comboEditingController.text.isNotEmpty) {
       comboEditingController.selection = TextSelection(baseOffset: 0, extentOffset: comboEditingController.text.length);
     }
@@ -236,7 +236,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
       closeMenu();
     }
 
-    return createdBySpread ? KeyEventResult.ignored : KeyEventResult.handled;
+    return createBySpreadColumn ? KeyEventResult.ignored : KeyEventResult.handled;
   }
 
   KeyEventResult _onComboEnterKeyPressed() {
@@ -244,13 +244,13 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
       closeMenu();
     }
 
-    return createdBySpread ? KeyEventResult.ignored : KeyEventResult.handled;
+    return createBySpreadColumn ? KeyEventResult.ignored : KeyEventResult.handled;
   }
 
   KeyEventResult _onEscKeyPressed() {
     if (menuController.isOpen) {
       closeMenu();
-      return createdBySpread ? KeyEventResult.ignored : KeyEventResult.handled;
+      return createBySpreadColumn ? KeyEventResult.ignored : KeyEventResult.handled;
     } else {
       return KeyEventResult.ignored;
     }

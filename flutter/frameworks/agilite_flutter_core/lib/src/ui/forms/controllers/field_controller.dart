@@ -27,7 +27,7 @@ abstract class FieldController<T> extends ChangeNotifier {
   bool req;
   bool autoFocus;
 
-  bool createdBySpread;
+  bool createBySpreadColumn;
 
   FieldController(
     this.name, {
@@ -35,7 +35,7 @@ abstract class FieldController<T> extends ChangeNotifier {
     this.validators,
     this.req = false,
     this.status = FieldStatus.clean,
-    this.createdBySpread = false,
+    this.createBySpreadColumn = false,
     this.autoFocus = false,
     T? initialValue,
     String? labelText,
