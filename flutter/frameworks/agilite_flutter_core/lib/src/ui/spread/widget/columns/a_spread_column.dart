@@ -28,6 +28,8 @@ abstract class ASpreadColumn<T> {
 
   AWidth _width = const AWidth.flex(1);
 
+  final String Function(dynamic value)? formatter;
+
   ASpreadColumn(
     this.name,
     this.label, {
@@ -35,6 +37,7 @@ abstract class ASpreadColumn<T> {
     this.isEditable,
     this.validators,
     this.req = false,
+    this.formatter,
   });
 
   bool canEdit(int row) => isEditable?.call(row) ?? !spreadController.readOnly;
@@ -173,7 +176,9 @@ abstract class ASpreadColumn<T> {
   }
 
   Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
-    return Text((spreadController.value[row][name])?.toString() ?? '');
+    final value = spreadController.value[row][name];
+    final text = formatter?.call(value) ?? value?.toString() ?? '';
+    return Text(text);
   }
 
   bool hasDoubleTap() => true;

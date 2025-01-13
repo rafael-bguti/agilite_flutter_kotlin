@@ -13,6 +13,7 @@ class AColumnString extends ASpreadColumn<String> {
     super.req,
     super.validators,
     super.alignment,
+    super.formatter,
     this.parser,
   });
   final FocusNode _editingFocusNode = FocusNode();

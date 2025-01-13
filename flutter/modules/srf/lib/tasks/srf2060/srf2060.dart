@@ -82,11 +82,13 @@ class _Srf2060State extends State<Srf2060> {
                             "srf01integracaoGdf",
                             "Possui nota",
                             alignment: Alignment.center,
+                            formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
                           ).widthChar(11),
                           AColumnString(
                             "srf01integracaoScf",
                             "Possui boleto",
                             alignment: Alignment.center,
+                            formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
                           ).widthChar(13),
                         ],
                         selectColumnName: "enviar",
