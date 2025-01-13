@@ -21,7 +21,7 @@ class IntController extends FormFieldController<int?> {
     super.textInputAction,
     super.validators,
     super.req,
-    super.createdBySpread,
+    super.createdBySpreadColumn,
     super.autoFocus,
     int? maxIntegerDigits,
   })  : maxIntegerDigits = maxIntegerDigits ?? 9,

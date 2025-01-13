@@ -10,7 +10,7 @@ class AColumnDate extends ASpreadColumn<DateTime> {
     super.validators,
   })  : _controller = DateController(
           name,
-          createdBySpread: true,
+          createdBySpreadColumn: true,
         ),
         super(alignment: Alignment.centerLeft) {
     _init();

@@ -13,7 +13,7 @@ class AColumnInt extends ASpreadColumn<int> {
   })  : _controller = IntController(
           name,
           maxIntegerDigits: maxIntegerDigits,
-          createdBySpread: true,
+          createdBySpreadColumn: true,
         ),
         super(alignment: Alignment.centerRight);
 

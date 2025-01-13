@@ -13,7 +13,7 @@ class ComboController<T> extends FieldController<T> {
     String? helperText,
     String? hintText,
     super.validators,
-    super.createdBySpread,
+    super.createdBySpreadColumn,
   })  : _helperText = helperText,
         _hintText = hintText,
         _value = defaultValue;

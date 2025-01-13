@@ -189,7 +189,7 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     return AutocompleteController<T>(
       name,
       repository: AllInMemoryAutocompleteRepository<T>(options!),
-      createdBySpread: true,
+      createdBySpreadColumn: true,
       showAllOptions: combo,
     );
   }
@@ -204,7 +204,7 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     return AutocompleteController<T>(
       name,
       repository: repository,
-      createdBySpread: true,
+      createdBySpreadColumn: true,
     );
   }
 }

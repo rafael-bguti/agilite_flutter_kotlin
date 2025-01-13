@@ -7,7 +7,7 @@ class BoolController extends FieldController<bool> {
     super.initialValue,
     super.enabled,
     super.labelText,
-    super.createdBySpread,
+    super.createdBySpreadColumn,
     super.autoFocus,
   }) : _value = defaultValue;
 

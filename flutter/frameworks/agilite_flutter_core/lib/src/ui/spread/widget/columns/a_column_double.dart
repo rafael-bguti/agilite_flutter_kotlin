@@ -20,7 +20,7 @@ class AColumnDouble extends ASpreadColumn<double> {
   })  : _controller = DoubleController(
           name,
           maxIntegerDigits: maxIntegerDigits,
-          createdBySpread: true,
+          createdBySpreadColumn: true,
         ),
         super(alignment: Alignment.centerRight);
 

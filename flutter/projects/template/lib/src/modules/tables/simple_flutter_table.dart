@@ -31,7 +31,7 @@ class _SimpleFlutterTableState extends State<SimpleFlutterTable> {
             child: DataTable(
               columns: <DataColumn>[
                 DataColumn(
-                  label: _buildHeader('Name', 0),
+                  label: SizedBox(width: 275, child: _buildHeader('Name', 0)),
                   onSort: (columnIndex, ascending) {
                     setState(() {
                       if (_sortColumnIndex == columnIndex) {

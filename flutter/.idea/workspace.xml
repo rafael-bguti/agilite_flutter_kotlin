@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Formatter">
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="rename">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/autocomplete_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/autocomplete_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/bool_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/bool_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/combo_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/combo_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/date_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/date_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/double_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/double_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/field_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/field_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/form_field_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/form_field_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/int_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/int_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/mixins/field_controller_register_mixin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/mixins/field_controller_register_mixin.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_autocomplete_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_autocomplete_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_autocomplete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_autocomplete.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_date.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_date.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_double.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_double.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_int.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_int.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/template/lib/src/modules/tables/simple_flutter_table.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/template/lib/src/modules/tables/simple_flutter_table.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +79,7 @@
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\scf\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter.main.dart">
+  <component name="RunManager" selected="Flutter.main.dart (1)">
     <configuration name="mainTeste2.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/projects/erp/lib/src/mainTeste2.dart" />
       <method v="2" />
@@ -87,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.main.dart (1)" />
+        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.mainTeste2.dart" />
       </list>
     </recent_temporary>
@@ -110,12 +118,21 @@
       <option name="project" value="LOCAL" />
       <updated>1736803746139</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="rename">
+      <option name="closed" value="true" />
+      <created>1736804690465</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1736804690465</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Formatter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Formatter" />
+    <MESSAGE value="rename" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

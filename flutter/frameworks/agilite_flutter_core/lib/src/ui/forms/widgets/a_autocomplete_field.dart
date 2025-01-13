@@ -165,7 +165,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
           menuChildren: [
             SizedBox(
               width: max(_width, _kMinWidth),
-              height: fieldController.createBySpreadColumn ? 250 : 350,
+              height: fieldController.createdBySpreadColumn ? 250 : 350,
               child: listChild,
             ),
           ],
@@ -250,7 +250,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
       child: Container(
         color: index == selectedIndex ? _selectedBackgroundColor : null,
         child: Padding(
-          padding: EdgeInsets.all(fieldController.createBySpreadColumn ? 4.0 : 6.0),
+          padding: EdgeInsets.all(fieldController.createdBySpreadColumn ? 4.0 : 6.0),
           child: widget.listItemBuilder?.call(item) ?? Text(item.toString(), style: style),
         ),
       ),
@@ -261,7 +261,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (fieldController.value != null && !fieldController.createBySpreadColumn)
+        if (fieldController.value != null && !fieldController.createdBySpreadColumn)
           IconButton(
             onPressed: () {
               fieldController.value = null;

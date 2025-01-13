@@ -37,7 +37,7 @@ abstract class FormFieldController<T> extends FieldController<T> {
     TextEditingController? textEditingController,
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
-    super.createBySpreadColumn,
+    super.createdBySpreadColumn,
   })  : _isControllerProvided = textEditingController != null,
         textEditingController = textEditingController ?? TextEditingController(),
         _helperText = helperText,
@@ -66,7 +66,7 @@ abstract class FormFieldController<T> extends FieldController<T> {
   }
 
   void _selectAllText() {
-    if (createBySpreadColumn) return;
+    if (createdBySpreadColumn) return;
     if (textEditingController.text.isNotEmpty) {
       textEditingController.selection = TextSelection(baseOffset: 0, extentOffset: textEditingController.text.length);
     }

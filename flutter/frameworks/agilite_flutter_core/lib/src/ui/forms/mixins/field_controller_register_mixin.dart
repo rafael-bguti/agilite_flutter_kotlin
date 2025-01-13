@@ -11,7 +11,7 @@ mixin FieldControllerRegisterMixin {
   ) {
     if (controller != null && controller.addedToFormController) return controller;
 
-    if (controller?.createBySpreadColumn ?? false) return controller!;
+    if (controller?.createdBySpreadColumn ?? false) return controller!;
 
     final formState = context.findAncestorStateOfType<AFormState>();
     if (formState == null) {

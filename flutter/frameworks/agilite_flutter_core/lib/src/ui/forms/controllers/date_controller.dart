@@ -27,7 +27,7 @@ class DateController extends FormFieldController<DateTime?> {
     super.textInputAction,
     super.validators,
     super.req,
-    super.createdBySpread,
+    super.createdBySpreadColumn,
     super.autoFocus,
   }) {
     focusNode.addListener(() {

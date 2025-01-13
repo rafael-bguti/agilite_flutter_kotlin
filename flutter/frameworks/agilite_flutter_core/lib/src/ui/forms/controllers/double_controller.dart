@@ -26,7 +26,7 @@ class DoubleController extends FormFieldController<double?> {
     super.validators,
     super.autoFocus,
     super.req,
-    super.createdBySpread,
+    super.createdBySpreadColumn,
     this.minDecimalDigits = 2,
     this.maxDecimalDigits = 2,
     this.maxIntegerDigits = 9,
@@ -36,7 +36,7 @@ class DoubleController extends FormFieldController<double?> {
         ) {
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-        if (createBySpreadColumn) return;
+        if (createdBySpreadColumn) return;
         String? text = _buildTextNumberOnFocusGained();
         if (text != null) {
           textEditingController.text = text;
