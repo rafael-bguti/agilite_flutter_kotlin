@@ -1,44 +1,42 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-mixin FieldControllerRegisterMixin {
-  T registerFormField<T extends FieldController<dynamic>>(
+mixin FieldControllerCreatorMixin {
+  T createFieldController<T extends FieldController<dynamic>>(
     BuildContext context,
     T? controller,
     String? name,
     T Function() controllerBuilderWhenNull,
     void Function(T controller)? onControllerCreated,
   ) {
-    if (controller != null && controller.addedToFormController) return controller;
-
-    if (controller?.createdBySpreadColumn ?? false) return controller!;
+    if (controller != null) return controller;
 
     final formState = context.findAncestorStateOfType<AFormState>();
     if (formState == null) {
-      if (controller == null) {
-        throw 'Ao criar um AField sem o controller é obrigatório que ele esteja dentro de um AForm. AField que deu erro: $name';
+      final result = _buildNewController(controllerBuilderWhenNull);
+      onControllerCreated?.call(result);
+      return result;
+    } else {
+      final mappedController = formState.getControllerByName(name!);
+      if (mappedController != null) {
+        if (mappedController is T) {
+          return mappedController;
+        } else {
+          throw 'Já existe um controller com a key $name no form e ele não é compatível com o tipo ${T.toString()}';
+        }
       }
-      return controller;
+
+      final result = _buildNewController(controllerBuilderWhenNull);
+      formState.addController(result);
+      onControllerCreated?.call(result);
+      return result;
     }
-
-    if (controller != null) {
-      formState.addController(controller);
-      return controller;
-    }
-
-    final mappedController = formState.getControllerByName(name!);
-    if (mappedController != null) {
-      if (mappedController is T) {
-        return mappedController;
-      } else {
-        throw 'Já existe um controller com a key $name no form e ele não é compatível com o tipo ${T.toString()}';
-      }
-    }
-
-    controller = controllerBuilderWhenNull();
-    final result = formState.addController(controller);
-    onControllerCreated?.call(result);
-
-    return result;
   }
+}
+
+T _buildNewController<T extends FieldController<dynamic>>(T Function() builder) {
+  final controller = builder();
+  controller.constructedBy = ConstructorType.auto;
+
+  return controller;
 }

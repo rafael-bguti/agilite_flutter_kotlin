@@ -51,12 +51,12 @@ class Srf2060Service(
     val mail = Mail(
       subject = docToSend.cgs15.cgs15titulo.orExc("Titulo do email não informado no CGS15"),
       html = html,
-      to = "rafael@multitecsistemas.com.br", //docToSend.cgs80.cgs80email!!,
+      to = docToSend.cgs80.cgs80email!!,
       fromName = docToSend.cgs15.cgs15fromName,
       replyTo = docToSend.cgs15.cgs15replayTo,
       replyToName = docToSend.cgs15.cgs15replayToName,
       attachments = attachments,
-//      bcc = "rafael@multitecsistemas.com.br"//TODO teste
+      bcc = "rafael@multitecsistemas.com.br"
     )
     mailSender.sendHtml(smptConfig, mail)
 

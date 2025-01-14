@@ -8,6 +8,8 @@ enum FieldStatus {
   valid,
 }
 
+enum ConstructorType { user, auto }
+
 abstract class FieldController<T> extends ChangeNotifier {
   final FocusNode focusNode = FocusNode();
 
@@ -23,11 +25,13 @@ abstract class FieldController<T> extends ChangeNotifier {
   T defaultValue;
   ChangeNotifier onValueChanged = ChangeNotifier();
 
-  bool addedToFormController = false;
   bool req;
   bool autoFocus;
 
   bool createdBySpreadColumn;
+
+  bool addedToFormController = false;
+  ConstructorType constructedBy = ConstructorType.user;
 
   FieldController(
     this.name, {
@@ -103,6 +107,18 @@ abstract class FieldController<T> extends ChangeNotifier {
     if (labelText != _labelText) {
       _labelText = labelText;
       notifyListeners();
+    }
+  }
+
+  void disposeByForm() {
+    if (constructedBy == ConstructorType.auto && addedToFormController) {
+      dispose();
+    }
+  }
+
+  void disposeByWidget() {
+    if (constructedBy == ConstructorType.auto && !addedToFormController) {
+      dispose();
     }
   }
 

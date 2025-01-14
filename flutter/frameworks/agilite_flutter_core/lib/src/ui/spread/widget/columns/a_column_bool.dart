@@ -26,7 +26,7 @@ class AColumnBool extends ASpreadColumn<bool> {
     return super.canEdit(row);
   }
 
-  bool isSelectColumn() => spreadController.selectColumnName == name;
+  bool isSelectColumn() => spreadSelectColumnName == name;
 
   @override
   Widget buildHeaderContent(BuildContext context) {

@@ -53,13 +53,13 @@ class AComboField<T> extends StatefulWidget {
   State<AComboField<T>> createState() => _AComboFieldState<T>();
 }
 
-class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerRegisterMixin {
+class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCreatorMixin {
   late final ComboController<T> fieldController;
 
   @override
   void initState() {
     super.initState();
-    fieldController = registerFormField(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
+    fieldController = createFieldController(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
   }
 
   @override

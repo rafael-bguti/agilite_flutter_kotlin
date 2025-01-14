@@ -78,15 +78,14 @@ class ACrudSpreadDataCard extends StatelessWidget {
   }
 
   Widget _buildSpread() {
-    return ASpread.columns(
-      CrudController.spreadDataName,
-      columns,
+    return ASpread(
+      name: CrudController.spreadDataName,
+      columns: columns,
       onRowTap: onEdit == null
           ? null
           : (rowIndex) {
               onEdit!(crudController.state.data[rowIndex]['id']);
             },
-      selectColumnName: CrudController.spreadDataSelectedColumnName,
       readOnly: true,
       selectPanelWidget: TextButton.icon(
         onPressed: crudController.deleteSelecteds,

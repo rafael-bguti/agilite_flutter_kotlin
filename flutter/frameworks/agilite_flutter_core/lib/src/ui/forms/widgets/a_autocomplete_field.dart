@@ -122,7 +122,7 @@ class AAutocompleteField<T> extends StatefulWidget {
   State<AAutocompleteField<T>> createState() => _AAutocompleteFieldState<T>();
 }
 
-class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with FieldControllerRegisterMixin {
+class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with FieldControllerCreatorMixin {
   late final AutocompleteController<T> fieldController;
   late final _localDecoration = widget.decoration ?? const InputDecoration();
 
@@ -132,7 +132,7 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
 
   @override
   void initState() {
-    fieldController = registerFormField(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
+    fieldController = createFieldController(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final size = getRenderBoxSize(key.currentContext!);

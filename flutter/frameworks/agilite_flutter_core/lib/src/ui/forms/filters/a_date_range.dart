@@ -1,7 +1,7 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ADateRange extends StatefulWidget with FieldControllerRegisterMixin {
+class ADateRange extends StatefulWidget with FieldControllerCreatorMixin {
   final String nameIni;
   final String nameEnd;
 

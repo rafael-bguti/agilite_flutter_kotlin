@@ -233,13 +233,13 @@ class ATextField extends StatefulWidget {
   State<ATextField> createState() => _ATextFieldState();
 }
 
-class _ATextFieldState extends State<ATextField> with FieldControllerRegisterMixin {
+class _ATextFieldState extends State<ATextField> with FieldControllerCreatorMixin {
   late final FormFieldController<dynamic> fieldController;
 
   @override
   void initState() {
     super.initState();
-    fieldController = registerFormField(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
+    fieldController = createFieldController(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
   }
 
   @override

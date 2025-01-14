@@ -60,13 +60,13 @@ class ABoolField extends StatefulWidget {
   State<ABoolField> createState() => _ABoolFieldState();
 }
 
-class _ABoolFieldState extends State<ABoolField> with FieldControllerRegisterMixin {
+class _ABoolFieldState extends State<ABoolField> with FieldControllerCreatorMixin {
   late final BoolController fieldController;
 
   @override
   void initState() {
     super.initState();
-    fieldController = registerFormField(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
+    fieldController = createFieldController(context, widget.fieldController, widget.name, _buildController, widget.onControllerCreated);
   }
 
   @override

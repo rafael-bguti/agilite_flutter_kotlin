@@ -10,7 +10,6 @@ class CrudController extends ViewController<CrudState> {
   static const String groupIndexName = 'groupIndex';
   static const String pageSizeName = 'pageSize';
   static const String currentPageName = 'currentPage';
-  static const String spreadDataSelectedColumnName = 'selected';
 
   final CrudRepository? _repository;
 

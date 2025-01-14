@@ -53,12 +53,11 @@ class _UsersSpreadState extends State<UsersSpread> {
         formController,
         child: SizedBox(
           height: 350,
-          child: ASpread.columns(
+          child: ASpread(
             readOnly: true,
-            selectColumnName: 'selected',
             moreDetail: SpreadMoreDetail(),
-            'sprUsers',
-            [
+            name: 'sprUsers',
+            columns: [
               AColumnReadOnly("nome", 'Name', renderWidgetBuilder: _renderName).widthChar(35),
               AColumnReadOnly("company", 'Company', renderWidgetBuilder: _renderCompany).widthChar(75),
               AColumnReadOnly("tags", 'Tags', renderWidgetBuilder: _renderTags).widthChar(50),
@@ -181,11 +180,11 @@ class _SimpleSpreadEditavelState extends State<SimpleSpreadEditavel> {
     return ACard(
       child: AForm(
         formController,
-        child: ASpread.columns(
+        child: ASpread(
           moreDetail: SpreadMoreDetail(),
           disableScroll: true,
-          'sprNaoEditavel',
-          [
+          name: 'sprNaoEditavel',
+          columns: [
             AColumnString("nome", 'Nome'),
             AColumnInt("idade", 'Idade'),
           ],

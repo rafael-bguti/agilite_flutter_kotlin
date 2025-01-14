@@ -145,30 +145,29 @@ class HttpProviderImpl extends HttpProvider {
   }) async {
     debugPrint(' ---> method -> $path -> $data');
 
-    Map<String, String> localHeaders = await _configureHeader(headers);
-    if (onSseMessage != null) {
-      final receiver = await sseProvider!.createReceiver(onSseMessage);
-      localHeaders['X-SSE-UID'] = receiver.uuid;
-    }
-
     Uri uri;
     http.Response response;
 
+    Map<String, String> localHeaders = await _configureHeader(headers);
     final client = http.Client();
     try {
       if (method == 'post') {
         final jsonBody = parseBody(data, localHeaders);
         uri = _url(path);
+        await _startSSE(onSseMessage, localHeaders);
         response = await client.post(uri, headers: localHeaders, body: jsonBody).timeout(timeout);
       } else if (method == 'put') {
         final jsonBody = parseBody(data, localHeaders);
         uri = _url(path);
+        await _startSSE(onSseMessage, localHeaders);
         response = await client.put(uri, headers: localHeaders, body: jsonBody).timeout(timeout);
       } else if (method == 'get') {
         uri = _url(path, data as Map<String, dynamic>?);
+        await _startSSE(onSseMessage, localHeaders);
         response = await client.get(uri, headers: localHeaders).timeout(timeout);
       } else if (method == 'delete') {
         uri = _url(path);
+        await _startSSE(onSseMessage, localHeaders);
         response = await client.delete(uri, headers: localHeaders).timeout(timeout);
       } else {
         throw UnexpectedException('Method $method for HTTP is not implemented');
@@ -178,6 +177,13 @@ class HttpProviderImpl extends HttpProvider {
     }
     final httpResponse = HttpResponse(response);
     return await (responseHandler ?? DefaultHttpResponseHandler()).handle(this, httpResponse);
+  }
+
+  Future<void> _startSSE(void Function(String message)? onSseMessage, Map<String, String> localHeaders) async {
+    if (onSseMessage != null) {
+      final receiver = await sseProvider!.createReceiver(onSseMessage);
+      localHeaders['X-SSE-UID'] = receiver.uuid;
+    }
   }
 
   Future<Map<String, String>> _configureHeader(Map<String, String>? headers) async {

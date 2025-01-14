@@ -40,7 +40,7 @@ class AFormState extends State<AForm> {
     return widget.child;
   }
 
-  T addController<T extends FieldController<dynamic>>(T fieldController) {
+  void addController<T extends FieldController<dynamic>>(T fieldController) {
     return _controller.addController(fieldController);
   }
 

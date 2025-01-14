@@ -5,31 +5,17 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-List<ASpreadColumn<dynamic>> _buildColumns(List<ASpreadColumn<dynamic>> columns, String? selectColumnName) {
-  if (selectColumnName == null) return columns;
-
-  return [
-    AColumnBool(
-      selectColumnName,
-      '',
-    ).widthFixed(52),
-    ...columns
-  ];
-}
+const spreadSelectColumnName = "rowIsSelected";
 
 class SpreadController extends FieldController<SpreadModel> {
-  double? _rowHeight;
-  String? _selectColumnName;
-  bool? _showRowHover;
-
   void Function(int rowIndex)? _onRowTap;
-
-  final bool disableScroll;
-  final bool disableVerticalScroll;
-  final bool readOnly;
-  final bool showSelectColumn = false;
   final ValueNotifier<bool> loading = ValueNotifier(false);
-  final List<ASpreadColumn<dynamic>> columns;
+
+  bool disableScroll = false;
+  bool disableVerticalScroll = false;
+  bool readOnly = false;
+  bool showSelectColumn = true;
+  List<ASpreadColumn<dynamic>> _columns = [];
 
   AScrollController scrollController = AScrollController();
 
@@ -40,38 +26,19 @@ class SpreadController extends FieldController<SpreadModel> {
 
   FormController moreDetailFormController = FormController();
 
-  final String? labelTextToValidationMessage;
+  String? labelTextToValidationMessage;
 
   SpreadController(
-    super.name, {
-    required List<ASpreadColumn<dynamic>> columns,
-    super.initialValue,
-    super.enabled,
-    super.labelText,
-    double? rowHeight,
-    String? selectColumnName,
-    bool? showRowHover,
-    this.disableScroll = false,
-    this.disableVerticalScroll = false,
-    this.readOnly = false,
-    this.onAddNewRow,
-    this.canAddNewRow,
-    this.onCellStopEdit,
-    this.labelTextToValidationMessage,
-  })  : _rowHeight = rowHeight ?? 48,
-        _selectColumnName = selectColumnName,
-        _showRowHover = showRowHover ?? false,
-        columns = _buildColumns(columns, selectColumnName),
-        super(defaultValue: SpreadModel.empty()) {
+    super.name,
+  ) : super(defaultValue: SpreadModel.empty()) {
     focusNode.addListener(_spreadFocusListener);
     focusNode.onKey = _onSpreadKeyListener;
-    for (int i = 0; i < this.columns.length; i++) {
-      this.columns[i].colIndex = i;
-    }
   }
 
   @override
   void dispose() {
+    print('Dispose SpreadController - $name');
+
     for (final column in columns) {
       column.dispose();
     }
@@ -316,35 +283,45 @@ class SpreadController extends FieldController<SpreadModel> {
     if (!focusNode.hasFocus) focusNode.requestFocus();
   }
 
-  //---- Seleção de Linhas ----
-  String? get selectColumnName => _selectColumnName;
-  set selectColumnName(String? value) {
-    if (value != _selectColumnName) {
-      _selectColumnName = value;
-      notifyListeners();
+  //--- Colunas ---
+  set columns(List<ASpreadColumn<dynamic>> columns) {
+    if (!showSelectColumn) {
+      _columns = columns;
+    } else {
+      _columns = [
+        AColumnBool(
+          spreadSelectColumnName,
+          '',
+        ).widthFixed(52),
+        ...columns
+      ];
+    }
+
+    for (int i = 0; i < this.columns.length; i++) {
+      this.columns[i].colIndex = i;
     }
   }
 
-  bool get hasSelectColumn => selectColumnName != null;
+  List<ASpreadColumn<dynamic>> get columns => _columns;
 
   bool isRowSelected(int row) {
-    return hasSelectColumn && value[row][selectColumnName!] == true;
+    return showSelectColumn && value[row][spreadSelectColumnName] == true;
   }
 
   void unselectAllRows() {
-    if (!hasSelectColumn) return;
+    if (!showSelectColumn) return;
 
     for (int i = 0; i < value.length; i++) {
-      value[i][selectColumnName!] = false;
+      value[i][spreadSelectColumnName] = false;
     }
     notifyListeners();
   }
 
   List<int> get selectedRows {
-    if (!hasSelectColumn) return [];
+    if (!showSelectColumn) return [];
     List<int> selected = [];
     for (int i = 0; i < value.length; i++) {
-      if (value[i][selectColumnName!] == true) {
+      if (value[i][spreadSelectColumnName] == true) {
         selected.add(i);
       }
     }
@@ -378,6 +355,7 @@ class SpreadController extends FieldController<SpreadModel> {
   }
 
   //---- Setters e Getters ----
+  double? _rowHeight;
   double get rowHeight => _rowHeight ?? 48;
   set rowHeight(double? value) {
     if (value != _rowHeight) {
@@ -386,6 +364,7 @@ class SpreadController extends FieldController<SpreadModel> {
     }
   }
 
+  bool? _showRowHover;
   bool get showRowHover => _showRowHover ?? false;
   set showRowHover(bool? value) {
     if (value != _showRowHover) {

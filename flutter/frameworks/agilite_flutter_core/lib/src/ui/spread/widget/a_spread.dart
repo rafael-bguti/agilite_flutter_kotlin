@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 const _moreActionWidth = 35.0;
 
 class ASpread extends StatefulWidget {
+  final selectedColumnName = "isSelectedRow";
+
   final SpreadController? controller;
   final Widget? selectPanelWidget;
 
@@ -21,13 +23,13 @@ class ASpread extends StatefulWidget {
   final List<Map<String, dynamic>>? value;
 
   final String? name;
-  final List<ASpreadColumn<dynamic>>? columns;
+  final List<ASpreadColumn<dynamic>> columns;
   final bool? disableScroll;
   final bool? disableVerticalScroll;
   final bool? readOnly;
-  final String? selectColumnName;
   final String labelButtonAddNew;
 
+  final bool? showSelectedColumn;
   //Actions
   final void Function(int rowIndex)? onRowTap;
   final FutureOr<void> Function(Map<String, dynamic> row)? onAddNewRow;
@@ -39,34 +41,13 @@ class ASpread extends StatefulWidget {
 
   final String? labelTextToValidationMessage;
 
-  const ASpread.controller(
-    this.controller, {
-    this.rowBuilder,
-    this.rowWrapperBuilder,
-    this.selectPanelWidget,
-    this.onRowTap,
-    this.moreOptionActionsBuilder,
-    this.moreDetail,
-    this.value,
-    this.labelButtonAddNew = 'Adicionar nova linha',
-    super.key,
-  })  : columns = null,
-        name = null,
-        disableScroll = null,
-        disableVerticalScroll = null,
-        selectColumnName = null,
-        onAddNewRow = null,
-        canAddNewRow = null,
-        readOnly = null,
-        onCellStopEdit = null,
-        onControllerCreated = null,
-        labelTextToValidationMessage = null;
+  final List<Map<String, dynamic>>? intialData;
 
-  const ASpread.columns(
-    String this.name,
-    this.columns, {
+  const ASpread({
+    required this.columns,
+    this.controller,
+    this.name,
     this.rowBuilder,
-    this.selectColumnName,
     this.selectPanelWidget,
     this.onRowTap,
     this.disableScroll = false,
@@ -82,14 +63,16 @@ class ASpread extends StatefulWidget {
     this.labelButtonAddNew = 'Adicionar nova linha',
     this.labelTextToValidationMessage,
     this.rowWrapperBuilder,
+    this.showSelectedColumn,
+    this.intialData,
     super.key,
-  }) : controller = null;
+  });
 
   @override
   State<ASpread> createState() => _ASpreadState();
 }
 
-class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
+class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
   late final SpreadController spreadController;
   late final List<SpreadMoreOptionAction>? Function(int row)? _localMoreOptionActionsBuilder =
       widget.moreOptionActionsBuilder ?? _buildDefaultMoreOptionActionsBuilder(spreadController);
@@ -97,19 +80,31 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   @override
   initState() {
     super.initState();
-    spreadController = registerFormField(
-      context,
-      widget.controller,
-      widget.name,
-      _buildController,
-      widget.onControllerCreated,
-    );
+    if (widget.controller != null) {
+      spreadController = widget.controller!;
+    } else {
+      spreadController = createFieldController(
+        context,
+        null,
+        widget.name,
+        _buildController,
+        widget.onControllerCreated,
+      );
+    }
+
+    _inflateController();
     spreadController.registerOnRowTap(widget.onRowTap);
     spreadController.registerMoreDetail(widget.moreDetail);
 
     for (var column in spreadController.columns) {
       column.spreadController = spreadController;
     }
+  }
+
+  @override
+  void dispose() {
+    spreadController.disposeByWidget();
+    super.dispose();
   }
 
   @override
@@ -282,7 +277,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
       ],
     );
 
-    if (controller.hasSelectColumn) {
+    if (controller.showSelectColumn) {
       bool isSelected = controller.isRowSelected(index);
       return Stack(
         children: [
@@ -329,20 +324,25 @@ class _ASpreadState extends State<ASpread> with FieldControllerRegisterMixin {
   }
 
   SpreadController _buildController() {
+    if (widget.name == null) throw 'O nome do controller não foi informado';
     final controller = SpreadController(
       widget.name!,
-      columns: widget.columns!,
-      disableScroll: widget.disableScroll ?? false,
-      disableVerticalScroll: widget.disableVerticalScroll ?? false,
-      selectColumnName: widget.selectColumnName,
-      readOnly: widget.readOnly == null ? widget.onRowTap != null : widget.readOnly!,
-      onAddNewRow: widget.onAddNewRow,
-      canAddNewRow: widget.canAddNewRow,
-      onCellStopEdit: widget.onCellStopEdit,
-      labelTextToValidationMessage: widget.labelTextToValidationMessage,
     );
 
     return controller;
+  }
+
+  void _inflateController() {
+    spreadController.columns = widget.columns;
+    spreadController.disableScroll = widget.disableScroll ?? false;
+    spreadController.disableVerticalScroll = widget.disableVerticalScroll ?? false;
+    spreadController.readOnly = widget.readOnly == null ? widget.onRowTap != null : widget.readOnly!;
+    spreadController.onAddNewRow = widget.onAddNewRow;
+    spreadController.canAddNewRow = widget.canAddNewRow;
+    spreadController.onCellStopEdit = widget.onCellStopEdit;
+    spreadController.labelTextToValidationMessage = widget.labelTextToValidationMessage;
+    spreadController.showSelectColumn = widget.showSelectedColumn ?? true;
+    if (widget.intialData != null) spreadController.fillFromList(widget.intialData!);
   }
 
   Widget _buildSelectedPanel(BuildContext context, SpreadController controller, Widget selectPanelWidget) {

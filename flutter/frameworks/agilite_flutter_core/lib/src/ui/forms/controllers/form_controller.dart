@@ -15,7 +15,7 @@ class FormController {
   final ValueNotifier<List<String>> $validationMessages = ValueNotifier([]);
   GlobalKey? panelValidationGlobalKey;
 
-  T addController<T extends FieldController<dynamic>>(T controller) {
+  void addController<T extends FieldController<dynamic>>(T controller) {
     if (containsControllerByName(controller.name)) {
       throw 'Já existe um controller com a key ${controller.name} no form';
     }
@@ -31,7 +31,6 @@ class FormController {
     for (var addControllerListener in addControllerListeners) {
       addControllerListener(controller);
     }
-    return controller;
   }
 
   //---- Map Controller ----
@@ -139,7 +138,7 @@ class FormController {
 
   void dispose() {
     for (var element in _fieldControllers) {
-      element.dispose();
+      element.disposeByForm();
     }
     _fieldControllers.clear();
     $validationMessages.value = [];
