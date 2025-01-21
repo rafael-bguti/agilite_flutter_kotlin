@@ -109,7 +109,7 @@ class SpreadController extends FieldController<SpreadModel> {
     return null;
   }
 
-  List<Map<String, dynamic>> get listData {
+  List<Map<String, dynamic>> get jsonList {
     return jsonValue as List<Map<String, dynamic>>? ?? [];
   }
 

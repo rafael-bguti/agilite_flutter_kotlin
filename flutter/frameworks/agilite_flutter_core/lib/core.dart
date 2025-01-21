@@ -61,7 +61,7 @@ export './src/ui/forms/data/autocomplete_repositories.dart';
 export './src/ui/forms/data/query_filter.dart';
 export './src/ui/forms/filters/a_date_range.dart';
 export './src/ui/forms/key_label.dart';
-export './src/ui/forms/mixins/field_controller_register_mixin.dart';
+export './src/ui/forms/mixins/field_controller_creator_mixin.dart';
 export './src/ui/forms/validations/validations.dart';
 export './src/ui/forms/widgets/a_autocomplete_field.dart';
 export './src/ui/forms/widgets/a_bool_field.dart';

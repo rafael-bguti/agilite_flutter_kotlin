@@ -36,7 +36,7 @@ class Srf2060Controller extends ViewController<Srf2060State> {
       if (selectedRows.isEmpty) {
         throw ValidationException("Selecione ao menos um e-mail para enviar");
       }
-      final allEmails = spreadEnvioController.listData;
+      final allEmails = spreadEnvioController.jsonList;
       final emailsAEnviar = selectedRows.map((row) => allEmails[row]).toList();
       showLoading("Enviando e-mails");
 

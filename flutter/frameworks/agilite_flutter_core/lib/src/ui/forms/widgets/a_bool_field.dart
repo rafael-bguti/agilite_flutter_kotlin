@@ -70,6 +70,12 @@ class _ABoolFieldState extends State<ABoolField> with FieldControllerCreatorMixi
   }
 
   @override
+  void dispose() {
+    fieldController.disposeByWidget();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final enabled = fieldController.enabled ?? true;
     final theme = Theme.of(context);

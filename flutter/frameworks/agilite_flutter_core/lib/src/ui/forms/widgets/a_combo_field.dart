@@ -63,6 +63,12 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCre
   }
 
   @override
+  void dispose() {
+    fieldController.disposeByWidget();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AConsumer(
       notifier: fieldController,

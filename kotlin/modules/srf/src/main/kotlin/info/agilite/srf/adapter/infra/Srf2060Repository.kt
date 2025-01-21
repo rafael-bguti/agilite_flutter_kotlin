@@ -57,7 +57,9 @@ class Srf2060Repository : RootRepository() {
             add(whereEmiss)
             add(whereReenv)
           }
-        }
+        },
+        orderBy = { "srf01dtEmiss DESC" },
+        limitQuery = " LIMIT 100 "
       )
     )
   }

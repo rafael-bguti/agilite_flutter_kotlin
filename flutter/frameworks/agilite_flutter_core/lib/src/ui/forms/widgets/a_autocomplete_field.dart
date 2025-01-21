@@ -144,6 +144,12 @@ class _AAutocompleteFieldState<T> extends State<AAutocompleteField<T>> with Fiel
   }
 
   @override
+  void dispose() {
+    fieldController.disposeByWidget();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final listChild = ValueListenableBuilder(
       valueListenable: fieldController.selectedIndex,
