@@ -1,4 +1,5 @@
 import 'package:agilite_flutter_core/core.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'srf2030_controller.dart';
@@ -43,27 +44,26 @@ class _Srf2030State extends State<Srf2030> {
                         ),
                       ],
                     ),
-                    AForm(
-                      controller.formFilterController,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 24.0),
-                        child: ACard(
-                          child: Column(
-                            children: [
-                              const ATextField.string(
-                                "arquivo",
-                                labelText: "Arquivo JSon",
+                    Padding(
+                      padding: EdgeInsets.only(top: 24.0),
+                      child: ACard(
+                        child: Column(
+                          children: [
+                            AFileField(
+                              fileType: FileType.custom,
+                              allowedExtensions: ['json'],
+                              controller: controller.fileController,
+                              labelText: "Arquivo JSon",
+                            ),
+                            const SizedBox(height: 16),
+                            Center(
+                              child: FilledButton(
+                                style: primaryButtonStyle,
+                                onPressed: controller.processarJson,
+                                child: const Text("Processar arquivo"),
                               ),
-                              const SizedBox(height: 16),
-                              Center(
-                                child: FilledButton(
-                                  style: primaryButtonStyle,
-                                  onPressed: controller.processarJson,
-                                  child: const Text("Processar arquivo"),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

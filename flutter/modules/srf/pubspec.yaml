@@ -14,7 +14,8 @@ dependencies:
     path: ../../frameworks/agilite_flutter_boot
   agilite_flutter_core:
     path: ../../frameworks/agilite_flutter_core
-
+  file_picker: ^8.1.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
