@@ -24,8 +24,7 @@ class Srf2050Controller(
   @Transactional
   fun emitirLoteXmlPrefeitura(
     @RequestBody(required = false) srf01ids: List<Long>?,
-    @RequestHeader(name = HEADER_SSE_UID_NAME, required = false) sseUid: String?,
   ): String {
-    return srF2050Service.emitirLoteXmlPrefeitura(srf01ids, sseUid ?: "")
+    return srF2050Service.emitirLoteXmlPrefeitura(srf01ids)
   }
 }

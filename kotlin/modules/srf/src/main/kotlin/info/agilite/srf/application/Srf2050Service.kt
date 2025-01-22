@@ -28,9 +28,8 @@ class SRF2050Service(
   private val srf2050repo: Srf2050Repository,
   private val srf01repo: Srf01Repository,
   private val cas65repo: Cas65Repository,
-  private val eventPublish: ApplicationEventPublisher,
 ) {
-  fun emitirLoteXmlPrefeitura(srf01ids: List<Long>?, sseUid: String): String {
+  fun emitirLoteXmlPrefeitura(srf01ids: List<Long>?): String {
     val srf01idsEmitir = srf01ids ?: srf2050repo.findsNFSeToExport().map { it.srf01id }
     if(srf01idsEmitir.isNullOrEmpty()){
       throw ValidationException("Nenhuma nota fiscal encontrada para emitir lote")
@@ -45,7 +44,7 @@ class SRF2050Service(
     val municipioEstado = "${cas65.cas65municipio}-${cas65.cas65uf}".uppercase()
     val xml: String
     if(municipioEstado == "ITATIBA-SP"){
-       xml = GDF2020EmissorItatiba().emitirLoteXmlPrefeituraItatiba(cas65, srf01s, sseUid)
+       xml = GDF2020EmissorItatiba().emitirLoteXmlPrefeituraItatiba(cas65, srf01s)
     }else{
       throw ValidationException("Não é possível emitir lotes de NFSe para o município de ${cas65.cas65municipio}-${cas65.cas65uf}")
     }
@@ -58,7 +57,7 @@ class SRF2050Service(
 class GDF2020EmissorItatiba() {
   private val ibgeItatiba = "3523404"
 
-  fun emitirLoteXmlPrefeituraItatiba(cas65: Cas65, srf01s: List<Srf01>, sseUid: String): String {
+  fun emitirLoteXmlPrefeituraItatiba(cas65: Cas65, srf01s: List<Srf01>): String {
     val enviarloteRpsEnvio = ElementXml.create("EnviarLoteRpsEnvio", "http://iss.itatiba.sp.gov.br/Arquivos/nfseV202.xsd")
 
     val loteRps = enviarloteRpsEnvio.addNode("LoteRps")

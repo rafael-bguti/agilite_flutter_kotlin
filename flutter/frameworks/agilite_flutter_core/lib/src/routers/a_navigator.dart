@@ -5,6 +5,8 @@ final GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>(d
 
 const String loadingRouteName = 'loading';
 const String errorRouteName = 'error';
+const String warningRouteName = 'warning';
+const String successRouteName = 'success';
 
 typedef NavigatorListener = void Function(String path);
 

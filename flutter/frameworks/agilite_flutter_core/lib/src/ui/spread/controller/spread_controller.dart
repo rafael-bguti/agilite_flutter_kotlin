@@ -113,6 +113,11 @@ class SpreadController extends FieldController<SpreadModel> {
     return jsonValue as List<Map<String, dynamic>>? ?? [];
   }
 
+  List<LowercaseMap> get selectedData {
+    final allData = value.toListMap().map((e) => LowercaseMap.fromMap(e)).toList();
+    return selectedRows.map((row) => allData[row]).toList();
+  }
+
   @override
   String? validate() {
     value.clearValidations();

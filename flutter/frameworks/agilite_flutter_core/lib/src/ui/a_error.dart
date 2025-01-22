@@ -20,10 +20,18 @@ class AError {
     bool closeAllDialogsBefore = true,
     String? pathToReplaceOnClose,
   }) {
-    defaultCatchView(
-      AErrorView(state: errorState, pathToReplaceOnClose: pathToReplaceOnClose),
-      closeAllDialogsBefore: closeAllDialogsBefore,
-    );
+    if (errorState.error is ValidationException) {
+      showWarning(
+        errorState.error.toString(),
+        closeAllDialogsBefore: closeAllDialogsBefore,
+        pathToReplaceOnClose: pathToReplaceOnClose,
+      );
+    } else {
+      defaultCatchView(
+        AErrorView(state: errorState, pathToReplaceOnClose: pathToReplaceOnClose),
+        closeAllDialogsBefore: closeAllDialogsBefore,
+      );
+    }
   }
 
   static void defaultCatchView(
@@ -33,7 +41,7 @@ class AError {
     if (closeAllDialogsBefore) {
       ANavigator.closeAllDialogs();
     }
-    final backgroundColor = errorView.backgroundColor ?? (errorView._isWarning ? warningColor : colorScheme!.errorContainer);
+    final backgroundColor = errorView.backgroundColor ?? colorScheme!.errorContainer;
 
     showDialog(
       routeSettings: const RouteSettings(name: errorRouteName),
@@ -154,26 +162,17 @@ class AErrorView extends StatelessWidget {
   Color get _foregroundColor {
     if (foregroundColor != null) {
       return foregroundColor!;
-    } else if (_isWarning) {
-      return onWarningColor;
     } else {
       return errorColor;
     }
   }
 
   String get _imagePath {
-    if (_isWarning) {
-      return 'packages/agilite_flutter_core/assets/warning.png';
-    } else {
-      return 'packages/agilite_flutter_core/assets/error.png';
-    }
+    return 'packages/agilite_flutter_core/assets/error.png';
   }
 
   String? get _title {
-    if (state.title != null) {
-      return state.title!;
-    }
-    return _isWarning ? null : 'Erro';
+    return state.title! ?? 'Erro';
   }
 
   String get _subTitle {
@@ -181,11 +180,6 @@ class AErrorView extends StatelessWidget {
   }
 
   String? get _stack {
-    if (_isWarning) {
-      return null;
-    }
     return state.stack.toString();
   }
-
-  bool get _isWarning => state.error is ValidationException || state.error is UnauthenticatedException || state.error is ForbiddenException;
 }
