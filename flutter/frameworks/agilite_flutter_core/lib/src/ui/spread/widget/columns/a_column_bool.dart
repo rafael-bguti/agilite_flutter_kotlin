@@ -36,7 +36,7 @@ class AColumnBool extends ASpreadColumn<bool> {
       for (var i = 0; i < spreadController.value.length; i++) {
         spreadController.value[i][name] = v;
       }
-      spreadController.refreshUi();
+      spreadController.refresh();
     }
 
     if (!spreadController.readOnly || isSelectColumn()) {
@@ -67,7 +67,7 @@ class AColumnBool extends ASpreadColumn<bool> {
           ? (v) {
               spreadController.selectCell(row, colIndex);
               spreadController.value[row][name] = v;
-              spreadController.refreshUi();
+              spreadController.refresh();
             }
           : null,
     );
@@ -118,7 +118,7 @@ class AColumnBool extends ASpreadColumn<bool> {
 
   void _toggleValue(SpreadController spreadController, int row) {
     spreadController.value[row][name] = !_extractValue(spreadController, row);
-    spreadController.refreshUi();
+    spreadController.refresh();
   }
 
   bool _extractValue(SpreadController spreadController, int row) {

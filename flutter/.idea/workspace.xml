@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Alteração nos Controllers">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/core.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/file_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/controllers/file_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_file_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_file_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2030/srf2030.dart" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2030/srf2030.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2030/srf2030_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2030/srf2030_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_bool.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_bool.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_date.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_column_date.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_spread_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_spread_column.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2050/srf2050.dart" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2050/srf2050.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2050/srf2050_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2050/srf2050_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/lib/src/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/src/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/infra/Scf02Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/infra/Scf02Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/web/Scf2010Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/adapter/web/Scf2010Controller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,31 +44,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Flutter.a_date_range.dart (1).executor&quot;: &quot;Debug&quot;,
-    &quot;Flutter.a_date_range.dart.executor&quot;: &quot;Run&quot;,
-    &quot;Flutter.main.dart (1).executor&quot;: &quot;Debug&quot;,
-    &quot;Flutter.main.dart.executor&quot;: &quot;Debug&quot;,
-    &quot;Flutter.mainTeste2.dart.executor&quot;: &quot;Debug&quot;,
-    &quot;Flutter.main_upload.dart.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Fontes/FontesAgilite/Agilite/flutter/modules/srf/lib/tasks&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3229885&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Flutter.a_date_range.dart (1).executor": "Debug",
+    "Flutter.a_date_range.dart.executor": "Run",
+    "Flutter.main.dart (1).executor": "Debug",
+    "Flutter.main.dart.executor": "Debug",
+    "Flutter.mainTeste2.dart.executor": "Debug",
+    "Flutter.main_upload.dart.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Fontes/FontesAgilite/Agilite/flutter/modules/scf/lib/tasks",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3229885",
+    "settings.editor.selected.configurable": "dart.settings",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\scf\lib\tasks" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\srf\lib\tasks" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\views" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\projects\erp\lib\src" />
@@ -159,8 +163,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart</url>
-          <line>311</line>
-          <option name="timeStamp" value="22" />
+          <line>57</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

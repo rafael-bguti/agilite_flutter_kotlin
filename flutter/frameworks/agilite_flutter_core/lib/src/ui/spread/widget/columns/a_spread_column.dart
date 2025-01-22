@@ -12,7 +12,6 @@ abstract class ASpreadColumn<T> {
 
   T? getValueOnStopEdit();
   dynamic valueToJson(T? value) => value;
-  T? valueFromJson(dynamic value) => value == null ? null : value as T?;
 
   bool get columnConsumeRowTap => false;
 

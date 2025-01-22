@@ -511,7 +511,7 @@ class SpreadMoreDetail {
     final rowMap = controller.moreDetailFormController.buidlJson();
 
     controller.value[rowIndex] = rowMap;
-    controller.refreshUi();
+    controller.refresh();
   }
 
   void focusFirstField(SpreadController controller) {

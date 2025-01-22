@@ -25,13 +25,6 @@ class AColumnDate extends ASpreadColumn<DateTime> {
 
   @override
   dynamic valueToJson(DateTime? value) => value?.format(dateISOFormat);
-  @override
-  DateTime? valueFromJson(dynamic value) {
-    if (value == null) return null;
-    if (value is DateTime) return value;
-
-    return value.toString().tryParseIsoDate();
-  }
 
   @override
   Widget buildEditCell(BuildContext context, int row) {
@@ -127,7 +120,7 @@ class AColumnDate extends ASpreadColumn<DateTime> {
     spreadController.value[selectedCellOnDatePickerShow!.rowIndex][name] = date;
     spreadController.selectCell(selectedCellOnDatePickerShow!.rowIndex, selectedCellOnDatePickerShow!.columnIndex);
     selectedCellOnDatePickerShow = null;
-    spreadController.refreshUi();
+    spreadController.refresh();
   }
 
   ATextField? _textField;

@@ -76,23 +76,11 @@ class SpreadController extends FieldController<SpreadModel> {
   }
 
   void fillFromList(List<Map<String, dynamic>> data) {
-    if (data.isEmpty) {
-      _value.replaceAll([]);
-      return;
-    }
+    value = SpreadModel.value(data);
+  }
 
-    final parsedData = data.toList()
-      ..forEach((row) {
-        for (final column in columns) {
-          final value = column.valueFromJson(row[column.name]);
-          if (value != null) {
-            row[column.name] = value;
-          }
-        }
-      });
-
-    value.replaceAll(parsedData);
-    refreshUi();
+  void refresh() {
+    notifyListeners();
   }
 
   @override
@@ -590,10 +578,6 @@ class SpreadController extends FieldController<SpreadModel> {
     } finally {
       loading.value = false;
     }
-  }
-
-  void refreshUi() {
-    notifyListeners();
   }
 
   void scrollToSelectedCell() {

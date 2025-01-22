@@ -5,7 +5,6 @@ class Srf2050Controller extends ViewController<Srf2050State> {
   Srf2050Controller() : super(Srf2050InitialState());
 
   final spreadEmitirController = SpreadController("docs");
-  final inputFileDestino = FileController();
 
   @override
   Future<void> onViewLoaded() async {
@@ -18,8 +17,6 @@ class Srf2050Controller extends ViewController<Srf2050State> {
   @override
   void dispose() {
     spreadEmitirController.dispose();
-    inputFileDestino.dispose();
-
     super.dispose();
   }
 

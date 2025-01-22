@@ -1,5 +1,6 @@
 import 'package:agilite_flutter_boot/boot.dart';
 import 'package:agilite_flutter_core/core.dart';
+import 'package:scf/tasks/scf2010/scf2010.dart' deferred as scf2010;
 import 'package:scf/tasks/scf2011/scf2011.dart' deferred as scf2011;
 import 'package:srf/tasks/srf2030/srf2030.dart' deferred as srf2030;
 import 'package:srf/tasks/srf2050/srf2050.dart' deferred as srf2050;
@@ -20,6 +21,13 @@ final routes = <ARoute>[
     dashboardPath,
     inFullLayout: true,
     (_, __) => const DashboardPage(),
+  ),
+  ARoute.lazy(
+    '/scf2010',
+    (_, __) async {
+      await scf2010.loadLibrary();
+      return scf2010.Scf2010();
+    },
   ),
   ARoute.lazy(
     '/scf2011',

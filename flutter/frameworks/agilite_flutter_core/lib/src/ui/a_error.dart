@@ -172,7 +172,7 @@ class AErrorView extends StatelessWidget {
   }
 
   String? get _title {
-    return state.title! ?? 'Erro';
+    return state.title ?? 'Erro';
   }
 
   String get _subTitle {
