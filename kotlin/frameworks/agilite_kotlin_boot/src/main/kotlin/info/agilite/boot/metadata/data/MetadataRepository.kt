@@ -1,20 +1,26 @@
 package info.agilite.boot.metadata.data
 
 import info.agilite.boot.metadata.MetadataUtils
-import info.agilite.boot.metadata.exceptions.*
-import info.agilite.boot.metadata.models.*
-import info.agilite.boot.metadata.models.tasks.TaskMetadata
+import info.agilite.boot.metadata.exceptions.AutocompleteMetadataNotFoundException
+import info.agilite.boot.metadata.exceptions.EntityClassNotFoundException
+import info.agilite.boot.metadata.exceptions.EntityMetadataNotFoundException
+import info.agilite.boot.metadata.exceptions.FieldMetadataNotFoundException
+import info.agilite.boot.metadata.models.AutocompleteConfig
+import info.agilite.boot.metadata.models.EntityMetadata
+import info.agilite.boot.metadata.models.FieldMetadata
+import info.agilite.boot.metadata.models.FieldTypeMetadata
+import info.agilite.core.extensions.substr
 import kotlin.reflect.KClass
 
 interface MetadataRepository {
   fun loadEntityClass(entityName: String): KClass<*>
 
   fun loadEntityMetadata(entityName: String): EntityMetadata
+  fun loadEntityMetadataByCrudTaskName(crudTaskName: String): EntityMetadata
   fun loadEntityMetadataByFieldName(fieldName: String): EntityMetadata
 
   fun loadFieldMetadata(fieldName: String): FieldMetadata
   fun loadAutocompleteFieldMetadata(fieldName: String, taskName: String? = null): AutocompleteConfig
-  fun <T : TaskMetadata> loadTaskMetadata(taskName: String, klass: KClass<T>): T
 }
 
 
@@ -25,6 +31,11 @@ class MetadataRepositoryImpl(
 
   override fun loadEntityClass(entityName: String): KClass<*> {
     return dataSource.getEntityClass(entityName) ?: throw EntityClassNotFoundException(entityName)
+  }
+
+  override fun loadEntityMetadataByCrudTaskName(crudTaskName: String): EntityMetadata {
+    val entityName = crudTaskName.substr(0, 3) + crudTaskName.substr(5,2)
+    return loadEntityMetadata(entityName)
   }
 
   override fun loadEntityMetadata(entityName: String): EntityMetadata {
@@ -57,15 +68,6 @@ class MetadataRepositoryImpl(
     return dataSource.getAutocompleteConfigByFieldName(nameWithTask) ?:
       buildAutocompleteConfigByFieldName(autocompleteName) ?:
       throw AutocompleteMetadataNotFoundException(autocompleteName)
-  }
-
-  override fun <T : TaskMetadata> loadTaskMetadata(taskName: String, klass: KClass<T>): T {
-    val metadata = dataSource.getTask(taskName.uppercase()) ?: throw TaskMetadataNotFoundException(taskName)
-    if (klass.isInstance(metadata)) {
-      return metadata as T
-    } else {
-      throw RuntimeException("Task $taskName is not a ${klass.simpleName}")
-    }
   }
 
   private fun buildAutocompleteConfigByFieldName(fieldName: String): AutocompleteConfig? {

@@ -30,9 +30,24 @@ class ACrudSpreadDataCard extends StatelessWidget {
             return Column(
               children: [
                 ACrudDataGroups(crudController),
-                AForm(
-                  crudController.dataFormController,
-                  child: Expanded(child: _buildSpread()),
+                Expanded(
+                  child: ASpread(
+                    name: CrudController.spreadDataName,
+                    columns: columns,
+                    onRowTap: onEdit == null
+                        ? null
+                        : (rowIndex) {
+                            onEdit!(crudController.state.data[rowIndex]['id']);
+                          },
+                    readOnly: true,
+                    controller: crudController.spreadController,
+                    selectPanelWidget: TextButton.icon(
+                      onPressed: crudController.deleteSelected,
+                      style: TextButton.styleFrom(foregroundColor: Colors.red),
+                      icon: const Icon(Icons.delete_outline_outlined),
+                      label: const Text("excluir selecionados"),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
@@ -43,16 +58,13 @@ class ACrudSpreadDataCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: APaginator(
                           currentPage: crudController.state.currentPage,
-                          pageSize: crudController.state.pageSize,
-                          totalRecords: crudController.state.totalRecords,
+                          pageSize: crudController.state.currentPageSize,
+                          infinite: true,
                           onPageSizeChange: (pgSize) {
-                            crudController.formFiltersController.setCustomValue(CrudController.pageSizeName, pgSize);
-                            crudController.doRefresh();
+                            crudController.onPageSizeChange(pgSize);
                           },
                           onPageChange: (delta) {
-                            final newPage = crudController.state.currentPage + delta;
-                            crudController.formFiltersController.setCustomValue(CrudController.currentPageName, newPage);
-                            crudController.doRefresh();
+                            crudController.pageNavigate(delta);
                           },
                         ),
                       ),
@@ -73,25 +85,6 @@ class ACrudSpreadDataCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSpread() {
-    return ASpread(
-      name: CrudController.spreadDataName,
-      columns: columns,
-      onRowTap: onEdit == null
-          ? null
-          : (rowIndex) {
-              onEdit!(crudController.state.data[rowIndex]['id']);
-            },
-      readOnly: true,
-      selectPanelWidget: TextButton.icon(
-        onPressed: crudController.deleteSelecteds,
-        style: TextButton.styleFrom(foregroundColor: Colors.red),
-        icon: const Icon(Icons.delete_outline_outlined),
-        label: const Text("excluir selecionados"),
       ),
     );
   }

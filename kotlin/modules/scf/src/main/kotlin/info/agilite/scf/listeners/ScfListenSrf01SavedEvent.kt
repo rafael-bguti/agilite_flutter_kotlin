@@ -1,7 +1,7 @@
 package info.agilite.scf.listeners
 
 import info.agilite.core.exceptions.ValidationException
-import info.agilite.scf.adapter.infra.ScfListenerRepository
+import info.agilite.scf.infra.ScfListenerRepository
 import info.agilite.scf.application.ScfFromSrfBaseService
 import info.agilite.shared.entities.cgs.CGS18SCF_AO_CRIAR_O_DOCUMETO
 import info.agilite.shared.entities.srf.Srf01

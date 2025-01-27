@@ -12,7 +12,7 @@ class AAutocompleteField<T> extends StatefulWidget {
   final AutocompleteController<T>? fieldController;
 
   final InputDecoration? decoration;
-  final Widget Function(KeyLabel<T>)? listItemBuilder;
+  final Widget Function(Option<T>)? listItemBuilder;
 
   final String? labelText;
   final String? hintText;
@@ -28,7 +28,7 @@ class AAutocompleteField<T> extends StatefulWidget {
   final ClientWhere? Function()? defaultWhereBuilder;
 
   final void Function(AutocompleteController<T> controller)? onControllerCreated;
-  final void Function(KeyLabel<T>? value)? onSelectedValue;
+  final void Function(Option<T>? value)? onSelectedValue;
 
   final String? autocompleteMetadataName;
   final bool isApi;
@@ -54,10 +54,10 @@ class AAutocompleteField<T> extends StatefulWidget {
         onSelectedValue = null,
         isApi = false;
 
-  final List<KeyLabel<T>>? options;
+  final List<Option<T>>? options;
   const AAutocompleteField.options(
     this.name, {
-    required List<KeyLabel<T>> this.options,
+    required List<Option<T>> this.options,
     super.key,
     this.listItemBuilder,
     this.decoration,
@@ -78,7 +78,7 @@ class AAutocompleteField<T> extends StatefulWidget {
 
   const AAutocompleteField.combo(
     this.name, {
-    required List<KeyLabel<T>> this.options,
+    required List<Option<T>> this.options,
     super.key,
     this.listItemBuilder,
     this.decoration,

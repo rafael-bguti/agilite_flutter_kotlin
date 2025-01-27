@@ -19,7 +19,7 @@ class SduiText extends SduiWidget<SduiTextModel> {
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SduiTextModel extends SduiModel {
   final String text;
 

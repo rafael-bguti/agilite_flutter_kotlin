@@ -2,7 +2,7 @@ package info.agilite.srf.adapter.web
 
 import info.agilite.boot.exceptions.ClientException
 import info.agilite.boot.spring.RestMapping
-import info.agilite.srf.adapter.infra.Srf2051Repository
+import info.agilite.srf.infra.Srf2051Repository
 import info.agilite.srf.application.Srf2051Service
 import org.springframework.http.HttpStatus
 import org.springframework.transaction.annotation.Transactional

@@ -4,8 +4,8 @@ import info.agilite.cgs.adapter.infra.Cgs38Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.integradores.bancos.IntegradorBancoFactory
 import info.agilite.integradores.bancos.models.*
-import info.agilite.scf.adapter.infra.Scf021Repository
-import info.agilite.scf.adapter.infra.Scf2010Repository
+import info.agilite.scf.infra.Scf021Repository
+import info.agilite.scf.infra.Scf2010Repository
 import info.agilite.scf.utils.toBancoConfig
 import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.scf.Scf021

@@ -13,7 +13,7 @@ import info.agilite.core.extensions.localCapitalize
 import info.agilite.core.extensions.orExc
 import info.agilite.shared.entities.cas.Cas65
 import info.agilite.shared.integrators.Scf02GeradorPDFToEmail
-import info.agilite.srf.adapter.infra.Srf2060Repository
+import info.agilite.srf.infra.Srf2060Repository
 import info.agilite.srf.domain.Srf2060Doc
 import info.agilite.srf.domain.Srf2060Mail
 import org.springframework.stereotype.Service

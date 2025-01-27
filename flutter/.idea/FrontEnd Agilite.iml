@@ -27,6 +27,9 @@
       <excludeFolder url="file://$MODULE_DIR$/modules/srf/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/modules/srf/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/modules/srf/build" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/cgs/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/cgs/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/modules/cgs/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

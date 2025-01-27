@@ -8,12 +8,12 @@ class CrudDescr {
   final String? _plural;
 
   const CrudDescr(
-      this.singular, {
-        String? plural,
-      }) : _plural = plural;
+    this.singular, {
+    String? plural,
+  }) : _plural = plural;
 
   String get plural {
-    return _plural ?? singular + 's';
+    return _plural ?? '${singular}s';
   }
 
   factory CrudDescr.fromJson(Map<String, dynamic> json) => _$CrudDescrFromJson(json);

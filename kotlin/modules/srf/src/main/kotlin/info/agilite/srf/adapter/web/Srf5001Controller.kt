@@ -4,7 +4,7 @@ import info.agilite.boot.spring.RestMapping
 import info.agilite.core.extensions.format
 import info.agilite.core.utils.CypherUtils
 import info.agilite.srf.adapter.dto.Srf5001Response
-import info.agilite.srf.adapter.infra.Srf5001Repository
+import info.agilite.srf.infra.Srf5001Repository
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 

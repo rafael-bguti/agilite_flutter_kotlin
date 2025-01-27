@@ -5,13 +5,13 @@ import 'package:agilite_flutter_core/core.dart';
 abstract class AutocompleteRepository<T> {
   const AutocompleteRepository();
 
-  FutureOr<List<KeyLabel<T>>> findByQuery(String? query);
-  KeyLabel<T>? fromValue(dynamic value);
+  FutureOr<List<Option<T>>> findByQuery(String? query);
+  Option<T>? fromValue(dynamic value);
 }
 
 class AllInMemoryAutocompleteRepository<T> extends AutocompleteRepository<T> {
   final int pageSize;
-  List<KeyLabel<T>> options;
+  List<Option<T>> options;
 
   AllInMemoryAutocompleteRepository(
     this.options, {
@@ -19,7 +19,7 @@ class AllInMemoryAutocompleteRepository<T> extends AutocompleteRepository<T> {
   });
 
   @override
-  List<KeyLabel<T>> findByQuery(String? query) {
+  List<Option<T>> findByQuery(String? query) {
     final result = query == null ? options : options.where((opt) => opt.toString().toLowerCase().contains(query.toLowerCase())).toList();
     if (result.length > pageSize) {
       return result.sublist(0, pageSize);
@@ -29,7 +29,7 @@ class AllInMemoryAutocompleteRepository<T> extends AutocompleteRepository<T> {
   }
 
   @override
-  KeyLabel<T>? fromValue(dynamic value) {
+  Option<T>? fromValue(dynamic value) {
     return options.firstWhereOrNull((opt) => opt.jsonKey == value);
   }
 }
@@ -49,7 +49,7 @@ class RemoteAPIAutocompleteRepository<T> extends AutocompleteRepository<T> {
   }
 
   @override
-  FutureOr<List<KeyLabel<T>>> findByQuery(String? query) async {
+  FutureOr<List<Option<T>>> findByQuery(String? query) async {
     final response = await http.post(
       "/autocomplete/find",
       body: {
@@ -59,11 +59,11 @@ class RemoteAPIAutocompleteRepository<T> extends AutocompleteRepository<T> {
       },
     );
 
-    return response.bodyListLowerCaseMap.map((e) => RemoteKeyLabel<T>.fromMap(e)).toList();
+    return response.bodyListLowerCaseMap.map((e) => RemoteOption<T>.fromJson(e)).toList();
   }
 
   @override
-  KeyLabel<T>? fromValue(dynamic value) {
+  Option<T>? fromValue(dynamic value) {
     if (value == null) return null;
     if (value is! Map<String, dynamic>) throw 'Value must be a Map<String, dynamic> to AutocompleteField $autocompleteMetadataName';
     final data = LowercaseMap.fromMap(value);
@@ -81,6 +81,6 @@ class RemoteAPIAutocompleteRepository<T> extends AutocompleteRepository<T> {
         )
         .join('-');
 
-    return RemoteKeyLabel<T>(data[_fieldMetadata.autocompleteColumnId] as T, labels, data);
+    return RemoteOption<T>(data[_fieldMetadata.autocompleteColumnId] as T, labels, data);
   }
 }

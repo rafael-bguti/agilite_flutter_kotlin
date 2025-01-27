@@ -1,6 +1,6 @@
 package info.agilite.cas.domain
 
-import info.agilite.boot.autocode.FrontEndMenuItem
+import info.agilite.boot.sdui.FrontEndMenuItem
 
 data class Cas2010Model(
   val nome: String,

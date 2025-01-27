@@ -3,7 +3,6 @@ package info.agilite.shared.metadata
 import info.agilite.boot.metadata.data.MetadataDatasource
 import info.agilite.boot.metadata.models.AutocompleteConfig
 import info.agilite.boot.metadata.models.EntityMetadata
-import info.agilite.boot.metadata.models.tasks.TaskMetadata
 import info.agilite.boot.orm.AbstractEntity
 import info.agilite.boot.orm.where
 import info.agilite.core.extensions.localCapitalize
@@ -11,11 +10,7 @@ import info.agilite.core.extensions.substr
 import info.agilite.core.model.LowerCaseMap
 import info.agilite.core.utils.ReflectionUtils
 import info.agilite.shared.entities.cgs.*
-import jdk.dynalink.linker.support.Guards.isNotNull
-import javax.management.Query.and
-import javax.management.Query.eq
 import kotlin.reflect.KClass
-import kotlin.reflect.full.declaredMemberProperties
 
 private val entitiesMetadataCache = mutableMapOf<String, EntityMetadata>()
 
@@ -56,10 +51,6 @@ class DicDados : MetadataDatasource {
     }
   }
 
-  override fun getTask(taskCode: String): TaskMetadata? {
-    //TODO Implementar
-    return null
-  }
 
   override fun getAutocompleteConfigByFieldName(fieldName: String): AutocompleteConfig? {
     return customAutocompleteConfig[fieldName] as AutocompleteConfig?

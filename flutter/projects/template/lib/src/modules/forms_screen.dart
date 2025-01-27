@@ -66,17 +66,17 @@ class _AutocompletesState extends State<Autocompletes> {
         spacing: 16,
         children: [
           AComboField("comboFixo", labelText: "Combobox Fixo", options: [
-            LocalKeyLabel<String>("1", "Opção 1"),
-            LocalKeyLabel<String>("2", "Opção 2"),
-            LocalKeyLabel<String>("3", "Opção 3"),
+            LocalOption<String>("1", "Opção 1"),
+            LocalOption<String>("2", "Opção 2"),
+            LocalOption<String>("3", "Opção 3"),
           ]),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AAutocompleteField.options("autocompleteFixo", labelText: "Autocomplete Fixo", options: [
-                LocalKeyLabel<String>("1", "Opção 1"),
-                LocalKeyLabel<String>("2", "Opção 2"),
-                LocalKeyLabel<String>("3", "Opção 3"),
+                LocalOption<String>("1", "Opção 1"),
+                LocalOption<String>("2", "Opção 2"),
+                LocalOption<String>("3", "Opção 3"),
               ]),
               AText("No Autocomplete com Options, o sistema exibe as opções paginado", style: moreDetailTextStyle),
             ],
@@ -85,9 +85,9 @@ class _AutocompletesState extends State<Autocompletes> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AAutocompleteField.combo("autocompleteCombo", labelText: "Autocomplete Combo", options: [
-                LocalKeyLabel<String>("1", "Opção 1"),
-                LocalKeyLabel<String>("2", "Opção 2"),
-                LocalKeyLabel<String>("3", "Opção 3"),
+                LocalOption<String>("1", "Opção 1"),
+                LocalOption<String>("2", "Opção 2"),
+                LocalOption<String>("3", "Opção 3"),
               ]),
               AText("No Autocomplete Combo, o sistema exibe todas as opções sem página", style: moreDetailTextStyle),
             ],
@@ -99,9 +99,9 @@ class _AutocompletesState extends State<Autocompletes> {
                 "autocompleteCustomField",
                 labelText: "Autocomplete Custom Field",
                 options: [
-                  LocalKeyLabel<String>("1", "João", moreDetails: {"image": "https://i.pravatar.cc/150?img=1", "empresa": "Company A"}),
-                  LocalKeyLabel<String>("2", "José", moreDetails: {"image": "https://i.pravatar.cc/150?img=2", "empresa": "Company B"}),
-                  LocalKeyLabel<String>("3", "Maria", moreDetails: {"image": "https://i.pravatar.cc/150?img=3", "empresa": "Company C"}),
+                  LocalOption<String>("1", "João", moreDetails: {"image": "https://i.pravatar.cc/150?img=1", "empresa": "Company A"}),
+                  LocalOption<String>("2", "José", moreDetails: {"image": "https://i.pravatar.cc/150?img=2", "empresa": "Company B"}),
+                  LocalOption<String>("3", "Maria", moreDetails: {"image": "https://i.pravatar.cc/150?img=3", "empresa": "Company C"}),
                 ],
                 listItemBuilder: _buildCustomListItem,
               ),
@@ -113,7 +113,7 @@ class _AutocompletesState extends State<Autocompletes> {
     );
   }
 
-  Widget _buildCustomListItem(KeyLabel<String> item) {
+  Widget _buildCustomListItem(Option<String> item) {
     final moreDetails = item.getMoreDetails();
     return ASpacingRow(
       children: [

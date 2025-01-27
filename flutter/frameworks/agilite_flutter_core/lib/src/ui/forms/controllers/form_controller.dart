@@ -6,7 +6,7 @@ typedef AddContollerEvent = void Function(FieldController<dynamic> controller);
 class FormController {
   final Map<String, dynamic> _value = {};
 
-  final List<AddContollerEvent> addControllerListeners = [];
+  final List<AddContollerEvent> _controllerListeners = [];
 
   final List<FieldController<dynamic>> _fieldControllers = [];
   List<FieldController<dynamic>> get fieldControllers => _fieldControllers;
@@ -28,9 +28,13 @@ class FormController {
       controller.fillFromJson(_value);
     }
 
-    for (var addControllerListener in addControllerListeners) {
+    for (var addControllerListener in _controllerListeners) {
       addControllerListener(controller);
     }
+  }
+
+  void addControllerListener(AddContollerEvent listener) {
+    _controllerListeners.add(listener);
   }
 
   //---- Map Controller ----
@@ -141,12 +145,19 @@ class FormController {
       element.disposeByForm();
     }
     _fieldControllers.clear();
+    _controllerListeners.clear();
+    _customValues.clear();
+    _mapControllers.clear();
     $validationMessages.value = [];
   }
 
   // ---- Register values ----
   void setCustomValue(String key, dynamic value) {
     _customValues[key] = value;
+  }
+
+  dynamic getCustomValue(String key) {
+    return _customValues[key];
   }
 
   void removeCustomValue(String key) {
@@ -162,10 +173,10 @@ class FormController {
     controller.value = value;
   }
 
-  dynamic getControllerValue(String controllerName) {
-    final controller = getController(controllerName);
+  dynamic getValue(String name) {
+    final controller = getController(name);
     if (controller == null) {
-      throw 'Controller $controllerName não encontrado';
+      return getCustomValue(name);
     }
     return controller.value;
   }

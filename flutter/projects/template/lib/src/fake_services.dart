@@ -6,7 +6,6 @@ import 'menu.dart';
 class FakeLoginService extends LoginService {
   @override
   Future<bool> login(String email, String password) async {
-    await Future.delayed(const Duration(milliseconds: 500));
     fullLayoutFacade.setMenuItems(menuItens);
 
     final user = LoggedUser(

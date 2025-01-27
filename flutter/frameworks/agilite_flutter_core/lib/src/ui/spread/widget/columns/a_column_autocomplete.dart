@@ -8,12 +8,12 @@ enum _Type {
 }
 
 class AColumnAutocomplete<T> extends ASpreadColumn<T> {
-  final List<KeyLabel<T>>? options;
+  final List<Option<T>>? options;
   final ClientWhere? Function()? defaultWhereBuilder;
-  final Widget Function(KeyLabel<T>)? listItemBuilder;
+  final Widget Function(Option<T>)? listItemBuilder;
   final _Type _type;
 
-  final void Function(KeyLabel<T>? value, int row)? onSelectedValue;
+  final void Function(Option<T>? value, int row)? onSelectedValue;
   late final AutocompleteController<T> _fieldController;
 
   final String? autocompleteMetadataName;
@@ -115,7 +115,7 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     _addValueOnSpread(keyLabel, rowIndex);
   }
 
-  void _addValueOnSpread(KeyLabel<T>? keyLabel, int rowIndex) {
+  void _addValueOnSpread(Option<T>? keyLabel, int rowIndex) {
     this.onSelectedValue?.call(keyLabel, rowIndex);
     if (keyLabel != null) {
       spreadController.value[rowIndex][name] = keyLabel.jsonKey;

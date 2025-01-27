@@ -4,7 +4,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 import '../sdui_context.dart';
-import '../sdui_render.dart';
 
 class SduiLoader extends StatefulWidget {
   final SduiContentProvider contentProvider;
@@ -60,7 +59,7 @@ class _SduiController extends ViewController<_ViewState> {
   Future<void> onViewLoaded() async {
     FutureOr<String?> contentOr = provider.getContent();
     if (contentOr is Future) {
-      showLoading("Carregando dados da tarfa");
+      showLoading("Carregando dados da tarefa");
 
       String? content = await contentOr;
       state = _ViewState(sduiJson: content?.toMap());

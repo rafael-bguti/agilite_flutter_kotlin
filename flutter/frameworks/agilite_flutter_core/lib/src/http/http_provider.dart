@@ -143,8 +143,6 @@ class HttpProviderImpl extends HttpProvider {
     HttpResponseHandler? responseHandler,
     void Function(String message)? onSseMessage,
   }) async {
-    debugPrint(' ---> method -> $path -> $data');
-
     Uri uri;
     http.Response response;
 
@@ -153,19 +151,23 @@ class HttpProviderImpl extends HttpProvider {
     try {
       if (method == 'post') {
         final jsonBody = parseBody(data, localHeaders);
+        debugPrint(' ---> POST -> $path -> $jsonBody');
         uri = _url(path);
         await _startSSE(onSseMessage, localHeaders);
         response = await client.post(uri, headers: localHeaders, body: jsonBody).timeout(timeout);
       } else if (method == 'put') {
         final jsonBody = parseBody(data, localHeaders);
+        debugPrint(' ---> PUT -> $path -> $jsonBody');
         uri = _url(path);
         await _startSSE(onSseMessage, localHeaders);
         response = await client.put(uri, headers: localHeaders, body: jsonBody).timeout(timeout);
       } else if (method == 'get') {
+        debugPrint(' ---> GET -> $path -> $data');
         uri = _url(path, data as Map<String, dynamic>?);
         await _startSSE(onSseMessage, localHeaders);
         response = await client.get(uri, headers: localHeaders).timeout(timeout);
       } else if (method == 'delete') {
+        debugPrint(' ---> DELETE -> $path');
         uri = _url(path);
         await _startSSE(onSseMessage, localHeaders);
         response = await client.delete(uri, headers: localHeaders).timeout(timeout);

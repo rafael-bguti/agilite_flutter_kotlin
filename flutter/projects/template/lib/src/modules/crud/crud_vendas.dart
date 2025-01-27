@@ -6,7 +6,8 @@ class CrudVendas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ACrud(
+    return ACrud.name(
+      taskName: "vendas",
       descr: const CrudDescr('Venda'),
       customFilters: [
         OutlinedButton.icon(

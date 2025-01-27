@@ -2,6 +2,7 @@
 NOME,TIPO,DESCRIÇÃO
 ROT4001,Fro,Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
 CAS2010,Pro,Login
+CGS1080,Cad,Entidade
 SCF2010,Pro,Enviar boletos ao Banco
 SCF2011,Pro,Processar retorno de boletos
 SCF5001,Bac,API

@@ -1,4 +1,7 @@
-import 'package:agilite_flutter_core/src/sdui/widgets/sdui_crud.dart';
+import 'package:agilite_flutter_core/src/sdui/crud/sdui_crud.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_autocomplete.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_combo_field.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_sized_box.dart';
 
 import 'widgets/widgets.dart';
 
@@ -33,5 +36,8 @@ class SduiWidgetRegistry {
 List<SduiWidget> _initWidgets = [
   SduiCrud(),
   SduiText(),
-  SduiColumn(),
+  SduiSpacingColumn(),
+  SduiSizedBox(),
+  SduiAutocomplete(),
+  SduiComboField(),
 ];

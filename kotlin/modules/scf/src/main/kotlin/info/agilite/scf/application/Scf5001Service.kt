@@ -1,7 +1,7 @@
 package info.agilite.scf.application
 
 import info.agilite.integradores.bancos.IntegradorBancoFactory
-import info.agilite.scf.adapter.infra.Scf5001Repository
+import info.agilite.scf.infra.Scf5001Repository
 import info.agilite.scf.utils.toBancoConfig
 import org.springframework.stereotype.Service
 

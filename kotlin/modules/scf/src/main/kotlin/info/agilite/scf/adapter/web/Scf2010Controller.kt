@@ -1,8 +1,8 @@
 package info.agilite.scf.adapter.web
 
 import info.agilite.boot.spring.RestMapping
-import info.agilite.scf.adapter.infra.Scf2010Dto
-import info.agilite.scf.adapter.infra.Scf2010Repository
+import info.agilite.scf.infra.Scf2010Dto
+import info.agilite.scf.infra.Scf2010Repository
 import info.agilite.scf.application.Scf2010Service
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

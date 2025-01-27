@@ -10,6 +10,19 @@ import 'pages/dashboard_page.dart';
 
 final routes = <ARoute>[
   ARoute.eager(
+    '/sdui/:base',
+    inFullLayout: true,
+    (_, state) {
+      final base = state.pathParameters['base'];
+      return SduiLoader(
+        contentProvider: RemoteSduiContentProvider(
+          url: '/sdui/$base',
+          pathParams: state.pathParameters,
+        ),
+      );
+    },
+  ),
+  ARoute.eager(
     splashPath,
     (_, __) => const SplashScreen(),
   ),

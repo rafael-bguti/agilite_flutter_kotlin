@@ -2,7 +2,7 @@ package info.agilite.scf.integrators
 
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.integradores.bancos.IntegradorBancoFactory
-import info.agilite.scf.adapter.infra.Scf02PdfGeneratorRepository
+import info.agilite.scf.infra.Scf02PdfGeneratorRepository
 import info.agilite.scf.utils.toBancoConfig
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.integrators.Scf02AnexoCobranca

@@ -14,7 +14,7 @@ import info.agilite.shared.entities.cgs.Cgs50
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.entities.srf.Srf011
 import info.agilite.shared.entities.srf.Srf012
-import info.agilite.srf.adapter.infra.Srf01Repository
+import info.agilite.srf.infra.Srf01Repository
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.time.LocalDate

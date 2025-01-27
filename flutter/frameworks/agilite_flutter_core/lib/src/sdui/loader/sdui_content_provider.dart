@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:agilite_flutter_core/core.dart';
+
 abstract class SduiContentProvider {
   FutureOr<String?> getContent();
 }
@@ -27,50 +29,8 @@ class RemoteSduiContentProvider implements SduiContentProvider {
 
   @override
   FutureOr<String?> getContent() async {
-    //TODO Código de testes
-
-    return """
-    {
-     "name": "SduiCrud",
-     "descr": {
-        "singular": "Cliente"
-     },
-     "columns": [
-        {
-          "name": "name",
-          "label": "Nome",
-          "type": "string"
-        },
-        {
-          "name": "email",
-          "label": "Email",
-          "type": "string"
-        }
-      ]
-    }
-    """;
-
-    // return """
-    // {
-    //  "name": "SduiColumn",
-    //  "spacing": 64,
-    //   "children": [
-    //     {
-    //       "name": "SduiText",
-    //       "text": "Hello World"
-    //     },
-    //     {
-    //       "name": "SduiText",
-    //       "text": "Hello World 2"
-    //     }
-    //
-    //   ]
-    // }
-    // """;
-
-    //TODO - Código correto
-    // return coreHttpProvider.get(url, queryParameters: pathParams).then((response) {
-    //   return response.bodyString;
-    // });
+    return coreHttpProvider.get(url, queryParameters: pathParams).then((response) {
+      return response.bodyString;
+    });
   }
 }

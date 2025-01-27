@@ -15,7 +15,7 @@ class Scf2011Controller extends ViewController<Scf2011State> {
   Future<void> processarBoletos() async {
     if (!formController.validate()) return;
     showLoading("baixando boletos");
-    final selectedCgs38 = formController.getControllerValue('cgs38RecBoletoComApi') as RemoteKeyLabel;
+    final selectedCgs38 = formController.getValue('cgs38RecBoletoComApi') as RemoteOption;
 
     final response = await httpProvider.post('/scf2011/${selectedCgs38.key}');
     final boletosProcessados = response.bodyList.map((e) => BoletoProcessado.fromJson(e)).toList();

@@ -3,7 +3,7 @@ package info.agilite.srf.application
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.Srf01SavedEvent
-import info.agilite.srf.adapter.infra.Srf01Repository
+import info.agilite.srf.infra.Srf01Repository
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import java.math.BigDecimal

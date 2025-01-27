@@ -17,6 +17,8 @@ dependencies:
     path: ../../frameworks/agilite_flutter_boot
   agilite_flutter_core:
     path: ../../frameworks/agilite_flutter_core
+  cgs:
+    path: ../../modules/cgs
   scf:
     path: ../../modules/scf
   srf:

@@ -8,7 +8,7 @@ class SduiRender {
     SduiContext sduiContext,
     Map<String, dynamic> json,
   ) {
-    final String name = json["name"].toString();
+    final String name = json["widget"].toString();
 
     final widget = SduiWidgetRegistry.instance.get(name);
     final model = widget.json2Model(json);

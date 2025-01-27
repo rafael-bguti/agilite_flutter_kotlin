@@ -1,6 +1,7 @@
 package info.agilite.erp.ui
 
-import info.agilite.boot.autocode.FrontEndMenuItem
+import info.agilite.boot.sdui.FrontEndMenuItem
+import info.agilite.boot.sdui.SduiRequest
 import info.agilite.cas.adapter.infra.UserMenuBuilder
 import org.springframework.stereotype.Component
 
@@ -10,7 +11,7 @@ class MenuBuilder : UserMenuBuilder {
     return listOf<FrontEndMenuItem>(
       FrontEndMenuItem.item(1, "Dashboard", "/cas2001", 0xe1b1),
       FrontEndMenuItem.group(2, "Cadastros", children = listOf(
-        FrontEndMenuItem.item(21, "Clientes / Fornecedores", "/cgs1080", 0xe491),
+        FrontEndMenuItem.item(21, "Entidades", "/sdui/${buildSduiRequestBase64("cgs1080")}", 0xe491),
         FrontEndMenuItem.item(22, "Serviços", "/cgs1050/2", 0xf180),
         FrontEndMenuItem.item(23, "Categoria financeira", "/cgs1040", 0xe19f),
         FrontEndMenuItem.item(24, "Contas de bancos", "/cgs1045", 0xf1dd),
@@ -28,5 +29,12 @@ class MenuBuilder : UserMenuBuilder {
         FrontEndMenuItem.item(45, "Retorno dos boletos", "/scf2011", 0xf523),
       ))
     )
+  }
+
+  private fun buildSduiRequestBase64(
+    name: String,
+    providerClass: String? = null,
+  ): String {
+    return SduiRequest(name, providerClass).toBase64()
   }
 }

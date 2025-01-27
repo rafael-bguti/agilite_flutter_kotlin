@@ -4,7 +4,7 @@ import info.agilite.boot.orm.BatchOperations
 import info.agilite.boot.orm.repositories.EmptyIdsList
 import info.agilite.boot.orm.repositories.IdsList
 import info.agilite.boot.security.UserContext
-import info.agilite.scf.adapter.infra.ScfBaseRepository
+import info.agilite.scf.infra.ScfBaseRepository
 import info.agilite.shared.RegOrigem
 import info.agilite.shared.entities.cgs.*
 import info.agilite.shared.entities.scf.Scf02

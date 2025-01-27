@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AComboField<T> extends StatefulWidget {
   //Criado via controller
-  final List<KeyLabel<T>> options;
+  final List<Option<T>> options;
   final ComboController<T>? fieldController;
 
   //Parâmetros para criar o controller aqui no TextField
@@ -82,7 +82,6 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCre
             labelText: widget.localDecoration.labelText ?? fieldController.labelText,
             hintText: widget.localDecoration.hintText ?? fieldController.hintText,
             helperText: widget.localDecoration.helperText ?? fieldController.helperText,
-            suffixIcon: _buildSuffixIcon(fieldController),
           ),
           items: widget.options
               .map(
@@ -103,19 +102,6 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCre
         );
       },
     );
-  }
-
-  Widget? _buildSuffixIcon(ComboController<T> fieldController) {
-    if (widget.options[0].jsonKey == null && fieldController.value != null) {
-      return IconButton(
-        icon: const Icon(Icons.clear, color: Colors.red),
-        onPressed: () {
-          fieldController.value = null as T;
-          fieldController.onChanged();
-        },
-      );
-    }
-    return null;
   }
 
   ComboController<T> _buildController() {

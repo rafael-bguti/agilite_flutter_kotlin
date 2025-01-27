@@ -11,9 +11,3 @@ SduiTextModel _$SduiTextModelFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String,
       id: json['id'] as String?,
     );
-
-Map<String, dynamic> _$SduiTextModelToJson(SduiTextModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'text': instance.text,
-    };

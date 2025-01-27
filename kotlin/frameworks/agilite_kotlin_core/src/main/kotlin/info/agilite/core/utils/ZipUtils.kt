@@ -9,9 +9,14 @@ import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
 object ZipUtils {
-    fun compressToBase64(content: String): String {
+    fun compressToUrlBase64(content: String): String {
         val bytes = compress(content)
-        return Base64.getEncoder().encodeToString(bytes)
+        return Base64.getUrlEncoder().encodeToString(bytes)
+    }
+
+    fun decompressFromUrlBase64(content: String): String {
+        val bytes = Base64.getUrlDecoder().decode(content)
+        return decompressToString(bytes)
     }
 
     fun compress(content: String): ByteArray {

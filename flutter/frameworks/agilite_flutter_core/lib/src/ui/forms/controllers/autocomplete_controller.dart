@@ -5,9 +5,9 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
-  List<KeyLabel<T>>? allOptions;
-  final List<KeyLabel<T>> filteredOptions = [];
+class AutocompleteController<T> extends FieldController<Option<T>?> {
+  List<Option<T>>? allOptions;
+  final List<Option<T>> filteredOptions = [];
   final AutocompleteRepository<T> repository;
 
   String? _helperText;
@@ -21,7 +21,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
 
   final bool showAllOptions;
 
-  final void Function(KeyLabel<T>? value)? onSelectedValue;
+  final void Function(Option<T>? value)? onSelectedValue;
 
   final FocusNode searchFocusNode = FocusNode();
   final TextEditingController searchEditingController = TextEditingController();
@@ -78,17 +78,17 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
     super.dispose();
   }
 
-  KeyLabel<T>? _value;
+  Option<T>? _value;
   @override
-  KeyLabel<T>? get value => _value;
+  Option<T>? get value => _value;
   @override
-  set value(KeyLabel<T>? localValue) {
+  set value(Option<T>? localValue) {
     if (localValue != _value) {
       _updateValue(localValue);
     }
   }
 
-  void _updateValue(KeyLabel<T>? localValue, [bool fromUserAction = true]) {
+  void _updateValue(Option<T>? localValue, [bool fromUserAction = true]) {
     comboEditingController.text = keyValueConverter.valueToString(localValue);
     _value = localValue ?? defaultValue;
     onValueChanged.notifyListeners();
@@ -108,7 +108,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
     _updateValue(keyVal, false);
   }
 
-  KeyLabel<T>? extractValueFromRemoteJson(Map<String, dynamic>? data) {
+  Option<T>? extractValueFromRemoteJson(Map<String, dynamic>? data) {
     if (data == null) return null;
 
     final value = data[name];
@@ -273,7 +273,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
     }
   }
 
-  void onListItemTap(KeyLabel<T> option) {
+  void onListItemTap(Option<T> option) {
     value = option;
     closeMenu();
   }
@@ -315,7 +315,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
     }
   }
 
-  KeyLabel<T>? _selectedOption() {
+  Option<T>? _selectedOption() {
     final selIndex = selectedIndex.value;
     if (selIndex >= 0 && selIndex < filteredOptions.length) {
       return filteredOptions[selIndex];
@@ -327,7 +327,7 @@ class AutocompleteController<T> extends FieldController<KeyLabel<T>?> {
 class KeyValueConverter<T> {
   const KeyValueConverter();
 
-  String valueToString(KeyLabel<dynamic>? value) {
+  String valueToString(Option<dynamic>? value) {
     if (value == null) return '';
     return value.toString();
   }

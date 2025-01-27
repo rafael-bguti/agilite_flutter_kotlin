@@ -3,7 +3,7 @@ package info.agilite.scf.adapter.web
 import info.agilite.boot.spring.RestMapping
 import info.agilite.core.extensions.format
 import info.agilite.core.utils.CypherUtils
-import info.agilite.scf.adapter.infra.Scf5001Repository
+import info.agilite.scf.infra.Scf5001Repository
 import info.agilite.scf.application.Scf5001Service
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

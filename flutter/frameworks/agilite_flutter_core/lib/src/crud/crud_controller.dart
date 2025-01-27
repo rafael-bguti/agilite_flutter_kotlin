@@ -4,33 +4,52 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:agilite_flutter_core/src/crud/crud_repository.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'crud_state.dart';
+
 class CrudController extends ViewController<CrudState> {
   static const String spreadDataName = 'data';
   static const String searchName = 'search';
-  static const String groupIndexName = 'groupIndex';
-  static const String pageSizeName = 'pageSize';
-  static const String currentPageName = 'currentPage';
 
-  final CrudRepository? _repository;
+  final String taskName;
+
+  final CrudRepository _repository;
+  final _searchDebouceTimer = DebounceTimer();
 
   //Controllers
   final formFiltersController = FormController();
-  final dataFormController = FormController();
+
+  final spreadController = SpreadController("data");
+
+  //Navigation
+  var currentPage = 0;
+  var pageSize = 10;
+  var groupIndex = 0;
 
   final $loading = false.obs;
-  CrudController({CrudRepository? repository})
-      : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
-        super(CrudState.empty());
+  CrudController({
+    required this.taskName,
+    CrudRepository? repository,
+  })  : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
+        super(CrudState.empty()) {
+    formFiltersController.addControllerListener(
+      (controller) {
+        if (controller is FormFieldController) {
+          controller.onValueChanged.addListener(onFilterChanged);
+        } else {
+          controller.onValueChanged.addListener(_refresh);
+        }
+      },
+    );
+  }
 
   @override
   @mustCallSuper
   Future<void> onViewLoaded() async {
-    showLoading("Carregando dados do cadastro");
-    await refresh(null);
+    await _refresh();
   }
 
   // ------ Edição ------
-  void deleteSelecteds() {
+  void deleteSelected() {
     print(' - Deletando selecionados');
   }
 
@@ -41,42 +60,64 @@ class CrudController extends ViewController<CrudState> {
 
   void clearFilters() {
     formFiltersController.clear();
-    doRefresh();
+    _clearCurrentPage();
+    _refresh();
   }
 
   // ------ Atualizar dados ------
-  Future<void> doRefresh() async {
-    refresh(getFilters());
+  void onFilterChanged() {
+    _clearCurrentPage();
+    _searchDebouceTimer.run(_refresh);
   }
 
-  Future<void> refresh(Map<String, dynamic>? filters) async {
+  Future<void> pageNavigate(int delta) async {
+    final newPage = state.currentPage + delta;
+    currentPage = max(0, newPage);
+    _refresh(delta > 0);
+  }
+
+  Future<void> onPageSizeChange(int pgSize) async {
+    _clearCurrentPage();
+    pageSize = pgSize;
+    _refresh();
+  }
+
+  Future<void> onGroupChanged(int groupIndex) async {
+    this.groupIndex = groupIndex;
+    _refresh();
+  }
+
+  void doRefresh() {
+    _refresh();
+  }
+
+  Future<void> _refresh([bool byNextPageNavigation = false]) async {
     $loading.value = true;
-    print(' - Refreshing data by filters: $filters');
-
-    await Future.delayed(const Duration(seconds: 1));
-    state = CrudState(
-      currentPage: 1,
-      pageSize: 10,
-      totalRecords: Random().nextInt(2569) + 50,
-      data: [
-        {"id": 50, "name": "João", "email": "joao@gmail.com"},
-        {"id": 97, "name": "Maria", "email": "maria@gmail.com"},
-      ],
-      groups: [
-        CrudStatusGroup(775, "todos"),
-        CrudStatusGroup(50, "em aberto"),
-        CrudStatusGroup(125, "aprovado"),
-        CrudStatusGroup(22, "enviando"),
-        CrudStatusGroup(8, "finalizado"),
-      ],
-      selectedGroupIndex: 3,
-    );
-    dataFormController.showValues({"data": state.data});
-    $loading.value = false;
+    try {
+      final request = buildRequest();
+      final stateResponse = await _repository.loadData(taskName, request);
+      if (stateResponse.data.isEmpty && byNextPageNavigation) {
+        showWarningSnack("Nenhuma nova página localizada");
+      } else {
+        state = stateResponse;
+        spreadController.fillFromList(state.data);
+      }
+    } finally {
+      $loading.value = false;
+    }
   }
 
-  Map<String, dynamic> getFilters() {
-    return formFiltersController.buidlJson();
+  CrudListRequest buildRequest() {
+    final customFilters = formFiltersController.buidlJson();
+    final search = customFilters.remove(searchName);
+
+    return CrudListRequest(
+      currentPage: currentPage,
+      pageSize: pageSize,
+      search: search,
+      customFilters: customFilters,
+      groupIndex: groupIndex,
+    );
   }
 
   // --- Diversos ---
@@ -84,43 +125,13 @@ class CrudController extends ViewController<CrudState> {
   void dispose() {
     $loading.dispose();
     formFiltersController.dispose();
+    spreadController.dispose();
+    _searchDebouceTimer.dispose();
 
     super.dispose();
   }
-}
 
-class CrudState {
-  final int currentPage;
-  final int pageSize;
-  final int totalRecords;
-  final List<Map<String, dynamic>> data;
-
-  //Crud com agrupamento - é exibido um TabHeader com os grupos em cima da Spread de dados
-  final List<CrudStatusGroup>? groups;
-  final int? selectedGroupIndex;
-
-  CrudState({
-    required this.currentPage,
-    required this.pageSize,
-    required this.totalRecords,
-    required this.data,
-    this.groups,
-    this.selectedGroupIndex,
-  });
-
-  CrudState.empty()
-      : currentPage = 0,
-        pageSize = 10,
-        totalRecords = 0,
-        data = [],
-        groups = null,
-        selectedGroupIndex = null;
-}
-
-class CrudStatusGroup {
-  final int qtd;
-  final String title;
-  final String? subtitle;
-
-  CrudStatusGroup(this.qtd, this.title, {this.subtitle});
+  void _clearCurrentPage() {
+    currentPage = 0;
+  }
 }

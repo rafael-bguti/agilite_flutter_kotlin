@@ -2,7 +2,7 @@ package info.agilite.srf.adapter.web
 
 import info.agilite.boot.spring.RestMapping
 import info.agilite.boot.sse.HEADER_SSE_UID_NAME
-import info.agilite.srf.adapter.infra.Srf2050Repository
+import info.agilite.srf.infra.Srf2050Repository
 import info.agilite.srf.application.SRF2050Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping

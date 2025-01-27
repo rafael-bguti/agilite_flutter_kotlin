@@ -1,6 +1,6 @@
 package info.agilite.scf.listeners
 
-import info.agilite.scf.adapter.infra.ScfListenerRepository
+import info.agilite.scf.infra.ScfListenerRepository
 import info.agilite.scf.application.ScfFromSrfBaseService
 import info.agilite.shared.entities.cgs.CGS18SCF_NA_APROVACAO_FISCAL
 import info.agilite.shared.events.*

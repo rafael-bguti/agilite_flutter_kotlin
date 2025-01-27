@@ -9,7 +9,6 @@ class CrudEditController extends ViewController<bool> {
   @override
   Future<void> onViewLoaded() async {
     showLoading("Carregando registro");
-    await Future.delayed(Duration(seconds: 2));
 
     formController.value = {
       "id": id,
@@ -26,7 +25,6 @@ class CrudEditController extends ViewController<bool> {
     if (!formController.validate()) return;
 
     showLoading("Salvando registro");
-    await Future.delayed(Duration(seconds: 1));
     print(formController.buidlJson());
 
     hideLoading();

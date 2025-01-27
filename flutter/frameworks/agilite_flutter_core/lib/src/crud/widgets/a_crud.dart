@@ -2,6 +2,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class ACrud extends StatefulWidget {
+  final String taskName;
   final CrudDescr descr;
   final List<ASpreadColumn> columns;
 
@@ -14,7 +15,8 @@ class ACrud extends StatefulWidget {
   final void Function(int? id)? onEdit;
   final Widget? formBody;
 
-  const ACrud({
+  const ACrud.name({
+    required this.taskName,
     required this.descr,
     required this.columns,
     this.customFilters,
@@ -24,19 +26,30 @@ class ACrud extends StatefulWidget {
     super.key,
   });
 
+  ACrud.controller({
+    required CrudController this.controller,
+    required this.descr,
+    required this.columns,
+    this.customFilters,
+    this.onEdit,
+    this.formBody,
+    super.key,
+  }) : taskName = controller.taskName;
+
   @override
   State<ACrud> createState() => _ACrudState();
 }
 
 class _ACrudState extends State<ACrud> {
   late final _controllerCreatedForThis = widget.controller != null;
-  late final _controller = widget.controller ?? CrudController();
+  late final _controller = widget.controller ?? CrudController(taskName: widget.taskName);
 
   @override
   void dispose() {
     if (!_controllerCreatedForThis) {
       _controller.dispose();
     }
+
     super.dispose();
   }
 

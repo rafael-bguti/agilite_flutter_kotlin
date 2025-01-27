@@ -15,10 +15,7 @@ class ACrudDataGroups extends StatelessWidget {
       selectedIndex: crudController.state.selectedGroupIndex ?? 0,
       headerCount: crudController.state.groups!.length,
       contentBuilder: _buildStatusContext,
-      onTabChanged: (tabIndex) {
-        crudController.formFiltersController.setCustomValue(CrudController.groupIndexName, tabIndex);
-        crudController.doRefresh();
-      },
+      onTabChanged: crudController.onGroupChanged,
     );
   }
 

@@ -3,7 +3,7 @@ package info.agilite.srf.adapter.web
 import info.agilite.boot.spring.RestMapping
 import info.agilite.boot.sse.SseEmitter
 import info.agilite.srf.domain.Srf2060Mail
-import info.agilite.srf.adapter.infra.Srf2060Repository
+import info.agilite.srf.infra.Srf2060Repository
 import info.agilite.srf.application.Srf2060Service
 import info.agilite.srf.domain.Srf2060Filter
 import org.springframework.web.bind.annotation.GetMapping

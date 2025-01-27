@@ -6,7 +6,7 @@ import info.agilite.cgs.adapter.infra.Cgs38Repository
 import info.agilite.integradores.bancos.IntegradorBancoFactory
 import info.agilite.integradores.bancos.models.BoletoProcessado
 import info.agilite.integradores.bancos.models.BoletoRecebido
-import info.agilite.scf.adapter.infra.Scf02Repository
+import info.agilite.scf.infra.Scf02Repository
 import info.agilite.scf.utils.toBancoConfig
 import info.agilite.shared.RegOrigem
 import info.agilite.shared.entities.cgs.Cgs38

@@ -9,24 +9,16 @@ part of 'sdui_spread_column.dart';
 SduiSpreadColumnModel _$SduiSpreadColumnModelFromJson(
         Map<String, dynamic> json) =>
     SduiSpreadColumnModel(
-      fieldMetadataName: json['fieldMetadataName'] as String?,
       name: json['name'] as String?,
       label: json['label'] as String?,
       type: $enumDecodeNullable(_$FieldMetadataTypeEnumMap, json['type']),
+      options: (json['options'] as List<dynamic>?)
+          ?.map((e) => LocalOption<dynamic>.fromJson(e as Map<String, dynamic>))
+          .toList(),
       width: json['width'] == null
           ? null
           : AWidth.fromJson(json['width'] as Map<String, dynamic>),
     );
-
-Map<String, dynamic> _$SduiSpreadColumnModelToJson(
-        SduiSpreadColumnModel instance) =>
-    <String, dynamic>{
-      'fieldMetadataName': instance.fieldMetadataName,
-      'name': instance.name,
-      'label': instance.label,
-      'type': _$FieldMetadataTypeEnumMap[instance.type],
-      'width': instance.width,
-    };
 
 const _$FieldMetadataTypeEnumMap = {
   FieldMetadataType.string: 'string',

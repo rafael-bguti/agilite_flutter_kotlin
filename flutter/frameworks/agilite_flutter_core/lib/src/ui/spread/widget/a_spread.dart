@@ -20,8 +20,6 @@ class ASpread extends StatefulWidget {
   //Mais detalhes
   final SpreadMoreDetail? moreDetail;
 
-  final List<Map<String, dynamic>>? value;
-
   final String? name;
   final List<ASpreadColumn<dynamic>> columns;
   final bool? disableScroll;
@@ -58,7 +56,6 @@ class ASpread extends StatefulWidget {
     this.canAddNewRow,
     this.readOnly,
     this.onCellStopEdit,
-    this.value,
     this.onControllerCreated,
     this.labelButtonAddNew = 'Adicionar nova linha',
     this.labelTextToValidationMessage,
@@ -108,15 +105,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
   }
 
   @override
-  void didUpdateWidget(ASpread oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.value != widget.value) {
-      spreadController.value = SpreadModel.value(widget.value);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AConsumer(
       notifier: spreadController,
@@ -125,7 +113,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
         if (widget.selectPanelWidget == null) return table;
 
         return Stack(
-          fit: StackFit.expand,
           children: [
             table,
             _buildSelectedPanel(context, controller, widget.selectPanelWidget!),

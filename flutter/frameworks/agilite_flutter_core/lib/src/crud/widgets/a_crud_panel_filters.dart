@@ -19,9 +19,12 @@ class ACrudPanelFilters extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       rows: [
         AGridRow(areas: "3, 9", children: [
-          ASearchField(
+          const ATextField.string(
             CrudController.searchName,
-            onSearchChanged: (_) => crudController.doRefresh(),
+            hintText: 'Pesquisar',
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search),
+            ),
           ),
           Row(
             children: [

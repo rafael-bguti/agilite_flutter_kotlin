@@ -32,10 +32,3 @@ class AutocompleteMetadataNotFoundException(
     autocompleteName,
     "Autocomplete $autocompleteName not found",
 )
-
-class TaskMetadataNotFoundException(
-    taskName: String,
-) : MetadataNotFoundException(
-    taskName,
-    "Task $taskName not found",
-)

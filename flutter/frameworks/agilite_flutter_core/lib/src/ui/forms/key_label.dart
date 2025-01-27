@@ -1,6 +1,6 @@
 import 'package:agilite_flutter_core/core.dart';
 
-abstract class KeyLabel<T> {
+abstract class Option<T> {
   dynamic get jsonKey;
   String get label;
   LowercaseMap? get allData;
@@ -11,24 +11,24 @@ abstract class KeyLabel<T> {
   Map<String, dynamic>? getMoreDetails();
 }
 
-class LocalKeyLabel<T> extends KeyLabel<T> {
+class LocalOption<T> extends Option<T> {
   final T? key;
   @override
   final String label;
   final Map<String, dynamic>? moreDetails;
 
-  LocalKeyLabel(
+  LocalOption(
     this.key,
     this.label, {
     this.moreDetails,
   });
 
-  LocalKeyLabel.keyOnly(this.key)
+  LocalOption.keyOnly(this.key)
       : label = key.toString(),
         moreDetails = null;
 
   @override
-  bool operator ==(covariant LocalKeyLabel<T> other) {
+  bool operator ==(covariant LocalOption<T> other) {
     return other.key == key;
   }
 
@@ -43,24 +43,31 @@ class LocalKeyLabel<T> extends KeyLabel<T> {
 
   @override
   Map<String, dynamic>? getMoreDetails() => moreDetails;
+
+  factory LocalOption.fromJson(Map<String, dynamic> map) {
+    return LocalOption<T>(
+      map['key'] as T,
+      map['label'] as String,
+    );
+  }
 }
 
-class RemoteKeyLabel<T> extends KeyLabel<T> {
+class RemoteOption<T> extends Option<T> {
   final T key;
   @override
   final String label;
   @override
   final LowercaseMap allData;
 
-  RemoteKeyLabel(this.key, this.label, this.allData);
+  RemoteOption(this.key, this.label, this.allData);
 
   @override
-  bool operator ==(covariant RemoteKeyLabel<T> other) {
+  bool operator ==(covariant RemoteOption<T> other) {
     return other.key == key;
   }
 
-  factory RemoteKeyLabel.fromMap(Map<String, dynamic> map) {
-    return RemoteKeyLabel<T>(
+  factory RemoteOption.fromJson(Map<String, dynamic> map) {
+    return RemoteOption<T>(
       map['key'] as T,
       map['label'] as String,
       LowercaseMap.fromMap(map['allData'] as Map<String, dynamic>),

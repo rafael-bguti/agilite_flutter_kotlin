@@ -16,7 +16,7 @@ import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.shared.events.Srf01FiscalProcessadoEvent
-import info.agilite.srf.adapter.infra.Srf2051Repository
+import info.agilite.srf.infra.Srf2051Repository
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import java.time.LocalDate

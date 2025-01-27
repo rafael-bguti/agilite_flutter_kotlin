@@ -14,7 +14,7 @@ class AMetadataField extends StatelessWidget {
   final String? helperText;
 
   //Combo
-  final List<KeyLabel<dynamic>>? autoCompleteOptions;
+  final List<Option<dynamic>>? autoCompleteOptions;
 
   //Autocomplete by FK
   final ClientWhere? Function()? defaultWhereBuilder;
@@ -59,7 +59,7 @@ class AMetadataField extends StatelessWidget {
   }
 
   Widget _buildAComboField(FieldMetadata field) {
-    final options = autoCompleteOptions ?? field.options!.map((e) => LocalKeyLabel(e.value, e.label)).toList();
+    final options = autoCompleteOptions ?? field.options!.map((e) => LocalOption(e.value, e.label)).toList();
     if (options.length < 15) {
       return AAutocompleteField.combo(
         field.name,

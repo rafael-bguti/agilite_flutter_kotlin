@@ -8,83 +8,70 @@ part 'sdui_spread_column.g.dart';
 
 class SduiSpreadColumn {
   static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiSpreadColumnModel model) {
-    SduiSpreadColumnModel localModel = _loadModel(model);
-
     ASpreadColumn result;
-    switch (localModel.type) {
-      case FieldMetadataType.string:
-        result = AColumnString(
-          localModel.name!,
-          localModel.label,
-        );
-        break;
-      case FieldMetadataType.int:
-        result = AColumnInt(
-          localModel.name!,
-          localModel.label,
-        );
-        break;
-      case FieldMetadataType.double:
-        result = AColumnDouble(
-          localModel.name!,
-          localModel.label,
-        );
-        break;
-      case FieldMetadataType.bool:
-        result = AColumnBool(
-          localModel.name!,
-          localModel.label,
-        );
-        break;
-      case FieldMetadataType.date:
-        result = AColumnDate(
-          localModel.name!,
-          localModel.label,
-        );
-        break;
-      default:
-        throw Exception('Type not supported');
-    }
-
-    result.width = localModel.width ?? const AWidth.flex(1);
-
-    return result;
-  }
-
-  static SduiSpreadColumnModel _loadModel(SduiSpreadColumnModel model) {
-    final SduiSpreadColumnModel hidratedModel;
-    if (model.name != null) {
-      hidratedModel = model;
-    } else {
-      final field = metadataRepository.field(model.fieldMetadataName!);
-      hidratedModel = SduiSpreadColumnModel(
-        name: field.name,
-        label: field.label,
-        type: field.type,
-        width: model.width,
+    if (model.options != null) {
+      result = AColumnAutocomplete.combo(
+        model.name!,
+        model.label,
+        options: model.options!,
       );
+    } else {
+      switch (model.type) {
+        case FieldMetadataType.string:
+          result = AColumnString(
+            model.name!,
+            model.label,
+          );
+          break;
+        case FieldMetadataType.int:
+          result = AColumnInt(
+            model.name!,
+            model.label,
+          );
+          break;
+        case FieldMetadataType.double:
+          result = AColumnDouble(
+            model.name!,
+            model.label,
+          );
+          break;
+        case FieldMetadataType.bool:
+          result = AColumnBool(
+            model.name!,
+            model.label,
+          );
+          break;
+        case FieldMetadataType.date:
+          result = AColumnDate(
+            model.name!,
+            model.label,
+          );
+          break;
+        default:
+          throw Exception('Type not supported');
+      }
     }
 
-    return hidratedModel;
+    result.width = model.width ?? const AWidth.flex(1);
+    return result;
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SduiSpreadColumnModel {
-  final String? fieldMetadataName;
-
   final String? name;
   final String? label;
   final FieldMetadataType? type;
+  final List<LocalOption>? options;
   final AWidth? width;
 
   SduiSpreadColumnModel({
-    this.fieldMetadataName,
     this.name,
     this.label,
     this.type,
+    this.options,
     this.width,
-  }) : assert(fieldMetadataName != null || name != null, 'fieldMetadataName or name must be provided');
+  });
 
   factory SduiSpreadColumnModel.fromJson(Map<String, dynamic> json) => _$SduiSpreadColumnModelFromJson(json);
 }
