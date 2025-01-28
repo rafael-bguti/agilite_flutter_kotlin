@@ -23,134 +23,132 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        fluid: true,
-        header: const AContainerHeader.text("Buttons"),
-        child: ASpacingColumn(
-          spacing: 32.0,
-          children: [
-            _Grid(
-              label: "Elevated",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    ElevatedButton(
-                      style: config.backgroundColor == null ? null : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
-                      onPressed: () {},
-                      child: Text(config.label),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Filled",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    FilledButton.tonal(
-                      style: config.backgroundColor == null ? null : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
-                      onPressed: () {},
-                      child: Text(config.label),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Outlined",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    OutlinedButton(
-                      style: config.backgroundColor == null ? null : buildOutlinedButtonStyle(config.backgroundColor!),
-                      onPressed: () {},
-                      child: Text(config.label),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Text",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    TextButton(
-                      style: config.backgroundColor == null ? null : buildTextButtonStyle(config.backgroundColor!),
-                      onPressed: () {},
-                      child: Text(config.label),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Icon",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    IconButton(
-                      style: config.backgroundColor == null ? null : buildOutlinedButtonStyle(config.backgroundColor!),
-                      onPressed: () {},
-                      icon: const Icon(Icons.health_and_safety_rounded),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Dropdown",
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: [
-                  for (final config in configs)
-                    CustomDropdownButton(
-                      label: Text(config.label),
-                      style: config.backgroundColor == null ? buildButtonStyle(onPrimaryColor, primaryColor) : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
-                    ),
-                ],
-              ),
-            ),
-            _Grid(
-              label: "Grouped",
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: IntrinsicWidth(
-                  child: SegmentedButton<String>(
-                    segments: const <ButtonSegment<String>>[
-                      ButtonSegment<String>(
-                        value: 'Opção 1',
-                        label: Text('Opção 1'),
-                      ),
-                      ButtonSegment<String>(
-                        value: 'Opção 2',
-                        label: Text('Opção 2'),
-                      ),
-                      ButtonSegment<String>(
-                        value: 'Opção 3',
-                        label: Text('Opção 3'),
-                      ),
-                    ],
-                    selected: <String>{_groupedValue},
-                    onSelectionChanged: (Set<String> newSelection) {
-                      setState(() {
-                        _groupedValue = newSelection.first;
-                      });
-                    },
+    return ATaskContainer(
+      fluid: true,
+      header: const AContainerHeader.text("Buttons"),
+      child: ASpacingColumn(
+        spacing: 32.0,
+        children: [
+          _Grid(
+            label: "Elevated",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  ElevatedButton(
+                    style: config.backgroundColor == null ? null : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
+                    onPressed: () {},
+                    child: Text(config.label),
                   ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Filled",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  FilledButton.tonal(
+                    style: config.backgroundColor == null ? null : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
+                    onPressed: () {},
+                    child: Text(config.label),
+                  ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Outlined",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  OutlinedButton(
+                    style: config.backgroundColor == null ? null : buildOutlinedButtonStyle(config.backgroundColor!),
+                    onPressed: () {},
+                    child: Text(config.label),
+                  ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Text",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  TextButton(
+                    style: config.backgroundColor == null ? null : buildTextButtonStyle(config.backgroundColor!),
+                    onPressed: () {},
+                    child: Text(config.label),
+                  ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Icon",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  IconButton(
+                    style: config.backgroundColor == null ? null : buildOutlinedButtonStyle(config.backgroundColor!),
+                    onPressed: () {},
+                    icon: const Icon(Icons.health_and_safety_rounded),
+                  ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Dropdown",
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                for (final config in configs)
+                  CustomDropdownButton(
+                    label: Text(config.label),
+                    style: config.backgroundColor == null ? buildButtonStyle(onPrimaryColor, primaryColor) : buildButtonStyle(config.backgroundColor!, config.foregroundColor!),
+                  ),
+              ],
+            ),
+          ),
+          _Grid(
+            label: "Grouped",
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: IntrinsicWidth(
+                child: SegmentedButton<String>(
+                  segments: const <ButtonSegment<String>>[
+                    ButtonSegment<String>(
+                      value: 'Opção 1',
+                      label: Text('Opção 1'),
+                    ),
+                    ButtonSegment<String>(
+                      value: 'Opção 2',
+                      label: Text('Opção 2'),
+                    ),
+                    ButtonSegment<String>(
+                      value: 'Opção 3',
+                      label: Text('Opção 3'),
+                    ),
+                  ],
+                  selected: <String>{_groupedValue},
+                  onSelectionChanged: (Set<String> newSelection) {
+                    setState(() {
+                      _groupedValue = newSelection.first;
+                    });
+                  },
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

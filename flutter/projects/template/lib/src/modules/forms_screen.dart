@@ -6,43 +6,41 @@ class FormsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        header: const AContainerHeader.text("Forms"),
-        child: ASpacingColumn(
-          spacing: 16,
-          children: [
-            AGrid(
-              areas: const ['4, 8'],
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const ADivider.text(text: "Simple form with Validation"),
-                    AText(
-                      "Provide valuable, actionable feedback to your users with HTML5 form validation – available in all our supported browsers.",
-                      style: moreDetailTextStyle,
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 24.0),
-                  child: SimpleForm(),
-                ),
-              ],
-            ),
-            AGrid(
-              areas: const ['4, 8'],
-              children: const [
-                ADivider.text(text: "Autocomplete/Combo"),
-                Padding(
-                  padding: EdgeInsets.only(top: 24.0),
-                  child: Autocompletes(),
-                ),
-              ],
-            ),
-          ],
-        ),
+    return ATaskContainer(
+      header: const AContainerHeader.text("Forms"),
+      child: ASpacingColumn(
+        spacing: 16,
+        children: [
+          AGrid(
+            areas: const ['4, 8'],
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const ADivider.text(text: "Simple form with Validation"),
+                  AText(
+                    "Provide valuable, actionable feedback to your users with HTML5 form validation – available in all our supported browsers.",
+                    style: moreDetailTextStyle,
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 24.0),
+                child: SimpleForm(),
+              ),
+            ],
+          ),
+          AGrid(
+            areas: const ['4, 8'],
+            children: const [
+              ADivider.text(text: "Autocomplete/Combo"),
+              Padding(
+                padding: EdgeInsets.only(top: 24.0),
+                child: Autocompletes(),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -23,43 +23,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        fluid: true,
-        header: AContainerHeader.text("CRM Dashboard -> ${ScreenSize(context).whichDevice()}"),
-        child: ASpacingColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 16,
-          children: [
-            const AAlert.warning(
-              title: 'Analytics Service Issues.',
-              message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
-            ),
-            AGrid(
-              areas: const [
-                '8, 4',
-              ],
-              children: const [
-                _OverviewPanel(),
-                _SchedulePanel(),
-              ],
-            ),
-            const ADivider.text(text: 'Recently added'),
-            const ACard(
-              padding: EdgeInsets.all(8),
-              child: SizedBox(
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    child: UserTable(),
-                  ),
+    return ATaskContainer(
+      fluid: true,
+      header: AContainerHeader.text("CRM Dashboard -> ${ScreenSize(context).whichDevice()}"),
+      child: ASpacingColumn(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          const AAlert.warning(
+            title: 'Analytics Service Issues.',
+            message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
+          ),
+          AGrid(
+            areas: const [
+              '8, 4',
+            ],
+            children: const [
+              _OverviewPanel(),
+              _SchedulePanel(),
+            ],
+          ),
+          const ADivider.text(text: 'Recently added'),
+          const ACard(
+            padding: EdgeInsets.all(8),
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 12.0),
+                  child: UserTable(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -24,97 +24,95 @@ class _Srf2060State extends State<Srf2060> {
     return AView(
       controller: controller,
       builder: (_, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: const AContainerHeader.text("Enviar e-mail dos documentos"),
-            child: ASpacingColumn(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AForm(
-                  controller.formFilterController,
-                  child: ACard(
-                    child: AGrid.rows(
-                      crossAxisAlignment: WrapCrossAlignment.end,
-                      rows: [
-                        AGridRow(
-                          areas: '6-12, 4-6, 2-6',
-                          children: [
-                            ASpacingColumn(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Emissão dos documentos",
-                                  style: textTheme?.bodyLarge?.copyWith(fontFamily: 'HeaderFont'),
-                                ),
-                                const ADateRange(
-                                  nameIni: "emissIni",
-                                  nameEnd: "emissFim",
-                                ),
-                              ],
-                            ),
-                            const ABoolField(
-                              "reenviar",
-                              labelText: "Listar e-mails já enviados",
-                            ),
-                            ElevatedButton(
-                              onPressed: controller.buscarEmails,
-                              child: const Text("Listar"),
-                            )
-                          ],
+        return ATaskContainer(
+          header: const AContainerHeader.text("Enviar e-mail dos documentos"),
+          child: ASpacingColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AForm(
+                controller.formFilterController,
+                child: ACard(
+                  child: AGrid.rows(
+                    crossAxisAlignment: WrapCrossAlignment.end,
+                    rows: [
+                      AGridRow(
+                        areas: '6-12, 4-6, 2-6',
+                        children: [
+                          ASpacingColumn(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Emissão dos documentos",
+                                style: textTheme?.bodyLarge?.copyWith(fontFamily: 'HeaderFont'),
+                              ),
+                              const ADateRange(
+                                nameIni: "emissIni",
+                                nameEnd: "emissFim",
+                              ),
+                            ],
+                          ),
+                          const ABoolField(
+                            "reenviar",
+                            labelText: "Listar e-mails já enviados",
+                          ),
+                          ElevatedButton(
+                            onPressed: controller.buscarEmails,
+                            child: const Text("Listar"),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              switch (state) {
+                Srf2060InitialState() => const SizedBox.shrink(),
+                Srf2060EmptyState() => const AAlert.warning(message: "Nenhum e-mail foi localizado para enviar"),
+                Srf2060FullState() => ACard(
+                    header: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("E-mails localizados"),
+                        FilledButton.tonal(
+                          style: successButtonStyle,
+                          onPressed: () {
+                            controller.enviarEmails();
+                          },
+                          child: const Text("Enviar"),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                switch (state) {
-                  Srf2060InitialState() => const SizedBox.shrink(),
-                  Srf2060EmptyState() => const AAlert.warning(message: "Nenhum e-mail foi localizado para enviar"),
-                  Srf2060FullState() => ACard(
-                      header: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("E-mails localizados"),
-                          FilledButton.tonal(
-                            style: successButtonStyle,
-                            onPressed: () {
-                              controller.enviarEmails();
-                            },
-                            child: const Text("Enviar"),
-                          ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 450,
+                      child: ASpread(
+                        controller: controller.spreadEnvioController,
+                        columns: [
+                          AColumnString("cgs18nome", "Natureza").widthChar(8),
+                          AColumnString("cgs15nome", "Modelo").widthChar(20),
+                          AColumnString("cgs80email", "Destinatário").widthChar(40),
+                          AColumnString("srf01nome", "Nome").widthChar(50),
+                          AColumnDate("srf01dtEmail", "Data envio").widthChar(12),
+                          AColumnString(
+                            "srf01integracaoGdf",
+                            "Possui nota",
+                            alignment: Alignment.center,
+                            formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
+                          ).widthChar(11),
+                          AColumnString(
+                            "srf01integracaoScf",
+                            "Possui boleto",
+                            alignment: Alignment.center,
+                            formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
+                          ).widthChar(13),
                         ],
-                      ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 450,
-                        child: ASpread(
-                          controller: controller.spreadEnvioController,
-                          columns: [
-                            AColumnString("cgs18nome", "Natureza").widthChar(8),
-                            AColumnString("cgs15nome", "Modelo").widthChar(20),
-                            AColumnString("cgs80email", "Destinatário").widthChar(40),
-                            AColumnString("srf01nome", "Nome").widthChar(50),
-                            AColumnDate("srf01dtEmail", "Data envio").widthChar(12),
-                            AColumnString(
-                              "srf01integracaoGdf",
-                              "Possui nota",
-                              alignment: Alignment.center,
-                              formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
-                            ).widthChar(11),
-                            AColumnString(
-                              "srf01integracaoScf",
-                              "Possui boleto",
-                              alignment: Alignment.center,
-                              formatter: (value) => value != null && value.toString() == "10" ? "Sim" : "Não",
-                            ).widthChar(13),
-                          ],
-                          readOnly: true,
-                        ),
+                        readOnly: true,
                       ),
                     ),
-                },
-                const SizedBox(height: 16),
-              ],
-            ),
+                  ),
+              },
+              const SizedBox(height: 16),
+            ],
           ),
         );
       },

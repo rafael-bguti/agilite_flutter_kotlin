@@ -23,53 +23,51 @@ class _Scf2011State extends State<Scf2011> {
     return AView(
       controller: controller,
       builder: (_, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: const AContainerHeader.text("Baixar boletos"),
-            child: ASpacingColumn(
-              children: [
-                AGrid(
-                  areas: const ['4, 8'],
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const ADivider.text(text: "Baixa de boletos"),
-                        AText(
-                          "Esse processo irá baixar os boletos que foram pagos no banco.",
-                          style: moreDetailTextStyle,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 24.0),
-                      child: AForm(
-                        controller.formController,
-                        child: ASpacingColumn(
-                          spacing: 16.0,
-                          children: [
-                            const AAutocompleteField.api(
-                              'cgs38RecBoletoComApi',
-                              labelText: 'Bancos com integração bancária configurada',
-                              req: true,
+        return ATaskContainer(
+          header: const AContainerHeader.text("Baixar boletos"),
+          child: ASpacingColumn(
+            children: [
+              AGrid(
+                areas: const ['4, 8'],
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const ADivider.text(text: "Baixa de boletos"),
+                      AText(
+                        "Esse processo irá baixar os boletos que foram pagos no banco.",
+                        style: moreDetailTextStyle,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: AForm(
+                      controller.formController,
+                      child: ASpacingColumn(
+                        spacing: 16.0,
+                        children: [
+                          const AAutocompleteField.api(
+                            'cgs38RecBoletoComApi',
+                            labelText: 'Bancos com integração bancária configurada',
+                            req: true,
+                          ),
+                          Center(
+                            child: FilledButton(
+                              style: primaryButtonStyle,
+                              onPressed: controller.processarBoletos,
+                              child: const Text("Baixar boletos"),
                             ),
-                            Center(
-                              child: FilledButton(
-                                style: primaryButtonStyle,
-                                onPressed: controller.processarBoletos,
-                                child: const Text("Baixar boletos"),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                if (state is Scf2011CompleteState) const ADivider.text(text: "Resultado do processamento"),
-                if (state is Scf2011CompleteState) _ResultadoDoProcessamento(boletosProcessados: state.boletosProcessados),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              if (state is Scf2011CompleteState) const ADivider.text(text: "Resultado do processamento"),
+              if (state is Scf2011CompleteState) _ResultadoDoProcessamento(boletosProcessados: state.boletosProcessados),
+            ],
           ),
         );
       },

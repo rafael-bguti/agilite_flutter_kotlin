@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/sdui/sdui_context.dart';
 import 'package:flutter/material.dart';
 
 class ACrud extends StatefulWidget {
@@ -68,29 +67,27 @@ class _ACrudState extends State<ACrud> {
     return AView(
       controller: _controller,
       builder: (context, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: ACrudHeader.text(
-              widget.descr.plural,
-              onAddTap: _isEditable ? _onEdit : null,
-            ),
-            child: ASpacingColumn(
-              spacing: 16,
-              children: [
-                AForm(
-                  _controller.formFiltersController,
-                  child: ACrudPanelFilters(
-                    _controller,
-                    customFilters: widget.customFilters,
-                  ),
+        return ATaskContainer(
+          header: ACrudHeader.text(
+            widget.descr.plural,
+            onAddTap: _isEditable ? _onEdit : null,
+          ),
+          child: ASpacingColumn(
+            spacing: 16,
+            children: [
+              AForm(
+                _controller.formFiltersController,
+                child: ACrudPanelFilters(
+                  _controller,
+                  customFilters: widget.customFilters,
                 ),
-                ACrudSpreadDataCard(
-                  crudController: _controller,
-                  onEdit: _isEditable ? _onEdit : null,
-                  columns: widget.columns,
-                ),
-              ],
-            ),
+              ),
+              ACrudSpreadDataCard(
+                crudController: _controller,
+                onEdit: _isEditable ? _onEdit : null,
+                columns: widget.columns,
+              ),
+            ],
           ),
         );
       },

@@ -7,22 +7,20 @@ class TablesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        header: const AContainerHeader.text("Tables / Spread"),
-        child: ASpacingColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 32,
-          children: const [
-            ADivider.text(text: "Spread read only - Custom Cell"),
-            AText("Linha 2 está com tooltip e a linha 3 está com a cor de fundo alterada"),
-            UsersSpread(),
-            ADivider.text(text: "Simple Spread - With more detail"),
-            SimpleSpreadEditavel(),
-            ADivider.text(text: "Simple Flutter Table"),
-            SimpleFlutterTable(),
-          ],
-        ),
+    return ATaskContainer(
+      header: const AContainerHeader.text("Tables / Spread"),
+      child: ASpacingColumn(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 32,
+        children: const [
+          ADivider.text(text: "Spread read only - Custom Cell"),
+          AText("Linha 2 está com tooltip e a linha 3 está com a cor de fundo alterada"),
+          UsersSpread(),
+          ADivider.text(text: "Simple Spread - With more detail"),
+          SimpleSpreadEditavel(),
+          ADivider.text(text: "Simple Flutter Table"),
+          SimpleFlutterTable(),
+        ],
       ),
     );
   }

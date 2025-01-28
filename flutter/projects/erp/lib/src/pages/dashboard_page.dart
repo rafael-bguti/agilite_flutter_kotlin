@@ -23,43 +23,48 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        fluid: true,
-        header: AContainerHeader.text("CRM Dashboard -> ${ScreenSize(context).whichDevice()}"),
-        child: ASpacingColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 16,
-          children: [
-            const AAlert.warning(
-              title: 'Analytics Service Issues.',
-              message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
-            ),
-            AGrid(
-              areas: const [
-                '8, 4',
-              ],
-              children: const [
-                _OverviewPanel(),
-                _SchedulePanel(),
-              ],
-            ),
-            const ADivider.text(text: 'Recently added'),
-            const ACard(
-              padding: EdgeInsets.all(8),
-              child: SizedBox(
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    child: UserTable(),
-                  ),
+    return ATaskContainer(
+      fluid: true,
+      header: AContainerHeader.text("CRM Dashboard -> ${ScreenSize(context).whichDevice()}"),
+      footer: Container(
+        color: Colors.teal,
+        height: 50,
+        child: const Center(
+          child: AText('Footer'),
+        ),
+      ),
+      child: ASpacingColumn(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          const AAlert.warning(
+            title: 'Analytics Service Issues.',
+            message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
+          ),
+          AGrid(
+            areas: const [
+              '8, 4',
+            ],
+            children: const [
+              _OverviewPanel(),
+              _SchedulePanel(),
+            ],
+          ),
+          const ADivider.text(text: 'Recently added'),
+          const ACard(
+            padding: EdgeInsets.all(8),
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 12.0),
+                  child: UserTable(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -552,10 +557,10 @@ class _UserTableState extends State<UserTable> {
   List<User> users = [
     User("https://i.pravatar.cc/150?img=1", 'Ollie Wallace', 'lorna.kirlin@nora.biz', null, 'Manager', '285-626-6050', '16 February 2019', false),
     User("https://i.pravatar.cc/150?img=5", 'Gilbert Barrett', 'paolo.zieme@gmail.com', null, 'Admin', '462-060-7408', '17 February 2019', false),
-    User("https://i.pravatar.cc/150?img=8", 'Tony Parks', 'vida.glover@gmail.com', Company('Frontend Matter Inc', 'Leuschkefurt'), 'Admin', '169-769-4821',
-        '18 February 2019', true),
-    User("https://i.pravatar.cc/150?img=9", 'Billy Nunez', 'annabell.kris@yahoo.com', Company('Huma Huma Inc.', 'Huma Huma Inc.'), 'User', '239-721-3649',
-        '19 February 2019', true),
+    User("https://i.pravatar.cc/150?img=8", 'Tony Parks', 'vida.glover@gmail.com', Company('Frontend Matter Inc', 'Leuschkefurt'), 'Admin', '169-769-4821', '18 February 2019',
+        true),
+    User(
+        "https://i.pravatar.cc/150?img=9", 'Billy Nunez', 'annabell.kris@yahoo.com', Company('Huma Huma Inc.', 'Huma Huma Inc.'), 'User', '239-721-3649', '19 February 2019', true),
   ];
 
   @override

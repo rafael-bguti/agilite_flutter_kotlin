@@ -12,35 +12,27 @@ class AEditCrudButtons extends StatelessWidget {
       spacing: 16,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        OutlinedButton(
-          style: buildOutlinedButtonStyle(onBackgroundColor),
+        FilledButton.icon(
+          style: buildButtonStyle(onSuccessColor, Colors.orange),
           onPressed: () => _onCancel(context),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Cancelar',
-              style: textTheme?.titleMedium?.copyWith(
-                color: onBackgroundColor,
-              ),
+          label: Text(
+            'Cancelar',
+            style: textTheme?.titleMedium?.copyWith(
+              color: Colors.orange,
             ),
           ),
+          icon: const Icon(Icons.arrow_back, color: Colors.orange),
         ),
         FilledButton.icon(
           style: successButtonStyle,
           onPressed: onSave,
-          label: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-            child: Text(
-              "Salvar",
-              style: textTheme?.titleMedium?.copyWith(
-                color: onSuccessColor,
-              ),
+          label: Text(
+            "Salvar",
+            style: textTheme?.titleMedium?.copyWith(
+              color: onSuccessColor,
             ),
           ),
-          icon: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-            child: Icon(Icons.save, color: onSuccessColor),
-          ),
+          icon: Icon(Icons.save, color: onSuccessColor),
         ),
       ],
     );

@@ -83,7 +83,7 @@ class ASideDialog {
       width: width ?? MediaQuery.of(globalNavigatorKey.currentContext!).size.width,
       offset: const Offset(0, 1),
       borderRadius: BorderRadius.only(topRight: Radius.circular(sheetBorderRadius), topLeft: Radius.circular(sheetBorderRadius)),
-      padding: padding ?? const EdgeInsets.only(top: 24, left: 8, right: 8),
+      padding: padding ?? const EdgeInsets.only(top: 24),
       alignment: Alignment.bottomCenter,
       height: height,
       barrierColor: barrierColor,

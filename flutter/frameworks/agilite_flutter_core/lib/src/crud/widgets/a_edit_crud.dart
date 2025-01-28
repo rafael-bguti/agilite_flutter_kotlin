@@ -34,20 +34,10 @@ class _AEditCrudState extends State<AEditCrud> {
       child: AView(
         controller: controller,
         builder: (context, state) {
-          return AContainer(
+          return ATaskContainer(
             header: AContainerHeader.text('${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}'),
-            footer: SizedBox(
-              height: 60,
-              child: AEditCrudButtons(
-                onSave: controller.save,
-              ),
-            ),
-            child: SingleChildScrollView(
-              child: AForm(
-                controller.formController,
-                child: widget.formBody,
-              ),
-            ),
+            footer: AEditCrudButtons(onSave: controller.save),
+            child: AForm(controller.formController, child: widget.formBody),
           );
         },
       ),

@@ -21,111 +21,109 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: AContainer(
-        header: const AContainerHeader.text("Tabs"),
-        child: ASpacingColumn(
-          children: [
-            AGrid(
-              spacing: 16,
-              areas: const [
-                '4, 8',
-              ],
-              children: [
-                const ADivider.text(text: "Custom"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: ACard(
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ATabHeader.builder(
-                          headerCount: _customTabs.length,
-                          contentBuilder: _buildCustomTab,
-                          onTabChanged: (index) {
-                            _$customSelectedTab.value = index;
-                          },
-                        ),
-                        AConsumer(
-                          notifier: _$customSelectedTab,
-                          builder: (_, __, ___) {
-                            return Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis. = ${_$customSelectedTab.value}'),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+    return ATaskContainer(
+      header: const AContainerHeader.text("Tabs"),
+      child: ASpacingColumn(
+        children: [
+          AGrid(
+            spacing: 16,
+            areas: const [
+              '4, 8',
+            ],
+            children: [
+              const ADivider.text(text: "Custom"),
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: ACard(
+                  padding: EdgeInsets.zero,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ATabHeader.builder(
+                        headerCount: _customTabs.length,
+                        contentBuilder: _buildCustomTab,
+                        onTabChanged: (index) {
+                          _$customSelectedTab.value = index;
+                        },
+                      ),
+                      AConsumer(
+                        notifier: _$customSelectedTab,
+                        builder: (_, __, ___) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis. = ${_$customSelectedTab.value}'),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            AGrid(
-              spacing: 16,
-              areas: const [
-                '4, 8',
-              ],
-              children: [
-                const ADivider.text(text: "Underlined"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: ACard(
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      children: [
-                        ATabHeader.text(
-                          headerTexts: const ['Traffic', 'Purchases', 'Quotes'],
-                          onTabChanged: (index) {
-                            print('Tab changed to $index');
-                          },
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis.'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            AGrid(
-              spacing: 16,
-              areas: const [
-                '4, 8',
-              ],
-              children: [
-                const ADivider.text(text: "Pills"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: ACard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ATabHeader.text(
-                          type: HeaderType.pills,
-                          headerTexts: const ['Traffic', 'Purchcases', 'Quotes'],
-                          onTabChanged: (index) {
-                            print('Tab changed to $index');
-                          },
-                        ),
-                        const Center(
+              ),
+            ],
+          ),
+          AGrid(
+            spacing: 16,
+            areas: const [
+              '4, 8',
+            ],
+            children: [
+              const ADivider.text(text: "Underlined"),
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: ACard(
+                  padding: EdgeInsets.zero,
+                  child: Column(
+                    children: [
+                      ATabHeader.text(
+                        headerTexts: const ['Traffic', 'Purchases', 'Quotes'],
+                        onTabChanged: (index) {
+                          print('Tab changed to $index');
+                        },
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
                           child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis.'),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          AGrid(
+            spacing: 16,
+            areas: const [
+              '4, 8',
+            ],
+            children: [
+              const ADivider.text(text: "Pills"),
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: ACard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ATabHeader.text(
+                        type: HeaderType.pills,
+                        headerTexts: const ['Traffic', 'Purchcases', 'Quotes'],
+                        onTabChanged: (index) {
+                          print('Tab changed to $index');
+                        },
+                      ),
+                      const Center(
+                        child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis.'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -23,47 +23,45 @@ class _Scf2010State extends State<Scf2010> {
     return AView(
       controller: controller,
       builder: (_, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: const AContainerHeader.text("Enviar boletos para o banco"),
-            child: ASpacingColumn(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ACard(
-                  header: const Text("Boletos a serem enviados"),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 400,
-                    child: ASpread(
-                      controller: controller.spreadEmitirController,
-                      columns: [
-                        AColumnDate("scf02dtVenc", "Data de vencimento").widthFlex(4),
-                        AColumnString("cgs80nome", "Cliente").widthFlex(8),
-                        AColumnString("cgs45nome", "Banco").widthFlex(4),
-                        AColumnDouble("scf02valor", "Valor").widthFlex(3),
-                      ],
-                      readOnly: true,
-                    ),
+        return ATaskContainer(
+          header: const AContainerHeader.text("Enviar boletos para o banco"),
+          child: ASpacingColumn(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ACard(
+                header: const Text("Boletos a serem enviados"),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 400,
+                  child: ASpread(
+                    controller: controller.spreadEmitirController,
+                    columns: [
+                      AColumnDate("scf02dtVenc", "Data de vencimento").widthFlex(4),
+                      AColumnString("cgs80nome", "Cliente").widthFlex(8),
+                      AColumnString("cgs45nome", "Banco").widthFlex(4),
+                      AColumnDouble("scf02valor", "Valor").widthFlex(3),
+                    ],
+                    readOnly: true,
                   ),
                 ),
-                ACard(
-                  child: AConsumer(
-                    notifier: controller.spreadEmitirController,
-                    builder: (_, spreadController, __) {
-                      final linhasSelecionadas = spreadController.selectedRowCount;
-                      return Center(
-                        child: FilledButton(
-                          style: primaryButtonStyle,
-                          onPressed: linhasSelecionadas == 0 ? null : controller.emitirDocumento,
-                          child: Text("Enviar $linhasSelecionadas boleto${linhasSelecionadas > 1 ? 's' : ''}"),
-                        ),
-                      );
-                    },
-                  ),
+              ),
+              ACard(
+                child: AConsumer(
+                  notifier: controller.spreadEmitirController,
+                  builder: (_, spreadController, __) {
+                    final linhasSelecionadas = spreadController.selectedRowCount;
+                    return Center(
+                      child: FilledButton(
+                        style: primaryButtonStyle,
+                        onPressed: linhasSelecionadas == 0 ? null : controller.emitirDocumento,
+                        child: Text("Enviar $linhasSelecionadas boleto${linhasSelecionadas > 1 ? 's' : ''}"),
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         );
       },

@@ -506,64 +506,66 @@ class SpreadMoreDetail {
   }
 
   Widget _defaultMoreDetailBodyBuilder(BuildContext context, int rowIndex, SpreadController controller) {
-    final result = Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          const ADialogHeader(
-            headerText: 'Mais detalhes',
-          ),
-          const ADivider.lineOnly(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: AForm(
-                controller.moreDetailFormController,
-                child: Focus(
-                  onKey: (node, event) {
-                    if (event.logicalKey == LogicalKeyboardKey.enter) {
-                      Navigator.of(globalNavigatorKey.currentContext!).pop();
-                      return KeyEventResult.handled;
-                    }
-                    return KeyEventResult.ignored;
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AGrid(
-                        areas: gridAreas,
-                        children: _getMoreDetailBodyChildren(context, rowIndex, controller),
-                      ),
-                      otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()
-                    ],
+    final result = Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            const ADialogHeader(
+              headerText: 'Mais detalhes',
+            ),
+            const ADivider.lineOnly(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: AForm(
+                  controller.moreDetailFormController,
+                  child: Focus(
+                    onKey: (node, event) {
+                      if (event.logicalKey == LogicalKeyboardKey.enter) {
+                        Navigator.of(globalNavigatorKey.currentContext!).pop();
+                        return KeyEventResult.handled;
+                      }
+                      return KeyEventResult.ignored;
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AGrid(
+                          areas: gridAreas,
+                          children: _getMoreDetailBodyChildren(context, rowIndex, controller),
+                        ),
+                        otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const ADivider.lineOnly(),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FilledButton.icon(
-                  style: FilledButton.styleFrom(
-                    foregroundColor: onSuccessColor,
-                    backgroundColor: successColor,
+            const ADivider.lineOnly(),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FilledButton.icon(
+                    style: FilledButton.styleFrom(
+                      foregroundColor: onSuccessColor,
+                      backgroundColor: successColor,
+                    ),
+                    onPressed: () {
+                      Navigator.of(globalNavigatorKey.currentContext!).pop();
+                    },
+                    icon: const Icon(Icons.check),
+                    label: const Tooltip(
+                      message: 'Ok (Enter)',
+                      child: Text("Ok"),
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(globalNavigatorKey.currentContext!).pop();
-                  },
-                  icon: const Icon(Icons.check),
-                  label: const Tooltip(
-                    message: 'Ok (Enter)',
-                    child: Text("Ok"),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
     return result;

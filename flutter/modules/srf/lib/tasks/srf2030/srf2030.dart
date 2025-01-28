@@ -25,53 +25,51 @@ class _Srf2030State extends State<Srf2030> {
     return AView(
       controller: controller,
       builder: (_, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: const AContainerHeader.text("Importar documentos via JSON"),
-            child: ASpacingColumn(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AGrid(
-                  areas: const ['4, 8'],
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const ADivider.text(text: "Importar documentos"),
-                        AText(
-                          "Esse processo importa novos dpcumentos a partir de um arquivo JSon.",
-                          style: moreDetailTextStyle,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 24.0),
-                      child: ACard(
-                        child: Column(
-                          children: [
-                            AFileField(
-                              fileType: FileType.custom,
-                              allowedExtensions: ['json'],
-                              controller: controller.fileController,
-                              labelText: "Arquivo JSon",
+        return ATaskContainer(
+          header: const AContainerHeader.text("Importar documentos via JSON"),
+          child: ASpacingColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AGrid(
+                areas: const ['4, 8'],
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const ADivider.text(text: "Importar documentos"),
+                      AText(
+                        "Esse processo importa novos dpcumentos a partir de um arquivo JSon.",
+                        style: moreDetailTextStyle,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 24.0),
+                    child: ACard(
+                      child: Column(
+                        children: [
+                          AFileField(
+                            fileType: FileType.custom,
+                            allowedExtensions: ['json'],
+                            controller: controller.fileController,
+                            labelText: "Arquivo JSon",
+                          ),
+                          const SizedBox(height: 16),
+                          Center(
+                            child: FilledButton(
+                              style: primaryButtonStyle,
+                              onPressed: controller.processarJson,
+                              child: const Text("Processar arquivo"),
                             ),
-                            const SizedBox(height: 16),
-                            Center(
-                              child: FilledButton(
-                                style: primaryButtonStyle,
-                                onPressed: controller.processarJson,
-                                child: const Text("Processar arquivo"),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         );
       },

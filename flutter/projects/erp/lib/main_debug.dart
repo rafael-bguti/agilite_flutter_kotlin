@@ -6,7 +6,7 @@ import 'src/routes.dart';
 
 void main() async {
   activeProfile = CoreProfile(
-    type: CoreProfileType.dev,
+    type: CoreProfileType.prod,
     apiBaseUrl: "http://localhost:8090/api",
   );
 

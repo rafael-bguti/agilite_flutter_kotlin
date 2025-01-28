@@ -24,47 +24,45 @@ class _Srf2050State extends State<Srf2050> {
     return AView(
       controller: controller,
       builder: (_, state) {
-        return SingleChildScrollView(
-          child: AContainer(
-            header: const AContainerHeader.text("Emitir NFS-e"),
-            child: ASpacingColumn(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ACard(
-                  header: const Text("Documentos a serem emitidos"),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 400,
-                    child: ASpread(
-                      controller: controller.spreadEmitirController,
-                      columns: [
-                        AColumnString("srf01numero", "Número").widthFlex(2),
-                        AColumnDate("srf01dtEmiss", "Data de emissão").widthFlex(3),
-                        AColumnString("srf01nome", "Cliente").widthFlex(8),
-                        AColumnDouble("srf01vlrTotal", "Valor total").widthFlex(3),
-                      ],
-                      readOnly: true,
-                    ),
+        return ATaskContainer(
+          header: const AContainerHeader.text("Emitir NFS-e"),
+          child: ASpacingColumn(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ACard(
+                header: const Text("Documentos a serem emitidos"),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 400,
+                  child: ASpread(
+                    controller: controller.spreadEmitirController,
+                    columns: [
+                      AColumnString("srf01numero", "Número").widthFlex(2),
+                      AColumnDate("srf01dtEmiss", "Data de emissão").widthFlex(3),
+                      AColumnString("srf01nome", "Cliente").widthFlex(8),
+                      AColumnDouble("srf01vlrTotal", "Valor total").widthFlex(3),
+                    ],
+                    readOnly: true,
                   ),
                 ),
-                ACard(
-                  child: AConsumer(
-                    notifier: controller.spreadEmitirController,
-                    builder: (_, spreadController, __) {
-                      final linhasSelecionadas = spreadController.selectedRowCount;
-                      return Center(
-                        child: FilledButton(
-                          style: primaryButtonStyle,
-                          onPressed: linhasSelecionadas == 0 ? null : controller.emitirDocumento,
-                          child: Text("Emitir $linhasSelecionadas NFSe"),
-                        ),
-                      );
-                    },
-                  ),
+              ),
+              ACard(
+                child: AConsumer(
+                  notifier: controller.spreadEmitirController,
+                  builder: (_, spreadController, __) {
+                    final linhasSelecionadas = spreadController.selectedRowCount;
+                    return Center(
+                      child: FilledButton(
+                        style: primaryButtonStyle,
+                        onPressed: linhasSelecionadas == 0 ? null : controller.emitirDocumento,
+                        child: Text("Emitir $linhasSelecionadas NFSe"),
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         );
       },
