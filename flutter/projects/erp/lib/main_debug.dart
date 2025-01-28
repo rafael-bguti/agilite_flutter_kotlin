@@ -6,8 +6,8 @@ import 'src/routes.dart';
 
 void main() async {
   activeProfile = CoreProfile(
-    type: CoreProfileType.prod,
-    apiBaseUrl: "https://app.agilite.info",
+    type: CoreProfileType.dev,
+    apiBaseUrl: "http://localhost:8090/api",
   );
 
   await Boot.initialize();

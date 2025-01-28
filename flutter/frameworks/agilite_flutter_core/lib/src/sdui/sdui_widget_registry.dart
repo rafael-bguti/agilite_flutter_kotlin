@@ -1,9 +1,16 @@
-import 'package:agilite_flutter_core/src/sdui/crud/sdui_crud.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/sdui_autocomplete.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/sdui_combo_field.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/sdui_sized_box.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_crud.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_fieldset.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_padding.dart';
 
-import 'widgets/widgets.dart';
+import 'widgets/sdui_autocomplete.dart';
+import 'widgets/sdui_combo_field.dart';
+import 'widgets/sdui_divider.dart';
+import 'widgets/sdui_grid.dart';
+import 'widgets/sdui_metadata_field.dart';
+import 'widgets/sdui_sized_box.dart';
+import 'widgets/sdui_spacing_column.dart';
+import 'widgets/sdui_text.dart';
+import 'widgets/sdui_widget.dart';
 
 class SduiWidgetRegistry {
   static final SduiWidgetRegistry instance = SduiWidgetRegistry._();
@@ -34,10 +41,15 @@ class SduiWidgetRegistry {
 }
 
 List<SduiWidget> _initWidgets = [
-  SduiCrud(),
-  SduiText(),
-  SduiSpacingColumn(),
-  SduiSizedBox(),
   SduiAutocomplete(),
   SduiComboField(),
+  SduiCrud(),
+  SduiDivider(),
+  SduiFieldset(),
+  SduiGrid(),
+  SduiMetadataField(),
+  SduiPadding(),
+  SduiSizedBox(),
+  SduiSpacingColumn(),
+  SduiText(),
 ];

@@ -1,14 +1,18 @@
+import 'dart:async';
+
 import 'package:agilite_flutter_core/core.dart';
+import 'package:agilite_flutter_core/src/sdui/sdui_context.dart';
 import 'package:flutter/material.dart';
 
 class ACrud extends StatefulWidget {
   final String taskName;
+
   final CrudDescr descr;
   final List<ASpreadColumn> columns;
-
   final List<Widget>? customFilters;
 
   final CrudController? controller;
+  final String? metadataToLoad;
 
   // ---- Para edição de registro ----
   // ---- Informar ou o OnEdit ou o FormBody ----
@@ -19,6 +23,7 @@ class ACrud extends StatefulWidget {
     required this.taskName,
     required this.descr,
     required this.columns,
+    this.metadataToLoad,
     this.customFilters,
     this.controller,
     this.onEdit,
@@ -34,7 +39,8 @@ class ACrud extends StatefulWidget {
     this.onEdit,
     this.formBody,
     super.key,
-  }) : taskName = controller.taskName;
+  })  : taskName = controller.taskName,
+        metadataToLoad = null;
 
   @override
   State<ACrud> createState() => _ACrudState();
@@ -42,7 +48,11 @@ class ACrud extends StatefulWidget {
 
 class _ACrudState extends State<ACrud> {
   late final _controllerCreatedForThis = widget.controller != null;
-  late final _controller = widget.controller ?? CrudController(taskName: widget.taskName);
+  late final _controller = widget.controller ??
+      CrudController(
+        taskName: widget.taskName,
+        metadataToLoad: widget.metadataToLoad,
+      );
 
   @override
   void dispose() {
@@ -93,11 +103,12 @@ class _ACrudState extends State<ACrud> {
     if (widget.onEdit != null) {
       widget.onEdit!(id);
     } else {
+      final body = await _loadFormBody();
       final saved = await ASideDialog.showBottom(
         builder: (context) => AEditCrud(
           descr: widget.descr,
           id: id,
-          formBody: widget.formBody!,
+          formBody: body,
         ),
         barrierDismissible: false,
       );
@@ -105,5 +116,21 @@ class _ACrudState extends State<ACrud> {
         _controller.doRefresh();
       }
     }
+  }
+
+  FutureOr<Widget> _loadFormBody() async {
+    if (activeProfile.type == CoreProfileType.dev) {
+      final formContent = await RemoteSduiContentProvider(
+        url: '/sdui/crudForm/${widget.taskName}',
+      ).getContent();
+
+      final sduiContext = SduiContext();
+      return SduiRender.renderFromJson(
+        context,
+        sduiContext,
+        formContent!,
+      );
+    }
+    return widget.formBody!;
   }
 }

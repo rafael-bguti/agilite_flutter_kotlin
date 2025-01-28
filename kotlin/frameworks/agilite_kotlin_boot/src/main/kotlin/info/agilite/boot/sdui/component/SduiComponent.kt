@@ -6,3 +6,17 @@ abstract class SduiComponent(
   val widget: String
     get() = this.javaClass.simpleName
 }
+
+enum class WrapCrossAlignment {
+  start,
+  end,
+  center
+}
+enum class CrossAxisAlignment {
+  start,
+  end,
+  center,
+  stretch,
+  baseline,
+}
+

@@ -57,14 +57,14 @@ class _SduiController extends ViewController<_ViewState> {
 
   @override
   Future<void> onViewLoaded() async {
-    FutureOr<String?> contentOr = provider.getContent();
+    FutureOr<Map<String, dynamic>?> contentOr = provider.getContent();
     if (contentOr is Future) {
       showLoading("Carregando dados da tarefa");
 
-      String? content = await contentOr;
-      state = _ViewState(sduiJson: content?.toMap());
+      Map<String, dynamic>? content = await contentOr;
+      state = _ViewState(sduiJson: content);
     } else {
-      state = _ViewState(sduiJson: contentOr.toMap());
+      state = _ViewState(sduiJson: contentOr);
     }
   }
 }

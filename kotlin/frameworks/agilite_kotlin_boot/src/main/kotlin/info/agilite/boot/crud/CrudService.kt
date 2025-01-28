@@ -15,6 +15,7 @@ import info.agilite.boot.sdui.SduiRequest
 import info.agilite.boot.sdui.autocomplete.Option
 import info.agilite.boot.sdui.component.*
 import info.agilite.core.extensions.splitToList
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import kotlin.math.max
 import kotlin.math.min
@@ -38,6 +39,8 @@ interface CrudService<T> {
 class DefaultSduiCrudService<T>(
   val crudRepository: AgiliteCrudRepository
 ) : CrudService<T>, SduiProvider {
+  @Value("\${spring.profiles.active:default}")
+  protected val activeProfile: String? = null
 
   //TODO adicionar um cache pra esse método, porém deixar ele desativado no ambiente de desenvolvimento
   override fun createSduiComponent(request: SduiRequest): SduiComponent {
@@ -68,6 +71,7 @@ class DefaultSduiCrudService<T>(
       request.taskName,
       TaskDescr(entityMetadata.descr),
       columns,
+      metadataToLoad = entityMetadata.name,
     )
   }
 

@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:agilite_flutter_core/core.dart';
 
 abstract class SduiContentProvider {
-  FutureOr<String?> getContent();
+  FutureOr<Map<String, dynamic>?> getContent();
 }
 
 class LocalSduiContentProvider implements SduiContentProvider {
-  final String sduiJson;
+  final Map<String, dynamic> sduiJson;
 
   LocalSduiContentProvider(this.sduiJson);
 
   @override
-  FutureOr<String?> getContent() {
+  FutureOr<Map<String, dynamic>?> getContent() {
     return sduiJson;
   }
 }
@@ -28,9 +28,9 @@ class RemoteSduiContentProvider implements SduiContentProvider {
   });
 
   @override
-  FutureOr<String?> getContent() async {
+  FutureOr<Map<String, dynamic>?> getContent() async {
     return coreHttpProvider.get(url, queryParameters: pathParams).then((response) {
-      return response.bodyString;
+      return response.bodyMap;
     });
   }
 }

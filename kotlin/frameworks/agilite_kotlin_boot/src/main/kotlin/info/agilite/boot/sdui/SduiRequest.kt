@@ -9,7 +9,7 @@ enum class SduiRequestType {
 
 class SduiRequest(
   val taskName: String,
-  val providerClassName: String?,
+  val providerClassName: String? = null,
   val type: SduiRequestType = SduiRequestType.CRUD,
 ) {
   fun toBase64(): String {

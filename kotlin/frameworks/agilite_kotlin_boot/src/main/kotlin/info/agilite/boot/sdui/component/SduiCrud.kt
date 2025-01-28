@@ -7,4 +7,6 @@ class SduiCrud(
   var descr: TaskDescr,
   var columns: List<SduiSpreadColumnComponent>,
   var customFilters: List<SduiComponent>? = null,
+  var formBody: SduiComponent? = null,
+  var metadataToLoad: String? = null,
 ) : SduiComponent()

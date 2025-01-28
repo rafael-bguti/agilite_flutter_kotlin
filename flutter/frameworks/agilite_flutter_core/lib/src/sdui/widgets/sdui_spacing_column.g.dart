@@ -14,5 +14,15 @@ SduiSpacingColumnModel _$SduiSpacingColumnModelFromJson(
               .toList() ??
           const [],
       spacing: (json['spacing'] as num?)?.toDouble(),
+      crossAxisAlignment: $enumDecodeNullable(
+          _$CrossAxisAlignmentEnumMap, json['crossAxisAlignment']),
       id: json['id'] as String?,
     );
+
+const _$CrossAxisAlignmentEnumMap = {
+  CrossAxisAlignment.start: 'start',
+  CrossAxisAlignment.end: 'end',
+  CrossAxisAlignment.center: 'center',
+  CrossAxisAlignment.stretch: 'stretch',
+  CrossAxisAlignment.baseline: 'baseline',
+};

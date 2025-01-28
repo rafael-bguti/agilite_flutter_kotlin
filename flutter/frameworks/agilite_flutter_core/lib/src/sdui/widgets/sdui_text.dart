@@ -1,8 +1,8 @@
-import 'package:agilite_flutter_core/src/sdui/sdui_context.dart';
+import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'widgets.dart';
+import 'sdui_widget.dart';
 
 part 'sdui_text.g.dart';
 

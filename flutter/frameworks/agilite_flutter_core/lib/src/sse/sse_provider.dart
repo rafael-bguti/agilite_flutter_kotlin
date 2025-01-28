@@ -13,7 +13,7 @@ class SseProviderImpl extends SseProvider {
     final uuid = UuidUtils.generate();
 
     var client = http.Client();
-    var request = http.Request("POST", Uri.parse("$apiBaseUrl/public/messenger"));
+    var request = http.Request("POST", Uri.parse("${activeProfile.apiBaseUrl}/public/messenger"));
     request.headers['Accept'] = 'text/event-stream';
     request.headers['Content-Type'] = 'application/json';
     request.body = uuid;

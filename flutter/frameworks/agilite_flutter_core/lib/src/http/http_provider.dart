@@ -5,8 +5,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String get apiBaseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'undefined_url');
-
 abstract class HttpProvider {
   Future<HttpResponse> get(
     String path, {
@@ -217,7 +215,7 @@ class HttpProviderImpl extends HttpProvider {
     if (path.startsWith("http://") || path.startsWith("https://")) {
       return Uri.parse(path).replace(queryParameters: queryParameters);
     } else {
-      final String url = '$apiBaseUrl$path';
+      final String url = '${activeProfile.apiBaseUrl}$path';
       return Uri.parse(url).replace(queryParameters: queryParameters);
     }
   }

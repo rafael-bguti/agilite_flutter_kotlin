@@ -3,8 +3,7 @@ import 'package:agilite_flutter_core/src/sdui/widgets/spread/sdui_spread_column.
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../sdui_context.dart';
-import '../widgets/widgets.dart';
+import 'sdui_widget.dart';
 
 part 'sdui_crud.g.dart';
 
@@ -26,11 +25,15 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
         )
         .toList();
 
-    return _SduiCrudWidget(
-      model: model,
-      dataColumns: crudDataColumns,
-      key: buildKey(model.id),
+    final formBody = model.formBody == null ? null : SduiRender.renderFromJson(context, sduiContext, model.formBody!);
+
+    return ACrud.name(
+      taskName: model.taskName,
+      descr: model.descr,
+      columns: crudDataColumns,
       customFilters: customFiltersWidgets,
+      formBody: formBody,
+      metadataToLoad: model.metadataToLoad,
     );
   }
 }
@@ -39,39 +42,20 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
 class SduiCrudModel extends SduiModel {
   final String taskName;
   final CrudDescr descr;
+  final String? metadataToLoad;
   final List<SduiSpreadColumnModel> columns;
   final List<Map<String, dynamic>>? customFilters;
+  final Map<String, dynamic>? formBody;
 
   SduiCrudModel({
     super.id,
     required this.taskName,
     required this.descr,
     required this.columns,
+    this.metadataToLoad,
     this.customFilters,
+    this.formBody,
   });
 
   factory SduiCrudModel.fromJson(Map<String, dynamic> json) => _$SduiCrudModelFromJson(json);
-}
-
-class _SduiCrudWidget extends StatelessWidget {
-  final SduiCrudModel model;
-  final List<ASpreadColumn> dataColumns;
-  final List<Widget>? customFilters;
-
-  _SduiCrudWidget({
-    required this.model,
-    required this.dataColumns,
-    required super.key,
-    this.customFilters,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ACrud.name(
-      taskName: model.taskName,
-      descr: model.descr,
-      columns: dataColumns,
-      customFilters: customFilters,
-    );
-  }
 }

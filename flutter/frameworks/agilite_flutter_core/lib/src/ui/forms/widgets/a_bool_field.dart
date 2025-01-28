@@ -33,7 +33,7 @@ class ABoolField extends StatefulWidget {
   const ABoolField.controller(
     BoolController this.fieldController, {
     super.key,
-    this.renderType = ABoolRenderType.switcher,
+    this.renderType = ABoolRenderType.checkbox,
     this.autoFocus,
     this.labelOrientation = LabelOrientation.horizontal,
   })  : name = null,
@@ -45,7 +45,7 @@ class ABoolField extends StatefulWidget {
 
   const ABoolField(
     String this.name, {
-    this.renderType = ABoolRenderType.switcher,
+    this.renderType = ABoolRenderType.checkbox,
     super.key,
     this.labelText,
     this.enabled,

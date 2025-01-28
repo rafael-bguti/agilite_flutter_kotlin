@@ -15,13 +15,13 @@ class ADivider extends StatelessWidget {
 
   const ADivider.label({
     required Widget this.label,
-    this.padding = const EdgeInsets.symmetric(vertical: 16),
+    this.padding = const EdgeInsets.only(top: 24, bottom: 0),
     super.key,
   }) : text = null;
 
   const ADivider.text({
     required String this.text,
-    this.padding = const EdgeInsets.symmetric(vertical: 16),
+    this.padding = const EdgeInsets.only(top: 24, bottom: 0),
     super.key,
   }) : label = null;
 

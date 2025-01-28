@@ -11,6 +11,7 @@ class CrudController extends ViewController<CrudState> {
   static const String searchName = 'search';
 
   final String taskName;
+  final String? metadataToLoad;
 
   final CrudRepository _repository;
   final _searchDebouceTimer = DebounceTimer();
@@ -28,6 +29,7 @@ class CrudController extends ViewController<CrudState> {
   final $loading = false.obs;
   CrudController({
     required this.taskName,
+    this.metadataToLoad,
     CrudRepository? repository,
   })  : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
         super(CrudState.empty()) {
@@ -45,6 +47,9 @@ class CrudController extends ViewController<CrudState> {
   @override
   @mustCallSuper
   Future<void> onViewLoaded() async {
+    if (metadataToLoad != null) {
+      await metadataRepository.loadFieldsByNames([metadataToLoad!]);
+    }
     await _refresh();
   }
 

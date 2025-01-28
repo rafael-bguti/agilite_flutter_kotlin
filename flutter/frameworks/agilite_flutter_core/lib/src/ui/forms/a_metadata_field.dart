@@ -12,6 +12,7 @@ class AMetadataField extends StatelessWidget {
   final int? maxLines;
   final String? hintText;
   final String? helperText;
+  final bool? enabled;
 
   //Combo
   final List<Option<dynamic>>? autoCompleteOptions;
@@ -30,6 +31,7 @@ class AMetadataField extends StatelessWidget {
     this.maxLength,
     this.maxLines,
     this.defaultWhereBuilder,
+    this.enabled,
     super.key,
   });
 
@@ -70,6 +72,7 @@ class AMetadataField extends StatelessWidget {
         validators: ValidationMapper.parseValidationQuery(field.validationQuery),
         hintText: hintText,
         helperText: helperText,
+        enabled: enabled,
       );
     } else {
       return AAutocompleteField.options(
@@ -81,6 +84,7 @@ class AMetadataField extends StatelessWidget {
         validators: ValidationMapper.parseValidationQuery(field.validationQuery),
         hintText: hintText,
         helperText: helperText,
+        enabled: enabled,
       );
     }
   }
@@ -95,6 +99,7 @@ class AMetadataField extends StatelessWidget {
       hintText: hintText,
       helperText: helperText,
       defaultWhereBuilder: defaultWhereBuilder,
+      enabled: enabled,
     );
   }
 
@@ -121,6 +126,7 @@ class AMetadataField extends StatelessWidget {
       validators: ValidationMapper.parseValidationQuery(field.validationQuery),
       hintText: hintText,
       helperText: helperText,
+      enabled: enabled,
     );
   }
 
@@ -129,6 +135,7 @@ class AMetadataField extends StatelessWidget {
       field.name,
       labelText: labelText ?? field.label,
       onControllerCreated: onControllerCreated,
+      enabled: enabled,
     );
   }
 

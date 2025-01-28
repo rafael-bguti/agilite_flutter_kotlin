@@ -8,7 +8,7 @@ part of 'sdui_sized_box.dart';
 
 SduiSizedBoxModel _$SduiSizedBoxModelFromJson(Map<String, dynamic> json) =>
     SduiSizedBoxModel(
-      child: json['child'] as Map<String, dynamic>,
+      child: json['child'] as Map<String, dynamic>?,
       width: (json['width'] as num?)?.toDouble(),
       height: (json['height'] as num?)?.toDouble(),
       id: json['id'] as String?,

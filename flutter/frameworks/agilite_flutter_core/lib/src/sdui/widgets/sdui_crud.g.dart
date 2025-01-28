@@ -14,7 +14,9 @@ SduiCrudModel _$SduiCrudModelFromJson(Map<String, dynamic> json) =>
       columns: (json['columns'] as List<dynamic>)
           .map((e) => SduiSpreadColumnModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      metadataToLoad: json['metadataToLoad'] as String?,
       customFilters: (json['customFilters'] as List<dynamic>?)
           ?.map((e) => e as Map<String, dynamic>)
           .toList(),
+      formBody: json['formBody'] as Map<String, dynamic>?,
     );
