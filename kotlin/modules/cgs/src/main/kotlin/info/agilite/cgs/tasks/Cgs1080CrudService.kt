@@ -8,7 +8,6 @@ import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.sdui.SduiRequest
 import info.agilite.boot.sdui.autocomplete.Option
 import info.agilite.boot.sdui.component.*
-import info.agilite.shared.entities.cgs.Cgs80
 import org.springframework.stereotype.Component
 
 private const val CLI_FOR_TRA_FILTER = "cliForTraFilter"
@@ -42,36 +41,17 @@ class Cgs1080CrudService(
   }
 
   private fun createFormBody(): SduiComponent {
-    return SduiGrid.createByQuery(
-      "4,8|cgs80codigo,cgs80nome",
-      GridRowQuery(
-        "4-4,8-8",
-        SduiFieldset(
-          "Caracterização",
-          SduiSpacingColumn(
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOf(
-              SduiMetadataField("cgs80cliente"),
-              SduiMetadataField("cgs80fornecedor"),
-              SduiMetadataField("cgs80transportadora"),
-            )
-          ),
-        ),
-        SduiPadding(
-          top = 8.0,
-          child = SduiGrid.createByQuery(
-            "6,6|cgs80tipo,cgs80ni,cgs80contribuinte,cgs80ie,cgs80im"
-          ),
-        )
-      ),
-      SduiDivider("Contatos"),
-      "4,4,4|cgs80email,cgs80telefone(mod:$MOD_FONE),cgs80celular(mod:$MOD_FONE)",
-      SduiDivider("Endereço"),
-      "3-3-5,9-9-7|cgs80cep(mod:$MOD_CEP),cgs80endereco",
-      "3-3-4,5-5-4,4|cgs80numero,cgs80bairro,cgs80complemento",
-      "3-3-4,5-5-4,4|cgs80uf(mod:$MOD_UF),cgs80municipio,$SDUI_EMPTY",
-      SduiDivider("Observações"),
-      "12|cgs80obs"
+    return SduiGrid.createByRows(
+      row("4,8", "cgs80codigo,cgs80nome"),
+      row("4-4,8-8", caracterizacaoFieldset, niFields),
+      row(SduiDivider("Contatos")),
+      row("4,4,4", "cgs80email,cgs80telefone(mod:$MOD_FONE),cgs80celular(mod:$MOD_FONE)"),
+      row(SduiDivider("Endereço")),
+      row("3-3-5,9-9-7", "cgs80cep(mod:$MOD_CEP),cgs80endereco"),
+      row("3-3-4,5-5-4,4", "cgs80numero,cgs80bairro,cgs80complemento"),
+      row("3-3-4,5-5-4,4", "cgs80uf(mod:$MOD_UF),cgs80municipio,$SDUI_EMPTY"),
+      row(SduiDivider("Observações")),
+      row("12", "cgs80obs"),
     )
   }
 
@@ -92,4 +72,32 @@ class Cgs1080CrudService(
     }
     return null
   }
+
+  private val caracterizacaoFieldset: SduiFieldset
+    get() {
+      return SduiFieldset(
+        "Caracterização",
+        SduiSpacingColumn(
+          crossAxisAlignment = CrossAxisAlignment.start,
+          children = listOf(
+            SduiMetadataField("cgs80cliente"),
+            SduiMetadataField("cgs80fornecedor"),
+            SduiMetadataField("cgs80transportadora"),
+          )
+        ),
+      )
+    }
+
+  private val niFields: SduiComponent
+    get() {
+      return SduiPadding(
+        top = 8.0,
+        child = SduiGrid.createByRows(
+          GridRowQuery(
+            "6,6",
+            "cgs80tipo,cgs80ni,cgs80contribuinte,cgs80ie,cgs80im",
+          )
+        ),
+      )
+    }
 }

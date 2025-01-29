@@ -8,7 +8,7 @@ const String _MOD_UF = 'uf';
 
 class AMetadataField extends StatelessWidget {
   final String fieldName;
-  final void Function(dynamic controller)? onControllerCreated;
+  final void Function(dynamic controller)? controllerCreated;
 
   //Customizações
   final FieldMetadataType? metadataType;
@@ -28,7 +28,7 @@ class AMetadataField extends StatelessWidget {
 
   const AMetadataField(
     this.fieldName, {
-    this.onControllerCreated,
+    this.controllerCreated,
     this.labelText,
     this.hintText,
     this.helperText,
@@ -162,6 +162,13 @@ class AMetadataField extends StatelessWidget {
       onControllerCreated: onControllerCreated,
       enabled: enabled,
     );
+  }
+
+  void onControllerCreated(FieldController controller) {
+    controller.onValueChanged.addListener(() {
+      print('Value changed: ${controller.name} -> ${controller.value}');
+    });
+    controllerCreated?.call(controller);
   }
 
   int? _getMaxLines(FieldMetadata field) {

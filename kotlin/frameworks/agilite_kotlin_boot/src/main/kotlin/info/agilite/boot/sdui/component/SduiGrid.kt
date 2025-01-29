@@ -1,7 +1,5 @@
 package info.agilite.boot.sdui.component
 
-import info.agilite.core.extensions.splitToList
-
 class SduiGrid(
   val rows: List<SduiGridRow>,
   val spacing: Int? = 8,
@@ -9,32 +7,22 @@ class SduiGrid(
   id: String? = null,
 ) : SduiComponent(id) {
   companion object {
-    fun createByQuery(vararg queries: Any): SduiGrid {
-      val result = mutableListOf<SduiGridRow>()
-
-      queries.forEach { q ->
-        when (q) {
-          is SduiGridRow -> result.add(q)
-          is GridRowQuery -> result.add(q.toRow())
-          is SduiComponent -> result.add(SduiGridRow("12", listOf(q)))
-          is String -> {
-            val split = q.splitToList("|")
-            val areas = if(split.size == 1) "12" else split[0]
-            val metadatas = if(split.size == 1) split[0] else split[1]
-            val children = SduiUtils.parseStringToComponents(metadatas)
-
-            result.add(SduiGridRow(areas, children))
-          }
-          else -> throw RuntimeException("Invalid query type: ${q::class.simpleName}")
-        }
-      }
-
-      return SduiGrid(result)
+    fun createByRows(vararg queries: GridRowQuery): SduiGrid {
+      return SduiGrid(queries.map { it.toRow() })
     }
   }
 }
 
-class GridRowQuery(val areas: String, vararg query: Any){
+fun row(areas: String, vararg query: Any): GridRowQuery {
+  return GridRowQuery(areas, *query)
+}
+fun row(sduiComponent: SduiComponent): GridRowQuery {
+  return GridRowQuery(sduiComponent)
+}
+
+
+class GridRowQuery(private val areas: String, vararg query: Any){
+  constructor(sduiComponent: SduiComponent) : this("12", sduiComponent)
   private val components = query.toList()
 
   fun toRow(): SduiGridRow {

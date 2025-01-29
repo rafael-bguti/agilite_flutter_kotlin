@@ -125,6 +125,7 @@ abstract class FieldController<T> extends ChangeNotifier {
   @override
   void dispose() {
     focusNode.dispose();
+    onValueChanged.dispose();
     super.dispose();
   }
 
