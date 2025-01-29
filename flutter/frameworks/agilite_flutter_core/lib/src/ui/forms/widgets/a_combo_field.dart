@@ -99,7 +99,7 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCre
           onChanged: enabled
               ? (v) {
                   fieldController.value = v as T;
-                  fieldController.onChanged();
+                  fieldController.onValueChanged();
                 }
               : null,
         );

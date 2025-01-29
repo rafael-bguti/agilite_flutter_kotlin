@@ -91,7 +91,8 @@ class AutocompleteController<T> extends FieldController<Option<T>?> {
   void _updateValue(Option<T>? localValue, [bool fromUserAction = true]) {
     comboEditingController.text = keyValueConverter.valueToString(localValue);
     _value = localValue ?? defaultValue;
-    onValueChanged.notifyListeners();
+
+    onValueChanged();
     notifyListeners();
 
     status = FieldStatus.dirty;

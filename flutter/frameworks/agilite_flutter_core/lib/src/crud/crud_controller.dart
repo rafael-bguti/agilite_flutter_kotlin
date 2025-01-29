@@ -37,9 +37,9 @@ class CrudController extends ViewController<CrudState> {
     formFiltersController.addControllerListener(
       (controller) {
         if (controller is FormFieldController) {
-          controller.onValueChanged.addListener(onFilterChanged);
+          controller.addValueChangeListener(onFilterChanged);
         } else {
-          controller.onValueChanged.addListener(_refresh);
+          controller.addValueChangeListener(_refresh);
         }
       },
     );

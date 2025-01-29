@@ -22,6 +22,8 @@ class BoolController extends FieldController<bool> {
     if (value == _value) return;
 
     _value = value ?? defaultValue;
+
+    onValueChanged();
     notifyListeners();
   }
 

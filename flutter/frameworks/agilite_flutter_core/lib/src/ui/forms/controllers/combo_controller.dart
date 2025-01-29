@@ -29,6 +29,8 @@ class ComboController<T> extends FieldController<T> {
     if (value == _value) return;
 
     _value = value ?? defaultValue;
+
+    onValueChanged();
     notifyListeners();
   }
 

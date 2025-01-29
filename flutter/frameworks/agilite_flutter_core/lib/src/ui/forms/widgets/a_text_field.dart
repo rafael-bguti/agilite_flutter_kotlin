@@ -279,7 +279,7 @@ class _ATextFieldState extends State<ATextField> with FieldControllerCreatorMixi
             obscureText: fieldController.obscureText ?? false,
             onChanged: (v) {
               widget.onChanged?.call(v);
-              fieldController.onChanged();
+              fieldController.onValueChanged();
             },
             autofocus: fieldController.autoFocus,
           );

@@ -23,7 +23,6 @@ abstract class FieldController<T> extends ChangeNotifier {
   List<FieldValidator>? validators;
 
   T defaultValue;
-  ChangeNotifier onValueChanged = ChangeNotifier();
 
   bool req;
   bool autoFocus;
@@ -72,8 +71,17 @@ abstract class FieldController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onChanged() {
-    onValueChanged.notifyListeners();
+  ChangeNotifier _onValueChangeNotifier = ChangeNotifier();
+  void addValueChangeListener(Function() listener) {
+    _onValueChangeNotifier.addListener(listener);
+  }
+
+  void removeValueChangeListener(Function() listener) {
+    _onValueChangeNotifier.removeListener(listener);
+  }
+
+  void onValueChanged() {
+    _onValueChangeNotifier.notifyListeners();
   }
 
   String? get errorText => _errorText;
@@ -125,7 +133,7 @@ abstract class FieldController<T> extends ChangeNotifier {
   @override
   void dispose() {
     focusNode.dispose();
-    onValueChanged.dispose();
+    _onValueChangeNotifier.dispose();
     super.dispose();
   }
 

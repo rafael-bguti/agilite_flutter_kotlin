@@ -95,6 +95,7 @@ abstract class FormFieldController<T> extends FieldController<T> {
     status = FieldStatus.dirty;
     validate();
     notifyListeners();
+    onValueChanged();
   }
 
   @override

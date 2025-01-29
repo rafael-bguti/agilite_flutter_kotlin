@@ -59,6 +59,7 @@ class SpreadController extends FieldController<SpreadModel> {
     _value.replaceAll(valueMap);
 
     notifyListeners();
+    onValueChanged();
   }
 
   void fireSpreadDataChanged() {

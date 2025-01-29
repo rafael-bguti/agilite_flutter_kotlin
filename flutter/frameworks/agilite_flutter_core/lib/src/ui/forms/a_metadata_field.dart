@@ -165,7 +165,8 @@ class AMetadataField extends StatelessWidget {
   }
 
   void onControllerCreated(FieldController controller) {
-    controller.onValueChanged.addListener(() {
+    print('Controller criado: ${controller.name}');
+    controller.addValueChangeListener(() {
       print('Value changed: ${controller.name} -> ${controller.value}');
     });
     controllerCreated?.call(controller);
