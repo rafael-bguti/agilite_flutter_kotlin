@@ -45,6 +45,7 @@ class _BootAppState extends State<BootApp> {
 
     metadataRepository = HttpMetadataRepositoryAdapter(httpProvider);
     coreHttpProvider = httpProvider;
+    coreCepService = cepService;
 
     if (widget.themeMode != null) {
       themeNotifier.value = widget.themeMode!;
@@ -85,6 +86,7 @@ HttpProvider get httpProvider => _httpProviderCache ??= HttpProviderImpl(
       authorizationTokenGetter: () => authService.loadLoggedToken(),
       sseProvider: SseProviderImpl(),
     );
+CepService get cepService => CepServiceViaCepImpl(httpProvider);
 
 Storage? _storageCache;
 AuthService? _authServiceCache;

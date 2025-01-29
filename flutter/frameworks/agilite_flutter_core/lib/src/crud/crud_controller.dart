@@ -5,6 +5,7 @@ import 'package:agilite_flutter_core/src/crud/crud_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'crud_state.dart';
+import 'models/crud_list_request.dart';
 
 class CrudController extends ViewController<CrudState> {
   static const String spreadDataName = 'data';

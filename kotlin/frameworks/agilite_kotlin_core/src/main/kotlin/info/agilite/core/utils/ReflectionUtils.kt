@@ -66,10 +66,17 @@ class ReflectionUtils {
 
     fun <T> getValue(entity: Any, propertyName: String): T? {
       val readMethod = BeanUtils.getPropertyDescriptor(entity::class.java, propertyName)?.readMethod
-        ?: return throw Exception("Property $propertyName not found in ${entity::class.simpleName}")
+        ?: throw Exception("Property $propertyName not found in ${entity::class.simpleName}")
 
       return readMethod.invoke(entity) as T?
 
+    }
+
+    fun setValue(entity: Any, propertyName: String, value: Any?) {
+      val writeMethod = BeanUtils.getPropertyDescriptor(entity::class.java, propertyName)?.writeMethod
+        ?: throw Exception("Property $propertyName not found in ${entity::class.simpleName}")
+
+      writeMethod.invoke(entity, value)
     }
 
     fun <O: Any, D: Any> copyAtts(origin: O, destiny: D): D {

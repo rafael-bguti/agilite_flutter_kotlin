@@ -19,3 +19,13 @@ set coreHttpProvider(HttpProvider coreHttpProvider) {
 HttpProvider get coreHttpProvider {
   return _coreHttpProvider ??= throw 'System initialize failed, HttpProvider not set';
 }
+
+CepService? _coreCepService;
+
+set coreCepService(CepService coreCepService) {
+  _coreCepService = coreCepService;
+}
+
+CepService get coreCepService {
+  return _coreCepService ??= throw 'System initialize failed, CepService not set';
+}

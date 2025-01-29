@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'a_edit_crud_buttons.dart';
 
 class AEditCrud extends StatefulWidget {
+  final String taskName;
   final CrudDescr descr;
   final int? id;
   final Widget formBody;
 
   const AEditCrud({
+    required this.taskName,
     required this.formBody,
     required this.descr,
     this.id,
@@ -20,7 +22,10 @@ class AEditCrud extends StatefulWidget {
 }
 
 class _AEditCrudState extends State<AEditCrud> {
-  late final CrudEditController controller = CrudEditController(id: widget.id);
+  late final CrudEditController controller = CrudEditController(
+    taskName: widget.taskName,
+    id: widget.id,
+  );
 
   @override
   void dispose() {
@@ -35,9 +40,16 @@ class _AEditCrudState extends State<AEditCrud> {
         controller: controller,
         builder: (context, state) {
           return ATaskContainer(
-            header: AContainerHeader.text('${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}'),
-            footer: AEditCrudButtons(onSave: controller.save),
-            child: AForm(controller.formController, child: widget.formBody),
+            header: AContainerHeader.text(
+              '${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}',
+            ),
+            footer: AEditCrudButtons(
+              onSave: controller.save,
+            ),
+            child: AForm(
+              controller.formController,
+              child: widget.formBody,
+            ),
           );
         },
       ),

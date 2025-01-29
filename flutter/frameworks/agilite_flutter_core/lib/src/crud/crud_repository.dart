@@ -1,9 +1,13 @@
 import 'package:agilite_flutter_core/core.dart';
+import 'package:agilite_flutter_core/src/crud/models/crud_edit_response.dart';
 
 import 'crud_state.dart';
+import 'models/crud_list_request.dart';
 
 abstract class CrudRepository {
   Future<CrudState> loadData(String taskName, CrudListRequest request);
+  Future<CrudEditResponse> edit(String taskName, int id);
+  Future<void> save(String taskName, Map<String, dynamic> data, dynamic id);
 }
 
 class HttpCrudRepositoryAdapter extends CrudRepository {
@@ -16,30 +20,19 @@ class HttpCrudRepositoryAdapter extends CrudRepository {
     final response = await http.post("/crud/list/find/$taskName", body: request);
     return CrudState.fromJson(response.bodyMap);
   }
-}
 
-class CrudListRequest {
-  final int currentPage;
-  final int pageSize;
-  final String? search;
-  final Map<String, dynamic>? customFilters;
-  final int? groupIndex;
+  @override
+  Future<CrudEditResponse> edit(String taskName, int id) async {
+    final response = await http.get("/crud/$taskName/$id");
+    return CrudEditResponse.fromJson(response.bodyMap);
+  }
 
-  CrudListRequest({
-    required this.currentPage,
-    required this.pageSize,
-    this.search,
-    this.customFilters,
-    this.groupIndex,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'currentPage': currentPage,
-      'pageSize': pageSize,
-      'search': search,
-      'customFilters': customFilters,
-      'groupIndex': groupIndex,
-    };
+  @override
+  Future<void> save(String taskName, Map<String, dynamic> data, dynamic id) async {
+    if (id == null) {
+      await http.post('/crud/$taskName', body: data);
+    } else {
+      await http.put('/crud/$taskName/$id', body: data);
+    }
   }
 }

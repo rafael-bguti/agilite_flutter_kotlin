@@ -87,7 +87,7 @@ class _AComboFieldState<T> extends State<AComboField<T>> with FieldControllerCre
               .map(
                 (item) => DropdownMenuItem<T>(
                   value: item.jsonKey as T?,
-                  child: Text(item.toString()),
+                  child: Text(item.toString(), style: (item.jsonKey == null ? textTheme?.bodySmall : textTheme?.bodyLarge)),
                 ),
               )
               .toList(),

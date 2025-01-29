@@ -2,11 +2,13 @@ package info.agilite.boot.crud
 
 import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.jdbcDialect
+import info.agilite.boot.metadata.exceptions.AutocompleteMetadataNotFoundException
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.metadata.models.FieldMetadata
 import info.agilite.boot.metadata.models.KeyMetadataType
 import info.agilite.boot.metadata.models.tasks.TaskDescr
 import info.agilite.boot.orm.AgiliteWhere
+import info.agilite.boot.orm.EntityMappingContext
 import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQuery
 import info.agilite.boot.orm.query.DbQueryBuilders
@@ -14,31 +16,34 @@ import info.agilite.boot.sdui.SduiProvider
 import info.agilite.boot.sdui.SduiRequest
 import info.agilite.boot.sdui.autocomplete.Option
 import info.agilite.boot.sdui.component.*
+import info.agilite.boot.security.UserContext
 import info.agilite.core.extensions.splitToList
+import info.agilite.core.json.JsonUtils
+import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import kotlin.math.max
 import kotlin.math.min
 
-interface CrudService<T> {
-  fun findListData(task: String, request: CrudListRequest): CrudListResponse
+interface CrudService {
+  fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
 //
 //  fun createNewRecord(task: String): Map<String, Any?>? {
 //    return null
 //  }
 //
-//  fun editRecord(task: String, id: Long): Map<String, Any?>?
-//
-//  fun convertEntity(task: String, map: Map<String, *>, id: Long?): T
-//  fun insert(entity: T)
-//  fun update(entity: T)
+  fun editRecord(taskName: String, id: Long): CrudEditResponse?
+  fun update(entity: Any)
+  fun insert(entity: Any)
+
+  fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): Any
 //  fun delete(task: String, ids: List<Long>)
 }
 
 @Service
-class DefaultSduiCrudService<T>(
+class DefaultSduiCrudService(
   val crudRepository: AgiliteCrudRepository
-) : CrudService<T>, SduiProvider {
+) : CrudService, SduiProvider {
   @Value("\${spring.profiles.active:default}")
   protected val activeProfile: String? = null
 
@@ -83,6 +88,62 @@ class DefaultSduiCrudService<T>(
       request.pageSize,
       data,
     )
+  }
+
+  override fun editRecord(taskName: String, id: Long): CrudEditResponse? {
+    val query = createEditQuery(taskName, id)
+    val data = crudRepository.findEditData(query) ?: return null
+
+    return CrudEditResponse(data)
+  }
+
+  override fun insert(entity: Any) {
+    try {
+      val tableName = EntityMappingContext.getTableAndSchema(entity!!::class.java).table
+      val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
+      setDefaultValues(entityMetadata, entity)
+
+      crudRepository.insert(entity as Any)
+    } catch (e: Exception) {
+      throw processConstraintViolationExceptionOnSave(e)
+    }
+  }
+
+  override fun update(entity: Any) {
+    try {
+      val tableName = EntityMappingContext.getTableAndSchema(entity!!::class.java).table
+      val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
+      setDefaultValues(entityMetadata, entity)
+
+      crudRepository.update(entity as Any)
+    } catch (e: Exception) {
+      throw processConstraintViolationExceptionOnSave(e)
+    }
+  }
+
+  override fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): Any {
+    val metadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
+    val entityClazz = defaultMetadataRepository.loadEntityClass(metadata.name)
+    val value = JsonUtils.fromMap(map, entityClazz.java)
+
+    if(id != null){
+      ReflectionUtils.setIdValue(value, id)
+    }
+
+    return value
+  }
+
+  protected fun createEditQuery(taskName: String, id: Long): DbQuery<*> {
+    val entityMetadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
+
+    val where = WhereSimple(" ${entityMetadata.name}id = :id", mapOf("id" to id))
+    val query = DbQueryBuilders.build(
+      defaultMetadataRepository.loadEntityClass(entityMetadata.name),
+      getColumnNamesToEdit(taskName, entityMetadata).joinToString(),
+      where = where,
+    )
+
+    return query
   }
 
   protected fun createListQuery(taskName: String, request: CrudListRequest): DbQuery<*> {
@@ -167,7 +228,7 @@ class DefaultSduiCrudService<T>(
     return result
   }
 
-  fun getCustomWhereOnList(request: CrudListRequest, entityMetadata: EntityMetadata): Pair<String, Map<String, Any>?>? {
+  protected fun getCustomWhereOnList(request: CrudListRequest, entityMetadata: EntityMetadata): Pair<String, Map<String, Any>?>? {
     return null
   }
 
@@ -235,48 +296,58 @@ class DefaultSduiCrudService<T>(
     }
   }
 
-//
-//  override fun convertEntity(task: String, map: Map<String, *>, id: Long?): T {
-//    val metadata = getCrudMetadata(task).entityMetadata
-//    val entityClazz = defaultMetadataRepository.loadEntityClass(metadata.name)
-//    val value = JsonUtils.fromMap(map, entityClazz.java)
-//
-//    if(id != null){
-//      ReflectionUtils.setIdValue(value, id)
-//    }
-//
-//    return value as T
-//  }
-//
-//  override fun insert(entity: T) {
+  protected fun getColumnNamesToEdit(taskName: String, entityMetadata: EntityMetadata): List<String> {
+    val columns = mutableListOf<String>()
+    addColumnsByTableName(taskName, entityMetadata, columns)
+    return columns
+  }
+
+  private fun addColumnsByTableName(taskName: String, entityMetadata: EntityMetadata, columns: MutableList<String>, aliasPrefx: String? = null) {
+    val alias = aliasPrefx?.let { "$it." } ?: ""
+    entityMetadata.fields.forEach {
+      if (it.foreignKeyEntity != null) {
+        try{
+          columns.addAll(getColumNamesToJoin(taskName,"$alias${it.name}", it, true))
+        }catch (e: AutocompleteMetadataNotFoundException){
+          columns.add("$alias${it.name}")
+        }
+      } else {
+        columns.add("$alias${it.name}")
+      }
+    }
+
+    entityMetadata.oneToMany.forEach { (key, value) ->
+      addColumnsByTableName(taskName, defaultMetadataRepository.loadEntityMetadata(value.childJoinClass.simpleName), columns, "${alias}${key}")
+    }
+  }
+
+  fun setDefaultValues(entityMetadata: EntityMetadata, entity: Any) {
+    if(entityMetadata.entityHasEmpresaField()){
+      ReflectionUtils.getValue<Long?>(entity as Any, entityMetadata.getEmpresaField()!!.name) ?:
+        ReflectionUtils.setValue(entity as Any, entityMetadata.getEmpresaField()!!.name, UserContext.safeUser.empId)
+    }
+  }
+
+  fun processConstraintViolationExceptionOnSave(rootExc: Exception): Exception {
+    return rootExc
+
+
+//    TODO implementar com o JDBC Spring Data
+//    val constraintExc = rootExc.unwrap<DataIntegrityViolationException>() ?: return rootExc
 //    try {
-//      val tableName = EntityMappingContext.getTableAndSchema(entity!!::class.java).table
-//      val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
-//      setDefaultValues(entity)
-//
-//      crudRepository.insert(entity as Any)
-//    } catch (e: Exception) {
-//      throw processConstraintViolationExceptionOnSave(e)
+//      val constraintName = constraintExc.constraintName ?: throw constraintExc
+//      if(constraintName.endsWith("_uk")) {
+//        //TODO - Melhorar a mensagem de erro extraindo o nome das colunas (não esquecer de remover as colunas de Contrato e Empresa)
+//        val msg = "Já existe um registro igual a esse. Não é possível cadastrar novamente."
+//        return ValidationException(msg)
+//      }
+//      return rootExc
+//    }catch (ignore: Exception){
+//      //TODO LOGAR a exception ignore
+//      return rootExc
 //    }
-//  }
-//
-//  override fun update(entity: T) {
-//    try {
-//      setDefaultValues(entity)
-//
-//      crudRepository.update(entity as Any)
-//    } catch (e: Exception) {
-//      throw processConstraintViolationExceptionOnSave(e)
-//    }
-//  }
-//
-//  //TODO implementar uma variaável no retorno que indique se o registro é Editavel ou não, assim no cliente quando não for editável, o botão Salvar é desabilitado
-//  override fun editRecord(task: String, id: Long): Map<String, Any?>? {
-//    val taskName = extractTaskName(task)
-//    val query = createEditQuery(taskName, id)
-//
-//    return crudRepository.findEditData(query)
-//  }
+  }
+
 //
 //  override fun delete(task: String, ids: List<Long>) {
 //    try {
@@ -292,73 +363,15 @@ class DefaultSduiCrudService<T>(
 //    return task.substringAfterLast(".")
 //  }
 //
-//  protected fun createEditQuery(taskName: String, id: Long): DbQuery<*> {
-//    val entityMetadata = defaultMetadataRepository.loadTaskMetadata(taskName, TaskCrudMetadata::class).entityMetadata
+
 //
-//    val where = WhereSimple(" ${entityMetadata.name}id = :id", mapOf("id" to id))
-//    val query = DbQueryBuilders.build(
-//      defaultMetadataRepository.loadEntityClass(entityMetadata.name),
-//      getColumnNamesToEdit(taskName).joinToString(),
-//      where = where,
-//    )
+
 //
-//    return query
-//  }
+
 //
-//  protected fun getColumnNamesToEdit(taskName: String): List<String> {
-//    val entityMetadata = defaultMetadataRepository.loadTaskMetadata(taskName, TaskCrudMetadata::class).entityMetadata
-//    val columns = mutableListOf<String>()
+
 //
-//    addColumnsByTableName(taskName, entityMetadata, columns)
-//    return columns
-//  }
-//
-//  private fun addColumnsByTableName(taskName: String, entityMetadata: EntityMetadata, columns: MutableList<String>, aliasPrefx: String? = null) {
-//    val alias = aliasPrefx?.let { "$it." } ?: ""
-//    entityMetadata.fields.forEach {
-//      if (it.foreignKeyEntity != null) {
-//        try{
-//          columns.addAll(getColumNamesToJoin(taskName,"$alias${it.name}", it, true))
-//        }catch (e: AutocompleteMetadataNotFoundException){
-//          columns.add("$alias${it.name}")
-//        }
-//      } else {
-//        columns.add("$alias${it.name}")
-//      }
-//    }
-//
-//    entityMetadata.oneToMany.forEach { (key, value) ->
-//      addColumnsByTableName(taskName, defaultMetadataRepository.loadEntityMetadata(value.childJoinClass.simpleName), columns, "${alias}${key}")
-//    }
-//  }
-//
-//  fun setDefaultValues(entity: T) {
-//    //TODO o Código Abaixo está setando a empresa na coluna, porém antes precisa ver se a configuração do usuário/emprsa usa centralização por emrpesa
-////    val empresaKey = "${entityMetadata.name}empresa".lowercase();
-////    if(entityMetadata.entityHasEmpresaField() && !row.containsKey(empresaKey)){
-////      row[empresaKey] = UserContext.currentUser.empId
-////    }
-//  }
-//
-//  fun processConstraintViolationExceptionOnSave(rootExc: Exception): Exception {
-//    return rootExc
-//
-//
-////    TODO implementar com o JDBC Spring Data
-////    val constraintExc = rootExc.unwrap<DataIntegrityViolationException>() ?: return rootExc
-////    try {
-////      val constraintName = constraintExc.constraintName ?: throw constraintExc
-////      if(constraintName.endsWith("_uk")) {
-////        //TODO - Melhorar a mensagem de erro extraindo o nome das colunas (não esquecer de remover as colunas de Contrato e Empresa)
-////        val msg = "Já existe um registro igual a esse. Não é possível cadastrar novamente."
-////        return ValidationException(msg)
-////      }
-////      return rootExc
-////    }catch (ignore: Exception){
-////      //TODO LOGAR a exception ignore
-////      return rootExc
-////    }
-//  }
+
 //
 //  fun processConstraintViolationExceptionOnDelete(rootExc: Exception): Exception {
 //    return rootExc

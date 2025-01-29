@@ -1,5 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
+import 'package:agilite_flutter_core/src/ui/forms/cep/a_text_field_cep.dart';
 import 'package:flutter/material.dart';
+
+const String _MOD_FONE = 'fone';
+const String _MOD_CEP = 'cep';
+const String _MOD_UF = 'uf';
 
 class AMetadataField extends StatelessWidget {
   final String fieldName;
@@ -13,6 +18,7 @@ class AMetadataField extends StatelessWidget {
   final String? hintText;
   final String? helperText;
   final bool? enabled;
+  final String? mod;
 
   //Combo
   final List<Option<dynamic>>? autoCompleteOptions;
@@ -32,6 +38,7 @@ class AMetadataField extends StatelessWidget {
     this.maxLines,
     this.defaultWhereBuilder,
     this.enabled,
+    this.mod,
     super.key,
   });
 
@@ -60,14 +67,17 @@ class AMetadataField extends StatelessWidget {
     }
   }
 
-  Widget _buildAComboField(FieldMetadata field) {
-    final options = autoCompleteOptions ?? field.options!.map((e) => LocalOption(e.value, e.label)).toList();
+  Widget _buildAComboField(FieldMetadata field, [List<Option<dynamic>>? localAutoCompleteOptions = null]) {
+    final options = localAutoCompleteOptions ?? autoCompleteOptions ?? field.options!.map((e) => LocalOption(e.value, e.label)).toList();
     if (options.length < 15) {
-      return AAutocompleteField.combo(
+      if (!field.req && options[0].jsonKey != null) {
+        options.insert(0, LocalOption<Object>(null, "Selecione..."));
+      }
+
+      return AComboField(
         field.name,
         options: options,
         labelText: labelText ?? field.label,
-        req: field.req,
         onControllerCreated: onControllerCreated,
         validators: ValidationMapper.parseValidationQuery(field.validationQuery),
         hintText: hintText,
@@ -103,7 +113,22 @@ class AMetadataField extends StatelessWidget {
     );
   }
 
-  Widget _buildATextField(FieldMetadata field) {
+  Widget _buildATextField(FieldMetadata metadata) {
+    return switch (mod) {
+      _MOD_FONE => ATextFieldFone(
+          metadata.name,
+          labelText: labelText ?? metadata.label,
+        ),
+      _MOD_CEP => ATextFieldCep(
+          metadata.name,
+          labelText: labelText ?? metadata.label,
+        ),
+      _MOD_UF => _buildAComboField(metadata, ufComboOptions),
+      _ => _buildDefaultTextField(metadata),
+    };
+  }
+
+  Widget _buildDefaultTextField(FieldMetadata field) {
     final FieldType type = switch (field.type) {
       FieldMetadataType.string => FieldType.string,
       FieldMetadataType.int => FieldType.int,

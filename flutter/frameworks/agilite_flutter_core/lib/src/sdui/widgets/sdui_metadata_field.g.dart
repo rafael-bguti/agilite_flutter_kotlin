@@ -14,5 +14,6 @@ SduiMetadataFieldModel _$SduiMetadataFieldModelFromJson(
       hintText: json['hintText'] as String?,
       helperText: json['helperText'] as String?,
       enabled: json['enabled'] as bool?,
+      mod: json['mod'] as String?,
       id: json['id'] as String?,
     );

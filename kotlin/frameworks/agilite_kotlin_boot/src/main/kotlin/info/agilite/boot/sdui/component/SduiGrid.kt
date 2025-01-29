@@ -2,8 +2,6 @@ package info.agilite.boot.sdui.component
 
 import info.agilite.core.extensions.splitToList
 
-const val SHORTCUT_EMPTY = "EMPTY_BOX"
-
 class SduiGrid(
   val rows: List<SduiGridRow>,
   val spacing: Int? = 8,
@@ -23,8 +21,7 @@ class SduiGrid(
             val split = q.splitToList("|")
             val areas = if(split.size == 1) "12" else split[0]
             val metadatas = if(split.size == 1) split[0] else split[1]
-            val names = metadatas.splitToList(",")
-            val children = names.map { componentFromString(it) }
+            val children = SduiUtils.parseStringToComponents(metadatas)
 
             result.add(SduiGridRow(areas, children))
           }
@@ -41,13 +38,16 @@ class GridRowQuery(val areas: String, vararg query: Any){
   private val components = query.toList()
 
   fun toRow(): SduiGridRow {
-    val children = components.map {
+    val children = mutableListOf<SduiComponent>()
+
+    components.forEach {
       when (it) {
-        is SduiComponent -> it
-        is String -> componentFromString(it)
+        is SduiComponent -> children.add(it)
+        is String -> children.addAll(SduiUtils.parseStringToComponents(it))
         else -> throw RuntimeException("Invalid query type: ${it::class.simpleName}")
       }
     }
+
     return SduiGridRow(areas, children)
   }
 }
@@ -56,10 +56,3 @@ data class SduiGridRow(
   val areas: String,
   val children: List<SduiComponent>
 )
-
-private fun componentFromString(str: String): SduiComponent {
-  return when(str) {
-    SHORTCUT_EMPTY -> SduiSizedBox.shrink()
-    else -> SduiMetadataField(str)
-  }
-}

@@ -40,16 +40,10 @@ class AFormState extends State<AForm> {
     return widget.child;
   }
 
-  void addController<T extends FieldController<dynamic>>(T fieldController) {
-    return _controller.addController(fieldController);
-  }
-
   ValueNotifier<List<String>> get $validationMessages => _controller.$validationMessages;
   void registerPanelValidationGlobalKey(GlobalKey key) {
     _controller.panelValidationGlobalKey = key;
   }
 
-  FieldController<dynamic>? getControllerByName(String name) {
-    return _controller.getController(name);
-  }
+  FormController get controller => _controller;
 }

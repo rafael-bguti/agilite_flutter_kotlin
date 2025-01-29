@@ -9,3 +9,8 @@ data class CrudListResponse(
   val groups: List<CrudListGroup>? = null,
   val selectedGroupIndex: Int? = null,
 )
+
+data class CrudEditResponse(
+  val data: Map<String, Any?>,
+  val editable: Boolean = true,
+)

@@ -103,6 +103,7 @@ class _ACrudState extends State<ACrud> {
       final body = await _loadFormBody();
       final saved = await ASideDialog.showBottom(
         builder: (context) => AEditCrud(
+          taskName: widget.taskName,
           descr: widget.descr,
           id: id,
           formBody: body,

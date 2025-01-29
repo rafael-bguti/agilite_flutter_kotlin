@@ -18,6 +18,7 @@ class SduiMetadataField extends SduiWidget<SduiMetadataFieldModel> {
       hintText: model.hintText,
       helperText: model.helperText,
       enabled: model.enabled,
+      mod: model.mod,
     );
   }
 }
@@ -29,6 +30,7 @@ class SduiMetadataFieldModel extends SduiModel {
   final String? hintText;
   final String? helperText;
   final bool? enabled;
+  final String? mod;
 
   SduiMetadataFieldModel({
     required this.name,
@@ -36,6 +38,7 @@ class SduiMetadataFieldModel extends SduiModel {
     this.hintText,
     this.helperText,
     this.enabled,
+    this.mod,
     super.id,
   });
 

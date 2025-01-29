@@ -17,7 +17,7 @@ mixin FieldControllerCreatorMixin {
       onControllerCreated?.call(result);
       return result;
     } else {
-      final mappedController = formState.getControllerByName(name!);
+      final mappedController = formState.controller.getController(name!);
       if (mappedController != null) {
         if (mappedController is T) {
           return mappedController;
@@ -27,7 +27,7 @@ mixin FieldControllerCreatorMixin {
       }
 
       final result = _buildNewController(controllerBuilderWhenNull);
-      formState.addController(result);
+      formState.controller.addController(result);
       onControllerCreated?.call(result);
       return result;
     }

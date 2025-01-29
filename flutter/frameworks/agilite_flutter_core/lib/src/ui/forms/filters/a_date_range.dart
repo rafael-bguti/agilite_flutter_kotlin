@@ -108,8 +108,8 @@ class _ADateRangeState extends State<ADateRange> {
     }
 
     if (formState != null) {
-      (formState?.getControllerByName(widget.nameIni) as DateController?)?.value = initialDate;
-      (formState?.getControllerByName(widget.nameEnd) as DateController?)?.value = finalDate;
+      (formState?.controller?.getController(widget.nameIni) as DateController?)?.value = initialDate;
+      (formState?.controller?.getController(widget.nameEnd) as DateController?)?.value = finalDate;
     }
     widget.onChanged?.call(initialDate, finalDate);
   }

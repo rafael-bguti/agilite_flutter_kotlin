@@ -16,7 +16,7 @@ private const val CLI_FOR_TRA_FILTER = "cliForTraFilter"
 @Component
 class Cgs1080CrudService(
   crudRepository: AgiliteCrudRepository
-) : DefaultSduiCrudService<Cgs80>(crudRepository) {
+) : DefaultSduiCrudService(crudRepository) {
   override fun createSduiComponent(request: SduiRequest): SduiComponent {
     val crud = super.createSduiComponent(request) as SduiCrud
 
@@ -36,14 +36,11 @@ class Cgs1080CrudService(
         )
       )
     )
+
     crud.formBody = createFormBody()
-
-
-
     return crud
   }
 
-  //TODO Quadno as opções forem fixas utilizar o combo ao inves do autocomplete
   private fun createFormBody(): SduiComponent {
     return SduiGrid.createByQuery(
       "4,8|cgs80codigo,cgs80nome",
@@ -67,15 +64,12 @@ class Cgs1080CrudService(
           ),
         )
       ),
-
       SduiDivider("Contatos"),
-      "4,4,4|cgs80email,cgs80telefone,cgs80celular",
-
+      "4,4,4|cgs80email,cgs80telefone(mod:$MOD_FONE),cgs80celular(mod:$MOD_FONE)",
       SduiDivider("Endereço"),
-      "3-3-5,9-9-7|cgs80cep,cgs80endereco",
+      "3-3-5,9-9-7|cgs80cep(mod:$MOD_CEP),cgs80endereco",
       "3-3-4,5-5-4,4|cgs80numero,cgs80bairro,cgs80complemento",
-      "3-3-4,5-5-4,4|cgs80uf,cgs80municipio,$SHORTCUT_EMPTY",
-
+      "3-3-4,5-5-4,4|cgs80uf(mod:$MOD_UF),cgs80municipio,$SDUI_EMPTY",
       SduiDivider("Observações"),
       "12|cgs80obs"
     )
