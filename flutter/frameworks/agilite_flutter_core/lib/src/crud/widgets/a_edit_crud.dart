@@ -48,6 +48,7 @@ class _AEditCrudState extends State<AEditCrud> {
             ),
             child: AForm(
               controller.formController,
+              value: state is CrudEditEditingState ? state.data : null,
               child: widget.formBody,
             ),
           );

@@ -22,7 +22,6 @@ class CrudEditController extends ViewController<CrudEditState> {
     if (id == null) {
     } else {
       final response = await _repository.edit(taskName, id!);
-      formController.value = response.data;
       state = CrudEditEditingState(response.data, response.editable);
     }
   }

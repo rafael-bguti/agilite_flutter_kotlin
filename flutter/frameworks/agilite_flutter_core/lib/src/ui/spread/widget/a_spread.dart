@@ -39,7 +39,7 @@ class ASpread extends StatefulWidget {
 
   final String? labelTextToValidationMessage;
 
-  final List<Map<String, dynamic>>? intialData;
+  final List<Map<String, dynamic>>? value;
 
   const ASpread({
     required this.columns,
@@ -61,7 +61,7 @@ class ASpread extends StatefulWidget {
     this.labelTextToValidationMessage,
     this.rowWrapperBuilder,
     this.showSelectedColumn,
-    this.intialData,
+    this.value,
     super.key,
   });
 
@@ -95,6 +95,15 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
 
     for (var column in spreadController.columns) {
       column.spreadController = spreadController;
+    }
+  }
+
+  @override
+  void didUpdateWidget(ASpread oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.value != widget.value) {
+      spreadController.fillFromList(widget.value ?? []);
     }
   }
 
@@ -329,7 +338,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
     spreadController.onCellStopEdit = widget.onCellStopEdit;
     spreadController.labelTextToValidationMessage = widget.labelTextToValidationMessage;
     spreadController.showSelectColumn = widget.showSelectedColumn ?? true;
-    if (widget.intialData != null) spreadController.fillFromList(widget.intialData!);
   }
 
   Widget _buildSelectedPanel(BuildContext context, SpreadController controller, Widget selectPanelWidget) {
