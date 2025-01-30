@@ -43,7 +43,7 @@ class AuthenticationFilter(
         return
       }
 
-      if(userDetails.token != userToken){
+      if (userDetails.token != userToken) {
         sendError(HttpStatus.UNAUTHORIZED.value(), TOKEN_INVALID_ERROR_MESSAGE, request, response)
         return
       }
@@ -61,7 +61,11 @@ class AuthenticationFilter(
       return
     }
 
-    filterChain.doFilter(request, response)
+    try {
+      filterChain.doFilter(request, response)
+    } finally {
+      UserContext.clear()
+    }
   }
 
   private fun sendError(status: Int, cause: String, request: HttpServletRequest, response: HttpServletResponse) {

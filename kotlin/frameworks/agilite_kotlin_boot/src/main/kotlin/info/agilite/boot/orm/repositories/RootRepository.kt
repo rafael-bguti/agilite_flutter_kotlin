@@ -210,7 +210,7 @@ abstract class RootRepository {
 
 
   fun setTenant(tenant: String) {
-    jdbc.updateIgnoreTransaction("SET search_path TO $tenant", emptyMap<String, Any>())
+    jdbc.setTenant(tenant)
   }
 
   /***

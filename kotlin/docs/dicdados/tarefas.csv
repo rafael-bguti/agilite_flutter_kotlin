@@ -10,4 +10,4 @@ SRF2030,Pro,Importar documentos
 SRF2050,Pro,Gerar XML NFSe Prefeitura
 SRF2051,Pro,Processar retorno NFSe Prefeitura
 SRF2060,Pro,Enviar e-mail dos documentos
-SRF5001,Bac,API
+SRF5001,Bac,"API - Utilizado para consultar dos sistemas externos (MultiNFe, TFS4, etc)"

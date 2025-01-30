@@ -8,4 +8,4 @@ SRF2030 - Processo - Importar documentos
 SRF2050 - Processo - Gerar XML NFSe Prefeitura
 SRF2051 - Processo - Processar retorno NFSe Prefeitura
 SRF2060 - Processo - Enviar e-mail dos documentos
-SRF5001 - Apenas Backend - API
+SRF5001 - Apenas Backend - API - Utilizado para consultar dos sistemas externos (MultiNFe, TFS4, etc)
