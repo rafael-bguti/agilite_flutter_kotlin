@@ -232,31 +232,28 @@ const val N_GDF10_LINK_PDF = "gdf10linkPdf";
 const val N_GDF10_REG_ORIGEM = "gdf10regOrigem";
 
 val GDF10ID = FieldMetadata("gdf10id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val GDF10EMPRESA = FieldMetadata("gdf10empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val GDF10DTEMISS = FieldMetadata("gdf10dtEmiss", 2, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val GDF10HREMISS = FieldMetadata("gdf10hrEmiss", 3, "Hora de emissão", FieldTypeMetadata.time, 6.0, true, null, null, null, null, null, false, false, false);
-val GDF10SISTEMA = FieldMetadata("gdf10sistema", 4, "Sistema", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "NFSe")), null, null, null, false, false, false);
-val GDF10TIPODOC = FieldMetadata("gdf10tipoDoc", 5, "Tipo de documento", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "Documento"),FieldOptionMetadata(2, "Cancelamento"),FieldOptionMetadata(3, "Carta de correção"),FieldOptionMetadata(4, "Inutilização"),FieldOptionMetadata(5, "Evento")), null, null, null, false, false, false);
-val GDF10DOCUMENTO = FieldMetadata("gdf10documento", 6, "XML armazenado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val GDF10STATUSPROC = FieldMetadata("gdf10statusProc", 7, "Status do processamento", FieldTypeMetadata.int, 3.0, true, null, listOf(FieldOptionMetadata(0, "Aguardando proc assíncrono"),FieldOptionMetadata(10, "Falha"),FieldOptionMetadata(20, "Erro"),FieldOptionMetadata(30, "Rejeitado"),FieldOptionMetadata(100, "Aprovado")), null, null, null, false, false, false);
-val GDF10PROTOCOLO = FieldMetadata("gdf10protocolo", 8, "Número protocolo", FieldTypeMetadata.string, 40.0, true, null, null, null, null, null, false, false, false);
-val GDF10CSTAT = FieldMetadata("gdf10cStat", 9, "Código de retorno", FieldTypeMetadata.string, 20.0, true, null, null, null, null, null, false, false, false);
-val GDF10XMOTIVO = FieldMetadata("gdf10xMotivo", 10, "Descrição do retorno", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
-val GDF10UIDTRACK = FieldMetadata("gdf10uidTrack", 11, "UID do Tracker armazenado externamente", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val GDF10LINKPDF = FieldMetadata("gdf10linkPdf", 12, "Link para o PDF gerado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val GDF10REGORIGEM = FieldMetadata("gdf10regOrigem", 13, "Origem do registro", FieldTypeMetadata.json, 0.0, true, null, null, null, null, null, false, false, false);
+val GDF10EMPRESA = FieldMetadata("gdf10empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10DTEMISS = FieldMetadata("gdf10dtEmiss", 2, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10HREMISS = FieldMetadata("gdf10hrEmiss", 3, "Hora de emissão", FieldTypeMetadata.time, 6.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10SISTEMA = FieldMetadata("gdf10sistema", 4, "Sistema", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "NFSe")), null, null, null, false, false, false, null);
+val GDF10TIPODOC = FieldMetadata("gdf10tipoDoc", 5, "Tipo de documento", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "Documento"),FieldOptionMetadata(2, "Cancelamento"),FieldOptionMetadata(3, "Carta de correção"),FieldOptionMetadata(4, "Inutilização"),FieldOptionMetadata(5, "Evento")), null, null, null, false, false, false, null);
+val GDF10DOCUMENTO = FieldMetadata("gdf10documento", 6, "XML armazenado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val GDF10STATUSPROC = FieldMetadata("gdf10statusProc", 7, "Status do processamento", FieldTypeMetadata.int, 3.0, true, null, listOf(FieldOptionMetadata(0, "Aguardando proc assíncrono"),FieldOptionMetadata(10, "Falha"),FieldOptionMetadata(20, "Erro"),FieldOptionMetadata(30, "Rejeitado"),FieldOptionMetadata(100, "Aprovado")), null, null, null, false, false, false, null);
+val GDF10PROTOCOLO = FieldMetadata("gdf10protocolo", 8, "Número protocolo", FieldTypeMetadata.string, 40.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10CSTAT = FieldMetadata("gdf10cStat", 9, "Código de retorno", FieldTypeMetadata.string, 20.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10XMOTIVO = FieldMetadata("gdf10xMotivo", 10, "Descrição do retorno", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false, null);
+val GDF10UIDTRACK = FieldMetadata("gdf10uidTrack", 11, "UID do Tracker armazenado externamente", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val GDF10LINKPDF = FieldMetadata("gdf10linkPdf", 12, "Link para o PDF gerado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val GDF10REGORIGEM = FieldMetadata("gdf10regOrigem", 13, "Origem do registro", FieldTypeMetadata.json, 0.0, true, null, null, null, null, null, false, false, false, null);
  
 val GDF10_METADATA = EntityMetadata(
   name = "Gdf10",
   descr = "Transmissões efetuadas",
-
   fields = listOf(
     GDF10ID,GDF10EMPRESA,GDF10DTEMISS,GDF10HREMISS,GDF10SISTEMA,GDF10TIPODOC,GDF10DOCUMENTO,GDF10STATUSPROC,GDF10PROTOCOLO,GDF10CSTAT,GDF10XMOTIVO,GDF10UIDTRACK,GDF10LINKPDF,GDF10REGORIGEM,
   ),
-
   keys = listOf(
   ),
-
   oneToMany = mapOf(
   )
 )

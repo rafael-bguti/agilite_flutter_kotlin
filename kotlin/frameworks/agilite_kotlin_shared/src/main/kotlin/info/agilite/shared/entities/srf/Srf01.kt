@@ -525,49 +525,46 @@ const val N_SRF011S = "srf011s";
 const val N_SRF012S = "srf012s";
 
 val SRF01ID = FieldMetadata("srf01id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF01EMPRESA = FieldMetadata("srf01empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF01NATUREZA = FieldMetadata("srf01natureza", 2, "Natureza da Operação", FieldTypeMetadata.fk, 10.0, true, "Cgs18", null, null, null, null, false, false, false);
-val SRF01TIPO = FieldMetadata("srf01tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Orçamento"),FieldOptionMetadata(1, "Pedido"),FieldOptionMetadata(2, "Nota Fiscal Produto"),FieldOptionMetadata(3, "Nota Fiscal Serviço")), null, null, null, false, false, false);
-val SRF01ES = FieldMetadata("srf01es", 4, "Entrada/Saida", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Entrada"),FieldOptionMetadata(1, "Saída")), null, null, null, false, false, false);
-val SRF01EP = FieldMetadata("srf01ep", 5, "Emissão própria", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false);
-val SRF01NUMERO = FieldMetadata("srf01numero", 6, "Número do documento", FieldTypeMetadata.int, 9.0, true, null, null, null, null, null, true, true, false);
-val SRF01SERIE = FieldMetadata("srf01serie", 7, "Série", FieldTypeMetadata.int, 3.0, false, null, null, null, null, null, false, false, false);
-val SRF01DTEMISS = FieldMetadata("srf01dtEmiss", 8, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, true, true, false);
-val SRF01HREMISS = FieldMetadata("srf01hrEmiss", 9, "Hora de emissão", FieldTypeMetadata.time, 4.0, false, null, null, null, null, null, false, false, false);
-val SRF01ENTIDADE = FieldMetadata("srf01entidade", 10, "Cliente ou Fornecedor", FieldTypeMetadata.fk, 10.0, true, "Cgs80", null, null, null, null, true, true, false);
-val SRF01NOME = FieldMetadata("srf01nome", 11, "Nome ou Razão Social", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, true, true, true);
-val SRF01NI = FieldMetadata("srf01ni", 12, "CPF/CNPJ", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, true);
-val SRF01IE = FieldMetadata("srf01ie", 13, "Inscrição estadual", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false);
-val SRF01IM = FieldMetadata("srf01im", 14, "Inscrição municipal", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false);
-val SRF01CEP = FieldMetadata("srf01cep", 15, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false);
-val SRF01ENDERECO = FieldMetadata("srf01endereco", 16, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false);
-val SRF01BAIRRO = FieldMetadata("srf01bairro", 17, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val SRF01ENDNUMERO = FieldMetadata("srf01endNumero", 18, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val SRF01COMPLEMENTO = FieldMetadata("srf01complemento", 19, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val SRF01UF = FieldMetadata("srf01uf", 20, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false);
-val SRF01MUNICIPIO = FieldMetadata("srf01municipio", 21, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false);
-val SRF01DTCANC = FieldMetadata("srf01dtCanc", 22, "Data de cancelamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, true, true, false);
-val SRF01VLRTOTAL = FieldMetadata("srf01vlrTotal", 23, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, true, true, false);
-val SRF01VLRISS = FieldMetadata("srf01vlrIss", 24, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SRF01DFEAPROV = FieldMetadata("srf01dfeAprov", 25, "Registro de DFE aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false);
-val SRF01DFECANCAPROV = FieldMetadata("srf01dfeCancAprov", 26, "Registro de DFE de Cancelamento Aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false);
-val SRF01INTEGRACAOSCF = FieldMetadata("srf01integracaoScf", 27, "Integração com o SCF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
-val SRF01INTEGRACAOGDF = FieldMetadata("srf01integracaoGdf", 28, "Integração com o GDF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
-val SRF01OBS = FieldMetadata("srf01obs", 29, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val SRF01DTEMAIL = FieldMetadata("srf01dtEmail", 30, "Data do envio do e-mail", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
+val SRF01EMPRESA = FieldMetadata("srf01empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SRF01NATUREZA = FieldMetadata("srf01natureza", 2, "Natureza da Operação", FieldTypeMetadata.fk, 10.0, true, "Cgs18", null, null, null, null, false, false, false, null);
+val SRF01TIPO = FieldMetadata("srf01tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Orçamento"),FieldOptionMetadata(1, "Pedido"),FieldOptionMetadata(2, "Nota Fiscal Produto"),FieldOptionMetadata(3, "Nota Fiscal Serviço")), null, null, null, false, false, false, null);
+val SRF01ES = FieldMetadata("srf01es", 4, "Entrada/Saida", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Entrada"),FieldOptionMetadata(1, "Saída")), null, null, null, false, false, false, null);
+val SRF01EP = FieldMetadata("srf01ep", 5, "Emissão própria", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false, null);
+val SRF01NUMERO = FieldMetadata("srf01numero", 6, "Número do documento", FieldTypeMetadata.int, 9.0, true, null, null, null, null, null, true, true, false, null);
+val SRF01SERIE = FieldMetadata("srf01serie", 7, "Série", FieldTypeMetadata.int, 3.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01DTEMISS = FieldMetadata("srf01dtEmiss", 8, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, true, true, false, null);
+val SRF01HREMISS = FieldMetadata("srf01hrEmiss", 9, "Hora de emissão", FieldTypeMetadata.time, 4.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01ENTIDADE = FieldMetadata("srf01entidade", 10, "Cliente ou Fornecedor", FieldTypeMetadata.fk, 10.0, true, "Cgs80", null, null, null, null, true, true, false, null);
+val SRF01NOME = FieldMetadata("srf01nome", 11, "Nome ou Razão Social", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, true, true, true, null);
+val SRF01NI = FieldMetadata("srf01ni", 12, "CPF/CNPJ", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, true, null);
+val SRF01IE = FieldMetadata("srf01ie", 13, "Inscrição estadual", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01IM = FieldMetadata("srf01im", 14, "Inscrição municipal", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01CEP = FieldMetadata("srf01cep", 15, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01ENDERECO = FieldMetadata("srf01endereco", 16, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01BAIRRO = FieldMetadata("srf01bairro", 17, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01ENDNUMERO = FieldMetadata("srf01endNumero", 18, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01COMPLEMENTO = FieldMetadata("srf01complemento", 19, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01UF = FieldMetadata("srf01uf", 20, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01MUNICIPIO = FieldMetadata("srf01municipio", 21, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false, null);
+val SRF01DTCANC = FieldMetadata("srf01dtCanc", 22, "Data de cancelamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, true, true, false, null);
+val SRF01VLRTOTAL = FieldMetadata("srf01vlrTotal", 23, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, true, true, false, null);
+val SRF01VLRISS = FieldMetadata("srf01vlrIss", 24, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
+val SRF01DFEAPROV = FieldMetadata("srf01dfeAprov", 25, "Registro de DFE aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false, null);
+val SRF01DFECANCAPROV = FieldMetadata("srf01dfeCancAprov", 26, "Registro de DFE de Cancelamento Aprovado", FieldTypeMetadata.fk, 10.0, false, "Gdf10", null, null, null, null, false, false, false, null);
+val SRF01INTEGRACAOSCF = FieldMetadata("srf01integracaoScf", 27, "Integração com o SCF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false, null);
+val SRF01INTEGRACAOGDF = FieldMetadata("srf01integracaoGdf", 28, "Integração com o GDF", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false, null);
+val SRF01OBS = FieldMetadata("srf01obs", 29, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val SRF01DTEMAIL = FieldMetadata("srf01dtEmail", 30, "Data do envio do e-mail", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false, null);
  
 val SRF01_METADATA = EntityMetadata(
   name = "Srf01",
   descr = "Documentos Fiscais",
-
   fields = listOf(
     SRF01ID,SRF01EMPRESA,SRF01NATUREZA,SRF01TIPO,SRF01ES,SRF01EP,SRF01NUMERO,SRF01SERIE,SRF01DTEMISS,SRF01HREMISS,SRF01ENTIDADE,SRF01NOME,SRF01NI,SRF01IE,SRF01IM,SRF01CEP,SRF01ENDERECO,SRF01BAIRRO,SRF01ENDNUMERO,SRF01COMPLEMENTO,SRF01UF,SRF01MUNICIPIO,SRF01DTCANC,SRF01VLRTOTAL,SRF01VLRISS,SRF01DFEAPROV,SRF01DFECANCAPROV,SRF01INTEGRACAOSCF,SRF01INTEGRACAOGDF,SRF01OBS,SRF01DTEMAIL,
   ),
-
   keys = listOf(
     KeyMetadata("srf01_uk", KeyMetadataType.uk, "srf01empresa, srf01natureza, srf01numero, srf01serie"),
   ),
-
   oneToMany = mapOf(
     "srf011s" to OneToManyMetadata(31, Srf011::class.java, "srf011doc"),
     "srf012s" to OneToManyMetadata(32, Srf012::class.java, "srf012doc"),

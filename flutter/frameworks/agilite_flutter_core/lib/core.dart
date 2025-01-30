@@ -22,6 +22,7 @@ export './src/extensions/list_extensions.dart';
 export './src/extensions/map_extensions.dart';
 export './src/extensions/observable_extensions.dart';
 export './src/extensions/string_extensions.dart';
+export './src/extensions/string_formatter_extension.dart';
 export './src/http/http_exceptions.dart';
 export './src/http/http_provider.dart';
 export './src/http/http_response.dart';

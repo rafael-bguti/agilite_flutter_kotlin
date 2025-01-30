@@ -72,7 +72,8 @@ class MetadataService {
     options = field.options,
     autocompleteColumnId = autocompleteColumnId,
     autocompleteColumnsView = autocompleteColumnsView,
-    validationQuery = field.validationQuery
+    validationQuery = field.validationQuery,
+    mod = field.mod
   )
 
   private fun tryLoadEntityByName(name: String): EntityMetadata? {

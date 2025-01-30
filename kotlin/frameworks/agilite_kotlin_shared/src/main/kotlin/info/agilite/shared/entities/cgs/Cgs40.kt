@@ -118,24 +118,21 @@ const val N_CGS40_SUP = "cgs40sup";
 const val N_CGS40_GRUPO = "cgs40grupo";
 
 val CGS40ID = FieldMetadata("cgs40id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS40EMPRESA = FieldMetadata("cgs40empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS40DESCR = FieldMetadata("cgs40descr", 2, "Descrição", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
-val CGS40TIPO = FieldMetadata("cgs40tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receita"),FieldOptionMetadata(1, "Despesas")), null, null, null, false, false, false);
-val CGS40SUP = FieldMetadata("cgs40sup", 4, "Categoria Superior", FieldTypeMetadata.fk, 10.0, false, "Cgs40", null, null, null, null, false, false, false);
-val CGS40GRUPO = FieldMetadata("cgs40grupo", 5, "É grupo?", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false);
+val CGS40EMPRESA = FieldMetadata("cgs40empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS40DESCR = FieldMetadata("cgs40descr", 2, "Descrição", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true, null);
+val CGS40TIPO = FieldMetadata("cgs40tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receita"),FieldOptionMetadata(1, "Despesas")), null, null, null, false, false, false, null);
+val CGS40SUP = FieldMetadata("cgs40sup", 4, "Categoria Superior", FieldTypeMetadata.fk, 10.0, false, "Cgs40", null, null, null, null, false, false, false, null);
+val CGS40GRUPO = FieldMetadata("cgs40grupo", 5, "É grupo?", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false, null);
  
 val CGS40_METADATA = EntityMetadata(
   name = "Cgs40",
   descr = "Categorias financeiras",
-
   fields = listOf(
     CGS40ID,CGS40EMPRESA,CGS40DESCR,CGS40TIPO,CGS40SUP,CGS40GRUPO,
   ),
-
   keys = listOf(
     KeyMetadata("cgs40_uk", KeyMetadataType.uk, "cgs40empresa, cgs40descr"),
   ),
-
   oneToMany = mapOf(
   )
 )

@@ -188,29 +188,26 @@ const val N_CGS38_API_CERT = "cgs38apiCert";
 const val N_CGS38_API_KEY = "cgs38apiKey";
 
 val CGS38ID = FieldMetadata("cgs38id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS38EMPRESA = FieldMetadata("cgs38empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS38NOME = FieldMetadata("cgs38nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
-val CGS38TIPO = FieldMetadata("cgs38tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Recebimento"),FieldOptionMetadata(1, "Pagamento")), null, null, null, true, true, false);
-val CGS38GERAR = FieldMetadata("cgs38gerar", 4, "Geração do documento financeiro", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(1, "Gerar em aberto"),FieldOptionMetadata(2, "Gerar quitado")), null, null, null, true, true, false);
-val CGS38FORMA = FieldMetadata("cgs38forma", 5, "Forma", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(0, "Dinheiro"),FieldOptionMetadata(1, "Boleto")), null, null, null, true, true, false);
-val CGS38CONTA = FieldMetadata("cgs38conta", 6, "Conta corrente para o lançamento financeiro", FieldTypeMetadata.fk, 10.0, false, "Cgs45", null, null, null, null, false, false, false);
-val CGS38APICLIENTID = FieldMetadata("cgs38apiClientId", 7, "Client ID da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS38APICLIENTSECRET = FieldMetadata("cgs38apiClientSecret", 8, "Client Secret da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS38APICERT = FieldMetadata("cgs38apiCert", 9, "Dados do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val CGS38APIKEY = FieldMetadata("cgs38apiKey", 10, "Dados da key do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val CGS38EMPRESA = FieldMetadata("cgs38empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS38NOME = FieldMetadata("cgs38nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true, null);
+val CGS38TIPO = FieldMetadata("cgs38tipo", 3, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Recebimento"),FieldOptionMetadata(1, "Pagamento")), null, null, null, true, true, false, null);
+val CGS38GERAR = FieldMetadata("cgs38gerar", 4, "Geração do documento financeiro", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(1, "Gerar em aberto"),FieldOptionMetadata(2, "Gerar quitado")), null, null, null, true, true, false, null);
+val CGS38FORMA = FieldMetadata("cgs38forma", 5, "Forma", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(0, "Dinheiro"),FieldOptionMetadata(1, "Boleto")), null, null, null, true, true, false, null);
+val CGS38CONTA = FieldMetadata("cgs38conta", 6, "Conta corrente para o lançamento financeiro", FieldTypeMetadata.fk, 10.0, false, "Cgs45", null, null, null, null, false, false, false, null);
+val CGS38APICLIENTID = FieldMetadata("cgs38apiClientId", 7, "Client ID da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS38APICLIENTSECRET = FieldMetadata("cgs38apiClientSecret", 8, "Client Secret da API de pagamento", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS38APICERT = FieldMetadata("cgs38apiCert", 9, "Dados do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val CGS38APIKEY = FieldMetadata("cgs38apiKey", 10, "Dados da key do certificado", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
  
 val CGS38_METADATA = EntityMetadata(
   name = "Cgs38",
   descr = "Forma de Pagamento/Recebimento",
-
   fields = listOf(
     CGS38ID,CGS38EMPRESA,CGS38NOME,CGS38TIPO,CGS38GERAR,CGS38FORMA,CGS38CONTA,CGS38APICLIENTID,CGS38APICLIENTSECRET,CGS38APICERT,CGS38APIKEY,
   ),
-
   keys = listOf(
     KeyMetadata("cgs38_uk", KeyMetadataType.uk, "cgs38empresa, cgs38nome"),
   ),
-
   oneToMany = mapOf(
   )
 )

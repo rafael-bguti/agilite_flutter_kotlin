@@ -190,29 +190,26 @@ const val N_CGS18_ALQ_ISS = "cgs18alqIss";
 const val N_CGS18_MODELO_EMAIL = "cgs18modeloEmail";
 
 val CGS18ID = FieldMetadata("cgs18id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS18EMPRESA = FieldMetadata("cgs18empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS18CODIGO = FieldMetadata("cgs18codigo", 2, "Código", FieldTypeMetadata.string, 10.0, true, null, null, null, null, null, true, true, true);
-val CGS18NOME = FieldMetadata("cgs18nome", 3, "Nome", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, true, true, true);
-val CGS18TIPO = FieldMetadata("cgs18tipo", 4, "Tipo de Operação", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Orçamento"),FieldOptionMetadata(1, "Pedido"),FieldOptionMetadata(2, "Nota Fiscal Produto"),FieldOptionMetadata(3, "Nota Fiscal Serviço")), null, null, null, false, false, false);
-val CGS18ES = FieldMetadata("cgs18es", 5, "Entrada/Saida", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Entrada"),FieldOptionMetadata(1, "Saída")), null, null, null, false, false, false);
-val CGS18SCF = FieldMetadata("cgs18scf", 6, "Quando gerar o SCF", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Não gerar"),FieldOptionMetadata(1, "Ao criar o documeto"),FieldOptionMetadata(2, "Na aprovacao fiscal")), null, null, null, false, false, false);
-val CGS18SERIE = FieldMetadata("cgs18serie", 7, "Série", FieldTypeMetadata.int, 3.0, false, null, null, null, null, null, false, false, false);
-val CGS18EMITIRDOC = FieldMetadata("cgs18emitirDoc", 8, "Emitir documento fiscal", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false);
-val CGS18ALQISS = FieldMetadata("cgs18alqIss", 9, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false);
-val CGS18MODELOEMAIL = FieldMetadata("cgs18modeloEmail", 10, "Modelo de e-mail", FieldTypeMetadata.fk, 10.0, false, "Cgs15", null, null, null, null, false, false, false);
+val CGS18EMPRESA = FieldMetadata("cgs18empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS18CODIGO = FieldMetadata("cgs18codigo", 2, "Código", FieldTypeMetadata.string, 10.0, true, null, null, null, null, null, true, true, true, null);
+val CGS18NOME = FieldMetadata("cgs18nome", 3, "Nome", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, true, true, true, null);
+val CGS18TIPO = FieldMetadata("cgs18tipo", 4, "Tipo de Operação", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Orçamento"),FieldOptionMetadata(1, "Pedido"),FieldOptionMetadata(2, "Nota Fiscal Produto"),FieldOptionMetadata(3, "Nota Fiscal Serviço")), null, null, null, false, false, false, null);
+val CGS18ES = FieldMetadata("cgs18es", 5, "Entrada/Saida", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Entrada"),FieldOptionMetadata(1, "Saída")), null, null, null, false, false, false, null);
+val CGS18SCF = FieldMetadata("cgs18scf", 6, "Quando gerar o SCF", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Não gerar"),FieldOptionMetadata(1, "Ao criar o documeto"),FieldOptionMetadata(2, "Na aprovacao fiscal")), null, null, null, false, false, false, null);
+val CGS18SERIE = FieldMetadata("cgs18serie", 7, "Série", FieldTypeMetadata.int, 3.0, false, null, null, null, null, null, false, false, false, null);
+val CGS18EMITIRDOC = FieldMetadata("cgs18emitirDoc", 8, "Emitir documento fiscal", FieldTypeMetadata.boolean, 1.0, true, null, null, null, null, null, false, false, false, null);
+val CGS18ALQISS = FieldMetadata("cgs18alqIss", 9, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false, null);
+val CGS18MODELOEMAIL = FieldMetadata("cgs18modeloEmail", 10, "Modelo de e-mail", FieldTypeMetadata.fk, 10.0, false, "Cgs15", null, null, null, null, false, false, false, null);
  
 val CGS18_METADATA = EntityMetadata(
   name = "Cgs18",
   descr = "Natureza da Operação",
-
   fields = listOf(
     CGS18ID,CGS18EMPRESA,CGS18CODIGO,CGS18NOME,CGS18TIPO,CGS18ES,CGS18SCF,CGS18SERIE,CGS18EMITIRDOC,CGS18ALQISS,CGS18MODELOEMAIL,
   ),
-
   keys = listOf(
     KeyMetadata("cgs18_uk", KeyMetadataType.uk, "cgs18empresa, cgs18codigo"),
   ),
-
   oneToMany = mapOf(
   )
 )

@@ -63,20 +63,17 @@ class Cas29() : AbstractEntity(2) {
 const val N_CAS29_NOME = "cas29nome";
 
 val CAS29ID = FieldMetadata("cas29id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CAS29NOME = FieldMetadata("cas29nome", 1, "Nome", FieldTypeMetadata.string, 50.0, true, null, null, null, null, null, false, false, false);
+val CAS29NOME = FieldMetadata("cas29nome", 1, "Nome", FieldTypeMetadata.string, 50.0, true, null, null, null, null, null, false, false, false, null);
  
 val CAS29_METADATA = EntityMetadata(
   name = "Cas29",
   descr = "Credencial",
-
   fields = listOf(
     CAS29ID,CAS29NOME,
   ),
-
   keys = listOf(
     KeyMetadata("cas29_uk", KeyMetadataType.uk, "cas29nome"),
   ),
-
   oneToMany = mapOf(
   )
 )

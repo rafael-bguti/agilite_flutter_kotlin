@@ -114,24 +114,21 @@ const val N_CAS30_CREDENCIAL = "cas30credencial";
 const val N_CAS30_INTERNO = "cas30interno";
 
 val CAS30ID = FieldMetadata("cas30id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CAS30AUTENTICACAO = FieldMetadata("cas30autenticacao", 1, "Autenticação (Rot10id)", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CAS30NOME = FieldMetadata("cas30nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, false, false, false);
-val CAS30EMPATIVA = FieldMetadata("cas30empAtiva", 3, "Empresa ativa", FieldTypeMetadata.fk, 10.0, true, "Cas65", null, null, null, null, false, false, false);
-val CAS30CREDENCIAL = FieldMetadata("cas30credencial", 4, "Credencial", FieldTypeMetadata.fk, 10.0, true, "Cas29", null, null, null, null, false, false, false);
-val CAS30INTERNO = FieldMetadata("cas30interno", 5, "Usuário interno do sistema, não é exibido para os clientes", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false);
+val CAS30AUTENTICACAO = FieldMetadata("cas30autenticacao", 1, "Autenticação (Rot10id)", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CAS30NOME = FieldMetadata("cas30nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, false, false, false, null);
+val CAS30EMPATIVA = FieldMetadata("cas30empAtiva", 3, "Empresa ativa", FieldTypeMetadata.fk, 10.0, true, "Cas65", null, null, null, null, false, false, false, null);
+val CAS30CREDENCIAL = FieldMetadata("cas30credencial", 4, "Credencial", FieldTypeMetadata.fk, 10.0, true, "Cas29", null, null, null, null, false, false, false, null);
+val CAS30INTERNO = FieldMetadata("cas30interno", 5, "Usuário interno do sistema, não é exibido para os clientes", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false, null);
  
 val CAS30_METADATA = EntityMetadata(
   name = "Cas30",
   descr = "Usuários",
-
   fields = listOf(
     CAS30ID,CAS30AUTENTICACAO,CAS30NOME,CAS30EMPATIVA,CAS30CREDENCIAL,CAS30INTERNO,
   ),
-
   keys = listOf(
     KeyMetadata("cas30_uk", KeyMetadataType.uk, "cas30autenticacao"),
   ),
-
   oneToMany = mapOf(
   )
 )

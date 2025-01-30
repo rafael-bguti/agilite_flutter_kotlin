@@ -1,6 +1,7 @@
 Tarefas --------------------------------
 ROT4001 - Apenas FrontEnd - Splash Screen - Frontend - Utilizada para fazer o redirecionamento inicial do cliente
 CAS2010 - Processo - Login
+CGS1080 - Cadastro - Entidade
 SCF2010 - Processo - Enviar boletos ao Banco
 SCF2011 - Processo - Processar retorno de boletos
 SCF5001 - Apenas Backend - API

@@ -91,22 +91,19 @@ const val N_CAS90_DESCR = "cas90descr";
 const val N_CAS90_GRUPO = "cas90grupo";
 
 val CAS90ID = FieldMetadata("cas90id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CAS90CODIGO = FieldMetadata("cas90codigo", 1, "Código", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, true, true, true);
-val CAS90DESCR = FieldMetadata("cas90descr", 2, "Descrição do campo", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, true, true, true);
-val CAS90GRUPO = FieldMetadata("cas90grupo", 3, "Grupo", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "Códigos de serviço"),FieldOptionMetadata(2, "CNAE")), null, null, null, false, false, false);
+val CAS90CODIGO = FieldMetadata("cas90codigo", 1, "Código", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, true, true, true, null);
+val CAS90DESCR = FieldMetadata("cas90descr", 2, "Descrição do campo", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, true, true, true, null);
+val CAS90GRUPO = FieldMetadata("cas90grupo", 3, "Grupo", FieldTypeMetadata.int, 2.0, true, null, listOf(FieldOptionMetadata(1, "Códigos de serviço"),FieldOptionMetadata(2, "CNAE")), null, null, null, false, false, false, null);
  
 val CAS90_METADATA = EntityMetadata(
   name = "Cas90",
   descr = "Repositório de dados",
-
   fields = listOf(
     CAS90ID,CAS90CODIGO,CAS90DESCR,CAS90GRUPO,
   ),
-
   keys = listOf(
     KeyMetadata("cas90_uk", KeyMetadataType.uk, "cas90codigo, cas90grupo"),
   ),
-
   oneToMany = mapOf(
   )
 )

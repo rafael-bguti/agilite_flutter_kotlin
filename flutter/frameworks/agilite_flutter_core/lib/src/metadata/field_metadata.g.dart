@@ -21,6 +21,7 @@ FieldMetadata _$FieldMetadataFromJson(Map<String, dynamic> json) =>
       helperText: json['helperText'] as String?,
       autocompleteColumnId: json['autocompleteColumnId'] as String?,
       autocompleteColumnsView: json['autocompleteColumnsView'] as String?,
+      mod: json['mod'] as String?,
     );
 
 Map<String, dynamic> _$FieldMetadataToJson(FieldMetadata instance) =>
@@ -36,6 +37,7 @@ Map<String, dynamic> _$FieldMetadataToJson(FieldMetadata instance) =>
       'options': instance.options,
       'autocompleteColumnId': instance.autocompleteColumnId,
       'autocompleteColumnsView': instance.autocompleteColumnsView,
+      'mod': instance.mod,
     };
 
 const _$FieldMetadataTypeEnumMap = {

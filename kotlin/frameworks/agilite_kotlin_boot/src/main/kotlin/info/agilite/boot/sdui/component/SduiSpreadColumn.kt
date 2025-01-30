@@ -9,6 +9,7 @@ class SduiSpreadColumnComponent(
   val type: String,
   val width: SduiColumnWidth? = null,
   val options: List<Option>? = null,
+  val mod: String?,
 )
 
 enum class SduiColumnWidthType {

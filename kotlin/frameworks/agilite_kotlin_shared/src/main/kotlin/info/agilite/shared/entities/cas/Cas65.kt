@@ -313,38 +313,35 @@ const val N_CAS65_MAIL_REPLY_TO = "cas65mailReplyTo";
 const val N_CAS65_MAIL_TLS = "cas65mailTLS";
 
 val CAS65ID = FieldMetadata("cas65id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CAS65CNPJ = FieldMetadata("cas65cnpj", 1, "Cnpj", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false);
-val CAS65IM = FieldMetadata("cas65im", 2, "Incrição Municipal", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, false, false, false);
-val CAS65NOME = FieldMetadata("cas65nome", 3, "Nome", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, false, false, false);
-val CAS65CNAE = FieldMetadata("cas65cnae", 4, "Código CNAE", FieldTypeMetadata.string, 10.0, false, null, null, null, null, null, false, false, false);
-val CAS65CEP = FieldMetadata("cas65cep", 5, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false);
-val CAS65ENDERECO = FieldMetadata("cas65endereco", 6, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false);
-val CAS65BAIRRO = FieldMetadata("cas65bairro", 7, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CAS65NUMERO = FieldMetadata("cas65numero", 8, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CAS65COMPLEMENTO = FieldMetadata("cas65complemento", 9, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CAS65UF = FieldMetadata("cas65uf", 10, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false);
-val CAS65MUNICIPIO = FieldMetadata("cas65municipio", 11, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false);
-val CAS65MAILHOST = FieldMetadata("cas65mailHost", 12, "Host do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILPORT = FieldMetadata("cas65mailPort", 13, "Porta do servidor de e-mail", FieldTypeMetadata.int, 5.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILUSER = FieldMetadata("cas65mailUser", 14, "Usuário do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILPASS = FieldMetadata("cas65mailPass", 15, "Senha do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILFROM = FieldMetadata("cas65mailFrom", 16, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILFROMNAME = FieldMetadata("cas65mailFromName", 17, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILREPLYTO = FieldMetadata("cas65mailReplyTo", 18, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CAS65MAILTLS = FieldMetadata("cas65mailTLS", 19, "Usar TLS", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false);
+val CAS65CNPJ = FieldMetadata("cas65cnpj", 1, "Cnpj", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false, null);
+val CAS65IM = FieldMetadata("cas65im", 2, "Incrição Municipal", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65NOME = FieldMetadata("cas65nome", 3, "Nome", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, false, false, false, null);
+val CAS65CNAE = FieldMetadata("cas65cnae", 4, "Código CNAE", FieldTypeMetadata.string, 10.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65CEP = FieldMetadata("cas65cep", 5, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65ENDERECO = FieldMetadata("cas65endereco", 6, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65BAIRRO = FieldMetadata("cas65bairro", 7, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65NUMERO = FieldMetadata("cas65numero", 8, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65COMPLEMENTO = FieldMetadata("cas65complemento", 9, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65UF = FieldMetadata("cas65uf", 10, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MUNICIPIO = FieldMetadata("cas65municipio", 11, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false, null);
+val CAS65MAILHOST = FieldMetadata("cas65mailHost", 12, "Host do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILPORT = FieldMetadata("cas65mailPort", 13, "Porta do servidor de e-mail", FieldTypeMetadata.int, 5.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILUSER = FieldMetadata("cas65mailUser", 14, "Usuário do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILPASS = FieldMetadata("cas65mailPass", 15, "Senha do servidor de e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILFROM = FieldMetadata("cas65mailFrom", 16, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILFROMNAME = FieldMetadata("cas65mailFromName", 17, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILREPLYTO = FieldMetadata("cas65mailReplyTo", 18, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CAS65MAILTLS = FieldMetadata("cas65mailTLS", 19, "Usar TLS", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false, null);
  
 val CAS65_METADATA = EntityMetadata(
   name = "Cas65",
   descr = "Empresa",
-
   fields = listOf(
     CAS65ID,CAS65CNPJ,CAS65IM,CAS65NOME,CAS65CNAE,CAS65CEP,CAS65ENDERECO,CAS65BAIRRO,CAS65NUMERO,CAS65COMPLEMENTO,CAS65UF,CAS65MUNICIPIO,CAS65MAILHOST,CAS65MAILPORT,CAS65MAILUSER,CAS65MAILPASS,CAS65MAILFROM,CAS65MAILFROMNAME,CAS65MAILREPLYTO,CAS65MAILTLS,
   ),
-
   keys = listOf(
     KeyMetadata("cas65_uk", KeyMetadataType.uk, "cas65cnpj"),
   ),
-
   oneToMany = mapOf(
   )
 )

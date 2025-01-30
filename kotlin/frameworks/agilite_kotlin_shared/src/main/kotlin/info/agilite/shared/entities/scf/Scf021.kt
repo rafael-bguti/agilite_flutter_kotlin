@@ -104,23 +104,20 @@ const val N_SCF021_CONTA = "scf021conta";
 const val N_SCF021_DT_BAIXA = "scf021dtBaixa";
 
 val SCF021ID = FieldMetadata("scf021id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF021DOC = FieldMetadata("scf021doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF021REMNUMERO = FieldMetadata("scf021remNumero", 2, "Id da remessa", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
-val SCF021CONTA = FieldMetadata("scf021conta", 3, "Conta bancária", FieldTypeMetadata.fk, 10.0, true, "Cgs45", null, null, null, null, false, false, false);
-val SCF021DTBAIXA = FieldMetadata("scf021dtBaixa", 4, "Data de pagamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
+val SCF021DOC = FieldMetadata("scf021doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SCF021REMNUMERO = FieldMetadata("scf021remNumero", 2, "Id da remessa", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false, null);
+val SCF021CONTA = FieldMetadata("scf021conta", 3, "Conta bancária", FieldTypeMetadata.fk, 10.0, true, "Cgs45", null, null, null, null, false, false, false, null);
+val SCF021DTBAIXA = FieldMetadata("scf021dtBaixa", 4, "Data de pagamento", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false, null);
  
 val SCF021_METADATA = EntityMetadata(
   name = "Scf021",
   descr = "Integração Bancária",
-
   fields = listOf(
     SCF021ID,SCF021DOC,SCF021REMNUMERO,SCF021CONTA,SCF021DTBAIXA,
   ),
-
   keys = listOf(
     KeyMetadata("scf021_uk", KeyMetadataType.uk, "scf021remNumero"),
   ),
-
   oneToMany = mapOf(
   )
 )

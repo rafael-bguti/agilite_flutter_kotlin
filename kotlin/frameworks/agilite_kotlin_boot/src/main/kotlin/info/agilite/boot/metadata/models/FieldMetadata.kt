@@ -15,4 +15,5 @@ data class FieldMetadata(
   val showInCrudList: Boolean = false,
   val filterable: Boolean = false,
   val showInFkAutoComplete: Boolean = false,
+  val mod: String? = null,
 )

@@ -3,7 +3,7 @@ package info.agilite.boot.sdui.component
 const val MOD_FONE = "fone"
 const val MOD_CEP = "cep"
 const val MOD_UF = "uf"
-const val _MOD_NI = "ni";
+const val MOD_NI = "ni";
 const val MOD_NITIPO = "nitipo"
 
 class SduiMetadataField (

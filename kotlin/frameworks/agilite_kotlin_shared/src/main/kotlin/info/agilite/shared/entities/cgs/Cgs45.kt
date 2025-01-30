@@ -91,22 +91,19 @@ const val N_CGS45_NOME = "cgs45nome";
 const val N_CGS45_DT_ULT_PROC_RETORNO = "cgs45dtUltProcRetorno";
 
 val CGS45ID = FieldMetadata("cgs45id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS45EMPRESA = FieldMetadata("cgs45empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS45NOME = FieldMetadata("cgs45nome", 2, "Descrição", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
-val CGS45DTULTPROCRETORNO = FieldMetadata("cgs45dtUltProcRetorno", 3, "Data do ultimo processamento de retorno do banco", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false);
+val CGS45EMPRESA = FieldMetadata("cgs45empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS45NOME = FieldMetadata("cgs45nome", 2, "Descrição", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true, null);
+val CGS45DTULTPROCRETORNO = FieldMetadata("cgs45dtUltProcRetorno", 3, "Data do ultimo processamento de retorno do banco", FieldTypeMetadata.date, 10.0, false, null, null, null, null, null, false, false, false, null);
  
 val CGS45_METADATA = EntityMetadata(
   name = "Cgs45",
   descr = "Contas de bancos",
-
   fields = listOf(
     CGS45ID,CGS45EMPRESA,CGS45NOME,CGS45DTULTPROCRETORNO,
   ),
-
   keys = listOf(
     KeyMetadata("cgs45_uk", KeyMetadataType.uk, "cgs45empresa, cgs45nome"),
   ),
-
   oneToMany = mapOf(
   )
 )

@@ -1,11 +1,11 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-const String _MOD_FONE = 'fone';
-const String _MOD_CEP = 'cep';
-const String _MOD_UF = 'uf';
-const String _MOD_NI = 'ni';
-const String _MOD_NITIPO = 'nitipo';
+const String MOD_FONE = 'fone';
+const String MOD_CEP = 'cep';
+const String MOD_UF = 'uf';
+const String MOD_NI = 'ni';
+const String MOD_NITIPO = 'nitipo';
 
 class AMetadataField extends StatelessWidget {
   final String fieldName;
@@ -47,7 +47,7 @@ class AMetadataField extends StatelessWidget {
   Widget build(BuildContext context) {
     final metadata = metadataRepository.field(fieldName);
 
-    if (mod != null) {
+    if (mod != null || metadata.mod != null) {
       return _buildByModification(metadata);
     }
 
@@ -119,24 +119,25 @@ class AMetadataField extends StatelessWidget {
   }
 
   Widget _buildByModification(FieldMetadata metadata) {
+    final mod = this.mod ?? metadata.mod;
     return switch (mod) {
-      _MOD_FONE => ATextFieldFone(
+      MOD_FONE => ATextFieldFone(
           metadata.name,
           labelText: labelText ?? metadata.label,
           req: metadata.req,
         ),
-      _MOD_CEP => ATextFieldCep(
+      MOD_CEP => ATextFieldCep(
           metadata.name,
           labelText: labelText ?? metadata.label,
           req: metadata.req,
         ),
-      _MOD_NI => ATextFieldNi(
+      MOD_NI => ATextFieldNi(
           metadata.name,
           labelText: labelText ?? metadata.label,
           req: metadata.req,
         ),
-      _MOD_UF => _buildAComboField(metadata, ufComboOptions),
-      _MOD_NITIPO => AComboNiTipo(
+      MOD_UF => _buildAComboField(metadata, ufComboOptions),
+      MOD_NITIPO => AComboNiTipo(
           metadata.name,
           labelText: labelText ?? metadata.label,
           req: metadata.req,

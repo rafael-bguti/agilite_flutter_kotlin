@@ -89,23 +89,20 @@ const val N_ROT01_RS = "rot01rs";
 const val N_ROT01_TENANT = "rot01tenant";
 
 val ROT01ID = FieldMetadata("rot01id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val ROT01CNPJ = FieldMetadata("rot01cnpj", 1, "CNPJ", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false);
-val ROT01RS = FieldMetadata("rot01rs", 2, "Razão Social", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, false, false, false);
-val ROT01TENANT = FieldMetadata("rot01tenant", 3, "Tenant name", FieldTypeMetadata.string, 20.0, true, null, null, null, null, null, false, false, false);
+val ROT01CNPJ = FieldMetadata("rot01cnpj", 1, "CNPJ", FieldTypeMetadata.string, 14.0, true, null, null, null, null, null, false, false, false, null);
+val ROT01RS = FieldMetadata("rot01rs", 2, "Razão Social", FieldTypeMetadata.string, 100.0, true, null, null, null, null, null, false, false, false, null);
+val ROT01TENANT = FieldMetadata("rot01tenant", 3, "Tenant name", FieldTypeMetadata.string, 20.0, true, null, null, null, null, null, false, false, false, null);
  
 val ROT01_METADATA = EntityMetadata(
   name = "Rot01",
   descr = "Contrato",
-
   fields = listOf(
     ROT01ID,ROT01CNPJ,ROT01RS,ROT01TENANT,
   ),
-
   keys = listOf(
     KeyMetadata("rot01_uk", KeyMetadataType.uk, "rot01cnpj"),
     KeyMetadata("rot01_uk1", KeyMetadataType.uk, "rot01tenant"),
   ),
-
   oneToMany = mapOf(
   )
 )

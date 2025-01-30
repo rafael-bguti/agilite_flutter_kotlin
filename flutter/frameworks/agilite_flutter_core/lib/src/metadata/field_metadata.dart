@@ -25,6 +25,8 @@ class FieldMetadata {
   final String? autocompleteColumnId;
   final String? autocompleteColumnsView;
 
+  final String? mod;
+
   const FieldMetadata({
     required this.name,
     required this.label,
@@ -37,6 +39,7 @@ class FieldMetadata {
     this.helperText,
     this.autocompleteColumnId,
     this.autocompleteColumnsView,
+    this.mod,
   });
 
   factory FieldMetadata.fromJson(Map<String, dynamic> json) => _$FieldMetadataFromJson(json);

@@ -128,25 +128,22 @@ const val N_ROT10_REFRESH_TOKEN = "rot10refreshToken";
 const val N_ROT10_ROLES = "rot10roles";
 
 val ROT10ID = FieldMetadata("rot10id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val ROT10CONTRATO = FieldMetadata("rot10contrato", 1, "Contrato", FieldTypeMetadata.fk, 10.0, true, "Rot01", null, null, null, null, false, false, false);
-val ROT10EMAIL = FieldMetadata("rot10email", 2, "E-Mail", FieldTypeMetadata.string, 100.0, true, null, null, null, null, "email,min:6", false, false, false);
-val ROT10SENHA = FieldMetadata("rot10senha", 3, "Senha", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, false, false, false);
-val ROT10TOKEN = FieldMetadata("rot10token", 4, "Token", FieldTypeMetadata.string, 300.0, false, null, null, null, null, null, false, false, false);
-val ROT10REFRESHTOKEN = FieldMetadata("rot10refreshToken", 5, "Refresh Token", FieldTypeMetadata.string, 300.0, false, null, null, null, null, null, false, false, false);
-val ROT10ROLES = FieldMetadata("rot10roles", 6, "Roles", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
+val ROT10CONTRATO = FieldMetadata("rot10contrato", 1, "Contrato", FieldTypeMetadata.fk, 10.0, true, "Rot01", null, null, null, null, false, false, false, null);
+val ROT10EMAIL = FieldMetadata("rot10email", 2, "E-Mail", FieldTypeMetadata.string, 100.0, true, null, null, null, null, "email,min:6", false, false, false, null);
+val ROT10SENHA = FieldMetadata("rot10senha", 3, "Senha", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, false, false, false, null);
+val ROT10TOKEN = FieldMetadata("rot10token", 4, "Token", FieldTypeMetadata.string, 300.0, false, null, null, null, null, null, false, false, false, null);
+val ROT10REFRESHTOKEN = FieldMetadata("rot10refreshToken", 5, "Refresh Token", FieldTypeMetadata.string, 300.0, false, null, null, null, null, null, false, false, false, null);
+val ROT10ROLES = FieldMetadata("rot10roles", 6, "Roles", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
  
 val ROT10_METADATA = EntityMetadata(
   name = "Rot10",
   descr = "Autenticação",
-
   fields = listOf(
     ROT10ID,ROT10CONTRATO,ROT10EMAIL,ROT10SENHA,ROT10TOKEN,ROT10REFRESHTOKEN,ROT10ROLES,
   ),
-
   keys = listOf(
     KeyMetadata("rot10_uk", KeyMetadataType.uk, "rot10email"),
   ),
-
   oneToMany = mapOf(
   )
 )

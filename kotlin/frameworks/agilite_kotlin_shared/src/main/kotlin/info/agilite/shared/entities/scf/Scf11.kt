@@ -146,25 +146,22 @@ const val N_SCF11_HIST = "scf11hist";
 const val N_SCF11_REG_ORIGEM = "scf11regOrigem";
 
 val SCF11ID = FieldMetadata("scf11id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF11EMPRESA = FieldMetadata("scf11empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF11TIPO = FieldMetadata("scf11tipo", 2, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receita"),FieldOptionMetadata(1, "Despesa")), null, null, null, true, true, false);
-val SCF11CONTA = FieldMetadata("scf11conta", 3, "Conta", FieldTypeMetadata.fk, 10.0, true, "Cgs45", null, null, null, null, true, true, false);
-val SCF11DATA = FieldMetadata("scf11data", 4, "Data", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, true, true, false);
-val SCF11VALOR = FieldMetadata("scf11valor", 5, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SCF11HIST = FieldMetadata("scf11hist", 6, "Histórico", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
-val SCF11REGORIGEM = FieldMetadata("scf11regOrigem", 7, "Registro de origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false);
+val SCF11EMPRESA = FieldMetadata("scf11empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SCF11TIPO = FieldMetadata("scf11tipo", 2, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receita"),FieldOptionMetadata(1, "Despesa")), null, null, null, true, true, false, null);
+val SCF11CONTA = FieldMetadata("scf11conta", 3, "Conta", FieldTypeMetadata.fk, 10.0, true, "Cgs45", null, null, null, null, true, true, false, null);
+val SCF11DATA = FieldMetadata("scf11data", 4, "Data", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, true, true, false, null);
+val SCF11VALOR = FieldMetadata("scf11valor", 5, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false, null);
+val SCF11HIST = FieldMetadata("scf11hist", 6, "Histórico", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false, null);
+val SCF11REGORIGEM = FieldMetadata("scf11regOrigem", 7, "Registro de origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false, null);
  
 val SCF11_METADATA = EntityMetadata(
   name = "Scf11",
   descr = "Lançamentos financeiros",
-
   fields = listOf(
     SCF11ID,SCF11EMPRESA,SCF11TIPO,SCF11CONTA,SCF11DATA,SCF11VALOR,SCF11HIST,SCF11REGORIGEM,
   ),
-
   keys = listOf(
   ),
-
   oneToMany = mapOf(
   )
 )

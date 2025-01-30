@@ -18,6 +18,7 @@ SduiSpreadColumnModel _$SduiSpreadColumnModelFromJson(
       width: json['width'] == null
           ? null
           : AWidth.fromJson(json['width'] as Map<String, dynamic>),
+      mod: json['mod'] as String?,
     );
 
 const _$FieldMetadataTypeEnumMap = {

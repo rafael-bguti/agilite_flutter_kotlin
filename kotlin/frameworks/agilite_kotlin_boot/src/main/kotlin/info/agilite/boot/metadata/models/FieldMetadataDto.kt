@@ -15,4 +15,5 @@ data class FieldMetadataDto(
   val autocompleteColumnsView: String?,
 
   val validationQuery: String?,
+  val mod: String?,
 )

@@ -141,26 +141,23 @@ const val N_CGS15_REPLAY_TO = "cgs15replayTo";
 const val N_CGS15_REPLAY_TO_NAME = "cgs15replayToName";
 
 val CGS15ID = FieldMetadata("cgs15id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS15EMPRESA = FieldMetadata("cgs15empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS15NOME = FieldMetadata("cgs15nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true);
-val CGS15TEMPLATE = FieldMetadata("cgs15template", 3, "Template de e-mail", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
-val CGS15TITULO = FieldMetadata("cgs15titulo", 4, "Título do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS15FROMNAME = FieldMetadata("cgs15fromName", 5, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS15REPLAYTO = FieldMetadata("cgs15replayTo", 6, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS15REPLAYTONAME = FieldMetadata("cgs15replayToName", 7, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
+val CGS15EMPRESA = FieldMetadata("cgs15empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS15NOME = FieldMetadata("cgs15nome", 2, "Nome", FieldTypeMetadata.string, 30.0, true, null, null, null, null, null, true, true, true, null);
+val CGS15TEMPLATE = FieldMetadata("cgs15template", 3, "Template de e-mail", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false, null);
+val CGS15TITULO = FieldMetadata("cgs15titulo", 4, "Título do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS15FROMNAME = FieldMetadata("cgs15fromName", 5, "Remetente do e-mail", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS15REPLAYTO = FieldMetadata("cgs15replayTo", 6, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS15REPLAYTONAME = FieldMetadata("cgs15replayToName", 7, "Responder para", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
  
 val CGS15_METADATA = EntityMetadata(
   name = "Cgs15",
   descr = "Modelo de e-mail",
-
   fields = listOf(
     CGS15ID,CGS15EMPRESA,CGS15NOME,CGS15TEMPLATE,CGS15TITULO,CGS15FROMNAME,CGS15REPLAYTO,CGS15REPLAYTONAME,
   ),
-
   keys = listOf(
     KeyMetadata("cgs15_uk", KeyMetadataType.uk, "cgs15empresa, cgs15nome"),
   ),
-
   oneToMany = mapOf(
   )
 )

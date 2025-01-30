@@ -167,26 +167,23 @@ const val N_SRF011_ALQ_ISS = "srf011alqIss";
 const val N_SRF011_VLR_ISS = "srf011vlrIss";
 
 val SRF011ID = FieldMetadata("srf011id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF011DOC = FieldMetadata("srf011doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF011ITEM = FieldMetadata("srf011item", 2, "Item", FieldTypeMetadata.fk, 10.0, true, "Cgs50", null, null, null, null, false, false, false);
-val SRF011DESCR = FieldMetadata("srf011descr", 3, "Descrição", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false);
-val SRF011QTD = FieldMetadata("srf011qtd", 4, "Quantidade", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
-val SRF011VLRUNIT = FieldMetadata("srf011vlrUnit", 5, "Unitário", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false);
-val SRF011VLRTOTAL = FieldMetadata("srf011vlrTotal", 6, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SRF011ALQISS = FieldMetadata("srf011alqIss", 7, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false);
-val SRF011VLRISS = FieldMetadata("srf011vlrIss", 8, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
+val SRF011DOC = FieldMetadata("srf011doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SRF011ITEM = FieldMetadata("srf011item", 2, "Item", FieldTypeMetadata.fk, 10.0, true, "Cgs50", null, null, null, null, false, false, false, null);
+val SRF011DESCR = FieldMetadata("srf011descr", 3, "Descrição", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, false, false, false, null);
+val SRF011QTD = FieldMetadata("srf011qtd", 4, "Quantidade", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false, null);
+val SRF011VLRUNIT = FieldMetadata("srf011vlrUnit", 5, "Unitário", FieldTypeMetadata.decimal, 16.6, true, null, null, null, null, null, false, false, false, null);
+val SRF011VLRTOTAL = FieldMetadata("srf011vlrTotal", 6, "Valor total", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false, null);
+val SRF011ALQISS = FieldMetadata("srf011alqIss", 7, "Aliquota ISS", FieldTypeMetadata.decimal, 4.2, false, null, null, null, null, null, false, false, false, null);
+val SRF011VLRISS = FieldMetadata("srf011vlrIss", 8, "Valor do ISS", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
  
 val SRF011_METADATA = EntityMetadata(
   name = "Srf011",
   descr = "Itens",
-
   fields = listOf(
     SRF011ID,SRF011DOC,SRF011ITEM,SRF011DESCR,SRF011QTD,SRF011VLRUNIT,SRF011VLRTOTAL,SRF011ALQISS,SRF011VLRISS,
   ),
-
   keys = listOf(
   ),
-
   oneToMany = mapOf(
   )
 )

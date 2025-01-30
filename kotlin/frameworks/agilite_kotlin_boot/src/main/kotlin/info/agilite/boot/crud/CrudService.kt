@@ -69,6 +69,7 @@ class DefaultSduiCrudService(
         type = field.type.frontEndType,
         options = field.options?.map { opt -> Option(opt.value, opt.label) },
         width = width,
+        mod = field.mod,
       )
     }
 

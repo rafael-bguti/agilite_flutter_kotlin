@@ -168,28 +168,25 @@ const val N_CGS50_OBS = "cgs50obs";
 const val N_CGS50_TIPO_SERVICO = "cgs50tipoServico";
 
 val CGS50ID = FieldMetadata("cgs50id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS50EMPRESA = FieldMetadata("cgs50empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS50MPS = FieldMetadata("cgs50mps", 2, "MPS(0,1,2)", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false);
-val CGS50DESCR = FieldMetadata("cgs50descr", 3, "Descrição completa de serviços", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, true, true, true);
-val CGS50CODIGO = FieldMetadata("cgs50codigo", 4, "Código", FieldTypeMetadata.string, 15.0, false, null, null, null, null, null, true, true, true);
-val CGS50PRECO = FieldMetadata("cgs50preco", 5, "Preço", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, true, true, false);
-val CGS50UNIDADE = FieldMetadata("cgs50unidade", 6, "Unidade", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false);
-val CGS50DESCRCOMP = FieldMetadata("cgs50descrComp", 7, "Descrição complementar", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val CGS50OBS = FieldMetadata("cgs50obs", 8, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val CGS50TIPOSERVICO = FieldMetadata("cgs50tipoServico", 9, "Código do serviço conforme tabela de serviços", FieldTypeMetadata.string, 10.0, false, null, null, null, null, null, false, false, false);
+val CGS50EMPRESA = FieldMetadata("cgs50empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS50MPS = FieldMetadata("cgs50mps", 2, "MPS(0,1,2)", FieldTypeMetadata.int, 1.0, true, null, null, null, null, null, false, false, false, null);
+val CGS50DESCR = FieldMetadata("cgs50descr", 3, "Descrição completa de serviços", FieldTypeMetadata.string, 0.0, true, null, null, null, null, null, true, true, true, null);
+val CGS50CODIGO = FieldMetadata("cgs50codigo", 4, "Código", FieldTypeMetadata.string, 15.0, false, null, null, null, null, null, true, true, true, null);
+val CGS50PRECO = FieldMetadata("cgs50preco", 5, "Preço", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, true, true, false, null);
+val CGS50UNIDADE = FieldMetadata("cgs50unidade", 6, "Unidade", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false, null);
+val CGS50DESCRCOMP = FieldMetadata("cgs50descrComp", 7, "Descrição complementar", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val CGS50OBS = FieldMetadata("cgs50obs", 8, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val CGS50TIPOSERVICO = FieldMetadata("cgs50tipoServico", 9, "Código do serviço conforme tabela de serviços", FieldTypeMetadata.string, 10.0, false, null, null, null, null, null, false, false, false, null);
  
 val CGS50_METADATA = EntityMetadata(
   name = "Cgs50",
   descr = "Itens e Serviços",
-
   fields = listOf(
     CGS50ID,CGS50EMPRESA,CGS50MPS,CGS50DESCR,CGS50CODIGO,CGS50PRECO,CGS50UNIDADE,CGS50DESCRCOMP,CGS50OBS,CGS50TIPOSERVICO,
   ),
-
   keys = listOf(
     KeyMetadata("cgs50_uk", KeyMetadataType.uk, "cgs50empresa, cgs50codigo"),
   ),
-
   oneToMany = mapOf(
   )
 )

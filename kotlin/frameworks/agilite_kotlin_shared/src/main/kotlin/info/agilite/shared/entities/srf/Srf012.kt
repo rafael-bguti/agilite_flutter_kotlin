@@ -131,24 +131,21 @@ const val N_SRF012_VALOR = "srf012valor";
 const val N_SRF012_DOCUMENTO = "srf012documento";
 
 val SRF012ID = FieldMetadata("srf012id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF012DOC = FieldMetadata("srf012doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF012FORMA = FieldMetadata("srf012forma", 2, "Forma de Pagamento/Recebimento", FieldTypeMetadata.fk, 10.0, true, "Cgs38", null, null, null, null, false, false, false);
-val SRF012PARCELA = FieldMetadata("srf012parcela", 3, "Parcela", FieldTypeMetadata.int, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF012DTVENC = FieldMetadata("srf012dtVenc", 4, "Data de vencimento", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val SRF012VALOR = FieldMetadata("srf012valor", 5, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SRF012DOCUMENTO = FieldMetadata("srf012documento", 6, "Contas Pagar/receber", FieldTypeMetadata.fk, 10.0, false, "Scf02", null, null, null, null, false, false, false);
+val SRF012DOC = FieldMetadata("srf012doc", 1, "Documento", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SRF012FORMA = FieldMetadata("srf012forma", 2, "Forma de Pagamento/Recebimento", FieldTypeMetadata.fk, 10.0, true, "Cgs38", null, null, null, null, false, false, false, null);
+val SRF012PARCELA = FieldMetadata("srf012parcela", 3, "Parcela", FieldTypeMetadata.int, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SRF012DTVENC = FieldMetadata("srf012dtVenc", 4, "Data de vencimento", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SRF012VALOR = FieldMetadata("srf012valor", 5, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false, null);
+val SRF012DOCUMENTO = FieldMetadata("srf012documento", 6, "Contas Pagar/receber", FieldTypeMetadata.fk, 10.0, false, "Scf02", null, null, null, null, false, false, false, null);
  
 val SRF012_METADATA = EntityMetadata(
   name = "Srf012",
   descr = "Parcelamento",
-
   fields = listOf(
     SRF012ID,SRF012DOC,SRF012FORMA,SRF012PARCELA,SRF012DTVENC,SRF012VALOR,SRF012DOCUMENTO,
   ),
-
   keys = listOf(
   ),
-
   oneToMany = mapOf(
   )
 )

@@ -73,7 +73,7 @@ class _ATextFieldCepState extends State<ATextFieldCep> {
     controller.formatValue = (value) {
       if (value.isNullOrBlank) return '';
       if (value!.length == 8) {
-        return '${value.substring(0, 5)}-${value.substring(5)}';
+        return value.formatCEP();
       } else {
         return value;
       }

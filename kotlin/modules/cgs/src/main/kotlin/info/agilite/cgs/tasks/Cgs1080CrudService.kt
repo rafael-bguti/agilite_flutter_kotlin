@@ -45,11 +45,11 @@ class Cgs1080CrudService(
       row("4,8", "cgs80codigo,cgs80nome"),
       row("4-4,8-8", caracterizacaoFieldset, niFields),
       row(SduiDivider("Contatos")),
-      row("4,4,4", "cgs80email,cgs80telefone(mod:$MOD_FONE),cgs80celular(mod:$MOD_FONE)"),
+      row("4,4,4", "cgs80email,cgs80telefone,cgs80celular"),
       row(SduiDivider("Endereço")),
-      row("3-3-5,9-9-7", "cgs80cep(mod:$MOD_CEP),cgs80endereco"),
+      row("3-3-5,9-9-7", "cgs80cep,cgs80endereco"),
       row("3-3-4,5-5-4,4", "cgs80numero,cgs80bairro,cgs80complemento"),
-      row("3-3-4,5-5-4,4", "cgs80uf(mod:$MOD_UF),cgs80municipio,$SDUI_EMPTY"),
+      row("3-3-4,5-5-4,4", "cgs80uf,cgs80municipio,$SDUI_EMPTY"),
       row(SduiDivider("Observações")),
       row("12", "cgs80obs"),
     )
@@ -94,8 +94,7 @@ class Cgs1080CrudService(
         top = 8.0,
         child = SduiGrid.createByRows(
           GridRowQuery(
-            "6,6",
-            "cgs80tipo(mod:$MOD_NITIPO),cgs80ni(mod:$_MOD_NI),cgs80contribuinte,cgs80ie,cgs80im",
+            "6,6", "cgs80tipo,cgs80ni,cgs80contribuinte,cgs80ie,cgs80im",
           )
         ),
       )

@@ -275,34 +275,31 @@ const val N_SCF02_LANCAMENTO = "scf02lancamento";
 const val N_SCF021S = "scf021s";
 
 val SCF02ID = FieldMetadata("scf02id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF02EMPRESA = FieldMetadata("scf02empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF02TIPO = FieldMetadata("scf02tipo", 2, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receber"),FieldOptionMetadata(1, "Pagar")), null, null, null, true, true, false);
-val SCF02FORMA = FieldMetadata("scf02forma", 3, "Forma de Pagamento/Recebimento", FieldTypeMetadata.fk, 10.0, true, "Cgs38", null, null, null, null, false, false, false);
-val SCF02ENTIDADE = FieldMetadata("scf02entidade", 4, "Entidade", FieldTypeMetadata.fk, 10.0, true, "Cgs80", null, null, null, null, false, false, false);
-val SCF02NOSSONUM = FieldMetadata("scf02nossoNum", 5, "Nosso Número", FieldTypeMetadata.long, 12.0, false, null, null, null, null, null, false, false, false);
-val SCF02NOSSONUMDV = FieldMetadata("scf02nossoNumDV", 6, "DV do Nosso Número", FieldTypeMetadata.int, 1.0, false, null, null, null, null, null, false, false, false);
-val SCF02DTEMISS = FieldMetadata("scf02dtEmiss", 7, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF02DTVENC = FieldMetadata("scf02dtVenc", 8, "Data de vencimento", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false);
-val SCF02HIST = FieldMetadata("scf02hist", 9, "Histórico", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val SCF02VALOR = FieldMetadata("scf02valor", 10, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false);
-val SCF02MULTA = FieldMetadata("scf02multa", 11, "Valor da Multa", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02JUROS = FieldMetadata("scf02juros", 12, "Valor de Juros", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02ENCARGOS = FieldMetadata("scf02encargos", 13, "Valor de Encargos", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02DESCONTO = FieldMetadata("scf02desconto", 14, "Valor de Desconto", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false);
-val SCF02REGORIGEM = FieldMetadata("scf02regOrigem", 15, "Registro de Origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false);
-val SCF02LANCAMENTO = FieldMetadata("scf02lancamento", 16, "Lancamento de quitação", FieldTypeMetadata.fk, 10.0, false, "Scf11", null, null, null, null, false, false, false);
+val SCF02EMPRESA = FieldMetadata("scf02empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SCF02TIPO = FieldMetadata("scf02tipo", 2, "Tipo", FieldTypeMetadata.int, 1.0, true, null, listOf(FieldOptionMetadata(0, "Receber"),FieldOptionMetadata(1, "Pagar")), null, null, null, true, true, false, null);
+val SCF02FORMA = FieldMetadata("scf02forma", 3, "Forma de Pagamento/Recebimento", FieldTypeMetadata.fk, 10.0, true, "Cgs38", null, null, null, null, false, false, false, null);
+val SCF02ENTIDADE = FieldMetadata("scf02entidade", 4, "Entidade", FieldTypeMetadata.fk, 10.0, true, "Cgs80", null, null, null, null, false, false, false, null);
+val SCF02NOSSONUM = FieldMetadata("scf02nossoNum", 5, "Nosso Número", FieldTypeMetadata.long, 12.0, false, null, null, null, null, null, false, false, false, null);
+val SCF02NOSSONUMDV = FieldMetadata("scf02nossoNumDV", 6, "DV do Nosso Número", FieldTypeMetadata.int, 1.0, false, null, null, null, null, null, false, false, false, null);
+val SCF02DTEMISS = FieldMetadata("scf02dtEmiss", 7, "Data de emissão", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SCF02DTVENC = FieldMetadata("scf02dtVenc", 8, "Data de vencimento", FieldTypeMetadata.date, 10.0, true, null, null, null, null, null, false, false, false, null);
+val SCF02HIST = FieldMetadata("scf02hist", 9, "Histórico", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val SCF02VALOR = FieldMetadata("scf02valor", 10, "Valor", FieldTypeMetadata.decimal, 16.2, true, null, null, null, null, null, false, false, false, null);
+val SCF02MULTA = FieldMetadata("scf02multa", 11, "Valor da Multa", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
+val SCF02JUROS = FieldMetadata("scf02juros", 12, "Valor de Juros", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
+val SCF02ENCARGOS = FieldMetadata("scf02encargos", 13, "Valor de Encargos", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
+val SCF02DESCONTO = FieldMetadata("scf02desconto", 14, "Valor de Desconto", FieldTypeMetadata.decimal, 16.2, false, null, null, null, null, null, false, false, false, null);
+val SCF02REGORIGEM = FieldMetadata("scf02regOrigem", 15, "Registro de Origem", FieldTypeMetadata.json, 0.0, false, null, null, null, null, null, false, false, false, null);
+val SCF02LANCAMENTO = FieldMetadata("scf02lancamento", 16, "Lancamento de quitação", FieldTypeMetadata.fk, 10.0, false, "Scf11", null, null, null, null, false, false, false, null);
  
 val SCF02_METADATA = EntityMetadata(
   name = "Scf02",
   descr = "Documento a pagar/receber",
-
   fields = listOf(
     SCF02ID,SCF02EMPRESA,SCF02TIPO,SCF02FORMA,SCF02ENTIDADE,SCF02NOSSONUM,SCF02NOSSONUMDV,SCF02DTEMISS,SCF02DTVENC,SCF02HIST,SCF02VALOR,SCF02MULTA,SCF02JUROS,SCF02ENCARGOS,SCF02DESCONTO,SCF02REGORIGEM,SCF02LANCAMENTO,
   ),
-
   keys = listOf(
   ),
-
   oneToMany = mapOf(
     "scf021s" to OneToManyMetadata(17, Scf021::class.java, "scf021doc"),
   )

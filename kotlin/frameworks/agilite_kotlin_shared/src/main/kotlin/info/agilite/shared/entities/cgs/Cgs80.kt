@@ -355,43 +355,40 @@ const val N_CGS80_FORNECEDOR = "cgs80fornecedor";
 const val N_CGS80_TRANSPORTADORA = "cgs80transportadora";
 
 val CGS80ID = FieldMetadata("cgs80id", 0, "ID", FieldTypeMetadata.id, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS80EMPRESA = FieldMetadata("cgs80empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false);
-val CGS80NOME = FieldMetadata("cgs80nome", 2, "Nome ou Razão Social", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, true, true, true);
-val CGS80FANTASIA = FieldMetadata("cgs80fantasia", 3, "Nome Fantasia", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false);
-val CGS80CODIGO = FieldMetadata("cgs80codigo", 4, "Código", FieldTypeMetadata.string, 15.0, false, null, null, null, null, null, true, true, false);
-val CGS80TIPO = FieldMetadata("cgs80tipo", 5, "Tipo de contato", FieldTypeMetadata.int, 1.0, false, null, listOf(FieldOptionMetadata(0, "Pessoa Física"),FieldOptionMetadata(1, "Pessoa Juridica"),FieldOptionMetadata(2, "Estrangeiro")), null, null, null, false, false, false);
-val CGS80NI = FieldMetadata("cgs80ni", 6, "CPF/CNPJ", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, true);
-val CGS80CONTRIBUINTE = FieldMetadata("cgs80contribuinte", 7, "Código contribuinte", FieldTypeMetadata.int, 1.0, false, null, listOf(FieldOptionMetadata(1, "Contribuinte ICMS"),FieldOptionMetadata(2, "Isento de ICMS"),FieldOptionMetadata(9, "Não contribuinte")), null, null, null, false, false, false);
-val CGS80IE = FieldMetadata("cgs80ie", 8, "Inscrição estadual", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false);
-val CGS80IM = FieldMetadata("cgs80im", 9, "Inscrição municipal", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false);
-val CGS80CEP = FieldMetadata("cgs80cep", 10, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false);
-val CGS80ENDERECO = FieldMetadata("cgs80endereco", 11, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false);
-val CGS80BAIRRO = FieldMetadata("cgs80bairro", 12, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CGS80NUMERO = FieldMetadata("cgs80numero", 13, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CGS80COMPLEMENTO = FieldMetadata("cgs80complemento", 14, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false);
-val CGS80UF = FieldMetadata("cgs80uf", 15, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false);
-val CGS80MUNICIPIO = FieldMetadata("cgs80municipio", 16, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false);
-val CGS80TELEFONE = FieldMetadata("cgs80telefone", 17, "Telefone", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, false);
-val CGS80CELULAR = FieldMetadata("cgs80celular", 18, "Celular", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, false);
-val CGS80EMAIL = FieldMetadata("cgs80email", 19, "E-Mail", FieldTypeMetadata.string, 200.0, false, null, null, null, null, "email,min:6", true, true, false);
-val CGS80OBS = FieldMetadata("cgs80obs", 20, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false);
-val CGS80CLIENTE = FieldMetadata("cgs80cliente", 21, "Cliente", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false);
-val CGS80FORNECEDOR = FieldMetadata("cgs80fornecedor", 22, "Fornecedor", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false);
-val CGS80TRANSPORTADORA = FieldMetadata("cgs80transportadora", 23, "Transportadora", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false);
+val CGS80EMPRESA = FieldMetadata("cgs80empresa", 1, "Empresa", FieldTypeMetadata.long, 10.0, true, null, null, null, null, null, false, false, false, null);
+val CGS80NOME = FieldMetadata("cgs80nome", 2, "Nome ou Razão Social", FieldTypeMetadata.string, 250.0, true, null, null, null, null, null, true, true, true, null);
+val CGS80FANTASIA = FieldMetadata("cgs80fantasia", 3, "Nome Fantasia", FieldTypeMetadata.string, 100.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80CODIGO = FieldMetadata("cgs80codigo", 4, "Código", FieldTypeMetadata.string, 15.0, false, null, null, null, null, null, true, true, false, null);
+val CGS80TIPO = FieldMetadata("cgs80tipo", 5, "Tipo de contato", FieldTypeMetadata.int, 1.0, false, null, listOf(FieldOptionMetadata(0, "Pessoa Física"),FieldOptionMetadata(1, "Pessoa Juridica"),FieldOptionMetadata(2, "Estrangeiro")), null, null, null, false, false, false, "nitipo");
+val CGS80NI = FieldMetadata("cgs80ni", 6, "CPF/CNPJ", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, true, "ni");
+val CGS80CONTRIBUINTE = FieldMetadata("cgs80contribuinte", 7, "Código contribuinte", FieldTypeMetadata.int, 1.0, false, null, listOf(FieldOptionMetadata(1, "Contribuinte ICMS"),FieldOptionMetadata(2, "Isento de ICMS"),FieldOptionMetadata(9, "Não contribuinte")), null, null, null, false, false, false, null);
+val CGS80IE = FieldMetadata("cgs80ie", 8, "Inscrição estadual", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80IM = FieldMetadata("cgs80im", 9, "Inscrição municipal", FieldTypeMetadata.string, 30.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80CEP = FieldMetadata("cgs80cep", 10, "CEP", FieldTypeMetadata.string, 8.0, false, null, null, null, null, null, false, false, false, "cep");
+val CGS80ENDERECO = FieldMetadata("cgs80endereco", 11, "Endereço", FieldTypeMetadata.string, 200.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80BAIRRO = FieldMetadata("cgs80bairro", 12, "Bairro", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80NUMERO = FieldMetadata("cgs80numero", 13, "Número", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80COMPLEMENTO = FieldMetadata("cgs80complemento", 14, "Complemento", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80UF = FieldMetadata("cgs80uf", 15, "UF", FieldTypeMetadata.string, 2.0, false, null, null, null, null, null, false, false, false, "uf");
+val CGS80MUNICIPIO = FieldMetadata("cgs80municipio", 16, "Município", FieldTypeMetadata.string, 50.0, false, null, null, null, null, null, true, true, false, null);
+val CGS80TELEFONE = FieldMetadata("cgs80telefone", 17, "Telefone", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, false, "fone");
+val CGS80CELULAR = FieldMetadata("cgs80celular", 18, "Celular", FieldTypeMetadata.string, 20.0, false, null, null, null, null, null, true, true, false, "fone");
+val CGS80EMAIL = FieldMetadata("cgs80email", 19, "E-Mail", FieldTypeMetadata.string, 200.0, false, null, null, null, null, "email,min:6", true, true, false, null);
+val CGS80OBS = FieldMetadata("cgs80obs", 20, "Observações", FieldTypeMetadata.string, 0.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80CLIENTE = FieldMetadata("cgs80cliente", 21, "Cliente", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80FORNECEDOR = FieldMetadata("cgs80fornecedor", 22, "Fornecedor", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false, null);
+val CGS80TRANSPORTADORA = FieldMetadata("cgs80transportadora", 23, "Transportadora", FieldTypeMetadata.boolean, 1.0, false, null, null, null, null, null, false, false, false, null);
  
 val CGS80_METADATA = EntityMetadata(
   name = "Cgs80",
   descr = "Entidade",
-
   fields = listOf(
     CGS80ID,CGS80EMPRESA,CGS80NOME,CGS80FANTASIA,CGS80CODIGO,CGS80TIPO,CGS80NI,CGS80CONTRIBUINTE,CGS80IE,CGS80IM,CGS80CEP,CGS80ENDERECO,CGS80BAIRRO,CGS80NUMERO,CGS80COMPLEMENTO,CGS80UF,CGS80MUNICIPIO,CGS80TELEFONE,CGS80CELULAR,CGS80EMAIL,CGS80OBS,CGS80CLIENTE,CGS80FORNECEDOR,CGS80TRANSPORTADORA,
   ),
-
   keys = listOf(
     KeyMetadata("cgs80_uk", KeyMetadataType.uk, "cgs80empresa, cgs80codigo"),
     KeyMetadata("cgs80_uk1", KeyMetadataType.uk, "cgs80empresa, cgs80ni"),
   ),
-
   oneToMany = mapOf(
   )
 )
