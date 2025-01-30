@@ -31,24 +31,3 @@ List<Option<String>> get ufComboOptions {
     LocalOption('TO', 'TO-Tocantins'),
   ];
 }
-
-String? formatFone(final String? fone) {
-  if (fone.isNullOrBlank) return null;
-  String? foneNumbers = fone!.onlyNumbers();
-  if (foneNumbers == null) return null;
-
-  if (foneNumbers.length == 8) {
-    return '${foneNumbers.substring(0, 4)}-${foneNumbers.substring(4)}';
-  } else if (foneNumbers.length == 10) {
-    return '(${foneNumbers.substring(0, 2)}) ${foneNumbers.substring(2, 6)}-${foneNumbers.substring(6)}';
-  } else if (foneNumbers.length == 11) {
-    return '(${foneNumbers.substring(0, 2)}) ${foneNumbers.substring(2, 7)}-${foneNumbers.substring(7)}';
-  } else if (foneNumbers.length > 11) {
-    final fonePart = foneNumbers.substring(foneNumbers.length - 11);
-    final prefix = foneNumbers.substring(0, foneNumbers.length - 11);
-
-    return '$prefix (${fonePart.substring(0, 2)}) ${fonePart.substring(2, 7)}-${fonePart.substring(7)}';
-  } else {
-    return foneNumbers;
-  }
-}

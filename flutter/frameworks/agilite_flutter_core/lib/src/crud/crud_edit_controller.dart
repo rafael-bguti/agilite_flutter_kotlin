@@ -30,7 +30,7 @@ class CrudEditController extends ViewController<CrudEditState> {
   Future<void> save() async {
     if (!formController.validate()) return;
     showLoading("Salvando registro");
-    await _repository.save(taskName, formController.buidlJson(), id);
+    await _repository.save(taskName, formController.buidlJson(true), id);
 
     hideLoading();
     ANavigator.pop("ok");

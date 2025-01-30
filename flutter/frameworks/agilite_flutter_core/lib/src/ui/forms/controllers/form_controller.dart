@@ -82,20 +82,20 @@ class FormController {
     return true;
   }
 
-  Map<String, dynamic> get controllersValue {
+  Map<String, dynamic> getControllersValue([bool includeNull = false]) {
     final Map<String, dynamic> map = {};
     for (var field in _fieldControllers) {
-      if (field.jsonValue != null) map[field.name] = field.jsonValue;
+      if (includeNull || field.jsonValue != null) map[field.name] = field.jsonValue;
     }
     return map;
   }
 
-  Map<String, dynamic> buidlJson([Map<String, dynamic> defaultValues = const {}]) {
-    return {..._customValues, ...defaultValues, ...controllersValue};
+  Map<String, dynamic> buidlJson([bool includeNull = false, Map<String, dynamic> defaultValues = const {}]) {
+    return {..._customValues, ...defaultValues, ...getControllersValue(includeNull)};
   }
 
   bool isChanged(Map<String, dynamic> newValue) {
-    return !ObjectUtils.isEquals(controllersValue, newValue);
+    return !ObjectUtils.isEquals(getControllersValue(), newValue);
   }
 
   set value(Map<String, dynamic>? data) {
@@ -173,12 +173,21 @@ class FormController {
     controller.value = value;
   }
 
+  // ----- get values ----
   dynamic getValue(String name) {
     final controller = getController(name);
     if (controller == null) {
       return getCustomValue(name);
     }
     return controller.value;
+  }
+
+  int? getInt(String key, [int? defaultValue]) {
+    var value = getValue(key);
+    if (value == null) return defaultValue;
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.parse(value.toString());
   }
 
   // ---- Get especific controller ----

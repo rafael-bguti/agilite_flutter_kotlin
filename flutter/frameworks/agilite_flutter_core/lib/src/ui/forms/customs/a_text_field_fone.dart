@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 class ATextFieldFone extends StatelessWidget {
   final String name;
   final String? labelText;
+  final bool? req;
 
   const ATextFieldFone(
     this.name, {
     this.labelText,
+    this.req,
     super.key,
   });
 
@@ -19,6 +21,7 @@ class ATextFieldFone extends StatelessWidget {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       onControllerCreated: (controller) => _configureController(controller as StringController),
       labelText: labelText,
+      req: req == true,
     );
   }
 
@@ -30,10 +33,6 @@ class ATextFieldFone extends StatelessWidget {
     });
 
     controller.parseValue = (text) => text.onlyNumbers();
-    controller.formatValue = _formatFone;
-  }
-
-  String _formatFone(final String? fone) {
-    return formatFone(fone) ?? '';
+    controller.formatValue = (fone) => fone?.formatFone() ?? '';
   }
 }

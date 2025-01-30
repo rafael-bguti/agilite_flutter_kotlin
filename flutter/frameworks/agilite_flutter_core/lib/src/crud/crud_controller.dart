@@ -61,7 +61,7 @@ class CrudController extends ViewController<CrudState> {
 
   // ------ Filtros ------
   bool get hasFilters {
-    return formFiltersController.controllersValue.isNotEmpty;
+    return formFiltersController.getControllersValue().isNotEmpty;
   }
 
   void clearFilters() {

@@ -9,12 +9,14 @@ class ATextFieldCep extends StatefulWidget {
   final String name;
   final String? labelText;
   final void Function(Cep cep)? onCepFound;
+  final bool? req;
 
   const ATextFieldCep(
     this.name, {
     this.formController,
     this.labelText,
     this.onCepFound,
+    this.req,
     super.key,
   });
 
@@ -44,6 +46,7 @@ class _ATextFieldCepState extends State<ATextFieldCep> {
       widget.name,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly, CepTextInputFormatter()],
       onControllerCreated: (controller) => _configureController(controller as StringController),
+      req: widget.req == true,
       decoration: InputDecoration(
         labelText: widget.labelText ?? 'CEP',
         suffixIcon: _searching

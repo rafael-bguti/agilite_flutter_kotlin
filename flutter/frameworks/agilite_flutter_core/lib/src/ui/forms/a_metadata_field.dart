@@ -1,10 +1,11 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/ui/forms/cep/a_text_field_cep.dart';
 import 'package:flutter/material.dart';
 
 const String _MOD_FONE = 'fone';
 const String _MOD_CEP = 'cep';
 const String _MOD_UF = 'uf';
+const String _MOD_NI = 'ni';
+const String _MOD_NITIPO = 'nitipo';
 
 class AMetadataField extends StatelessWidget {
   final String fieldName;
@@ -45,6 +46,10 @@ class AMetadataField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final metadata = metadataRepository.field(fieldName);
+
+    if (mod != null) {
+      return _buildByModification(metadata);
+    }
 
     if (autoCompleteOptions != null || metadata.options != null) {
       return _buildAComboField(metadata);
@@ -113,22 +118,34 @@ class AMetadataField extends StatelessWidget {
     );
   }
 
-  Widget _buildATextField(FieldMetadata metadata) {
+  Widget _buildByModification(FieldMetadata metadata) {
     return switch (mod) {
       _MOD_FONE => ATextFieldFone(
           metadata.name,
           labelText: labelText ?? metadata.label,
+          req: metadata.req,
         ),
       _MOD_CEP => ATextFieldCep(
           metadata.name,
           labelText: labelText ?? metadata.label,
+          req: metadata.req,
+        ),
+      _MOD_NI => ATextFieldNi(
+          metadata.name,
+          labelText: labelText ?? metadata.label,
+          req: metadata.req,
         ),
       _MOD_UF => _buildAComboField(metadata, ufComboOptions),
-      _ => _buildDefaultTextField(metadata),
+      _MOD_NITIPO => AComboNiTipo(
+          metadata.name,
+          labelText: labelText ?? metadata.label,
+          req: metadata.req,
+        ),
+      _ => throw 'Mod $mod not implemented',
     };
   }
 
-  Widget _buildDefaultTextField(FieldMetadata field) {
+  Widget _buildATextField(FieldMetadata field) {
     final FieldType type = switch (field.type) {
       FieldMetadataType.string => FieldType.string,
       FieldMetadataType.int => FieldType.int,
@@ -165,10 +182,6 @@ class AMetadataField extends StatelessWidget {
   }
 
   void onControllerCreated(FieldController controller) {
-    print('Controller criado: ${controller.name}');
-    controller.addValueChangeListener(() {
-      print('Value changed: ${controller.name} -> ${controller.value}');
-    });
     controllerCreated?.call(controller);
   }
 
