@@ -24,6 +24,10 @@ class AFormState extends State<AForm> {
   void initState() {
     super.initState();
     _controller = widget.controller;
+
+    if (widget.value != null) {
+      _controller.value = widget.value!;
+    }
   }
 
   @override

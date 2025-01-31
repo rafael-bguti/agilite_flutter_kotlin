@@ -51,11 +51,11 @@ class CrudController(
     return CrudServiceResolver.createService(taskName, appContext).createNewRecord(taskName)
   }
 
-//
-//  @PostMapping("/delete/{taskName}")
-//  @Transactional
-//  fun delete(@PathVariable("taskName") taskName: String, @RequestBody ids: List<Long>) {
-//    serviceResolver(taskName).delete(taskName, ids)
-//  }
-//
+
+  @PostMapping("/delete/{taskName}")
+  @Transactional
+  fun delete(@PathVariable("taskName") taskName: String, @RequestBody ids: List<Long>) {
+    CrudServiceResolver.createService(taskName, appContext).delete(taskName, ids)
+  }
+
 }

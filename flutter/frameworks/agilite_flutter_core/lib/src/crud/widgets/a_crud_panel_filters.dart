@@ -54,7 +54,7 @@ class ACrudPanelFilters extends StatelessWidget {
                   child: OutlinedButton.icon(
                     style: buildOutlinedButtonStyle(errorColor),
                     onPressed: () {
-                      crudController.clearFilters();
+                      crudController.onClearFiltersClicked();
                     },
                     label: const Text("limpar filtros"),
                     icon: const Icon(Icons.clear),

@@ -11,6 +11,7 @@ abstract class CrudRepository {
   Future<CrudEditResponse> edit(String taskName, int id);
 
   Future<void> save(String taskName, Map<String, dynamic> data, dynamic id);
+  Future<void> delete(String taskName, List<Object> ids);
 }
 
 class HttpCrudRepositoryAdapter extends CrudRepository {
@@ -45,5 +46,10 @@ class HttpCrudRepositoryAdapter extends CrudRepository {
     } else {
       await http.put('/crud/$taskName/$id', body: data);
     }
+  }
+
+  @override
+  Future<void> delete(String taskName, List<Object> ids) async {
+    await http.post('/crud/delete/$taskName', body: ids);
   }
 }

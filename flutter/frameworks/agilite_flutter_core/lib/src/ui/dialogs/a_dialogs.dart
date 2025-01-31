@@ -53,6 +53,33 @@ void showError(
   );
 }
 
+void showQuestionMessage(
+  String message,
+  Future<void> Function(BuildContext context) onConfirm,
+) {
+  showQuestion(
+    ABottomDialogQuestion(
+      message: message,
+      onConfirm: onConfirm,
+    ),
+  );
+}
+
+void showQuestion(
+  ABottomDialogQuestion questionDialog,
+) {
+  showModalBottomSheet(
+    routeSettings: const RouteSettings(name: questionRouteName),
+    context: globalNavigatorKey.currentContext!,
+    enableDrag: true,
+    showDragHandle: true,
+    constraints: BoxConstraints(
+      minWidth: MediaQuery.of(globalNavigatorKey.currentContext!).size.width,
+    ),
+    builder: (ctx) => questionDialog,
+  );
+}
+
 void showErrorState(
   ErrorState errorState, {
   bool closeAllDialogsBefore = true,

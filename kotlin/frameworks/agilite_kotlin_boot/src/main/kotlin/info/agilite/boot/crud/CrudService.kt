@@ -34,7 +34,7 @@ interface CrudService<T> {
   fun save(entity: T)
 
   fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): T
-//  fun delete(task: String, ids: List<Long>)
+  fun delete(task: String, ids: List<Long>)
 }
 
 @Service
@@ -118,6 +118,16 @@ class DefaultSduiCrudService<T>(
     }
 
     return value as T
+  }
+
+
+  override fun delete(taskName: String, ids: List<Long>) {
+    try {
+      val entityMetadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
+      crudRepository.delete(entityMetadata, ids)
+    } catch (e: Exception) {
+      throw processConstraintViolationExceptionOnDelete(e)
+    }
   }
 
   protected fun createEditQuery(taskName: String, id: Long): DbQuery<*> {
@@ -334,46 +344,21 @@ class DefaultSduiCrudService<T>(
 //    }
   }
 
+  fun processConstraintViolationExceptionOnDelete(rootExc: Exception): Exception {
+    return rootExc
+
+//    TODO implementar
+//    val constraintExc = rootExc.unwrap<ConstraintViolationException>() ?: return rootExc
 //
-//  override fun delete(task: String, ids: List<Long>) {
 //    try {
-//      val taskName = extractTaskName(task)
-//      val entityMetadata = defaultMetadataRepository.loadTaskMetadata(taskName, TaskCrudMetadata::class).entityMetadata
-//      crudRepository.delete(entityMetadata, ids)
-//    } catch (e: Exception) {
-//      throw processConstraintViolationExceptionOnDelete(e)
+//      val constraintName = constraintExc.constraintName
+//      defaultMetadataRepository.loadEntityMetadataByFieldName(constraintName).let { entityMetadata ->
+//        val msg = "Não é possível excluir o registro pois ele está em uso no 'Cadastro de ${entityMetadata.descr}'"
+//        return ValidationException(msg)
+//      }
+//    }catch (ignore: Exception){
+//      //TODO LOGAR a exception ignore
+//      return rootExc
 //    }
-//  }
-//
-//  protected fun extractTaskName(task: String): String {
-//    return task.substringAfterLast(".")
-//  }
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-//  fun processConstraintViolationExceptionOnDelete(rootExc: Exception): Exception {
-//    return rootExc
-//
-////    TODO implementar
-////    val constraintExc = rootExc.unwrap<ConstraintViolationException>() ?: return rootExc
-////
-////    try {
-////      val constraintName = constraintExc.constraintName
-////      defaultMetadataRepository.loadEntityMetadataByFieldName(constraintName).let { entityMetadata ->
-////        val msg = "Não é possível excluir o registro pois ele está em uso no 'Cadastro de ${entityMetadata.descr}'"
-////        return ValidationException(msg)
-////      }
-////    }catch (ignore: Exception){
-////      //TODO LOGAR a exception ignore
-////      return rootExc
-////    }
-//  }
+  }
 }

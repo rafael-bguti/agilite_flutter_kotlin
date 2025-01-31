@@ -11,6 +11,7 @@ class ABottomDialogQuestion extends StatefulWidget {
   final String confirmButtonText;
   final Color? primary;
   final bool popOnConfirm;
+
   const ABottomDialogQuestion({
     required this.message,
     required this.onConfirm,

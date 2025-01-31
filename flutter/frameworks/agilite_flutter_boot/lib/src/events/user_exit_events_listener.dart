@@ -15,22 +15,13 @@ class UserExitEventsListener {
   }
 
   static void _onSysEventExitButtonClicked() {
-    showModalBottomSheet(
-      routeSettings: const RouteSettings(name: questionRouteName),
-      context: globalNavigatorKey.currentContext!,
-      enableDrag: true,
-      showDragHandle: true,
-      constraints: BoxConstraints(
-        minWidth: MediaQuery.of(globalNavigatorKey.currentContext!).size.width,
-      ),
-      builder: (ctx) => ABottomDialogQuestion(
-        primary: errorColor,
-        popOnConfirm: false,
-        icon: Icons.exit_to_app,
-        message: "Deseja sair do sistema?",
-        onConfirm: (context) => _onConfirmExitButtonClick(),
-      ),
-    );
+    showQuestion(ABottomDialogQuestion(
+      primary: errorColor,
+      popOnConfirm: false,
+      icon: Icons.exit_to_app,
+      message: "Deseja sair do sistema?",
+      onConfirm: (context) => _onConfirmExitButtonClick(),
+    ));
   }
 
   static Future<void> _onConfirmExitButtonClick() async {

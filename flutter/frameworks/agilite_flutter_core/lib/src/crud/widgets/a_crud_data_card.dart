@@ -41,8 +41,9 @@ class ACrudSpreadDataCard extends StatelessWidget {
                           },
                     readOnly: true,
                     controller: crudController.spreadController,
+                    value: crudController.state.data,
                     selectPanelWidget: TextButton.icon(
-                      onPressed: crudController.deleteSelected,
+                      onPressed: crudController.onDeleteClicked,
                       style: TextButton.styleFrom(foregroundColor: Colors.red),
                       icon: const Icon(Icons.delete_outline_outlined),
                       label: const Text("excluir selecionados"),
@@ -64,7 +65,7 @@ class ACrudSpreadDataCard extends StatelessWidget {
                             crudController.onPageSizeChange(pgSize);
                           },
                           onPageChange: (delta) {
-                            crudController.pageNavigate(delta);
+                            crudController.onPageNavigateClicked(delta);
                           },
                         ),
                       ),

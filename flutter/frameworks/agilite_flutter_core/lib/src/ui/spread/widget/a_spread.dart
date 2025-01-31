@@ -102,6 +102,8 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
   void didUpdateWidget(ASpread oldWidget) {
     super.didUpdateWidget(oldWidget);
 
+    print('OLD ' + oldWidget.value.toString());
+    print('NEW ' + widget.value.toString());
     if (oldWidget.value != widget.value) {
       spreadController.fillFromList(widget.value ?? []);
     }
@@ -338,6 +340,10 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
     spreadController.onCellStopEdit = widget.onCellStopEdit;
     spreadController.labelTextToValidationMessage = widget.labelTextToValidationMessage;
     spreadController.showSelectColumn = widget.showSelectedColumn ?? true;
+
+    if (widget.value != null) {
+      spreadController.fillFromList(widget.value!);
+    }
   }
 
   Widget _buildSelectedPanel(BuildContext context, SpreadController controller, Widget selectPanelWidget) {
