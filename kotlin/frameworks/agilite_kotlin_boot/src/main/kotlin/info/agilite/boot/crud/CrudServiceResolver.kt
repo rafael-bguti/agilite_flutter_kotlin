@@ -6,13 +6,13 @@ import info.agilite.core.extensions.substr
 import org.springframework.context.ApplicationContext
 
 object CrudServiceResolver {
-  fun createService(taskName: String, appContext: ApplicationContext): CrudService {
+  fun createService(taskName: String, appContext: ApplicationContext): CrudService<Any> {
     val clazz = extractCrudServiceClassName(taskName)
 
     val result = appContext.getBean(clazz.simpleName.localDecapitalize())
-    if (result !is CrudService) throw RuntimeException("Class ${clazz.name} must implement CrudService")
+    if (result !is CrudService<*>) throw RuntimeException("Class ${clazz.name} must implement CrudService")
 
-    return result
+    return result as CrudService<Any>
   }
 
   fun extractCrudServiceClassName(taskName: String): Class<out Any> {

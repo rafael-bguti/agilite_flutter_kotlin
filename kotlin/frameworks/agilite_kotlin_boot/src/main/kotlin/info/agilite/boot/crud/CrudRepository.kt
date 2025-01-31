@@ -11,8 +11,7 @@ interface AgiliteCrudRepository {
   fun findListData(query: DbQuery<*>): List<MutableMap<String, Any?>>
   fun findEditData(query: DbQuery<*>):Map<String, Any?>?
 
-  fun insert(entity: Any)
-  fun update(entity: Any) : Int
+  fun save(entity: Any)
   fun delete(entityMetadata: EntityMetadata, ids: List<Long>)
 }
 
@@ -33,12 +32,8 @@ class DefaultCrudRepository(
     return repository.listMap(query).firstOrNull()
   }
 
-  override fun insert(entity: Any) {
-    repository.insert(entity)
-  }
-
-  override fun update(entity: Any): Int {
-    return repository.update(entity)
+  override fun save(entity: Any) {
+    repository.insertOrUpdate(entity)
   }
 }
 

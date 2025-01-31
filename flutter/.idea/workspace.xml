@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Crud">
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Modificadores no Metadata">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/events/user_exit_events_listener.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/events/user_exit_events_listener.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_edit_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_edit_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_edit_crud.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_edit_crud.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/routers/a_navigator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/routers/a_navigator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudServiceResolver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudServiceResolver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/RootRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/orm/repositories/RootRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/tasks/Cgs1080CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/tasks/Cgs1080CrudService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +60,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Fontes/FontesAgilite/Agilite/flutter/frameworks/agilite_flutter_core/lib/src/ui/forms/customs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Fontes/FontesAgilite/agilite_dicdados&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.3229885&quot;,
@@ -159,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738240953808</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Modificadores no Metadata">
+      <option name="closed" value="true" />
+      <created>1738247604145</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738247604145</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -168,7 +185,8 @@
     <MESSAGE value="Controller" />
     <MESSAGE value="Alteração nos Controllers" />
     <MESSAGE value="Crud" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud" />
+    <MESSAGE value="Modificadores no Metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modificadores no Metadata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

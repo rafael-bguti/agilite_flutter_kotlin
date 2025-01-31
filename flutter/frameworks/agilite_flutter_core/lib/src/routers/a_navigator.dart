@@ -7,6 +7,15 @@ const String loadingRouteName = 'loading';
 const String errorRouteName = 'error';
 const String warningRouteName = 'warning';
 const String successRouteName = 'success';
+const String questionRouteName = 'question';
+
+const Set<String> dialogRouteNames = {
+  loadingRouteName,
+  errorRouteName,
+  warningRouteName,
+  successRouteName,
+  questionRouteName,
+};
 
 typedef NavigatorListener = void Function(String path);
 
@@ -60,9 +69,7 @@ class ANavigator {
   }
 
   static void closeAllDialogs() {
-    globalNavigatorKey.currentState!.popUntil((route) {
-      return route is PageRoute;
-    });
+    globalNavigatorKey.currentState!.popUntil((route) => !dialogRouteNames.contains(route.settings.name));
   }
 
   static bool isInDialog(BuildContext context) {

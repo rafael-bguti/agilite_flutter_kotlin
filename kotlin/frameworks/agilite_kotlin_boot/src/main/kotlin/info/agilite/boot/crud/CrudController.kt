@@ -35,24 +35,21 @@ class CrudController(
   fun insert(@PathVariable("taskName") taskName: String, @RequestBody data: LowerCaseMap) {
     val service = CrudServiceResolver.createService(taskName, appContext)
     val entity = service.convertEntity(taskName, data, null)
-    service.insert(entity)
+
+    service.save(entity)
   }
 
   @PutMapping("/{taskName}/{id}")
   @Transactional
   fun update(@PathVariable("taskName") taskName: String, @PathVariable("id") id: Long, @RequestBody data: LowerCaseMap) {
     val service = CrudServiceResolver.createService(taskName, appContext)
-    service.update(service.convertEntity(taskName, data, id))
+    service.save(service.convertEntity(taskName, data, id))
   }
 
-
-//
-//  @PostMapping("/onnew/{taskName}")
-//  fun onNew(@PathVariable("taskName") taskName: String): Map<String, Any?>? {
-//    return serviceResolver(taskName).createNewRecord(taskName)
-//  }
-//
-//
+  @PostMapping("/onnew/{taskName}")
+  fun onNew(@PathVariable("taskName") taskName: String): Map<String, Any?>? {
+    return CrudServiceResolver.createService(taskName, appContext).createNewRecord(taskName)
+  }
 
 //
 //  @PostMapping("/delete/{taskName}")

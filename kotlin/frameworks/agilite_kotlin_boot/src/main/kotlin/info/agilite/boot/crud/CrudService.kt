@@ -25,25 +25,22 @@ import org.springframework.stereotype.Service
 import kotlin.math.max
 import kotlin.math.min
 
-interface CrudService {
+interface CrudService<T> {
   fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
-//
-//  fun createNewRecord(task: String): Map<String, Any?>? {
-//    return null
-//  }
-//
-  fun editRecord(taskName: String, id: Long): CrudEditResponse?
-  fun update(entity: Any)
-  fun insert(entity: Any)
 
-  fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): Any
+  fun createNewRecord(task: String): Map<String, Any?>? { return null }
+  fun editRecord(taskName: String, id: Long): CrudEditResponse?
+  fun validate(entity: T) {}
+  fun save(entity: T)
+
+  fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): T
 //  fun delete(task: String, ids: List<Long>)
 }
 
 @Service
-class DefaultSduiCrudService(
+class DefaultSduiCrudService<T>(
   val crudRepository: AgiliteCrudRepository
-) : CrudService, SduiProvider {
+) : CrudService<T>, SduiProvider {
   @Value("\${spring.profiles.active:default}")
   protected val activeProfile: String? = null
 
@@ -98,31 +95,20 @@ class DefaultSduiCrudService(
     return CrudEditResponse(data)
   }
 
-  override fun insert(entity: Any) {
+  override fun save(entity: T) {
     try {
       val tableName = EntityMappingContext.getTableAndSchema(entity!!::class.java).table
       val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
       setDefaultValues(entityMetadata, entity)
 
-      crudRepository.insert(entity as Any)
+      validate(entity)
+      crudRepository.save(entity as Any)
     } catch (e: Exception) {
       throw processConstraintViolationExceptionOnSave(e)
     }
   }
 
-  override fun update(entity: Any) {
-    try {
-      val tableName = EntityMappingContext.getTableAndSchema(entity!!::class.java).table
-      val entityMetadata = defaultMetadataRepository.loadEntityMetadata(tableName)
-      setDefaultValues(entityMetadata, entity)
-
-      crudRepository.update(entity as Any)
-    } catch (e: Exception) {
-      throw processConstraintViolationExceptionOnSave(e)
-    }
-  }
-
-  override fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): Any {
+  override fun convertEntity(taskName: String, map: Map<String, *>, id: Long?): T {
     val metadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
     val entityClazz = defaultMetadataRepository.loadEntityClass(metadata.name)
     val value = JsonUtils.fromMap(map, entityClazz.java)
@@ -131,7 +117,7 @@ class DefaultSduiCrudService(
       ReflectionUtils.setIdValue(value, id)
     }
 
-    return value
+    return value as T
   }
 
   protected fun createEditQuery(taskName: String, id: Long): DbQuery<*> {
@@ -324,8 +310,7 @@ class DefaultSduiCrudService(
 
   fun setDefaultValues(entityMetadata: EntityMetadata, entity: Any) {
     if(entityMetadata.entityHasEmpresaField()){
-      ReflectionUtils.getValue<Long?>(entity as Any, entityMetadata.getEmpresaField()!!.name) ?:
-        ReflectionUtils.setValue(entity as Any, entityMetadata.getEmpresaField()!!.name, UserContext.safeUser.empId)
+      ReflectionUtils.setValue(entity as Any, entityMetadata.getEmpresaField()!!.name, UserContext.safeUser.empId)
     }
   }
 

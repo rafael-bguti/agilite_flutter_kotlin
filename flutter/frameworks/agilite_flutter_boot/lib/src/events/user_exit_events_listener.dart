@@ -16,6 +16,7 @@ class UserExitEventsListener {
 
   static void _onSysEventExitButtonClicked() {
     showModalBottomSheet(
+      routeSettings: const RouteSettings(name: questionRouteName),
       context: globalNavigatorKey.currentContext!,
       enableDrag: true,
       showDragHandle: true,

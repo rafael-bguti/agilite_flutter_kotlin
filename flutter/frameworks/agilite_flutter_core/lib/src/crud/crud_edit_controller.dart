@@ -20,6 +20,8 @@ class CrudEditController extends ViewController<CrudEditState> {
   Future<void> onViewLoaded() async {
     showLoading("Carregando registro");
     if (id == null) {
+      final data = await _repository.onNew(taskName);
+      state = CrudEditEditingState(data ?? {}, true);
     } else {
       final response = await _repository.edit(taskName, id!);
       state = CrudEditEditingState(response.data, response.editable);
@@ -29,7 +31,12 @@ class CrudEditController extends ViewController<CrudEditState> {
   Future<void> save() async {
     if (!formController.validate()) return;
     showLoading("Salvando registro");
-    await _repository.save(taskName, formController.buidlJson(true), id);
+    try {
+      await _repository.save(taskName, formController.buidlJson(true), id);
+    } on ValidationException catch (e, stack) {
+      showError(e, stack);
+      return;
+    }
 
     hideLoading();
     ANavigator.pop("ok");

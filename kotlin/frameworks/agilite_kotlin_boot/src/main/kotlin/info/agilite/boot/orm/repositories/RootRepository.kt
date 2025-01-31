@@ -129,6 +129,18 @@ abstract class RootRepository {
       insert(tableName, values, schema)
     }
   }
+  fun insertOrUpdate(entity: Any) {
+    if(entity is Map<*, *>)   {
+      throw Exception("Não é permitido utilizar um Map no método insertOrUpdate por entity")
+    }
+    ReflectionUtils.entityIsNew(entity).let { isNew ->
+      if(isNew){
+        insert(entity)
+      }else {
+        update(entity)
+      }
+    }
+  }
   fun insert(entity: Any) {
     if(entity is Map<*, *>)   {
       throw Exception("Não é permitido utilizar um Map no método insert por entity, utilize o método que recebe um Map")

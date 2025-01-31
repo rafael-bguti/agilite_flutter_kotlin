@@ -39,7 +39,10 @@ class CrudController extends ViewController<CrudState> {
         if (controller is FormFieldController) {
           controller.addValueChangeListener(onFilterChanged);
         } else {
-          controller.addValueChangeListener(_refresh);
+          controller.addValueChangeListener(() {
+            _clearCurrentPage();
+            _refresh();
+          });
         }
       },
     );
@@ -90,6 +93,7 @@ class CrudController extends ViewController<CrudState> {
 
   Future<void> onGroupChanged(int groupIndex) async {
     this.groupIndex = groupIndex;
+    _clearCurrentPage();
     _refresh();
   }
 
