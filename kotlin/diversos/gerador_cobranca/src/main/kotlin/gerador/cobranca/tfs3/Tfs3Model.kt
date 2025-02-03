@@ -25,7 +25,7 @@ data class Tfs3Evento(
         cnpj = cnpj,
         nome = cliente
       ),
-      itens = listOf(
+      itens = mutableListOf(
         ItemCobranca(
           codigo = CODIGO_ITEM_TFS3,
           descricao = obs,

@@ -125,7 +125,7 @@ Future<void> _showDialog(
       return AlertDialog(
         icon: Icon(icon, color: color, size: 44),
         title: Text(title, style: TextStyle(color: color)),
-        content: Text(message, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: AText(message, style: const TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           TextButton(
             onPressed: () {

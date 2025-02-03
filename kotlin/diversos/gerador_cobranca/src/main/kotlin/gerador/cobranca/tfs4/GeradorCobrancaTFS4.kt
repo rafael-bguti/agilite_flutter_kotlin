@@ -1,9 +1,9 @@
 package gerador.cobranca.tfs4
 
 import gerador.cobranca.*
+import gerador.cobranca.cob_antigos.CobAntigoRepository
 import gerador.cobranca.daos.DAO
 import info.agilite.core.extensions.format
-import info.agilite.core.extensions.numbersOnly
 import info.agilite.core.json.JsonUtils
 import info.agilite.core.utils.DateUtils
 import info.agilite.integradores.dtos.Cliente
@@ -11,26 +11,21 @@ import info.agilite.integradores.dtos.Cobranca
 import info.agilite.integradores.dtos.FormaPagamento
 import info.agilite.integradores.dtos.ItemCobranca
 import java.time.LocalDate
-import java.util.stream.Collectors.toSet
+import kotlin.math.max
 
 lateinit var contratoMultiNFe: Map<String, ContratoMultiNFe>
 lateinit var contratosTFSam3: Set<String>
 
 //Processadores customizados
 val processadoresCustomizadosPorCliente = mapOf<String, Processador>(
-  // Multitec Sistemas
-  "67919092000189" to IgnorarCobranca(),
-  "64856974000154" to ValorZeradoAte100DocsE1Empresa(),//Suzan Indústria e Comércio de Materiais
-  "16937595000146" to ValorZeradoAte100DocsE1Empresa(),//QI Equipamentos para Automação Industrial
-  "19065357000186" to ValorFixo(694.0.toBigDecimal()),//MaisVerdes Tecnologia
+  "67919092000189" to IgnorarCobranca(), // Multitec Sistemas
+  "64856974000154" to ValorZeradoAte100DocsE1Empresa(), // Suzan Indústria e Comércio de Materiais
+  "16937595000146" to ValorZeradoAte100DocsE1Empresa(), // QI Equipamentos para Automação Industrial
+  "19065357000186" to ValorFixo(694.0.toBigDecimal()), // MaisVerdes
 )
 
 
-//Adicinoar as cobranças extras aqui
 val servicosAdicionaisPorRevenda: MutableMap<Revenda, List<ItemCobranca>> = mutableMapOf(
-  Revenda("52104228000125", "ELTech Sistemas") to listOf(
-    ItemCobranca(CODIGO_ITEM_MANUTENCAO_NUVEM, "Manutenção da Nuvem AWS", 1, 500.toBigDecimal()),
-  ),
 )
 
 class GeradorCobrancaTFS4 {
@@ -42,7 +37,7 @@ class GeradorCobrancaTFS4 {
       val processador = obterProcessador(consumoDaLicenca)
       processador.processarValores(consumoDaLicenca)
     }
-    removerZerados(consumoDasLicencas)
+    removerValoresPequenos(consumoDasLicencas)
 
     val faturamentos = mutableListOf<FaturamentoTFS4>()
     gerarFaturamentoDosConsumosDoMultiNfe(consumoDasLicencas, faturamentos)
@@ -76,8 +71,6 @@ class GeradorCobrancaTFS4 {
       val cnpjEmissor = it.cnpj
       faturamentos.any { fat -> fat.cnpjEmissores.contains(cnpjEmissor)  } || documentosNaoPagos.add(it)
     }
-
-
   }
 
   private fun gerarFaturamentoVendaDiretaCliente(
@@ -91,7 +84,7 @@ class GeradorCobrancaTFS4 {
         natureza = NATUREZA_TFS4_CLI,
         cliente = Cliente(licenca.cnpjCobrancaSAM4DiretoCliente ?: licenca.licencaCNPJ, licenca.licencaRs),
         obs = licenca.getHistorico(),
-        itens = listOf(
+        itens = mutableListOf(
           ItemCobranca(
             codigo = CODIGO_ITEM_TFS4_CLI,
             descricao = "Uso do TFS4 cobrado diretamente do cliente",
@@ -169,7 +162,7 @@ class GeradorCobrancaTFS4 {
       natureza = NATUREZA_MNFE_IN_SAM4,
       cliente = Cliente(licenca.cnpjCobrancaMultinfe ?: licenca.licencaCNPJ, licenca.licencaRs),
       obs = licenca.getHistorico(),
-      itens = listOf(
+      itens = mutableListOf(
         ItemCobranca(
           codigo = CODIGO_ITEM_MULTINFE,
           descricao = "Uso do TFS4 cobrado pelo contrato do MultiNFe",
@@ -211,15 +204,24 @@ class GeradorCobrancaTFS4 {
     val valorTotalSAM3 = cobrancasSam3.map { it.itens.sumOf { item -> item.valor } }.sumOf { it }
     println("Valor total SAM3: $valorTotalSAM3")
     println("Valor total SAM4: ${licenca.total}")
-    //TODO imprimir aqui ultimas 6 cobranças do sistema de cobranca
-    println("O que fazer? [1] - Usar só o novo, [2] - Usar só o antigo, [3] - Usar os 2, [4] - Só o novo com outro valor")
-    val resposta = readlnOrNull()
 
-    if (resposta == "1") {
+    exibirCobrancasAnteriores(licenca.licencaCNPJ)
+
+    println("O que fazer? [0] - Usar o MAIOR [1] - Usar só o novo, [2] - Usar só o antigo, [3] - Usar os 2, [4] - Só o novo com outro valor")
+    val resposta = readlnOrNull() ?: "0"
+
+    if (resposta == "0") {
+      cobrancasSam3.forEach{ cobrancasGeradas.remove(it) }
+      val maiorValor = if(valorTotalSAM3 > licenca.total) valorTotalSAM3 else licenca.total
+      licenca.total = maiorValor
+      return FaturamentoTFS4(buildFaturamentoMultinfeInSAM4(licenca), cnpjs)
+    } else if (resposta == "1") {
       cobrancasSam3.forEach{ cobrancasGeradas.remove(it) }
       return FaturamentoTFS4(buildFaturamentoMultinfeInSAM4(licenca), cnpjs)
     } else if (resposta == "2") {
-      return null
+      cobrancasSam3.forEach{ cobrancasGeradas.remove(it) }
+      licenca.total = valorTotalSAM3
+      return FaturamentoTFS4(buildFaturamentoMultinfeInSAM4(licenca), cnpjs)
     } else if (resposta == "3") {
       return FaturamentoTFS4(buildFaturamentoMultinfeInSAM4(licenca), cnpjs)
     } else if (resposta == "4") {
@@ -237,11 +239,20 @@ class GeradorCobrancaTFS4 {
     throw RuntimeException("Resposta inválida")
   }
 
-  private fun removerZerados(consumoDasLicencas: MutableList<ConsumoTFS4Licenca>) {
+  private fun exibirCobrancasAnteriores(cnpj: String){
+    val resultado = CobrancaRepository.buscarCobrancas(cnpj)
+    if(resultado.size < 6){
+      resultado.addAll(CobAntigoRepository.buscarCobrancasAntigas(cnpj))
+    }
+
+    println("Ultimas cobranças: ${resultado}")
+  }
+
+  private fun removerValoresPequenos(consumoDasLicencas: MutableList<ConsumoTFS4Licenca>) {
     for (indice in consumoDasLicencas.size - 1 downTo 0) {
       val licenca = consumoDasLicencas[indice]
-      if (licenca.total == 0.toBigDecimal()) {
-        println("*** ATENÇÃO *** Licença ${licenca.licencaCNPJ}-${licenca.licencaRs} com valor 0,00 - QtdTotalDocs - ${licenca.qtdTotalDocs()} - Já usou o sistema ${licenca.jaProcessouAlgumDoc()}")
+      if (licenca.total <= 10.toBigDecimal()) {
+        println("*** ATENÇÃO *** REMOVENDO A COBRANÇA - Licença ${licenca.licencaCNPJ}-${licenca.licencaRs} com valor ${licenca.total} - QtdTotalDocs - ${licenca.qtdTotalDocs()} - Já usou o sistema ${licenca.jaProcessouAlgumDoc()}")
         consumoDasLicencas.removeAt(indice)
       }
     }

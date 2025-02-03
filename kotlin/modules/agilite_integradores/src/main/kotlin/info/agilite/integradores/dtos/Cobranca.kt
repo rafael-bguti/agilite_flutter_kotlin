@@ -6,9 +6,10 @@ import java.time.LocalDate
 data class Cobranca(
   val natureza: String,
   val cliente: Cliente,
-  val itens: List<ItemCobranca>,
+  val itens: MutableList<ItemCobranca>,
   val formasPagamento: List<FormaPagamento>,
-  val obs: String? = null,
+  var obs: String? = null,
+  var agrupada: Boolean = false,
 ){
   fun total(): BigDecimal {
     return itens.sumOf { it.valor }

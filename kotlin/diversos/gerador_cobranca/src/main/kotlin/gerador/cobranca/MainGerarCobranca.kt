@@ -28,9 +28,16 @@ const val NATUREZA_TFS3 = "TFS3"
 const val NATUREZA_NUVEM = "MANUT_NUVEM";
 const val NATUREZA_DPIL = "DPIL";
 const val NATUREZA_SOFTWARE = "SOFTWARE";
+
+//Natureza sem nota
 const val NATUREZA_FREELA = "FREELA";
 
+//Forma por dentro
 const val NOME_FORMA_PAGAMENTO_BOLETO = "Boleto Inter"
+
+//Forma por fora
+const val NOME_FORMA_PAGAMENTO_PIX = "PIX"
+
 val mesAnoReferencia = LocalDate.now().minusMonths(1)
 
 fun main() {
@@ -57,9 +64,15 @@ class GerarCobranca {
     GeradorCobrancaTFS4().gerar()
 
     ajustarVencimento()
+    removerValoresPequenos(cobrancasGeradas)
+
+    alterarCnpjMaliber()
+    agruparCobrancaDasRevendas()
+
     Files.write(JsonUtils.toJson(cobrancasGeradas).toByteArray(), File("c:\\lixo\\cobrancas\\cobrancas.json"))
     println("Arquivo criado em: c:\\lixo\\cobrancas\\cobrancas.json")
     println("VALOR TOTAL: ${cobrancasGeradas.sumOf { it.total() }}")
+
 
     println("\n\n")
     println("* * * * * * * * A T E N Ç Ã O * * * * * * * *")
@@ -69,6 +82,16 @@ class GerarCobranca {
     println("* * * * * * * * A T E N Ç Ã O * * * * * * * *")
 
     println("Arquivo de cobrança gerado com sucesso! -> c:\\lixo\\cobrancas\\cobrancas.json")
+  }
+
+  private fun removerValoresPequenos(cobrancas: MutableList<Cobranca>) {
+    for (i in cobrancas.indices.reversed()) {
+      val cob = cobrancas[i]
+      if(cob.total() < BigDecimal("10")){
+        println(" * * * A T E N Ç Ã O * * * --- REMOVENDO COBRANÇA de ${cob.cliente.nome} - ${cob.total()}")
+        cobrancas.removeAt(i)
+      }
+    }
   }
 
   private fun ajustarVencimento(){
@@ -82,19 +105,37 @@ class GerarCobranca {
   }
 
   private fun ajustarCobrancas() {
-    ajustarCNPJMaliber()
     ajustarSindicatoCapivari()
     gerarNovosTitulos()
   }
 
-  private fun ajustarCNPJMaliber(){
-    //TODO Jan de 2025 não funcionou
+  private fun alterarCnpjMaliber(){
     cobrancasGeradas.forEach {
       if(it.cliente.cnpj == "47938840000163"){// Maliber
         it.cliente.cnpj = "47938840000325"
       }
     }
   }
+
+  private fun agruparCobrancaDasRevendas(){
+    cobrancasGeradas.filter { cobRev -> cobRev.natureza == NATUREZA_TFS4_REV}.forEach { cobRev ->
+      val cobrancasFilhas = cobrancasGeradas.filter{ cobRev.cliente.cnpj == it.cliente.cnpj && it.natureza != NATUREZA_FREELA && it != cobRev}
+      if(cobrancasFilhas.isNotEmpty()){
+        cobRev.obs = "[Cobrança 1] - ${cobRev.obs}"
+
+        cobrancasFilhas.forEachIndexed { index, it ->
+          cobRev.obs += "\n\n[Cobrança ${index + 2}] - ${it.obs ?: it.itens.first().descricao}"
+          cobRev.itens.addAll(it.itens)
+          cobRev.formasPagamento.forEach{fp -> fp.valor = fp.valor.add(it.total())}
+          it.agrupada = true
+        }
+      }
+    }
+
+    cobrancasGeradas.removeIf { it.agrupada }
+  }
+
+
 
   private fun ajustarSindicatoCapivari(){
     //SINDICATO DOS TRABALHADORES ASSALARIADOS DE CAPIVARI

@@ -21,7 +21,7 @@ class Utils {
       return Cobranca(
         natureza = natureza,
         cliente = Cliente(cnpj = cnpj),
-        itens = listOf(ItemCobranca(codigo = codigoItem, descricao = descrItem, quantidade = 1, valor = valor)),
+        itens = mutableListOf(ItemCobranca(codigo = codigoItem, descricao = descrItem, quantidade = 1, valor = valor)),
         obs = obs,
         formasPagamento = listOf(
           FormaPagamento(

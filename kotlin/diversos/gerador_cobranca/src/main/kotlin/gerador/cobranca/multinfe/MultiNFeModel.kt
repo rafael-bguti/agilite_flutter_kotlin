@@ -29,7 +29,7 @@ data class MNFeCobranca(
           quantidade = 1,
           valor = it.total
         )
-      },
+      }.toMutableList(),
       formasPagamento = listOf(
         FormaPagamento(
           nomeFormaPagamento = NOME_FORMA_PAGAMENTO_BOLETO,

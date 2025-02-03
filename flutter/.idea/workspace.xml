@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Insert no Crud">
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Crud Completo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/events/user_exit_events_listener.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/lib/src/events/user_exit_events_listener.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud_data_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud_data_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud_panel_filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud_panel_filters.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_bottom_dialog_question.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_bottom_dialog_question.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_dialogs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_dialogs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/widgets/a_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738323736425</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Crud Completo">
+      <option name="closed" value="true" />
+      <created>1738327739928</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1738327739928</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -195,7 +199,8 @@
     <MESSAGE value="Crud" />
     <MESSAGE value="Modificadores no Metadata" />
     <MESSAGE value="Insert no Crud" />
-    <option name="LAST_COMMIT_MESSAGE" value="Insert no Crud" />
+    <MESSAGE value="Crud Completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Crud Completo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

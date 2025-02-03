@@ -71,7 +71,7 @@ class GeradorCobrancaTFS3 {
         Cobranca(
           NATUREZA_TFS3,
           Cliente(cnpjNaoCobrado, cobrancaHistorica.nome),
-          listOf(ItemCobranca(CODIGO_ITEM_TFS3, "Transmissor Fiscal SAM3 - Manutenção de documentos", 1, cobrancaHistorica.valor)),
+          mutableListOf(ItemCobranca(CODIGO_ITEM_TFS3, "Transmissor Fiscal SAM3 - Manutenção de documentos", 1, cobrancaHistorica.valor)),
           listOf(FormaPagamento(NOME_FORMA_PAGAMENTO_BOLETO, LocalDate.now().withDayOfMonth(20), cobrancaHistorica.valor)),
         )
       ))
