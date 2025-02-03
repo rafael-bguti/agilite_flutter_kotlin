@@ -1,5 +1,6 @@
 import 'package:agilite_flutter_boot/boot.dart';
 import 'package:agilite_flutter_core/core.dart';
+import 'package:flutter/material.dart';
 import 'package:scf/tasks/scf2010/scf2010.dart' deferred as scf2010;
 import 'package:scf/tasks/scf2011/scf2011.dart' deferred as scf2011;
 import 'package:srf/tasks/srf2030/srf2030.dart' deferred as srf2030;
@@ -15,6 +16,7 @@ final routes = <ARoute>[
     (_, state) {
       final base = state.pathParameters['base'];
       return SduiLoader(
+        key: ValueKey(base),
         contentProvider: RemoteSduiContentProvider(
           url: '/sdui/$base',
           pathParams: state.pathParameters,

@@ -3,7 +3,21 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="C:\Fontes\FontesAgilite\Agilite\kotlin\docs\dicdados\tabelas.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="C:\Fontes\FontesAgilite\Agilite\kotlin\docs\dicdados\tarefas.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\docs\dicdados\tabelas.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

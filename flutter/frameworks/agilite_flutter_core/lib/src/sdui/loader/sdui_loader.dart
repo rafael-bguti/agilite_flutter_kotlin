@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../sdui_context.dart';
-
 class SduiLoader extends StatefulWidget {
   final SduiContentProvider contentProvider;
   const SduiLoader({

@@ -37,8 +37,6 @@ class SpreadController extends FieldController<SpreadModel> {
 
   @override
   void dispose() {
-    print('Dispose SpreadController - $name');
-
     for (final column in columns) {
       column.dispose();
     }

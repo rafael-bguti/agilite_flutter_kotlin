@@ -61,19 +61,16 @@ class GlobalNavigationObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     routeStack.add(route);
-    print("Stack depois de push: ${routeStack.map((e) => e.settings.name)}");
   }
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     routeStack.removeLast();
-    print("Stack depois de pop: ${routeStack.map((e) => e.settings.name)}");
   }
 
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
     routeStack.removeLast();
-    print("Stack depois de remove: ${routeStack.map((e) => e.settings.name)}");
   }
 
   @override
@@ -82,7 +79,6 @@ class GlobalNavigationObserver extends NavigatorObserver {
     if (newRoute != null) {
       routeStack.add(newRoute);
     }
-    print("Stack depois de replace: ${routeStack.map((e) => e.settings.name)}");
   }
 
   int get stackLength => routeStack.length;

@@ -49,20 +49,24 @@ class DefaultSduiCrudService<T>(
     val taskName = request.taskName
 
     val entityMetadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
-    val columnNames = getColumnNamesToList(taskName, entityMetadata)
+    val columnQuery = getColumnQueriesToList(taskName, entityMetadata)
 
-    val columns = columnNames.map {
-      val split = it.split(".")
+    val columns = columnQuery.map { query ->
+      val querySplit = query.splitToList("|")
+      val completField = querySplit[0]
+      val label = querySplit.getOrNull(1)
+
+      val split = completField.split(".")
       val field = defaultMetadataRepository.loadFieldMetadata(split.last())
 
-      val fieldLength = if (field.size == 0.0 || field.foreignKeyEntity != null) 35 else field.size.toInt()
+      val fieldLength = if (field.size <= 5.0 || field.foreignKeyEntity != null) 15 else field.size.toInt()
       val labelLength = field.label.length
       min(max(fieldLength, labelLength), 35)
 
       val width = SduiColumnWidth(SduiColumnWidthType.byCharCount, min(max(fieldLength, labelLength), 35).toDouble())
       SduiSpreadColumnComponent(
-        name = it,
-        label = getColumnLabel(split),
+        name = completField,
+        label = label ?: getColumnLabel(split),
         type = field.type.frontEndType,
         options = field.options?.map { opt -> Option(opt.value, opt.label) },
         width = width,
@@ -147,7 +151,7 @@ class DefaultSduiCrudService<T>(
     val entityMetadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
     val columnId = "${entityMetadata.name}id as id"
 
-    val whereLikeSearchPair = createWhereToSearch(entityMetadata, request)
+    val whereLikeSearchPair = createWhereToSearch(taskName, entityMetadata, request)
     val whereDetailedFiltersPair = createWheresToDetailedFilters(entityMetadata, request)
     val wherePadrao = getCustomWhereOnList(request, entityMetadata)
     val where = buildString {
@@ -164,9 +168,10 @@ class DefaultSduiCrudService<T>(
     wherePadrao?.second?.let { filtersParams.putAll(it) }
 
     val whereSimple = WhereSimple(where, filtersParams)
+    val columnsQuery = getColumnQueriesToList(taskName, entityMetadata).map { it.substringBefore("|", it) }.joinToString()
     val query = DbQueryBuilders.build(
       defaultMetadataRepository.loadEntityClass(entityMetadata.name),
-      getColumnNamesToList(taskName, entityMetadata).joinToString(),
+      columnsQuery,
       limitQuery = " LIMIT ${request.pageSize} OFFSET ${request.currentPage * request.pageSize} ",
       columnsProcessor = { "$columnId, $it" },
       where = whereSimple,
@@ -176,7 +181,7 @@ class DefaultSduiCrudService<T>(
     return query
   }
 
-  protected fun getColumnNamesToList(taskName: String, entityMetadata: EntityMetadata): List<String> {
+  protected fun getColumnQueriesToList(taskName: String, entityMetadata: EntityMetadata): List<String> {
     val result = mutableListOf<String>()
     entityMetadata.fieldsToCrudList().forEach {
       if (it.foreignKeyEntity != null) {
@@ -213,7 +218,7 @@ class DefaultSduiCrudService<T>(
 
     val idName = "${parenteFkField.foreignKeyEntity!!.lowercase()}id"
     val localParentAlias = parentAlias?.let { "$it." } ?: ""
-    val result = mutableListOf("$localParentAlias$idName")
+    val result = if(onEdit) mutableListOf("$localParentAlias$idName") else mutableListOf()
 
     fieldsFk.forEach {
       if (it.foreignKeyEntity != null) {
@@ -229,10 +234,10 @@ class DefaultSduiCrudService<T>(
     return null
   }
 
-  private fun createWhereToSearch(entity: EntityMetadata, filters: CrudListRequest): Pair<String, Map<String, Any>?>? {
-    return if (filters.search != null && !entity.fieldsSearchable().isNullOrEmpty()) {
-      val columns = entity.fieldsSearchable()!!.joinToString(",") {
-        jdbcDialect.coalesceString(jdbcDialect.castToString(it.name))
+  private fun createWhereToSearch(taskName: String, entity: EntityMetadata, filters: CrudListRequest): Pair<String, Map<String, Any>?>? {
+    return if (filters.search != null) {
+      val columns = getColumnQueriesToList(taskName, entity).map {it.substringBefore("|", it)} .joinToString(",") {
+        jdbcDialect.coalesceString(jdbcDialect.castToString(it))
       }
       val where = "CONCAT(${columns}) ILIKE :search"
       Pair(where, mapOf("search" to "%${filters.search}%"))

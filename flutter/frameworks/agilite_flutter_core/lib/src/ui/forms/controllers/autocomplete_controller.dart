@@ -280,13 +280,8 @@ class AutocompleteController<T> extends FieldController<Option<T>?> {
   }
 
   void onSearchTextChange(String value) {
-    try {
-      selectedIndex.value = value.isEmpty || showAllOptions ? -1 : 0;
-      loadingOptions(value);
-    } catch (e) {
-      print(e); //TODO Criar uma classe de erro que indique para o tratador global que é pra exibir uma msg global
-      rethrow;
-    }
+    selectedIndex.value = value.isEmpty || showAllOptions ? -1 : 0;
+    loadingOptions(value);
   }
 
   Future<void> loadingOptions(String? query) async {

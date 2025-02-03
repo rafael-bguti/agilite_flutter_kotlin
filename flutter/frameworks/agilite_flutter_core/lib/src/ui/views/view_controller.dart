@@ -28,7 +28,6 @@ class ViewController<T> extends ChangeNotifier {
 
   @override
   void dispose() {
-    print('DISPOSE $runtimeType');
     super.dispose();
   }
 }

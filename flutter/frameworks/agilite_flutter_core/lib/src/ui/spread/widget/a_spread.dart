@@ -101,9 +101,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
   @override
   void didUpdateWidget(ASpread oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    print('OLD ' + oldWidget.value.toString());
-    print('NEW ' + widget.value.toString());
     if (oldWidget.value != widget.value) {
       spreadController.fillFromList(widget.value ?? []);
     }

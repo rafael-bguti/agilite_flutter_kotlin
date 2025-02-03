@@ -15,13 +15,6 @@ data class EntityMetadata (
     return fields.filter { it.filterable }.ifEmpty { null }
   }
 
-  //TODO - Esse método está voltando o resultado a partir do 'filterable',
-  // precisa criar um campo 'searchable' no Metadata para que o usuário possa definir quais campos serão usados na busca, com menos campos que no filtro detalhado
-  // Além de criar uma chave para essas buscas nas tabelas principais
-  fun fieldsSearchable(): List<FieldMetadata>? {
-    return fields.filter { it.filterable && it.foreignKeyEntity == null }.ifEmpty { null }
-  }
-
   fun fieldsShowInFk(): List<FieldMetadata> {
     return fields.filter { it.showInFkAutoComplete } //TODO caso esteja vazio pegar os campos da UK
   }

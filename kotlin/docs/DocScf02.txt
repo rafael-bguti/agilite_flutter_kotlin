@@ -8,7 +8,7 @@ scf02empresa                     10.0 S Lng        Empresa
 scf02tipo                         1.0 S Int        Tipo
                                                    0 - Receber
                                                    1 - Pagar
-scf02forma                       10.0 S Cgs38      Forma de Pagamento/Recebimento
+scf02forma                       10.0 S Cgs38      Forma
 scf02entidade                    10.0 S Cgs80      Entidade
 scf02nossoNum                    12.0 N Lng        Nosso Número
 scf02nossoNumDV                   1.0 N Int        DV do Nosso Número

@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Crud Completo">
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="Gerador cobranca">
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_dialogs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/dialogs/a_dialogs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/docs/DocScf02.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/docs/DocScf02.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/docs/dicdados/tabelas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/docs/dicdados/tabelas.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/entities/scf/Scf02.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_shared/src/main/kotlin/info/agilite/shared/entities/scf/Scf02.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/tasks/Cgs1080CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/cgs/src/main/kotlin/info/agilite/cgs/tasks/Cgs1080CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738327739928</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Gerador cobranca">
+      <option name="closed" value="true" />
+      <created>1738584373767</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738584373767</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -200,7 +208,8 @@
     <MESSAGE value="Modificadores no Metadata" />
     <MESSAGE value="Insert no Crud" />
     <MESSAGE value="Crud Completo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud Completo" />
+    <MESSAGE value="Gerador cobranca" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gerador cobranca" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

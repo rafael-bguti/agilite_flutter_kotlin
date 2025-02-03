@@ -11,18 +11,15 @@ class SseReceiver {
     stream.listen(
       (event) {
         if (onMessage != null) {
-          print("SSE: $event");
           if (event.startsWith("data:msg:")) {
             onMessage!(event.substring(9));
           }
         }
       },
       onError: (error) {
-        print("Erro no fluxo SSE: $error"); //TODO
         _client.close();
       },
       onDone: () {
-        print("Conexão SSE encerrada pelo servidor."); //TODO remover
         _client.close();
       },
       cancelOnError: true,

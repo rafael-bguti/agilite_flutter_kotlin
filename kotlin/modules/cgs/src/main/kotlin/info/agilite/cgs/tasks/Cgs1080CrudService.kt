@@ -21,24 +21,6 @@ class Cgs1080CrudService(
 ) : DefaultSduiCrudService<Cgs80>(crudRepository) {
   override fun createSduiComponent(request: SduiRequest): SduiComponent {
     val crud = super.createSduiComponent(request) as SduiCrud
-
-    crud.customFilters = listOf(
-      SduiSizedBox(
-        width = 250.0,
-        child = SduiComboField(
-          name = CLI_FOR_TRA_FILTER,
-          options = listOf(
-            Option(null, "Selecionar..."),
-            Option("1", "Apenas clientes"),
-            Option("2", "Apenas fornecedores"),
-            Option("3", "Apenas transportadoras"),
-          ),
-          labelText = "Exibir",
-          hintText = "Selecione..."
-        )
-      )
-    )
-
     crud.formBody = createFormBody()
     return crud
   }

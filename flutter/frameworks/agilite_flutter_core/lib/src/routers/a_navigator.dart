@@ -32,7 +32,6 @@ class ANavigator {
     if (closeAllDialogsBefore) {
       ANavigator.closeAllDialogs();
     }
-
     appRouter.replace(path);
   }
 
@@ -56,7 +55,6 @@ class ANavigator {
   }
 
   static void refresh() {
-    print('refresh');
     appRouter.refresh();
   }
 
