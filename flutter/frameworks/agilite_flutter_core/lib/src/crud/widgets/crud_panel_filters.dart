@@ -1,12 +1,12 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ACrudPanelFilters extends StatelessWidget {
+class CrudPanelFilters extends StatelessWidget {
   final CrudController crudController;
 
   final Widget Function(BuildContext context)? moreFiltersPanelBuilder;
   final List<Widget>? customFilters;
-  const ACrudPanelFilters(
+  const CrudPanelFilters(
     this.crudController, {
     this.customFilters,
     this.moreFiltersPanelBuilder,

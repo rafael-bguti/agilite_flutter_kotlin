@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
+import './crud_data_table_card.dart';
+import 'crud_header.dart';
+import 'crud_panel_filters.dart';
+
 class ACrud extends StatefulWidget {
   final String taskName;
 
   final CrudDescr descr;
-  final List<ASpreadColumn> columns;
+  final List<ADataTableColumn> columns;
   final List<Widget>? customFilters;
 
   final CrudController? controller;
@@ -68,7 +72,7 @@ class _ACrudState extends State<ACrud> {
       controller: _controller,
       builder: (context, state) {
         return ATaskContainer(
-          header: ACrudHeader.text(
+          header: CrudHeader.text(
             widget.descr.plural,
             onAddTap: _isEditable ? _onEdit : null,
           ),
@@ -77,12 +81,12 @@ class _ACrudState extends State<ACrud> {
             children: [
               AForm(
                 _controller.formFiltersController,
-                child: ACrudPanelFilters(
+                child: CrudPanelFilters(
                   _controller,
                   customFilters: widget.customFilters,
                 ),
               ),
-              ACrudSpreadDataCard(
+              CrudDataTableCard(
                 crudController: _controller,
                 onEdit: _isEditable ? _onEdit : null,
                 columns: widget.columns,

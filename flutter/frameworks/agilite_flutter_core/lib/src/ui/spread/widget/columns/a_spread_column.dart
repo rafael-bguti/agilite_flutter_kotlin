@@ -27,7 +27,7 @@ abstract class ASpreadColumn<T> {
 
   AWidth _width = const AWidth.flex(1);
 
-  final String Function(dynamic value)? formatter;
+  final Formatter? formatter;
 
   ASpreadColumn(
     this.name,
@@ -153,21 +153,17 @@ abstract class ASpreadColumn<T> {
   }
 
   Widget _buildCellSizeContainer(Widget child, bool header) {
-    final borderDecorator = header ? null : null;
-
     if (width.hasFixedWidth) {
-      return Container(
+      return SizedBox(
         width: width.width,
         height: spreadController.rowHeight,
-        decoration: borderDecorator,
         child: child,
       );
     } else {
       return Flexible(
         flex: width.width.toInt(),
-        child: Container(
+        child: SizedBox(
           height: spreadController.rowHeight,
-          decoration: borderDecorator,
           child: child,
         ),
       );

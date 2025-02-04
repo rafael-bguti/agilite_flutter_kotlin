@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'crud_state.dart';
 import 'models/crud_list_request.dart';
 
+const idName = 'id';
+
 class CrudController extends ViewController<CrudState> {
   static const String spreadDataName = 'data';
   static const String searchName = 'search';
@@ -20,7 +22,8 @@ class CrudController extends ViewController<CrudState> {
   //Controllers
   final formFiltersController = FormController();
 
-  final spreadController = SpreadController("data");
+  //Selected rows
+  var _selectedRows = <int>[];
 
   //Navigation
   var currentPage = 0;
@@ -72,7 +75,6 @@ class CrudController extends ViewController<CrudState> {
     onBtnRefreshClick();
   }
 
-  // ------ Atualizar dados ------
   void onFilterChanged() {
     _clearCurrentPage();
     _searchDebouceTimer.run(_refresh);
@@ -99,23 +101,29 @@ class CrudController extends ViewController<CrudState> {
     _refresh();
   }
 
+  void onSelectedRowsChanged(List<int> selectedRows) {
+    _selectedRows = selectedRows;
+    notifyListeners();
+  }
+
+  List<int> get selectedRows => _selectedRows;
+
   void onDeleteClicked() {
-    final selectedRows = spreadController.selectedRows;
-    if (selectedRows.length == 0) {
+    if (_selectedRows.isEmpty) {
       showWarningSnack("Nenhum registro selecionado para exclusão");
       return;
     }
 
-    final msg = selectedRows.length == 1 ? "do registro selecionado?" : "dos ${selectedRows.length} registros selecionados?";
-    showQuestionMessage("Confirma a exclusão $msg", (ctx) => _onConfirmDeleteSelected(ctx, selectedRows));
+    final msg = _selectedRows.length == 1 ? "do registro selecionado?" : "dos ${_selectedRows.length} registros selecionados?";
+    showQuestionMessage("Confirma a exclusão $msg", (ctx) => _onConfirmDeleteSelected(ctx, _selectedRows));
   }
 
-  Future<void> _onConfirmDeleteSelected(BuildContext context, List<int> selectedRows) async {
+  Future<void> _onConfirmDeleteSelected(BuildContext context, List<int> selectedRowIndex) async {
     try {
       showLoading("Excluindo registros selecionados...");
       final List<Object> selectedIds = [];
 
-      for (final rowIndex in selectedRows) {
+      for (final rowIndex in selectedRowIndex) {
         selectedIds.add(_getIdByRowIndex(rowIndex));
       }
 
@@ -127,9 +135,9 @@ class CrudController extends ViewController<CrudState> {
     }
   }
 
-  Object _getIdByRowIndex(int rowIndex) {
-    final row = state.data[rowIndex];
-    final id = row["id"];
+  Object _getIdByRowIndex(int selctedRowIndex) {
+    final row = state.data[selctedRowIndex];
+    final id = row[idName];
     if (id == null) {
       throw 'Não foi possível localizar o valor do ID do registro';
     }
@@ -137,12 +145,15 @@ class CrudController extends ViewController<CrudState> {
   }
 
   Future<void> _refresh([bool byNextPageNavigation = false]) async {
+    _selectedRows.clear();
     $loading.value = true;
+
     try {
       final request = _buildRequest();
       final stateResponse = await _repository.loadData(taskName, request);
       if (stateResponse.data.isEmpty && byNextPageNavigation) {
         showWarningSnack("Nenhuma nova página localizada");
+        notifyListeners();
       } else {
         state = stateResponse;
       }
@@ -153,7 +164,7 @@ class CrudController extends ViewController<CrudState> {
 
   CrudListRequest _buildRequest() {
     final customFilters = formFiltersController.buidlJson();
-    final search = customFilters.remove(searchName);
+    final search = customFilters.remove(searchName)?.toString();
 
     return CrudListRequest(
       currentPage: currentPage,
@@ -169,8 +180,8 @@ class CrudController extends ViewController<CrudState> {
   void dispose() {
     $loading.dispose();
     formFiltersController.dispose();
-    spreadController.dispose();
     _searchDebouceTimer.dispose();
+    _selectedRows.clear();
 
     super.dispose();
   }

@@ -1,8 +1,8 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ACrudHeader extends AContainerHeader {
-  ACrudHeader._({
+class CrudHeader extends AContainerHeader {
+  CrudHeader._({
     required String text,
     required Widget? headerOptions,
   }) : super.text(
@@ -10,12 +10,12 @@ class ACrudHeader extends AContainerHeader {
           headerOptions: headerOptions,
         );
 
-  factory ACrudHeader.text(
+  factory CrudHeader.text(
     String headerText, {
     VoidCallback? onAddTap,
     List<MoreOption>? moreOptions,
   }) {
-    return ACrudHeader._(
+    return CrudHeader._(
       text: headerText,
       headerOptions: _createMoreOptions(onAddTap, moreOptions),
     );

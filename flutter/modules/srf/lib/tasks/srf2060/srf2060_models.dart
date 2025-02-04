@@ -19,9 +19,9 @@ class Srf2060Filter {
 
   factory Srf2060Filter.fromJson(Map<String, dynamic> json) {
     return Srf2060Filter(
-      emissIni: json['emissIni'],
-      emissFim: json['emissFim'],
-      reenviar: json['reenviar'],
+      emissIni: json['emissIni'] as DateTime?,
+      emissFim: json['emissFim'] as DateTime?,
+      reenviar: json['reenviar'] as bool?,
     );
   }
 }
@@ -53,16 +53,16 @@ class Srf2060Mail {
 
   factory Srf2060Mail.fromJson(Map<String, dynamic> json) {
     return Srf2060Mail(
-      cgs18id: json['cgs18id'],
-      cgs18nome: json['cgs18nome'],
-      cgs15id: json['cgs15id'],
-      cgs15nome: json['cgs15nome'],
-      cgs15titulo: json['cgs15titulo'],
-      cgs80email: json['cgs80email'],
-      srf01id: json['srf01id'],
-      srf01nome: json['srf01nome'],
-      srf01integracaoScf: json['srf01integracaoScf'],
-      srf01integracaoGdf: json['srf01integracaoGdf'],
+      cgs18id: json['cgs18id'] as int,
+      cgs18nome: json['cgs18nome'] as String,
+      cgs15id: json['cgs15id'] as int,
+      cgs15nome: json['cgs15nome'] as String,
+      cgs15titulo: json['cgs15titulo'] as String,
+      cgs80email: json['cgs80email'] as String?,
+      srf01id: json['srf01id'] as int,
+      srf01nome: json['srf01nome'] as String,
+      srf01integracaoScf: json['srf01integracaoScf'] as int,
+      srf01integracaoGdf: json['srf01integracaoGdf'] as int,
     );
   }
 }

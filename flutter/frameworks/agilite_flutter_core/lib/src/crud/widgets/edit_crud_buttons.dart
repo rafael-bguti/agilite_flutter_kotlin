@@ -1,10 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class AEditCrudButtons extends StatelessWidget {
+class EditCrudButtons extends StatelessWidget {
   final void Function() onSave;
   final void Function()? onCancel;
-  const AEditCrudButtons({required this.onSave, this.onCancel, super.key});
+  const EditCrudButtons({required this.onSave, this.onCancel, super.key});
 
   @override
   Widget build(BuildContext context) {

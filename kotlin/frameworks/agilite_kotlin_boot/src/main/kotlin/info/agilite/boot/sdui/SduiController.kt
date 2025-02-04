@@ -1,10 +1,7 @@
 package info.agilite.boot.sdui
 
-import SduiComboField
-import info.agilite.boot.metadata.models.FieldTypeMetadata
-import info.agilite.boot.metadata.models.tasks.TaskDescr
-import info.agilite.boot.sdui.autocomplete.Option
-import info.agilite.boot.sdui.component.*
+import info.agilite.boot.sdui.component.SduiComponent
+import info.agilite.boot.sdui.component.SduiCrud
 import info.agilite.boot.spring.RestMapping
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationContext
@@ -28,9 +25,6 @@ class SduiController(
 
   @GetMapping("/crudForm/{taskName}")
   fun getCrudFormInDevMode(@PathVariable("taskName") taskName: String): SduiComponent {
-    if(activeProfile != "dev") {
-      throw RuntimeException("This endpoint is only available in dev profile")
-    }
     val sduiRequest = SduiRequest(taskName)
     val sduiProvider = SduiProviderResolver.sduiProvider(sduiRequest, appContext)
     val crud = sduiProvider.createSduiComponent(sduiRequest)

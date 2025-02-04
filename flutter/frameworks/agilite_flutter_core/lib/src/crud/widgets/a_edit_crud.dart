@@ -1,7 +1,7 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-import 'a_edit_crud_buttons.dart';
+import 'edit_crud_buttons.dart';
 
 class AEditCrud extends StatefulWidget {
   final String taskName;
@@ -43,7 +43,7 @@ class _AEditCrudState extends State<AEditCrud> {
             header: AContainerHeader.text(
               '${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}',
             ),
-            footer: AEditCrudButtons(
+            footer: EditCrudButtons(
               onSave: controller.save,
             ),
             child: AForm(

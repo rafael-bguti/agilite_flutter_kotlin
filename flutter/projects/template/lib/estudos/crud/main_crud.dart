@@ -58,7 +58,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
                     if (editedUser != null) {
                       setState(() {
-                        users[index] = editedUser;
+                        users[index] = editedUser as User;
                       });
                     }
                   },
@@ -90,7 +90,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
           if (newUser != null) {
             setState(() {
-              users.add(newUser);
+              users.add(newUser as User);
             });
           }
         },

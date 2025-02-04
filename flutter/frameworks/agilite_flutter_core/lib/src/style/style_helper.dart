@@ -72,6 +72,7 @@ final moreDetailTextStyle = TextStyle(color: onBackgroundColor.lightenOrDarken(b
 ButtonStyle primaryButtonStyle = buildButtonStyle(primaryColor, onPrimaryColor);
 ButtonStyle successButtonStyle = buildButtonStyle(successColor, onSuccessColor);
 ButtonStyle warningButtonStyle = buildButtonStyle(warningColor, onWarningColor);
+ButtonStyle errorButtonStyle = buildButtonStyle(errorColor, onErrorColor);
 
 ButtonStyle buildButtonStyle(Color backgroundColor, Color foregroundColor) {
   return ButtonStyle(

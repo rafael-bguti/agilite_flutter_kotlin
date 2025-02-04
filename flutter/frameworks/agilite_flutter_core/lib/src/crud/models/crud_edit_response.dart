@@ -9,8 +9,8 @@ class CrudEditResponse {
 
   factory CrudEditResponse.fromJson(Map<String, dynamic> json) {
     return CrudEditResponse(
-      data: json['data'],
-      editable: json['editable'],
+      data: json['data'] as Map<String, dynamic>,
+      editable: json['editable'] as bool,
     );
   }
 }

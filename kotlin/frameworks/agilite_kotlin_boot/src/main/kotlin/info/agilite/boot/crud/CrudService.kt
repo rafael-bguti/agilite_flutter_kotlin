@@ -50,29 +50,7 @@ class DefaultSduiCrudService<T>(
 
     val entityMetadata = defaultMetadataRepository.loadEntityMetadataByCrudTaskName(taskName)
     val columnQuery = getColumnQueriesToList(taskName, entityMetadata)
-
-    val columns = columnQuery.map { query ->
-      val querySplit = query.splitToList("|")
-      val completField = querySplit[0]
-      val label = querySplit.getOrNull(1)
-
-      val split = completField.split(".")
-      val field = defaultMetadataRepository.loadFieldMetadata(split.last())
-
-      val fieldLength = if (field.size <= 5.0 || field.foreignKeyEntity != null) 15 else field.size.toInt()
-      val labelLength = field.label.length
-      min(max(fieldLength, labelLength), 35)
-
-      val width = SduiColumnWidth(SduiColumnWidthType.byCharCount, min(max(fieldLength, labelLength), 35).toDouble())
-      SduiSpreadColumnComponent(
-        name = completField,
-        label = label ?: getColumnLabel(split),
-        type = field.type.frontEndType,
-        options = field.options?.map { opt -> Option(opt.value, opt.label) },
-        width = width,
-        mod = field.mod,
-      )
-    }
+    val columns = convertColumQueryToSduiColumn(columnQuery)
 
     return SduiCrud(
       request.taskName,
@@ -80,6 +58,10 @@ class DefaultSduiCrudService<T>(
       columns,
       metadataToLoad = entityMetadata.name,
     )
+  }
+
+  protected fun convertColumQueryToSduiColumn(columnQuery: List<String>): List<SduiColumn> {
+   return SduiParser.parseQueryToColumns(columnQuery.joinToString())
   }
 
   override fun findListData(taskName: String, request: CrudListRequest): CrudListResponse {
@@ -168,7 +150,7 @@ class DefaultSduiCrudService<T>(
     wherePadrao?.second?.let { filtersParams.putAll(it) }
 
     val whereSimple = WhereSimple(where, filtersParams)
-    val columnsQuery = getColumnQueriesToList(taskName, entityMetadata).map { it.substringBefore("|", it) }.joinToString()
+    val columnsQuery = getColumnQueriesToList(taskName, entityMetadata).joinToString()
     val query = DbQueryBuilders.build(
       defaultMetadataRepository.loadEntityClass(entityMetadata.name),
       columnsQuery,
@@ -236,7 +218,7 @@ class DefaultSduiCrudService<T>(
 
   private fun createWhereToSearch(taskName: String, entity: EntityMetadata, filters: CrudListRequest): Pair<String, Map<String, Any>?>? {
     return if (filters.search != null) {
-      val columns = getColumnQueriesToList(taskName, entity).map {it.substringBefore("|", it)} .joinToString(",") {
+      val columns = getColumnQueriesToList(taskName, entity).joinToString(",") {
         jdbcDialect.coalesceString(jdbcDialect.castToString(it))
       }
       val where = "CONCAT(${columns}) ILIKE :search"

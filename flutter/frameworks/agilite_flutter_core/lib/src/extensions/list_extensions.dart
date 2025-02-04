@@ -42,4 +42,10 @@ extension ListExtension<T> on List<T> {
     }
     return true;
   }
+
+  Iterable<R> mapIndexed<R>(R Function(int index, T item) f) sync* {
+    for (int i = 0; i < length; i++) {
+      yield f(i, this[i]);
+    }
+  }
 }

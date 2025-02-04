@@ -29,7 +29,7 @@ class StorageAuthServiceImpl extends AuthService {
     return _secureStorage.get(_userKey).then((json) {
       if (json == null) return null;
 
-      _loggedUser = LoggedUser.fromJson(jsonDecode(json));
+      _loggedUser = LoggedUser.fromJson(jsonDecode(json) as Map<String, dynamic>);
       return _loggedUser!;
     });
   }

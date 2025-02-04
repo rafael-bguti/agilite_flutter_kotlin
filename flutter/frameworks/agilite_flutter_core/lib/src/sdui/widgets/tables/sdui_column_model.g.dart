@@ -1,17 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sdui_spread_column.dart';
+part of 'sdui_column_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SduiSpreadColumnModel _$SduiSpreadColumnModelFromJson(
-        Map<String, dynamic> json) =>
-    SduiSpreadColumnModel(
-      name: json['name'] as String?,
+SduiColumnModel _$SduiColumnModelFromJson(Map<String, dynamic> json) =>
+    SduiColumnModel(
+      name: json['name'] as String,
+      type: $enumDecode(_$FieldMetadataTypeEnumMap, json['type']),
       label: json['label'] as String?,
-      type: $enumDecodeNullable(_$FieldMetadataTypeEnumMap, json['type']),
       options: (json['options'] as List<dynamic>?)
           ?.map((e) => LocalOption<dynamic>.fromJson(e as Map<String, dynamic>))
           .toList(),

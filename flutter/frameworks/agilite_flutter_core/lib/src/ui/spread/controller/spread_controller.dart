@@ -5,7 +5,7 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const spreadSelectColumnName = "rowIsSelected";
+const tableSelectColumnName = "isRowSelected";
 
 class SpreadController extends FieldController<SpreadModel> {
   void Function(int rowIndex)? _onRowTap;
@@ -282,7 +282,7 @@ class SpreadController extends FieldController<SpreadModel> {
     } else {
       _columns = [
         AColumnBool(
-          spreadSelectColumnName,
+          tableSelectColumnName,
           '',
         ).widthFixed(52),
         ...columns
@@ -297,14 +297,14 @@ class SpreadController extends FieldController<SpreadModel> {
   List<ASpreadColumn<dynamic>> get columns => _columns;
 
   bool isRowSelected(int row) {
-    return showSelectColumn && value[row][spreadSelectColumnName] == true;
+    return showSelectColumn && value[row][tableSelectColumnName] == true;
   }
 
   void unselectAllRows() {
     if (!showSelectColumn) return;
 
     for (int i = 0; i < value.length; i++) {
-      value[i][spreadSelectColumnName] = false;
+      value[i][tableSelectColumnName] = false;
     }
     notifyListeners();
   }
@@ -313,7 +313,7 @@ class SpreadController extends FieldController<SpreadModel> {
     if (!showSelectColumn) return [];
     List<int> selected = [];
     for (int i = 0; i < value.length; i++) {
-      if (value[i][spreadSelectColumnName] == true) {
+      if (value[i][tableSelectColumnName] == true) {
         selected.add(i);
       }
     }

@@ -1,11 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'sdui_spread_column.g.dart';
+import './sdui_column_model.dart';
 
 class SduiSpreadColumn {
-  static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiSpreadColumnModel model) {
+  static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiColumnModel model) {
     ASpreadColumn result;
     if (model.options != null) {
       result = AColumnAutocomplete.combo(
@@ -19,7 +18,7 @@ class SduiSpreadColumn {
           result = AColumnString(
             model.name!,
             model.label,
-            formatter: _createFormatterByMod(model.mod),
+            formatter: createFormatterByMetadataMod(model.mod),
           );
           break;
         case FieldMetadataType.int:
@@ -54,39 +53,4 @@ class SduiSpreadColumn {
     result.width = model.width ?? const AWidth.flex(1);
     return result;
   }
-
-  static String Function(dynamic value)? _createFormatterByMod(String? mod) {
-    if (mod == null) return null;
-    switch (mod) {
-      case MOD_FONE:
-        return (value) => value == null ? '' : value.toString().formatFone();
-      case MOD_NI:
-        return (value) => value == null ? '' : value.toString().formatCpfCNPJ();
-      case MOD_CEP:
-        return (value) => value == null ? '' : value.toString().formatCEP();
-      default:
-        return null;
-    }
-  }
-}
-
-@JsonSerializable(createToJson: false)
-class SduiSpreadColumnModel {
-  final String? name;
-  final String? label;
-  final FieldMetadataType? type;
-  final List<LocalOption>? options;
-  final AWidth? width;
-  final String? mod;
-
-  SduiSpreadColumnModel({
-    this.name,
-    this.label,
-    this.type,
-    this.options,
-    this.width,
-    this.mod,
-  });
-
-  factory SduiSpreadColumnModel.fromJson(Map<String, dynamic> json) => _$SduiSpreadColumnModelFromJson(json);
 }

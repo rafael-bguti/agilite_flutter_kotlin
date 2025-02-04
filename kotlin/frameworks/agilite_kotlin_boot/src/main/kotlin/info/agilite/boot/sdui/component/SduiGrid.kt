@@ -31,7 +31,7 @@ class GridRowQuery(private val areas: String, vararg query: Any){
     components.forEach {
       when (it) {
         is SduiComponent -> children.add(it)
-        is String -> children.addAll(SduiUtils.parseStringToComponents(it))
+        is String -> children.addAll(SduiParser.parseStringToComponents(it))
         else -> throw RuntimeException("Invalid query type: ${it::class.simpleName}")
       }
     }

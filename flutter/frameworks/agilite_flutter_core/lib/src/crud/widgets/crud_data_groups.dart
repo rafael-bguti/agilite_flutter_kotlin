@@ -1,9 +1,9 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ACrudDataGroups extends StatelessWidget {
+class CrudDataGroups extends StatelessWidget {
   final CrudController crudController;
-  const ACrudDataGroups(this.crudController, {super.key});
+  const CrudDataGroups(this.crudController, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ SduiCrudModel _$SduiCrudModelFromJson(Map<String, dynamic> json) =>
       taskName: json['taskName'] as String,
       descr: CrudDescr.fromJson(json['descr'] as Map<String, dynamic>),
       columns: (json['columns'] as List<dynamic>)
-          .map((e) => SduiSpreadColumnModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => SduiColumnModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       metadataToLoad: json['metadataToLoad'] as String?,
       customFilters: (json['customFilters'] as List<dynamic>?)

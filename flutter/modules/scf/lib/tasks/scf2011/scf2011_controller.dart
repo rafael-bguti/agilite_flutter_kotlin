@@ -54,7 +54,7 @@ class BoletoProcessado {
     return BoletoProcessado(
       numero: json['numero'] as String?,
       dataVencimento: json['dataVencimento'] != null ? DateTime.parse(json['dataVencimento'] as String) : null,
-      recebimento: BoletoRecebido.fromJson(json['recebimento']),
+      recebimento: BoletoRecebido.fromJson(json['recebimento'] as Map<String, dynamic>),
       baixadoComSucesso: json['baixadoComSucesso'] as bool,
       status: json['status'] as String,
     );
@@ -85,7 +85,7 @@ class BoletoRecebido {
       situacao: json['situacao'] as String,
       dataSituacao: DateTime.parse(json['dataSituacao'] as String),
       valorTotalRecebido: json['valorTotalRecebido'] as double,
-      pagador: json['pagador'] != null ? PagadorRecebido.fromJson(json['pagador']) : null,
+      pagador: json['pagador'] != null ? PagadorRecebido.fromJson(json['pagador'] as Map<String, dynamic>) : null,
     );
   }
 }

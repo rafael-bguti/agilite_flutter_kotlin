@@ -1,13 +1,15 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-class ACrudSpreadDataCard extends StatelessWidget {
-  final CrudController crudController;
-  final List<ASpreadColumn> columns;
-  final double height;
-  final void Function(int id)? onEdit;
+import 'crud_data_groups.dart';
 
-  const ACrudSpreadDataCard({
+class CrudDataTableCard extends StatelessWidget {
+  final CrudController crudController;
+  final List<ADataTableColumn> columns;
+  final double height;
+  final void Function(int rowIndex)? onEdit;
+
+  const CrudDataTableCard({
     required this.crudController,
     required this.columns,
     required this.onEdit,
@@ -29,32 +31,34 @@ class ACrudSpreadDataCard extends StatelessWidget {
             }
             return Column(
               children: [
-                ACrudDataGroups(crudController),
+                CrudDataGroups(crudController),
                 Expanded(
-                  child: ASpread(
-                    name: CrudController.spreadDataName,
+                  child: ADataTable(
                     columns: columns,
+                    rows: crudController.state.data,
+                    onSelectedRowsChanged: (selectedRows) {
+                      crudController.onSelectedRowsChanged(selectedRows);
+                    },
                     onRowTap: onEdit == null
                         ? null
-                        : (rowIndex) {
-                            onEdit!(crudController.state.data[rowIndex]['id']);
+                        : (rowData) {
+                            onEdit!(rowData['id'] as int);
                           },
-                    readOnly: true,
-                    controller: crudController.spreadController,
-                    value: crudController.state.data,
-                    selectPanelWidget: TextButton.icon(
-                      onPressed: crudController.onDeleteClicked,
-                      style: TextButton.styleFrom(foregroundColor: Colors.red),
-                      icon: const Icon(Icons.delete_outline_outlined),
-                      label: const Text("excluir selecionados"),
-                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: FilledButton.tonal(
+                          style: errorButtonStyle,
+                          child: Text('Excluir selecionados'),
+                          onPressed: crudController.selectedRows.isEmpty ? null : crudController.onDeleteClicked,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: APaginator(
