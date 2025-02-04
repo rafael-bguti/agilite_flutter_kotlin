@@ -53,7 +53,6 @@ class SpreadController extends FieldController<SpreadModel> {
   @override
   set value(SpreadModel newModel) {
     final valueMap = newModel._rows.map((e) => e._dataMap).toList();
-    _normalizeValue(valueMap);
     _value.replaceAll(valueMap);
 
     notifyListeners();
@@ -165,7 +164,6 @@ class SpreadController extends FieldController<SpreadModel> {
     await _fireOnAddNewRow(addedRow);
     final rows = [addedRow];
 
-    _normalizeValue(rows);
     if (rowIndexToInsert != null) {
       value.insertRow(rowIndexToInsert, rows[0]);
     } else {
@@ -297,7 +295,7 @@ class SpreadController extends FieldController<SpreadModel> {
   List<ASpreadColumn<dynamic>> get columns => _columns;
 
   bool isRowSelected(int row) {
-    return showSelectColumn && value[row][tableSelectColumnName] == true;
+    return showSelectColumn && value[row].getBool(tableSelectColumnName) == true;
   }
 
   void unselectAllRows() {
@@ -313,7 +311,7 @@ class SpreadController extends FieldController<SpreadModel> {
     if (!showSelectColumn) return [];
     List<int> selected = [];
     for (int i = 0; i < value.length; i++) {
-      if (value[i][tableSelectColumnName] == true) {
+      if (value[i].getBool(tableSelectColumnName) == true) {
         selected.add(i);
       }
     }
@@ -566,19 +564,6 @@ class SpreadController extends FieldController<SpreadModel> {
     return KeyEventResult.handled;
   }
 
-  void _normalizeValue(List<Map<String, dynamic>> value) async {
-    if (value.isEmpty) return;
-
-    try {
-      loading.value = true;
-      for (final column in columns) {
-        await column.normalizeSpreadValue(value);
-      }
-    } finally {
-      loading.value = false;
-    }
-  }
-
   void scrollToSelectedCell() {
     if (selectedCell == null || disableVerticalScroll) return;
     double left = _getLeftPosition(selectedCell!.columnIndex);
@@ -684,36 +669,27 @@ class SpreadModel {
   }
 
   void setValueAtIfNull(int rowIndex, String columnName, dynamic value) {
-    if (_rows[rowIndex][columnName] != null) return;
+    if (_rows[rowIndex].getDynamic(columnName) != null) return;
     _rows[rowIndex][columnName] = value;
-  }
-
-  //---- Get Values -----
-  double? getDouble(int rowIndex, String columnName, [double? defaultValue]) {
-    final value = _rows[rowIndex][columnName];
-    if (value == null) return defaultValue;
-    if (value is double) return value;
-    if (value is num) return value.toDouble();
-    return double.tryParse(value.toString()) ?? defaultValue;
   }
 
   //---- Totalização -----
   double getTotal(String columnName) {
     double total = 0;
-    for (var i = 0; i < _rows.length; i++) {
-      total += getDouble(i, columnName, 0)!;
+    for (var row in _rows) {
+      total += row.getDouble(columnName, 0)!;
     }
     return total;
   }
 }
 
 class SpreadRow {
-  final Map<String, dynamic> _data;
+  final LowercaseMap _data;
   final Map<String, String> _validationMessage = {};
 
-  SpreadRow(Map<String, dynamic> data) : _data = {...data};
+  SpreadRow(Map<String, dynamic> data) : _data = LowercaseMap.fromMap(data);
 
-  operator [](String columnName) => _data[columnName];
+  // operator [](String columnName) => _data[columnName];
   operator []=(String columnName, dynamic value) {
     _data[columnName] = value;
     _removeValidationMessage(columnName);
@@ -737,6 +713,19 @@ class SpreadRow {
   void clearValidations() {
     _validationMessage.clear();
   }
+
+  //---- Get Values -----
+  dynamic getDynamic(String columnName) => _data[columnName];
+
+  double? getDouble(String columnName, [double? defaultValue]) => _data.getDouble(columnName, defaultValue);
+
+  int? getInt(String columnName, [int? defaultValue]) => _data.getInt(columnName, defaultValue);
+
+  String? getString(String columnName, [String? defaultValue]) => _data.getString(columnName, defaultValue);
+
+  bool? getBool(String columnName, [bool? defaultValue]) => _data.getBool(columnName, defaultValue);
+
+  DateTime? getDateTime(String columnName, [DateTime? defaultValue]) => _data.getDateTime(columnName, defaultValue);
 }
 
 class SelectedCell {

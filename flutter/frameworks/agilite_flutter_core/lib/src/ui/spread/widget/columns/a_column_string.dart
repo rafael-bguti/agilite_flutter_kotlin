@@ -49,7 +49,7 @@ class AColumnString extends ASpreadColumn<String> {
 
   @override
   void onEdit(int row, String? pressedChar) {
-    final value = spreadController.value[row][name];
+    final value = spreadController.value[row].getString(name);
 
     _editingController.text = pressedChar ?? value?.toString() ?? '';
   }

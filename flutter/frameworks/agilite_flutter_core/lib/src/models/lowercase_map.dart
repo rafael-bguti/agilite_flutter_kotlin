@@ -58,23 +58,27 @@ class LowercaseMap extends MapBase<String, dynamic> {
     var value = this[key];
     if (value == null) return defaultValue;
     if (value is double) return value;
-    if (value is num) return value.toDouble();
-    return double.parse(value.toString());
+
+    this[key] = value is num ? value.toDouble() : double.parse(value.toString());
+    return this[key] as double;
   }
 
   int? getInt(String key, [int? defaultValue]) {
     var value = this[key];
     if (value == null) return defaultValue;
     if (value is int) return value;
-    if (value is num) return value.toInt();
-    return int.parse(value.toString());
+
+    this[key] = value is num ? value.toInt() : int.parse(value.toString());
+    return this[key] as int;
   }
 
   bool? getBool(String key, [bool? defaultValue]) {
     var value = this[key];
     if (value == null) return defaultValue;
     if (value is bool) return value;
-    return bool.parse(value.toString());
+
+    this[key] = bool.parse(value.toString());
+    return this[key] as bool;
   }
 
   String? getString(String key, [String? defaultValue]) {
@@ -87,6 +91,8 @@ class LowercaseMap extends MapBase<String, dynamic> {
     var value = this[key];
     if (value == null) return defaultValue;
     if (value is DateTime) return value;
-    return DateTime.parse(value.toString());
+
+    this[key] = DateTime.parse(value.toString());
+    return this[key] as DateTime;
   }
 }

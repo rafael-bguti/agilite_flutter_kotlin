@@ -33,15 +33,8 @@ class AColumnDouble extends ASpreadColumn<double> {
 
   @override
   Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
-    var value = spreadController.value[row][name];
-    if (value == null) {
-      return const Text('');
-    } else {
-      if (value is! double) {
-        value = double.tryParse(value.toString());
-      }
-      return Text((value as double).format(minDecimalDigits, maxDecimalDigits, true));
-    }
+    var value = spreadController.value[row].getDouble(name);
+    return Text(value?.format(minDecimalDigits, maxDecimalDigits, true) ?? '');
   }
 
   @override
@@ -71,27 +64,7 @@ class AColumnDouble extends ASpreadColumn<double> {
       }
     }
 
-    var value = spreadController.value[row][name];
-    if (value == null) {
-      _controller.value = null;
-    } else {
-      if (value is! double) {
-        value = value.toString().tryParsePtBRDouble();
-      }
-      _controller.value = (value as double?);
-    }
-  }
-
-  @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {
-    for (final row in value) {
-      final cellValue = row[name];
-      if (cellValue != null) {
-        if (cellValue is! double) {
-          row[name] = cellValue.toString().tryParsePtBRDouble();
-        }
-      }
-    }
+    _controller.value = spreadController.value[row].getDouble(name);
   }
 
   @override

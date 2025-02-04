@@ -96,6 +96,10 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
     for (var column in spreadController.columns) {
       column.spreadController = spreadController;
     }
+
+    if (widget.value != null) {
+      spreadController.fillFromList(widget.value!);
+    }
   }
 
   @override
@@ -337,10 +341,6 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
     spreadController.onCellStopEdit = widget.onCellStopEdit;
     spreadController.labelTextToValidationMessage = widget.labelTextToValidationMessage;
     spreadController.showSelectColumn = widget.showSelectedColumn ?? true;
-
-    if (widget.value != null) {
-      spreadController.fillFromList(widget.value!);
-    }
   }
 
   Widget _buildSelectedPanel(BuildContext context, SpreadController controller, Widget selectPanelWidget) {

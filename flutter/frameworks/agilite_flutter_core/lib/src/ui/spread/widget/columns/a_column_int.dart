@@ -51,27 +51,7 @@ class AColumnInt extends ASpreadColumn<int> {
       }
     }
 
-    var value = spreadController.value[row][name];
-    if (value == null) {
-      _controller.value = null;
-    } else {
-      if (value is! int) {
-        value = int.tryParse(value.toString());
-      }
-      _controller.value = value as int?;
-    }
-  }
-
-  @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {
-    for (final row in value) {
-      final cellValue = row[name];
-      if (cellValue != null) {
-        if (cellValue is! int) {
-          row[name] = int.tryParse(cellValue.toString());
-        }
-      }
-    }
+    _controller.value = spreadController.value[row].getInt(name);
   }
 
   ATextField? _textField;

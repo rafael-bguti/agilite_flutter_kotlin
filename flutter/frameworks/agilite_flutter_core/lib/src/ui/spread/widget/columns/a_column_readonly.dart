@@ -44,9 +44,6 @@ class AColumnReadOnly extends ASpreadColumn<dynamic> {
   }
 
   @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {}
-
-  @override
   void onEdit(int row, String? pressedChar) {}
 
   @override

@@ -88,18 +88,18 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
   @override
   Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
     final value = _fieldController.extractValueFromRemoteJson(spreadController.value[row].toMap());
-
-    return Row(
-      children: [
-        Expanded(
-          child: Text(value?.label ?? ''),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(right: 3.0),
-          child: Icon(Icons.arrow_drop_down, size: 14),
-        )
-      ],
-    );
+    return Text(value?.label ?? '');
+    // return Row(
+    //   children: [
+    //     Expanded(
+    //       child: Text(value?.label ?? ''),
+    //     ),
+    //     const Padding(
+    //       padding: EdgeInsets.only(right: 3.0),
+    //       child: Icon(Icons.arrow_drop_down, size: 14),
+    //     )
+    //   ],
+    // );
     // }
   }
 
@@ -135,9 +135,6 @@ class AColumnAutocomplete<T> extends ASpreadColumn<T> {
     _fieldController.dispose();
     super.dispose();
   }
-
-  @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {}
 
   AAutocompleteField<T>? _textField;
   AAutocompleteField<T> _getTextField() {

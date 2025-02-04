@@ -95,9 +95,6 @@ class AColumnBool extends ASpreadColumn<bool> {
   }
 
   @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {}
-
-  @override
   void onEdit(int row, String? pressedChar) {}
 
   @override
@@ -122,15 +119,7 @@ class AColumnBool extends ASpreadColumn<bool> {
   }
 
   bool _extractValue(SpreadController spreadController, int row) {
-    var value = spreadController.value[row][name];
-    if (value == null) {
-      return false;
-    } else {
-      if (value is! bool) {
-        return bool.tryParse(value.toString()) ?? false;
-      }
-      return value;
-    }
+    return spreadController.value[row].getBool(name) ?? false;
   }
 
   @override

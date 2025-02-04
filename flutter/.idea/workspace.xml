@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002">
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/tables/sdui_datatable_column.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/data_table/a_data_table.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/formatter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/formatter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/a_metadata_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/forms/a_metadata_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiMetadataField.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiMetadataField.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,6 +224,16 @@
     </task>
     <option name="localTasksCounter" value="15" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Formatter" />

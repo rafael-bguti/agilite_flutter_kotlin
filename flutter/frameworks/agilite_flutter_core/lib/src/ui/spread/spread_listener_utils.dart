@@ -48,7 +48,7 @@ class MultiplyCellsHandler implements CellValueChangedHandler {
 
   @override
   void onCellValueChanged(SpreadController spreadController, int row) {
-    final values = _columnNames.map((name) => spreadController.value.getDouble(row, name)).toList();
+    final values = _columnNames.map((name) => spreadController.value[row].getDouble(name)).toList();
     if (values.contains(null)) return;
 
     final result = values.reduce((value, element) => value! * element!);
@@ -65,11 +65,10 @@ class PercentCellsHandler implements CellValueChangedHandler {
 
   @override
   void onCellValueChanged(SpreadController spreadController, int row) {
-    final value = spreadController.value.getDouble(row, valueColumnName);
-    final percent = spreadController.value.getDouble(row, percentColumnName);
-    if (value == null || percent == null) return;
+    final value = spreadController.value[row].getDouble(valueColumnName, 0);
+    final percent = spreadController.value[row].getDouble(percentColumnName, 0);
 
-    final result = value * percent / 100;
+    final result = value! * percent! / 100;
     spreadController.value[row][destColumnName] = result;
   }
 }

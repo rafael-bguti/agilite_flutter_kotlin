@@ -84,7 +84,7 @@ abstract class ASpreadColumn<T> {
   }
 
   bool _executeValidationToRow(int rowIndex, List<FieldValidator> validators) {
-    final value = spreadController.value[rowIndex][name];
+    final value = spreadController.value[rowIndex].getDynamic(name);
     for (final validation in validators) {
       final error = validation(value);
       if (error != null) {
@@ -175,9 +175,9 @@ abstract class ASpreadColumn<T> {
     if (formatter != null) {
       text = formatter!.call(spreadController.value[row], name);
     } else {
-      final value = spreadController.value[row][name];
-      text = value?.toString() ?? '';
+      text = spreadController.value[row].getString(name) ?? '';
     }
+
     return Text(text);
   }
 
@@ -245,8 +245,6 @@ abstract class ASpreadColumn<T> {
       ),
     ],
   );
-
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {}
 
   @mustCallSuper
   void dispose() {}

@@ -25,9 +25,9 @@ ColumnFormatter? createColumnFormatterByMetadataMod(String? mod) {
   }
 
   return switch (mod) {
-    MOD_FONE => (row, columnName) => row[columnName] == null ? '' : row[columnName].toString().formatFone(),
-    MOD_NI => (row, columnName) => row[columnName] == null ? '' : row[columnName].toString().formatCpfCNPJ(),
-    MOD_CEP => (row, columnName) => row[columnName] == null ? '' : row[columnName].toString().formatCEP(),
+    MOD_FONE => (row, columnName) => row.getString(columnName)?.formatFone() ?? '',
+    MOD_NI => (row, columnName) => row.getString(columnName)?.formatCpfCNPJ() ?? '',
+    MOD_CEP => (row, columnName) => row.getString(columnName)?.formatCEP() ?? '',
     _ => null
   };
 }
@@ -49,11 +49,19 @@ class _StatusDateFormatter {
 
   ColumnFormatter formatter() {
     return (row, columnName) {
-      final vcto = row[colunaVcto];
-      final pgto = row[colunaPgto];
-      if (vcto == null) return 'Em Aberto';
-      if (pgto == null) return 'Vencido';
-      return 'Pago';
+      final vcto = row.getDateTime(colunaVcto);
+      final pgto = row.getDateTime(colunaPgto);
+      if (pgto != null) {
+        return 'Pago';
+      } else {
+        if (vcto == null) return 'Sem data';
+        final hoje = DateTime.now();
+        if (vcto.isBefore(hoje)) {
+          return 'Vencido';
+        } else {
+          return 'A vencer';
+        }
+      }
     };
   }
 }

@@ -39,29 +39,21 @@ class AColumnDate extends ASpreadColumn<DateTime> {
 
   @override
   Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
-    var value = spreadController.value[row][name];
+    var value = spreadController.value[row].getDateTime(name);
 
-    Widget child;
-    if (value == null) {
-      child = const Text('');
-    } else {
-      if (value is! DateTime) {
-        value = value.toString().tryParsePtBRDate() ?? value.toString().tryParseIsoDate();
-      }
-      child = Text((value as DateTime?)?.format() ?? '');
-    }
-
-    return Row(
-      children: [
-        Expanded(
-          child: child,
-        ),
-        const Padding(
-          padding: EdgeInsets.only(right: 3.0),
-          child: Icon(Icons.calendar_today, size: 12),
-        )
-      ],
-    );
+    Widget child = Text(value?.format() ?? '');
+    return child;
+    // return Row(
+    //   children: [
+    //     Expanded(
+    //       child: child,
+    //     ),
+    //     const Padding(
+    //       padding: EdgeInsets.only(right: 3.0),
+    //       child: Icon(Icons.calendar_today, size: 12),
+    //     )
+    //   ],
+    // );
   }
 
   @override
@@ -86,27 +78,7 @@ class AColumnDate extends ASpreadColumn<DateTime> {
       }
     }
 
-    var value = spreadController.value[row][name];
-    if (value == null) {
-      _controller.value = null;
-    } else {
-      if (value is! DateTime) {
-        value = value.toString().tryParseIsoDate() ?? value.toString().tryParsePtBRDate();
-      }
-      _controller.value = (value as DateTime?);
-    }
-  }
-
-  @override
-  Future<void> normalizeSpreadValue(List<Map<String, dynamic>> value) async {
-    for (final row in value) {
-      final cellValue = row[name];
-      if (cellValue != null) {
-        if (cellValue is! DateTime) {
-          row[name] = cellValue.toString().tryParseIsoDate();
-        }
-      }
-    }
+    _controller.value = spreadController.value[row].getDateTime(name);
   }
 
   SelectedCell? selectedCellOnDatePickerShow;
