@@ -4,14 +4,12 @@ import info.agilite.boot.sdui.autocomplete.Option
 
 class SduiColumn(
   val name: String,
-  val label: String,
-  val type: String,
+  var label: String,
+  var type: String,
 
-  val width: SduiColumnWidth? = null,
-  val maxWidth: Double? = null,
-
-  val options: List<Option>? = null,
-  val mod: String?,
+  var width: SduiColumnWidth? = null,
+  var options: List<Option>? = null,
+  var mod: String? = null,
 )
 
 enum class SduiColumnWidthType {

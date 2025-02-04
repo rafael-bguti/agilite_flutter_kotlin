@@ -28,6 +28,7 @@ abstract class ASpreadColumn<T> {
   AWidth _width = const AWidth.flex(1);
 
   final Formatter? formatter;
+  final dynamic Function(dynamic value)? columnValueExtractor;
 
   ASpreadColumn(
     this.name,
@@ -37,6 +38,7 @@ abstract class ASpreadColumn<T> {
     this.validators,
     this.req = false,
     this.formatter,
+    this.columnValueExtractor,
   });
 
   bool canEdit(int row) => isEditable?.call(row) ?? !spreadController.readOnly;

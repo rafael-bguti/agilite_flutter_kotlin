@@ -7,6 +7,9 @@ const String MOD_UF = 'uf';
 const String MOD_NI = 'ni';
 const String MOD_NITIPO = 'nitipo';
 
+//Apenas modificadores de colunas
+const String MOD_STATUS_DATE = 'status_date';
+
 class AMetadataField extends StatelessWidget {
   final String fieldName;
   final void Function(dynamic controller)? controllerCreated;

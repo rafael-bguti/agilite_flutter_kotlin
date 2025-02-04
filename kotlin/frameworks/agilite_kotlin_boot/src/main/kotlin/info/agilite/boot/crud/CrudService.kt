@@ -60,8 +60,8 @@ class DefaultSduiCrudService<T>(
     )
   }
 
-  protected fun convertColumQueryToSduiColumn(columnQuery: List<String>): List<SduiColumn> {
-   return SduiParser.parseQueryToColumns(columnQuery.joinToString())
+  protected fun convertColumQueryToSduiColumn(columnQuery: List<String>): MutableList<SduiColumn> {
+   return SduiParser.parseQueryToColumns(columnQuery.joinToString()).toMutableList()
   }
 
   override fun findListData(taskName: String, request: CrudListRequest): CrudListResponse {

@@ -6,6 +6,9 @@ const val MOD_UF = "uf"
 const val MOD_NI = "ni";
 const val MOD_NITIPO = "nitipo"
 
+//Apenas para colunas
+const val MOD_STATUS_DATE = "status_date"
+
 class SduiMetadataField (
   val name: String,
   val labelText: String? = null,
