@@ -24,7 +24,7 @@ class StatusPagamentoByDateRendered {
           return ATag(text: 'A vencer', color: warningColor);
         }
       }
-      return Center(child: chip);
+      return chip;
     };
   }
 }

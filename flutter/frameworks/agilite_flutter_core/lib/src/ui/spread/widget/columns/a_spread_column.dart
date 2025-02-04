@@ -138,13 +138,14 @@ abstract class ASpreadColumn<T> {
   Widget buildRenderCellWrapper(BuildContext context, int row, bool isFocused) {
     final decoration = getBorderDecoration(isFocused, row);
 
-    Widget child = canEdit(row)
-        ? buildRenderCell(context, row, isFocused)
-        : DefaultTextStyle(
-            style: TextStyle(color: onSurfaceColor.withOpacity(0.65)),
-            child: cellRenderer?.call(context, spreadController, row, name, isFocused) ?? buildRenderCell(context, row, isFocused),
-          );
+    // Widget child = canEdit(row)
+    //     ? buildRenderCell(context, row, isFocused)
+    //     : DefaultTextStyle(
+    //         style: TextStyle(color: onSurfaceColor.withOpacity(0.65)),
+    //         child: cellRenderer?.call(context, spreadController, row, name, isFocused) ?? buildRenderCell(context, row, isFocused),
+    //       );
 
+    Widget child = cellRenderer?.call(context, spreadController, row, name, isFocused) ?? buildRenderCell(context, row, isFocused);
     return GestureDetector(
       onTapDown: (_) => spreadController.onCellTap(row, colIndex),
       child: Container(
@@ -233,7 +234,7 @@ abstract class ASpreadColumn<T> {
     return this;
   }
 
-  final BoxDecoration _unFocusedBorderDecoration = BoxDecoration(border: Border.all(color: Colors.red, width: 2));
+  final BoxDecoration _unFocusedBorderDecoration = BoxDecoration(border: Border.all(color: Colors.transparent, width: 2));
   final BoxDecoration _editableBorderDecoration = BoxDecoration(border: Border.all(color: primaryColor, width: 2));
   final BoxDecoration _inEditingBorderDecoration = BoxDecoration(
     color: backgroundColor,

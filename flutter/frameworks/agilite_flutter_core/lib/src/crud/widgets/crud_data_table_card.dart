@@ -51,15 +51,19 @@ class CrudDataTableCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: FilledButton.tonalIcon(
-                          style: errorButtonStyle,
-                          label: Text('Excluir selecionados'),
-                          icon: const Icon(Icons.delete_outline_outlined),
-                          onPressed: crudController.spreadController.selectedRows.isEmpty ? null : crudController.onDeleteClicked,
-                        ),
-                      ),
+                      AConsumer(
+                          notifier: crudController.spreadController,
+                          builder: (_, __, ___) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: FilledButton.tonalIcon(
+                                style: errorButtonStyle,
+                                label: Text('Excluir selecionados'),
+                                icon: const Icon(Icons.delete_outline_outlined),
+                                onPressed: crudController.spreadController.selectedRows.isEmpty ? null : crudController.onDeleteClicked,
+                              ),
+                            );
+                          }),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: APaginator(

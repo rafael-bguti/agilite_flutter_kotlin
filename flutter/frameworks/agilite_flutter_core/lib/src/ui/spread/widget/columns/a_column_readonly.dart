@@ -9,7 +9,7 @@ class AColumnReadOnly extends ASpreadColumn<dynamic> {
     super.cellRenderer,
   });
   @override
-  bool get columnConsumeRowTap => true;
+  bool get columnConsumeRowTap => false;
 
   @override
   bool canEdit(int row) {

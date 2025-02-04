@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002">
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/formatter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/formatter.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/spread_custom_cell_renderer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/spread_custom_cell_renderer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_spread_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/columns/a_spread_column.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cgs/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cgs/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/scf/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/scf/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

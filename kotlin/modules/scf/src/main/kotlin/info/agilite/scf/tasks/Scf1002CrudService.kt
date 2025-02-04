@@ -5,6 +5,8 @@ import info.agilite.boot.crud.DefaultSduiCrudService
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.sdui.component.MOD_STATUS_DATE_FUNCTION
 import info.agilite.boot.sdui.component.SduiColumn
+import info.agilite.boot.sdui.component.SduiColumnWidth
+import info.agilite.boot.sdui.component.SduiColumnWidthType
 import info.agilite.core.extensions.splitToList
 import info.agilite.shared.entities.cgs.Cgs80
 import org.springframework.stereotype.Component
@@ -20,7 +22,11 @@ class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCru
     result.filter { it.name == "scf02dtVenc" }.first().label = "Dt Vcto"
     result.filter { it.name == "scf02lancamento.scf11data" }.first().label = "Dt Pagto"
 
-    result.add(0, SduiColumn("scf02dtVenc", "Status", "string", mod = MOD_STATUS_DATE_FUNCTION("scf02dtVenc", "scf02lancamento.scf11data"))    )
+    result.add(0, SduiColumn(
+      "scf02dtVenc", "Status", "string",
+      width = SduiColumnWidth(SduiColumnWidthType.fixed, 100.0),
+      mod = MOD_STATUS_DATE_FUNCTION("scf02dtVenc", "scf02lancamento.scf11data"))
+    )
 
     return result
   }

@@ -65,10 +65,6 @@ class SduiSpreadColumn {
   }
 
   static CellFormatter? _createColumnFormatterToReadOnly(SduiColumnModel model) {
-    if (model.type == FieldMetadataType.date) {
-      return (spreadController, row, columnName) => spreadController.value[row].getDateTime(columnName)?.format() ?? '';
-    }
-
     if (!model.options.isNullOrEmpty) {
       return (spreadController, row, columnName) {
         final val = spreadController.value[row].getDynamic(columnName);
@@ -76,6 +72,12 @@ class SduiSpreadColumn {
 
         return model.options!.firstWhereOrNull((element) => element.jsonKey == val)?.label ?? val.toString();
       };
+    }
+
+    if (model.type == FieldMetadataType.date) {
+      return (spreadController, row, columnName) => spreadController.value[row].getDateTime(columnName)?.format() ?? '';
+    } else if (model.type == FieldMetadataType.double) {
+      return (spreadController, row, columnName) => spreadController.value[row].getDouble(columnName)?.format() ?? '';
     }
 
     return createCellColumnFormatterBySduiMod(model.mod);
