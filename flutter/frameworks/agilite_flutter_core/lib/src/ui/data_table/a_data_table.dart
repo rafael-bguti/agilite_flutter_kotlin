@@ -79,7 +79,7 @@ class _ADataTableState extends State<ADataTable> {
   List<DataCell> _cells(Map<String, dynamic> row) {
     return widget.columns.map(
       (c) {
-        final String? text = c.formatter?.call(row[c.name]) ?? row[c.name]?.toString();
+        final String? text = c.formatter?.call(row, c.name) ?? row[c.name]?.toString();
         return DataCell(
           Container(
             constraints: BoxConstraints(maxWidth: c.maxWidth ?? _MAX_WIDTH),
@@ -114,7 +114,7 @@ class ADataTableColumn {
   final bool numeric;
   final double? maxWidth;
 
-  final Formatter? formatter;
+  final ColumnFormatter? formatter;
 
   const ADataTableColumn(
     this.name,

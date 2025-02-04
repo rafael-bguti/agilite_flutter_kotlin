@@ -9,6 +9,7 @@ class SduiColumn(
 
   var width: SduiColumnWidth? = null,
   var options: List<Option>? = null,
+
   var mod: String? = null,
 )
 

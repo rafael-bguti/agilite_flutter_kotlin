@@ -13,13 +13,14 @@ class SduiDatatableColumn {
       model.label ?? model.name,
       maxWidth: maxWidth,
       numeric: numeric,
-      formatter: createFormatterByMetadataMod(model.mod) ?? _createFormatter(model),
+      formatter: createColumnFormatterByMetadataMod(model.mod) ?? _createFormatter(model),
     );
   }
 
-  static Formatter? _createFormatter(SduiColumnModel model) {
+  static ColumnFormatter? _createFormatter(SduiColumnModel model) {
     if (model.options != null) {
-      return (value) {
+      return (row, name) {
+        final value = row[name];
         if (value == null) return '';
         final option = model.options!.firstWhereOrNull((element) => element.jsonKey == value);
         return option?.label ?? '';
@@ -28,14 +29,16 @@ class SduiDatatableColumn {
 
     switch (model.type) {
       case FieldMetadataType.date:
-        return (value) {
+        return (row, name) {
+          final value = row[name];
           if (value == null) return '';
           final DateTime? date = value.toString().tryParseIsoDate();
           return date == null ? "" : date.format();
         };
 
       case FieldMetadataType.double:
-        return (value) {
+        return (row, name) {
+          final value = row[name];
           if (value == null) return '';
           return (value as double).format();
         };
