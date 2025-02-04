@@ -5,7 +5,7 @@ import 'crud_data_groups.dart';
 
 class CrudDataTableCard extends StatelessWidget {
   final CrudController crudController;
-  final List<ADataTableColumn> columns;
+  final List<ASpreadColumn> columns;
   final double height;
   final void Function(int rowIndex)? onEdit;
 
@@ -33,17 +33,17 @@ class CrudDataTableCard extends StatelessWidget {
               children: [
                 CrudDataGroups(crudController),
                 Expanded(
-                  child: ADataTable(
+                  child: ASpread(
+                    name: CrudController.spreadDataName,
                     columns: columns,
-                    rows: crudController.state.data,
-                    onSelectedRowsChanged: (selectedRows) {
-                      crudController.onSelectedRowsChanged(selectedRows);
-                    },
                     onRowTap: onEdit == null
                         ? null
-                        : (rowData) {
-                            onEdit!(rowData['id'] as int);
+                        : (rowIndex) {
+                            onEdit!(crudController.state.data[rowIndex]['id'] as int);
                           },
+                    readOnly: true,
+                    controller: crudController.spreadController,
+                    value: crudController.state.data,
                   ),
                 ),
                 Padding(
@@ -53,10 +53,11 @@ class CrudDataTableCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: FilledButton.tonal(
+                        child: FilledButton.tonalIcon(
                           style: errorButtonStyle,
-                          child: Text('Excluir selecionados'),
-                          onPressed: crudController.selectedRows.isEmpty ? null : crudController.onDeleteClicked,
+                          label: Text('Excluir selecionados'),
+                          icon: const Icon(Icons.delete_outline_outlined),
+                          onPressed: crudController.spreadController.selectedRows.isEmpty ? null : crudController.onDeleteClicked,
                         ),
                       ),
                       Padding(

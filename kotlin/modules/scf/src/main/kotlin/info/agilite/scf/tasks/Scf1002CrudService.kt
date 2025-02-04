@@ -20,12 +20,7 @@ class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCru
     result.filter { it.name == "scf02dtVenc" }.first().label = "Dt Vcto"
     result.filter { it.name == "scf02lancamento.scf11data" }.first().label = "Dt Pagto"
 
-    result.add(
-      0,
-      SduiColumn("scf02dtVenc", "Status", "string",
-        mod = MOD_STATUS_DATE_FUNCTION("scf02dtVenc", "scf02lancamento.scf11data")
-      )
-    )
+    result.add(0, SduiColumn("scf02dtVenc", "Status", "string", mod = MOD_STATUS_DATE_FUNCTION("scf02dtVenc", "scf02lancamento.scf11data"))    )
 
     return result
   }

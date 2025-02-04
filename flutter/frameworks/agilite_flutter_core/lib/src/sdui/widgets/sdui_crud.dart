@@ -1,10 +1,10 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/tables/sdui_column_model.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/tables/sdui_datatable_column.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'sdui_widget.dart';
+import 'tables/sdui_column_model.dart';
+import 'tables/sdui_spread_column.dart';
 
 part 'sdui_crud.g.dart';
 
@@ -16,7 +16,7 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
   Widget render(BuildContext context, SduiContext sduiContext, SduiCrudModel model) {
     final crudDataColumns = model.columns
         .map(
-          (column) => SduiDatatableColumn.build(context, sduiContext, column),
+          (column) => SduiSpreadColumn.build(context, sduiContext, column),
         )
         .toList();
 

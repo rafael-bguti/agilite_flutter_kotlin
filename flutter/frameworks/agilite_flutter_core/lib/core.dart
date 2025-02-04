@@ -49,7 +49,6 @@ export './src/ui/a_loading.dart';
 export './src/ui/app/agilite_app_scaffold.dart';
 export './src/ui/app/app_scroll_behavior.dart';
 export './src/ui/core_ui_utils.dart';
-export './src/ui/data_table/a_data_table.dart';
 export './src/ui/dialogs/a_bottom_dialog_question.dart';
 export './src/ui/dialogs/a_dialogs.dart';
 export './src/ui/dialogs/a_side_dialog.dart';

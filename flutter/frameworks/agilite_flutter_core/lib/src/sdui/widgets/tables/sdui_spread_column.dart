@@ -8,7 +8,7 @@ class SduiSpreadColumn {
     ASpreadColumn result;
     if (model.options != null) {
       result = AColumnAutocomplete.combo(
-        model.name!,
+        model.name,
         model.label,
         options: model.options!,
       );
@@ -16,32 +16,32 @@ class SduiSpreadColumn {
       switch (model.type) {
         case FieldMetadataType.string:
           result = AColumnString(
-            model.name!,
+            model.name,
             model.label,
-            formatter: createFormatterByMetadataMod(model.mod),
+            formatter: createColumnFormatterByMetadataMod(model.mod),
           );
           break;
         case FieldMetadataType.int:
           result = AColumnInt(
-            model.name!,
+            model.name,
             model.label,
           );
           break;
         case FieldMetadataType.double:
           result = AColumnDouble(
-            model.name!,
+            model.name,
             model.label,
           );
           break;
         case FieldMetadataType.bool:
           result = AColumnBool(
-            model.name!,
+            model.name,
             model.label,
           );
           break;
         case FieldMetadataType.date:
           result = AColumnDate(
-            model.name!,
+            model.name,
             model.label,
           );
           break;
@@ -50,7 +50,7 @@ class SduiSpreadColumn {
       }
     }
 
-    result.width = model.width ?? const AWidth.flex(1);
+    result.width = model.width ?? AWidth.byCharCount(model.label?.length ?? 10);
     return result;
   }
 }

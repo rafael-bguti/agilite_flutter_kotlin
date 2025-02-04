@@ -5,10 +5,10 @@ const String MOD_FONE = 'fone';
 const String MOD_CEP = 'cep';
 const String MOD_UF = 'uf';
 const String MOD_NI = 'ni';
-const String MOD_NITIPO = 'nitipo';
+const String MOD_NITIPO = 'niTipo';
 
 //Apenas modificadores de colunas
-const String MOD_STATUS_DATE = 'status_date';
+const String MOD_STATUS_DATE = 'statusDate';
 
 class AMetadataField extends StatelessWidget {
   final String fieldName;

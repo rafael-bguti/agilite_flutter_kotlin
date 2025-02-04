@@ -11,7 +11,7 @@ class ACrud extends StatefulWidget {
   final String taskName;
 
   final CrudDescr descr;
-  final List<ADataTableColumn> columns;
+  final List<ASpreadColumn> columns;
   final List<Widget>? customFilters;
 
   final CrudController? controller;

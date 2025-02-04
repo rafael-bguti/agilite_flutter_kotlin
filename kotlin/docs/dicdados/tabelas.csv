@@ -99,7 +99,7 @@ Cgs80,Entidade,S,,,,2,,,,,,,,,,
 ,nome,Nome ou Razão Social,S,str,250.0,2,,,S,S,,,,,,
 ,fantasia,Nome Fantasia,,str,100.0,2,,,N,,,,,,,
 ,codigo,Código,,str,15.0,2,,uk,S,,,,,,,
-,tipo,Tipo de contato,N,int,1.0,2,0-Pessoa Física;1-Pessoa Juridica;2-Estrangeiro,,N,N,,,,,,nitipo
+,tipo,Tipo de contato,N,int,1.0,2,0-Pessoa Física;1-Pessoa Juridica;2-Estrangeiro,,N,N,,,,,,niTipo
 ,ni,CPF/CNPJ,,str,20.0,2,,uk1,S,S,,,,,,ni
 ,contribuinte,Código contribuinte,N,int,1.0,2,1-Contribuinte ICMS;2-Isento de ICMS;9-Não contribuinte,,N,N,,,,,,
 ,ie,Inscrição estadual,,str,30.0,2,,,,,,,,,,

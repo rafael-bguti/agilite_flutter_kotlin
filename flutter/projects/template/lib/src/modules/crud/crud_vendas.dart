@@ -17,9 +17,9 @@ class CrudVendas extends StatelessWidget {
           icon: const Icon(Icons.calendar_today),
         ),
       ],
-      columns: const [
-        ADataTableColumn("name", "Name"),
-        ADataTableColumn("email", "Email"),
+      columns: [
+        AColumnString("name", "Name"),
+        AColumnString("email", "Email"),
       ],
       formBody: ASpacingColumn(
         children: const [
