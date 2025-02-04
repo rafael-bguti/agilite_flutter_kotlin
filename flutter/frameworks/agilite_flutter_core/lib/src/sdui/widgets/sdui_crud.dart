@@ -16,7 +16,7 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
   Widget render(BuildContext context, SduiContext sduiContext, SduiCrudModel model) {
     final crudDataColumns = model.columns
         .map(
-          (column) => SduiSpreadColumn.build(context, sduiContext, column),
+          (column) => SduiSpreadColumn.build(context, sduiContext, column, true),
         )
         .toList();
 

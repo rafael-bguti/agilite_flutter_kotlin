@@ -97,13 +97,13 @@ class _Srf2060State extends State<Srf2060> {
                             "srf01integracaoGdf",
                             "Possui nota",
                             alignment: Alignment.center,
-                            formatter: _integracaoFormatter,
+                            cellFormatter: _integracaoFormatter,
                           ).widthChar(11),
                           AColumnString(
                             "srf01integracaoScf",
                             "Possui boleto",
                             alignment: Alignment.center,
-                            formatter: _integracaoFormatter,
+                            cellFormatter: _integracaoFormatter,
                           ).widthChar(13),
                         ],
                         readOnly: true,
@@ -119,5 +119,5 @@ class _Srf2060State extends State<Srf2060> {
     );
   }
 
-  String _integracaoFormatter(row, name) => row.getString(name) == "10" ? "Sim" : "Não";
+  final CellFormatter _integracaoFormatter = (spreadController, row, name) => spreadController.value[row].getString(name) == "10" ? "Sim" : "Não";
 }

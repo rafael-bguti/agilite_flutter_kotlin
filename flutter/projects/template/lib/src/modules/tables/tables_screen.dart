@@ -56,9 +56,9 @@ class _UsersSpreadState extends State<UsersSpread> {
             moreDetail: SpreadMoreDetail(),
             name: 'sprUsers',
             columns: [
-              AColumnReadOnly("nome", 'Name', renderWidgetBuilder: _renderName).widthChar(35),
-              AColumnReadOnly("company", 'Company', renderWidgetBuilder: _renderCompany).widthChar(75),
-              AColumnReadOnly("tags", 'Tags', renderWidgetBuilder: _renderTags).widthChar(50),
+              AColumnReadOnly("nome", 'Name', cellRenderer: _renderName).widthChar(35),
+              AColumnReadOnly("company", 'Company', cellRenderer: _renderCompany).widthChar(75),
+              AColumnReadOnly("tags", 'Tags', cellRenderer: _renderTags).widthChar(50),
             ],
             rowBuilder: _rowBuilder,
           ),
@@ -88,7 +88,7 @@ class _UsersSpreadState extends State<UsersSpread> {
     return wrapper;
   }
 
-  Widget _renderName(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
+  Widget _renderName(BuildContext context, SpreadController spreadController, int row, String name, bool isFocused) {
     final user = users[row];
     return ASpacingRow(
       children: [
@@ -114,7 +114,7 @@ class _UsersSpreadState extends State<UsersSpread> {
     );
   }
 
-  Widget _renderCompany(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
+  Widget _renderCompany(BuildContext context, SpreadController spreadController, int row, String name, bool isFocused) {
     final user = users[row];
     return user.company == null
         ? const Text('')
@@ -134,7 +134,7 @@ class _UsersSpreadState extends State<UsersSpread> {
           );
   }
 
-  Widget _renderTags(BuildContext context, SpreadController spreadController, int row, bool isFocused) {
+  Widget _renderTags(BuildContext context, SpreadController spreadController, int row, String name, bool isFocused) {
     final user = users[row];
     return Chip(label: Text(user.tags));
   }

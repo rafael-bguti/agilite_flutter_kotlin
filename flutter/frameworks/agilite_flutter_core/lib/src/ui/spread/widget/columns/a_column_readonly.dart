@@ -2,12 +2,11 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class AColumnReadOnly extends ASpreadColumn<dynamic> {
-  Widget Function(BuildContext context, SpreadController spreadController, int row, bool isFocused) renderWidgetBuilder;
-
   AColumnReadOnly(
     super.name,
     super.label, {
-    required this.renderWidgetBuilder,
+    super.cellFormatter,
+    super.cellRenderer,
   });
   @override
   bool get columnConsumeRowTap => true;
@@ -18,17 +17,7 @@ class AColumnReadOnly extends ASpreadColumn<dynamic> {
   }
 
   @override
-  Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
-    return renderWidgetBuilder(context, spreadController, row, isFocused);
-  }
-
-  @override
   bool hasDoubleTap() => false;
-
-  @override
-  Widget buildEditCellWrapper(BuildContext context, int row) {
-    return super.buildRenderCellWrapper(context, row, true);
-  }
 
   @override
   Widget buildEditCell(BuildContext context, int row) {
@@ -40,7 +29,7 @@ class AColumnReadOnly extends ASpreadColumn<dynamic> {
 
   @override
   dynamic getValueOnStopEdit() {
-    return 1;
+    return null;
   }
 
   @override

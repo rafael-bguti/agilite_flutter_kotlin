@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 const _durationToFocus = Duration(milliseconds: 15);
 
+typedef CellFormatter = String Function(SpreadController controller, int row, String columnName)?;
+typedef CellRenderer = Widget Function(BuildContext context, SpreadController controller, int row, String columnName, bool isFocused);
+
 abstract class ASpreadColumn<T> {
   final bool Function(int row)? isEditable;
 
@@ -27,7 +30,8 @@ abstract class ASpreadColumn<T> {
 
   AWidth _width = const AWidth.flex(1);
 
-  final ColumnFormatter? formatter;
+  final CellFormatter? cellFormatter;
+  final CellRenderer? cellRenderer;
 
   ASpreadColumn(
     this.name,
@@ -36,7 +40,8 @@ abstract class ASpreadColumn<T> {
     this.isEditable,
     this.validators,
     this.req = false,
-    this.formatter,
+    this.cellFormatter,
+    this.cellRenderer,
   });
 
   bool canEdit(int row) => isEditable?.call(row) ?? !spreadController.readOnly;
@@ -137,7 +142,7 @@ abstract class ASpreadColumn<T> {
         ? buildRenderCell(context, row, isFocused)
         : DefaultTextStyle(
             style: TextStyle(color: onSurfaceColor.withOpacity(0.65)),
-            child: buildRenderCell(context, row, isFocused),
+            child: cellRenderer?.call(context, spreadController, row, name, isFocused) ?? buildRenderCell(context, row, isFocused),
           );
 
     return GestureDetector(
@@ -172,8 +177,8 @@ abstract class ASpreadColumn<T> {
 
   Widget buildRenderCell(BuildContext context, int row, bool isFocused) {
     final String text;
-    if (formatter != null) {
-      text = formatter!.call(spreadController.value[row], name);
+    if (cellFormatter != null) {
+      text = cellFormatter!.call(spreadController, row, name);
     } else {
       text = spreadController.value[row].getString(name) ?? '';
     }
@@ -228,7 +233,7 @@ abstract class ASpreadColumn<T> {
     return this;
   }
 
-  final BoxDecoration _unFocusedBorderDecoration = BoxDecoration(border: Border.all(color: Colors.transparent, width: 2));
+  final BoxDecoration _unFocusedBorderDecoration = BoxDecoration(border: Border.all(color: Colors.red, width: 2));
   final BoxDecoration _editableBorderDecoration = BoxDecoration(border: Border.all(color: primaryColor, width: 2));
   final BoxDecoration _inEditingBorderDecoration = BoxDecoration(
     color: backgroundColor,

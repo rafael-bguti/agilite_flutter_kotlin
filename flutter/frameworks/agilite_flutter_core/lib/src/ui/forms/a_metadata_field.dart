@@ -1,15 +1,6 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-const String MOD_FONE = 'fone';
-const String MOD_CEP = 'cep';
-const String MOD_UF = 'uf';
-const String MOD_NI = 'ni';
-const String MOD_NITIPO = 'niTipo';
-
-//Apenas modificadores de colunas
-const String MOD_STATUS_DATE = 'statusDate';
-
 class AMetadataField extends StatelessWidget {
   final String fieldName;
   final void Function(dynamic controller)? controllerCreated;

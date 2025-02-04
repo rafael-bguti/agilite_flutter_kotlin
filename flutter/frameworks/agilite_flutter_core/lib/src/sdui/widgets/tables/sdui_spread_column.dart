@@ -4,53 +4,80 @@ import 'package:flutter/material.dart';
 import './sdui_column_model.dart';
 
 class SduiSpreadColumn {
-  static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiColumnModel model) {
+  static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiColumnModel model, [bool readOnly = false]) {
     ASpreadColumn result;
-    if (model.options != null) {
-      result = AColumnAutocomplete.combo(
+    if (readOnly) {
+      final cellRenderer = createSpreadCellRendererByMod(model.mod);
+      result = AColumnReadOnly(
         model.name,
         model.label,
-        options: model.options!,
+        cellFormatter: cellRenderer != null ? null : _createColumnFormatterToReadOnly(model),
+        cellRenderer: cellRenderer,
       );
     } else {
-      switch (model.type) {
-        case FieldMetadataType.string:
-          result = AColumnString(
-            model.name,
-            model.label,
-            formatter: createColumnFormatterByMetadataMod(model.mod),
-          );
-          break;
-        case FieldMetadataType.int:
-          result = AColumnInt(
-            model.name,
-            model.label,
-          );
-          break;
-        case FieldMetadataType.double:
-          result = AColumnDouble(
-            model.name,
-            model.label,
-          );
-          break;
-        case FieldMetadataType.bool:
-          result = AColumnBool(
-            model.name,
-            model.label,
-          );
-          break;
-        case FieldMetadataType.date:
-          result = AColumnDate(
-            model.name,
-            model.label,
-          );
-          break;
-        default:
-          throw Exception('Type not supported');
+      if (model.options != null) {
+        result = AColumnAutocomplete.combo(
+          model.name,
+          model.label,
+          options: model.options!,
+        );
+      } else {
+        switch (model.type) {
+          case FieldMetadataType.string:
+            result = AColumnString(
+              model.name,
+              model.label,
+              cellFormatter: createCellColumnFormatterBySduiMod(model.mod),
+            );
+            break;
+          case FieldMetadataType.int:
+            result = AColumnInt(
+              model.name,
+              model.label,
+            );
+            break;
+          case FieldMetadataType.double:
+            result = AColumnDouble(
+              model.name,
+              model.label,
+            );
+            break;
+          case FieldMetadataType.bool:
+            result = AColumnBool(
+              model.name,
+              model.label,
+            );
+            break;
+          case FieldMetadataType.date:
+            result = AColumnDate(
+              model.name,
+              model.label,
+            );
+            break;
+          default:
+            throw Exception('Type not supported');
+        }
       }
     }
 
     result.width = model.width ?? AWidth.byCharCount(model.label?.length ?? 10);
     return result;
+  }
+
+  static CellFormatter? _createColumnFormatterToReadOnly(SduiColumnModel model) {
+    if (model.type == FieldMetadataType.date) {
+      return (spreadController, row, columnName) => spreadController.value[row].getDateTime(columnName)?.format() ?? '';
+    }
+
+    if (!model.options.isNullOrEmpty) {
+      return (spreadController, row, columnName) {
+        final val = spreadController.value[row].getDynamic(columnName);
+        if (val == null) return '';
+
+        return model.options!.firstWhereOrNull((element) => element.jsonKey == val)?.label ?? val.toString();
+      };
+    }
+
+    return createCellColumnFormatterBySduiMod(model.mod);
   }
 }
