@@ -26,12 +26,7 @@ class Cgs1080CrudService(
         width = 250.0,
         child = SduiComboField(
           name = CLI_FOR_TRA_FILTER,
-          options = listOf(
-            Option(null, "Selecionar..."),
-            Option("1", "Apenas clientes"),
-            Option("2", "Apenas fornecedores"),
-            Option("3", "Apenas transportadoras"),
-          ),
+          options = entidadeFilterData.map { Option(it.first, it.second) },
           labelText = "Exibir",
           hintText = "Selecione..."
         )
@@ -47,13 +42,7 @@ class Cgs1080CrudService(
   ): Pair<String, Map<String, Any>?>? {
     if (request.customFilters?.containsKey(CLI_FOR_TRA_FILTER) == true) {
       val filterValue = request.customFilters?.get(CLI_FOR_TRA_FILTER) as String
-      val where = when (filterValue) {
-        "1" -> "cgs80.cgs80cliente = true"
-        "2" -> "cgs80.cgs80fornecedor = true"
-        "3" -> "cgs80.cgs80transportadora = true"
-        else -> null
-      }
-
+      val where = filterValue?.let {entidadeFilterData.find { it.first == filterValue }?.third}
       return where?.let { Pair(it, null) }
     }
     return null
@@ -111,4 +100,11 @@ class Cgs1080CrudService(
         ),
       )
     }
+
+  private val entidadeFilterData = listOf(
+    Triple(null, "Selecionar...", null),
+    Triple("1", "Apenas clientes", "cgs80.cgs80cliente = true"),
+    Triple("2", "Apenas fornecedores",  "cgs80.cgs80fornecedor = true"),
+    Triple("3", "Apenas transportadoras", "cgs80.cgs80transportadora = true"),
+  )
 }

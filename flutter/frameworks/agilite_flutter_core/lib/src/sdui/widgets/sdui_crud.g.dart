@@ -18,5 +18,6 @@ SduiCrudModel _$SduiCrudModelFromJson(Map<String, dynamic> json) =>
       customFilters: (json['customFilters'] as List<dynamic>?)
           ?.map((e) => e as Map<String, dynamic>)
           .toList(),
+      moreFiltersWidget: json['moreFiltersWidget'] as Map<String, dynamic>?,
       formBody: json['formBody'] as Map<String, dynamic>?,
     );

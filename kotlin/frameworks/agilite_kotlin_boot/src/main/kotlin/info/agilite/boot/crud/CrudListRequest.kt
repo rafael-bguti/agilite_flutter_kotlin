@@ -6,5 +6,5 @@ data class CrudListRequest(
   val search: String?,
   val customFilters: Map<String, Any?>?,
   val dialogMoreFiltersValue: Map<String, Any?>?,
-  val groupIndex: Int?,
+  var groupIndex: Int?,
 )

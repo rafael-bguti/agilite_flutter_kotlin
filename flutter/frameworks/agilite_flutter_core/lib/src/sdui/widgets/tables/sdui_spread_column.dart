@@ -8,11 +8,18 @@ class SduiSpreadColumn {
     ASpreadColumn result;
     if (readOnly) {
       final cellRenderer = createSpreadCellRendererByMod(model.mod);
+      final alignment = model.type == FieldMetadataType.int || model.type == FieldMetadataType.double
+          ? Alignment.centerRight
+          : model.type == FieldMetadataType.date
+              ? Alignment.center
+              : Alignment.centerLeft;
+
       result = AColumnReadOnly(
         model.name,
         model.label,
         cellFormatter: cellRenderer != null ? null : _createColumnFormatterToReadOnly(model),
         cellRenderer: cellRenderer,
+        alignment: alignment,
       );
     } else {
       if (model.options != null) {

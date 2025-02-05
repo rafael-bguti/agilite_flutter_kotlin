@@ -2,6 +2,7 @@ package info.agilite.boot.crud
 
 import info.agilite.boot.defaultMetadataRepository
 import info.agilite.boot.jdbcDialect
+import info.agilite.boot.metadata.MetadataUtils
 import info.agilite.boot.metadata.exceptions.AutocompleteMetadataNotFoundException
 import info.agilite.boot.metadata.models.EntityMetadata
 import info.agilite.boot.metadata.models.FieldMetadata
@@ -14,7 +15,6 @@ import info.agilite.boot.orm.query.DbQuery
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.sdui.SduiProvider
 import info.agilite.boot.sdui.SduiRequest
-import info.agilite.boot.sdui.autocomplete.Option
 import info.agilite.boot.sdui.component.*
 import info.agilite.boot.security.UserContext
 import info.agilite.core.extensions.splitToList
@@ -22,8 +22,6 @@ import info.agilite.core.json.JsonUtils
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import kotlin.math.max
-import kotlin.math.min
 
 interface CrudService<T> {
   fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
@@ -228,9 +226,21 @@ class DefaultSduiCrudService<T>(
     }
   }
 
+  protected fun buildMoreFilterKey(fieldName: String, type: MoreFiltersType, indexOnBetween: Int? = null): String {
+    if(type == MoreFiltersType.BETWEEN && indexOnBetween == null){
+      throw RuntimeException("O parâmetro indexOnBetween é obrigatório quando o tipo é BETWEEN")
+    }
+    if (type == MoreFiltersType.BETWEEN) {
+      return "${fieldName}_${indexOnBetween}_${type.name}"
+    }else{
+      return "${fieldName}_${type.name}"
+    }
+
+  }
+
   private fun createWheresToDetailedFilters(entity: EntityMetadata, filters: CrudListRequest): Pair<String, Map<String, Any?>?>? {
-    return if (filters.dialogMoreFiltersValue != null) {
-      val detailedFilterData = parseRequestFiltersToDetailedFilters(filters)
+    return if (!filters.dialogMoreFiltersValue.isNullOrEmpty()) {
+      val detailedFilterData = createDetailedFilters(filters)
       val mapParams = mutableMapOf<String, Any?>()
       detailedFilterData.forEach { mapParams.putAll(it.getParameters()) }
 
@@ -243,26 +253,26 @@ class DefaultSduiCrudService<T>(
     }
   }
 
-  private fun parseRequestFiltersToDetailedFilters(filters: CrudListRequest): List<DetailedFilterData>{
+  private fun createDetailedFilters(filters: CrudListRequest): List<DetailedFilterData>{
     val mapFilters = mutableMapOf<String, DetailedFilterData> ()
-    filters.dialogMoreFiltersValue?.forEach { (key, value) ->
-      val fieldName = key.split("_")[0]
-      var localValue = value
-      var operator = "ILIKE"
-      if(key.contains("_")){
-        operator = "BETWEEN"
-      }else if(key.contains(".")){
-        operator = "="
-      }else{
-        localValue = "%$value%"
-      }
 
-      val detailedFilterData = mapFilters[fieldName] ?: DetailedFilterData(fieldName, operator, localValue, localValue)
-      if(operator == "BETWEEN"){
-        if(key.contains("_ini"))
+    filters.dialogMoreFiltersValue?.forEach { (key, value) ->
+      val query = key.split("_")
+      val fieldName = query.first()
+      val type = MoreFiltersType.valueOf(query.last())
+      val localValue = MetadataUtils.convertValueByFieldName(fieldName, value)
+
+      val detailedFilterData: DetailedFilterData
+      if(type == MoreFiltersType.BETWEEN && mapFilters.containsKey(fieldName)){
+        val indexOnBetween = query[1].toInt()
+        detailedFilterData = mapFilters[fieldName]!!
+        if(indexOnBetween == 0){
           detailedFilterData.value1 = localValue
-        else if(key.contains("_fim"))
+        }else{
           detailedFilterData.value2 = localValue
+        }
+      }else{
+        detailedFilterData = DetailedFilterData(fieldName, type, localValue, localValue)
       }
 
       mapFilters[fieldName] = detailedFilterData

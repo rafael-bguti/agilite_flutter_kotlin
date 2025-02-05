@@ -27,7 +27,7 @@ class CrudDataGroups extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '${crudController.state.groups![index].qtd}',
+          '${crudController.state.groups![index].qtd ?? ''}',
           style: textTheme?.labelLarge?.copyWith(
             fontSize: 18,
             color: textColor,

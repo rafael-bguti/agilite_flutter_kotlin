@@ -37,22 +37,34 @@ class DefaultCrudRepository(
   }
 }
 
+enum class MoreFiltersType {
+  BETWEEN,
+  SINGLE,
+}
+
 data class DetailedFilterData(
   val fieldName: String,
-  val operator: String,
+  val type: MoreFiltersType,
   var value1: Any?,
   var value2: Any?
 ){
   fun getWhereClause(dialect: JdbcDialect): String {
-    return when(operator){
-      "BETWEEN" -> "${dialect.coalesceString(dialect.castToString(fieldName))} BETWEEN :$fieldName" + "Inicial AND :$fieldName" + "Final"
-      else -> "${dialect.coalesceString(dialect.castToString(fieldName))} $operator :$fieldName"
+    return when(type){
+      MoreFiltersType.BETWEEN -> " $fieldName BETWEEN :$fieldName" + "Inicial AND :$fieldName" + "Final "
+      else -> {
+        if(value1 is String){
+          value1 = "%$value1%"
+          return " $fieldName ILIKE :$fieldName"
+        }else{
+          return " $fieldName = :$fieldName"
+        }
+      }
     }
   }
 
   fun getParameters(): Map<String, Any?> {
-    return when(operator){
-      "BETWEEN" -> mapOf("${fieldName}Inicial" to value1, "${fieldName}Final" to value2)
+    return when(type){
+      MoreFiltersType.BETWEEN -> mapOf("${fieldName}Inicial" to value1, "${fieldName}Final" to value2)
       else -> mapOf(fieldName to value1)
     }
   }

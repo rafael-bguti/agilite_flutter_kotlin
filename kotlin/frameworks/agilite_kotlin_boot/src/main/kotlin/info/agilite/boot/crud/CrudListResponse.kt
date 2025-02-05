@@ -6,8 +6,8 @@ data class CrudListResponse(
 
   val data: List<Map<String, Any?>>,
 
-  val groups: List<CrudListGroup>? = null,
-  val selectedGroupIndex: Int? = null,
+  var groups: List<CrudListGroup>? = null,
+  var selectedGroupIndex: Int? = null,
 )
 
 data class CrudEditResponse(

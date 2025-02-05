@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 class CrudPanelFilters extends StatelessWidget {
   final CrudController crudController;
 
-  final Widget Function(BuildContext context)? moreFiltersPanelBuilder;
   final List<Widget>? customFilters;
+  final Widget? moreFiltersWidget;
+
   const CrudPanelFilters(
     this.crudController, {
     this.customFilters,
-    this.moreFiltersPanelBuilder,
+    this.moreFiltersWidget,
     super.key,
   });
 
@@ -26,21 +27,24 @@ class CrudPanelFilters extends StatelessWidget {
               prefixIcon: Icon(Icons.search),
             ),
           ),
-          Row(
+          ASpacingRow(
             children: [
               ...(customFilters ?? []),
-              const Spacer(),
-              if (moreFiltersPanelBuilder != null)
+              if (moreFiltersWidget != null)
                 OutlinedButton.icon(
                   style: buildOutlinedButtonStyle(primaryColor),
                   onPressed: () {
                     ASideDialog.showRight(
-                      builder: moreFiltersPanelBuilder!,
+                      builder: (ctx) => _MoreFiltersPanel(
+                        crudController: crudController,
+                        moreFiltersWidget: moreFiltersWidget!,
+                      ),
                     );
                   },
                   label: const Text("mais filtros"),
                   icon: const Icon(Icons.filter_alt_outlined),
                 ),
+              const Spacer(),
               AConsumer(
                 notifier: crudController.$loading,
                 builder: (_, __, child) {
@@ -65,6 +69,55 @@ class CrudPanelFilters extends StatelessWidget {
           ),
         ]),
       ],
+    );
+  }
+}
+
+class _MoreFiltersPanel extends StatelessWidget {
+  final CrudController crudController;
+  final Widget moreFiltersWidget;
+  const _MoreFiltersPanel({
+    required this.crudController,
+    required this.moreFiltersWidget,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const ADialogHeader(headerText: "Mais filtros"),
+            const SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                child: AForm(
+                  crudController.moreFiltersFormController,
+                  child: moreFiltersWidget,
+                ),
+              ),
+            ),
+            Container(
+              height: 65,
+              color: backgroundColor,
+              child: Center(
+                child: FilledButton.icon(
+                  style: successButtonStyle,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    crudController.onBtnRefreshClick();
+                  },
+                  label: const Text("Fitlrar"),
+                  icon: const Icon(Icons.check),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

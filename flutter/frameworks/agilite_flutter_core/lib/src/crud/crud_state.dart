@@ -37,11 +37,11 @@ class CrudState {
 
 @JsonSerializable(createToJson: false)
 class CrudStatusGroup {
-  final int qtd;
+  final int? qtd;
   final String title;
   final String? subtitle;
 
-  CrudStatusGroup(this.qtd, this.title, {this.subtitle});
+  CrudStatusGroup(this.title, {this.qtd, this.subtitle});
 
   factory CrudStatusGroup.fromJson(Map<String, dynamic> json) => _$CrudStatusGroupFromJson(json);
 }

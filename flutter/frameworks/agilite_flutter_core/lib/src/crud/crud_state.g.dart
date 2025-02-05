@@ -20,7 +20,7 @@ CrudState _$CrudStateFromJson(Map<String, dynamic> json) => CrudState(
 
 CrudStatusGroup _$CrudStatusGroupFromJson(Map<String, dynamic> json) =>
     CrudStatusGroup(
-      (json['qtd'] as num).toInt(),
       json['title'] as String,
+      qtd: (json['qtd'] as num?)?.toInt(),
       subtitle: json['subtitle'] as String?,
     );

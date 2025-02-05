@@ -18,7 +18,8 @@ class CrudController extends ViewController<CrudState> {
   final _searchDebouceTimer = DebounceTimer();
 
   //Controllers
-  final formFiltersController = FormController();
+  final filtersFormController = FormController();
+  final moreFiltersFormController = FormController();
 
   final spreadController = SpreadController("data");
 
@@ -34,7 +35,7 @@ class CrudController extends ViewController<CrudState> {
     CrudRepository? repository,
   })  : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
         super(CrudState.empty()) {
-    formFiltersController.addControllerListener(
+    filtersFormController.addControllerListener(
       (controller) {
         if (controller is FormFieldController) {
           controller.addValueChangeListener(onFilterChanged);
@@ -64,11 +65,12 @@ class CrudController extends ViewController<CrudState> {
 
   // ------ Filtros ------
   bool get hasFilters {
-    return formFiltersController.getControllersValue().isNotEmpty;
+    return filtersFormController.getControllersValue().isNotEmpty || moreFiltersFormController.getControllersValue().isNotEmpty;
   }
 
   void onClearFiltersClicked() {
-    formFiltersController.clear();
+    filtersFormController.clear();
+    moreFiltersFormController.clear();
     onBtnRefreshClick();
   }
 
@@ -93,10 +95,6 @@ class CrudController extends ViewController<CrudState> {
   Future<void> onGroupChanged(int groupIndex) async {
     this.groupIndex = groupIndex;
     onBtnRefreshClick();
-  }
-
-  void doRefresh() {
-    _refresh();
   }
 
   void onDeleteClicked() {
@@ -152,7 +150,7 @@ class CrudController extends ViewController<CrudState> {
   }
 
   CrudListRequest _buildRequest() {
-    final customFilters = formFiltersController.buidlJson();
+    final customFilters = filtersFormController.buidlJson();
     final search = customFilters.remove(searchName) as String?;
 
     return CrudListRequest(
@@ -161,6 +159,7 @@ class CrudController extends ViewController<CrudState> {
       search: search,
       customFilters: customFilters,
       groupIndex: groupIndex,
+      dialogMoreFiltersValue: moreFiltersFormController.buidlJson(),
     );
   }
 
@@ -168,9 +167,10 @@ class CrudController extends ViewController<CrudState> {
   @override
   void dispose() {
     $loading.dispose();
-    formFiltersController.dispose();
+    filtersFormController.dispose();
     spreadController.dispose();
     _searchDebouceTimer.dispose();
+    moreFiltersFormController.dispose();
 
     super.dispose();
   }

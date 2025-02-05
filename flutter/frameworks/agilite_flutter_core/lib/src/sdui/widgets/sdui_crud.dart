@@ -27,6 +27,7 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
         .toList();
 
     final formBody = model.formBody == null ? null : SduiRender.renderFromJson(context, sduiContext, model.formBody!);
+    final moreFiltersBody = model.moreFiltersWidget == null ? null : SduiRender.renderFromJson(context, sduiContext, model.moreFiltersWidget!);
 
     return ACrud.name(
       taskName: model.taskName,
@@ -35,6 +36,7 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
       customFilters: customFiltersWidgets,
       formBody: formBody,
       metadataToLoad: model.metadataToLoad,
+      moreFiltersWidget: moreFiltersBody,
     );
   }
 }
@@ -46,6 +48,7 @@ class SduiCrudModel extends SduiModel {
   final String? metadataToLoad;
   final List<SduiColumnModel> columns;
   final List<Map<String, dynamic>>? customFilters;
+  final Map<String, dynamic>? moreFiltersWidget;
   final Map<String, dynamic>? formBody;
 
   SduiCrudModel({
@@ -55,6 +58,7 @@ class SduiCrudModel extends SduiModel {
     required this.columns,
     this.metadataToLoad,
     this.customFilters,
+    this.moreFiltersWidget,
     this.formBody,
   });
 

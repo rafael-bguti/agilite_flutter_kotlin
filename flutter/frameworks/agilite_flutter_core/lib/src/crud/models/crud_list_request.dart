@@ -3,6 +3,7 @@ class CrudListRequest {
   final int pageSize;
   final String? search;
   final Map<String, dynamic>? customFilters;
+  final Map<String, dynamic>? dialogMoreFiltersValue;
   final int? groupIndex;
 
   CrudListRequest({
@@ -10,6 +11,7 @@ class CrudListRequest {
     required this.pageSize,
     this.search,
     this.customFilters,
+    this.dialogMoreFiltersValue,
     this.groupIndex,
   });
 
@@ -20,6 +22,7 @@ class CrudListRequest {
       'search': search,
       'customFilters': customFilters,
       'groupIndex': groupIndex,
+      'dialogMoreFiltersValue': dialogMoreFiltersValue,
     };
   }
 }

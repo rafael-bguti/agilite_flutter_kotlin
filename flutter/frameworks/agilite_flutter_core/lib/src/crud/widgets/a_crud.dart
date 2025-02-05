@@ -12,10 +12,13 @@ class ACrud extends StatefulWidget {
 
   final CrudDescr descr;
   final List<ASpreadColumn> columns;
-  final List<Widget>? customFilters;
 
   final CrudController? controller;
   final String? metadataToLoad;
+
+  // ---- More filters ----
+  final List<Widget>? customFilters;
+  final Widget? moreFiltersWidget;
 
   // ---- Para edição de registro ----
   // ---- Informar ou o OnEdit ou o FormBody ----
@@ -31,6 +34,7 @@ class ACrud extends StatefulWidget {
     this.controller,
     this.onEdit,
     this.formBody,
+    this.moreFiltersWidget,
     super.key,
   });
 
@@ -41,6 +45,7 @@ class ACrud extends StatefulWidget {
     this.customFilters,
     this.onEdit,
     this.formBody,
+    this.moreFiltersWidget,
     super.key,
   })  : taskName = controller.taskName,
         metadataToLoad = null;
@@ -62,7 +67,6 @@ class _ACrudState extends State<ACrud> {
     if (!_controllerCreatedForThis) {
       _controller.dispose();
     }
-
     super.dispose();
   }
 
@@ -80,10 +84,11 @@ class _ACrudState extends State<ACrud> {
             spacing: 16,
             children: [
               AForm(
-                _controller.formFiltersController,
+                _controller.filtersFormController,
                 child: CrudPanelFilters(
                   _controller,
                   customFilters: widget.customFilters,
+                  moreFiltersWidget: widget.moreFiltersWidget,
                 ),
               ),
               CrudDataTableCard(
@@ -115,7 +120,7 @@ class _ACrudState extends State<ACrud> {
         barrierDismissible: false,
       );
       if (saved != null) {
-        _controller.doRefresh();
+        _controller.onBtnRefreshClick();
       }
     }
   }

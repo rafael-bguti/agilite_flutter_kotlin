@@ -1,4 +1,5 @@
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_crud.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_date_range.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_fieldset.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_padding.dart';
 
@@ -44,6 +45,7 @@ List<SduiWidget> _initWidgets = [
   SduiAutocomplete(),
   SduiComboField(),
   SduiCrud(),
+  SduiDateRange(),
   SduiDivider(),
   SduiFieldset(),
   SduiGrid(),

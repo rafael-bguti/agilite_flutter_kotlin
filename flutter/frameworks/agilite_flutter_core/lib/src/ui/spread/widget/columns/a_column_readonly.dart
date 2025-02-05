@@ -7,6 +7,7 @@ class AColumnReadOnly extends ASpreadColumn<dynamic> {
     super.label, {
     super.cellFormatter,
     super.cellRenderer,
+    super.alignment = Alignment.centerLeft,
   });
   @override
   bool get columnConsumeRowTap => false;

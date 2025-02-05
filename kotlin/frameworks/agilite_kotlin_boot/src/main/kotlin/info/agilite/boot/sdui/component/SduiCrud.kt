@@ -8,5 +8,6 @@ class SduiCrud(
   var columns: List<SduiColumn>,
   var customFilters: List<SduiComponent>? = null,
   var formBody: SduiComponent? = null,
+  var moreFiltersWidget: SduiComponent? = null,
   var metadataToLoad: String? = null,
 ) : SduiComponent()

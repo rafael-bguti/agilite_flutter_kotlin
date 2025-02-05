@@ -2,14 +2,19 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 class ADateRange extends StatefulWidget with FieldControllerCreatorMixin {
+  final String? label;
+
   final String nameIni;
   final String nameEnd;
+  final bool fluid;
 
   final void Function(DateTime initialDate, DateTime finalDate)? onChanged;
 
   const ADateRange({
     required this.nameIni,
     required this.nameEnd,
+    this.fluid = false,
+    this.label,
     this.onChanged,
     super.key,
   });
@@ -40,7 +45,7 @@ class _ADateRangeState extends State<ADateRange> {
 
   @override
   Widget build(BuildContext context) {
-    const constraint = BoxConstraints(maxWidth: 370);
+    BoxConstraints constraint = BoxConstraints(maxWidth: widget.fluid ? double.infinity : 370);
     final fields = [
       Expanded(child: ATextField.date(widget.nameIni)),
       const Text("até"),
@@ -49,9 +54,11 @@ class _ADateRangeState extends State<ADateRange> {
 
     return Container(
       constraints: constraint,
-      child: ASpacingColumn(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (widget.label != null) Text(widget.label!, style: textTheme?.labelLarge),
+          const SizedBox(height: 4),
           DropdownButtonFormField<RangeValue>(
             hint: const Text("Selecione um intervalo"),
             items: values
@@ -62,6 +69,7 @@ class _ADateRangeState extends State<ADateRange> {
                 .toList(),
             onChanged: _onChanged,
           ),
+          const SizedBox(height: 8),
           ASpacingRow(
             children: fields,
           ),

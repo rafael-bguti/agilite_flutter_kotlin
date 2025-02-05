@@ -53,7 +53,7 @@ abstract class ASpreadColumn<T> {
 
   Widget buildHeader(BuildContext context) {
     final child = Container(
-      alignment: Alignment.centerLeft,
+      alignment: alignment,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: buildHeaderContent(context),
