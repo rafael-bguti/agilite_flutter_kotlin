@@ -82,21 +82,8 @@ class SpreadController extends FieldController<SpreadModel> {
   }
 
   @override
-  get jsonValue {
-    if (value.isNotEmpty) {
-      final result = value.toListMap();
-      for (var row in result) {
-        for (final column in columns) {
-          row[column.name] = column.valueToJson(row[column.name]);
-        }
-      }
-      return result;
-    }
-    return null;
-  }
-
-  List<Map<String, dynamic>> get jsonList {
-    return jsonValue as List<Map<String, dynamic>>? ?? [];
+  List<Map<String, dynamic>> get jsonValue {
+    return value.toListMap();
   }
 
   List<LowercaseMap> get selectedData {
@@ -685,10 +672,10 @@ class SpreadModel {
 }
 
 class SpreadRow {
-  final LowercaseMap _data;
+  final Map<String, dynamic?> _data;
   final Map<String, String> _validationMessage = {};
 
-  SpreadRow(Map<String, dynamic> data) : _data = LowercaseMap.fromMap(data);
+  SpreadRow(Map<String, dynamic> data) : _data = data;
 
   // operator [](String columnName) => _data[columnName];
   operator []=(String columnName, dynamic value) {

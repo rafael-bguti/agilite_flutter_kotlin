@@ -208,7 +208,17 @@ class HttpProviderImpl extends HttpProvider {
       }
     }
 
-    return needEncode ? jsonEncode(data) : data.toString();
+    return needEncode
+        ? jsonEncode(
+            data,
+            toEncodable: (dynamic object) {
+              if (object is DateTime) {
+                return object.formatToIso();
+              }
+              return object;
+            },
+          )
+        : data.toString();
   }
 
   Uri _url(String path, [Map<String, dynamic>? queryParameters]) {

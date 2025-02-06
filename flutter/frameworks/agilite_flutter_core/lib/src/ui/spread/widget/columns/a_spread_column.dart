@@ -14,7 +14,6 @@ abstract class ASpreadColumn<T> {
   void doRequestFocusOnEdit();
 
   T? getValueOnStopEdit();
-  dynamic valueToJson(T? value) => value;
 
   bool get columnConsumeRowTap => false;
 

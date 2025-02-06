@@ -42,7 +42,7 @@ class Srf2060Service(
     }
   }
 
-  fun doSendMail(docToSend: Srf2060Doc, smptConfig: SmtpConfig) {
+  private fun doSendMail(docToSend: Srf2060Doc, smptConfig: SmtpConfig) {
     val html = criarCorpoDoEmail(docToSend)
 
     val attachments = criarAnexos(docToSend)

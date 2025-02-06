@@ -18,12 +18,12 @@ class Srf2060Controller(
 ) {
 
   @PostMapping("listar")
-  fun listarDocumentosParaEnviarEmail(@RequestBody filter: Srf2060Filter): List<Srf2060Mail>{
+  fun listarDocumentosParaEnviarEmail(@RequestBody filter: Srf2060Filter): List<Srf2060Mail> {
     return repository.buscarDadosDocumentosParaEnviarEmail(filter)
   }
 
   @PostMapping
-    fun enviarEmails(@RequestBody srf2060dtos: List<Srf2060Mail>){
+  fun enviarEmails(@RequestBody srf2060dtos: List<Srf2060Mail>) {
     service.enviarEmailDocumentos(srf2060dtos)
   }
 }

@@ -24,9 +24,6 @@ class AColumnDate extends ASpreadColumn<DateTime> {
   }
 
   @override
-  dynamic valueToJson(DateTime? value) => value?.format(dateISOFormat);
-
-  @override
   Widget buildEditCell(BuildContext context, int row) {
     return _getTextField();
   }

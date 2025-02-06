@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002">
-      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2060/srf2060.dart" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/lib/tasks/srf2060/srf2060.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2060Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2060Service.kt" afterDir="false" />
-    </list>
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
