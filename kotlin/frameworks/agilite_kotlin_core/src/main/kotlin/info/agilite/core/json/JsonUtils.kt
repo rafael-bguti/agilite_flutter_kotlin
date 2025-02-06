@@ -30,6 +30,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.stream.Collectors
 
 
@@ -148,7 +149,7 @@ object JsonUtils {
   fun createLocalDateModule(): SimpleModule {
     val module = SimpleModule()
     module.addSerializer(LocalDate::class.java, LocalDateSerializer(DateTimeFormatter.ISO_DATE))
-    module.addDeserializer(LocalDate::class.java, LocalDateDeserializer(DateTimeFormatter.ISO_DATE))
+    module.addDeserializer(LocalDate::class.java, LocalDateFlexibleDeserializer())
     module.addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
     module.addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
     module.addSerializer(LocalTime::class.java, LocalTimeSerializer(DateTimeFormatter.ISO_TIME))
@@ -160,6 +161,20 @@ object JsonUtils {
     val module = SimpleModule()
     module.setSerializerModifier(PartLoadedEntitySerializerModifier())
     return module
+  }
+}
+
+internal class LocalDateFlexibleDeserializer : JsonDeserializer<LocalDate>() {
+  private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
+
+  override fun deserialize(p: JsonParser, ctxt: DeserializationContext): LocalDate {
+    val text = p.text
+    return try {
+      LocalDate.parse(text, dateTimeFormatter)
+    } catch (e: DateTimeParseException) {
+      LocalDate.parse(text, dateFormatter)
+    }
   }
 }
 

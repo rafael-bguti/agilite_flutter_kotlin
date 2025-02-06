@@ -213,7 +213,7 @@ class HttpProviderImpl extends HttpProvider {
             data,
             toEncodable: (dynamic object) {
               if (object is DateTime) {
-                return object.formatToIso();
+                return object.toIso8601String();
               }
               return object;
             },
