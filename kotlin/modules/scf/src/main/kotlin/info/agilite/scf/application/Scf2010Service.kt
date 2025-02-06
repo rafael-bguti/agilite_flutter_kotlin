@@ -2,11 +2,13 @@ package info.agilite.scf.application
 
 import info.agilite.cgs.adapter.infra.Cgs38Repository
 import info.agilite.core.exceptions.ValidationException
+import info.agilite.core.extensions.substr
 import info.agilite.integradores.bancos.IntegradorBancoFactory
 import info.agilite.integradores.bancos.models.*
 import info.agilite.scf.infra.Scf021Repository
 import info.agilite.scf.infra.Scf2010Repository
 import info.agilite.scf.utils.toBancoConfig
+import info.agilite.shared.entities.cgs.CGS80TIPO_PESSOA_JURIDICA
 import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.scf.Scf021
 import org.springframework.stereotype.Service
@@ -52,14 +54,14 @@ class Scf2010Service(
     pagador = Pagador(
       cpfCnpj = scf02entidade.cgs80ni ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
       nome = scf02entidade.cgs80nome,
-      tipoPessoa = TipoPessoa.JURIDICA,
+      tipoPessoa = if(scf02entidade.cgs80tipo == CGS80TIPO_PESSOA_JURIDICA) TipoPessoa.JURIDICA else TipoPessoa.FISICA,
       endereco = scf02entidade.cgs80endereco ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
       numero = scf02entidade.cgs80numero ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
       bairro = scf02entidade.cgs80bairro,
       cidade = scf02entidade.cgs80municipio ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
       uf = scf02entidade.cgs80uf ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
       cep = scf02entidade.cgs80cep ?: "", // TODO Criar um validador que valide os dados obrigatórios antes de emitir o boleto
-      complemento = scf02entidade.cgs80complemento,
+      complemento = scf02entidade.cgs80complemento?.substr(0, 30),
     ),
     multa = MoraMulta(
       taxa = BigDecimal(2),

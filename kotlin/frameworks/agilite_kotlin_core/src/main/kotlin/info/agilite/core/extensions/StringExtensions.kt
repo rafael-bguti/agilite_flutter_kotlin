@@ -56,7 +56,7 @@ fun String.substr(start: Int, length: Int): String {
   val sb = StringBuffer()
   val end = min(start + length, this.length)
   for (i in start until end) {
-    sb.append(this.get(i))
+    sb.append(this[i])
   }
   return sb.toString()
 }

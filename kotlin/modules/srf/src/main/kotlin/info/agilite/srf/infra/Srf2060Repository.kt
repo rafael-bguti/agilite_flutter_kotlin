@@ -4,6 +4,7 @@ import info.agilite.boot.orm.WhereSimple
 import info.agilite.boot.orm.query.DbQueryBuilders
 import info.agilite.boot.orm.repositories.RootRepository
 import info.agilite.boot.orm.where
+import info.agilite.core.extensions.addOrReplace
 import info.agilite.core.json.JsonUtils
 import info.agilite.shared.entities.cgs.Cgs15
 import info.agilite.shared.entities.cgs.Cgs80
@@ -57,18 +58,19 @@ class Srf2060Repository : RootRepository() {
           }
         },
         orderBy = { "ORDER BY srf01dtEmiss DESC" },
-        limitQuery = " LIMIT 100 "
+        limitQuery = " LIMIT 200 "
       )
     )
   }
 
   fun findDocsToSendMail(srf01ids: List<Long>): List<Srf2060Doc> {
     val sql = """
-      SELECT srf01.*, gdf10.*, cgs15.*, cgs80.*, scf02.*
+      SELECT srf01.*, srf011.*, gdf10.*, cgs15.*, cgs80.*, scf02.*
       FROM Srf01
       LEFT JOIN Srf012 ON srf012doc = srf01id
       LEFT JOIN Gdf10 ON srf01dfeAprov = gdf10id
       LEFT JOIN Scf02 ON srf012documento = scf02id
+      INNER JOIN Srf011 ON srf011doc = srf01id
       INNER JOIN Cgs80 ON srf01entidade = cgs80id
       INNER JOIN Cgs18 ON srf01natureza = cgs18id
       INNER JOIN Cgs15 ON cgs18modeloEmail = cgs15id
@@ -84,6 +86,7 @@ class Srf2060Repository : RootRepository() {
       if(lastSrf2060Doc?.srf01?.id != srf01id) {
         lastSrf2060Doc = Srf2060Doc(
           JsonUtils.fromMap(it, Srf01::class.java),
+          mutableListOf(),
           JsonUtils.fromMap(it, Cgs80::class.java),
           if(it["gdf10id"] != null) JsonUtils.fromMap(it, Gdf10::class.java) else null,
           JsonUtils.fromMap(it, Cgs15::class.java),
@@ -91,9 +94,12 @@ class Srf2060Repository : RootRepository() {
         )
         result.add(lastSrf2060Doc!!)
       }
+      val srf011 = JsonUtils.fromMap(it, Srf011::class.java)
+      lastSrf2060Doc!!.srf011s.addOrReplace(srf011)
+
       if(it["scf02id"] != null) {
         val scf02 = JsonUtils.fromMap(it, Scf02::class.java)
-        lastSrf2060Doc!!.scf02s.add(scf02)
+        lastSrf2060Doc!!.scf02s.addOrReplace(scf02)
       }
     }
 

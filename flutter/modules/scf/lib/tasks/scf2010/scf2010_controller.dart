@@ -27,11 +27,14 @@ class Scf2010Controller extends ViewController<String> {
     final ids = selectedNFSe.map((e) => e.getInt("scf02id")).toList();
 
     showLoading("Enviando boletos para o banco");
-    final response = await httpProvider.post(
-      "/scf2010",
-      body: ids,
-    );
-    showSuccessSnack("Boletos enviados com sucesso!");
-    await onViewLoaded();
+    try {
+      final response = await httpProvider.post(
+        "/scf2010",
+        body: ids,
+      );
+      showSuccessSnack("Boletos enviados com sucesso!");
+    } finally {
+      await onViewLoaded();
+    }
   }
 }

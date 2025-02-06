@@ -16,7 +16,7 @@ const val STATUS_FILTER = "statusFilter"
 @Component
 class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCrudService<Cgs80>(crudRepository) {
   override fun getColumnQueriesToList(taskName: String, entityMetadata: EntityMetadata): List<String> {
-    return "scf02dtVenc, scf02lancamento.scf11data, scf02entidade.cgs80nome, scf02entidade.cgs80ni, scf02valor, scf02forma.cgs38nome".splitToList()
+    return "scf02dtVenc, scf02nossoNum, scf02lancamento.scf11data, scf02entidade.cgs80nome, scf02entidade.cgs80ni, scf02valor, scf02forma.cgs38nome".splitToList()
   }
 
   override fun createSduiComponent(request: SduiRequest): SduiComponent {

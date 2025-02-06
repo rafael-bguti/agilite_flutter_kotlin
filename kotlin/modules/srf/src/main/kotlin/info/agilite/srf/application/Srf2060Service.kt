@@ -13,9 +13,9 @@ import info.agilite.core.extensions.localCapitalize
 import info.agilite.core.extensions.orExc
 import info.agilite.shared.entities.cas.Cas65
 import info.agilite.shared.integrators.Scf02GeradorPDFToEmail
-import info.agilite.srf.infra.Srf2060Repository
 import info.agilite.srf.domain.Srf2060Doc
 import info.agilite.srf.domain.Srf2060Mail
+import info.agilite.srf.infra.Srf2060Repository
 import org.springframework.stereotype.Service
 
 @Service
@@ -40,7 +40,6 @@ class Srf2060Service(
       sse.sendMessage("Enviando email para ${docToSend.cgs80.cgs80email}")
       doSendMail(docToSend, smptConfig)
     }
-
   }
 
   fun doSendMail(docToSend: Srf2060Doc, smptConfig: SmtpConfig) {
@@ -59,14 +58,13 @@ class Srf2060Service(
       bcc = "rafael@multitecsistemas.com.br"
     )
     mailSender.sendHtml(smptConfig, mail)
-
     repository.updateEmailSent(docToSend.srf01)
   }
 
   private fun criarAnexos(docToSend: Srf2060Doc): MutableList<MailAttachment> {
     val attachments = mutableListOf<MailAttachment>()
     val scf02ids = docToSend.scf02s.map { it.scf02id }
-    val anexos = scf02PdfGenerator.gerarAnexoCobranca(scf02ids)
+    val anexos = scf02PdfGenerator.gerarAnexoCobranca(scf02ids) // TODO passar o SCF02 aqui dentro pois está faznedo select dentro do gerarAnexoCobranca
     anexos?.values?.forEach { anexo ->
         attachments.add(MailAttachment(anexo.nome, anexo.content, anexo.contentType))
     }
@@ -82,6 +80,7 @@ class Srf2060Service(
       mapOf(
         "mesReferencia" to mesReferencia,
         "srf01" to docToSend.srf01,
+        "srf011s" to docToSend.srf01.srf011s,
         "gdf10" to docToSend.gdf10,
         "scf02s" to docToSend.scf02s,
       )

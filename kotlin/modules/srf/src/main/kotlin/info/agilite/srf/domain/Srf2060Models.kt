@@ -7,6 +7,7 @@ import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.scf.Scf02
 import info.agilite.shared.entities.srf.Srf01
+import info.agilite.shared.entities.srf.Srf011
 import java.time.LocalDate
 
 class Srf2060Filter(
@@ -42,6 +43,7 @@ data class Srf2060Mail(
 
 class Srf2060Doc(
   val srf01: Srf01,
+  val srf011s: MutableList<Srf011>,
   val cgs80: Cgs80,
   val gdf10: Gdf10?,
   val cgs15: Cgs15,

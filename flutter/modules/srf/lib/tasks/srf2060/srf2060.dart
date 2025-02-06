@@ -69,17 +69,27 @@ class _Srf2060State extends State<Srf2060> {
                 Srf2060InitialState() => const SizedBox.shrink(),
                 Srf2060EmptyState() => const AAlert.warning(message: "Nenhum e-mail foi localizado para enviar"),
                 Srf2060FullState() => ACard(
-                    header: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    header: ASpacingColumn(
                       children: [
-                        const Text("E-mails localizados"),
-                        FilledButton.tonal(
-                          style: successButtonStyle,
-                          onPressed: () {
-                            controller.enviarEmails();
-                          },
-                          child: const Text("Enviar"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("E-mails localizados"),
+                            FilledButton.tonal(
+                              style: successButtonStyle,
+                              onPressed: () {
+                                controller.enviarEmails();
+                              },
+                              child: AConsumer(
+                                notifier: controller.spreadEnvioController,
+                                builder: (_, __, ___) {
+                                  return Text("Enviar ${controller.spreadEnvioController.selectedRowCount} e-mails");
+                                },
+                              ),
+                            ),
+                          ],
                         ),
+                        if (controller.spreadEnvioController.rowCount == 200) const AAlert.warning(message: "A lista de e-mails foi limitada a 200 registros"),
                       ],
                     ),
                     child: SizedBox(

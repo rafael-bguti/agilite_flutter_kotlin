@@ -319,6 +319,7 @@ class SpreadController extends FieldController<SpreadModel> {
     return selected;
   }
 
+  int get rowCount => value.length;
   int get selectedRowCount => selectedRows.length;
 
   //---- Formulario para mais detalhes -----
