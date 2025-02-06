@@ -41,7 +41,7 @@ class Srf2030Service(
     val cgs18 = cgs18repo.findByCodigo(cobranca.natureza) ?: throw ValidationException("Natureza não encontrada: ${cobranca.natureza}")
     val cgs80 = cgs80repo.findByNi(cobranca.cliente.cnpj.numbersOnly()) ?: throw ValidationException("Entidade não encontrada: ${cobranca.cliente.cnpj}")
 
-    val maxSrf01Numero = srf01repo.findMaxNumero()
+    val maxSrf01Numero = srf01repo.findMaxNumeroBySeries(cgs18.cgs18serie)
 
     val srf01 = Srf01(
       srf01empresa = user.empId,

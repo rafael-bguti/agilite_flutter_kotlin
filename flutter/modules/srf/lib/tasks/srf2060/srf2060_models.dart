@@ -1,31 +1,3 @@
-class Srf2060Filter {
-  final DateTime? emissIni;
-  final DateTime? emissFim;
-  final bool? reenviar;
-
-  Srf2060Filter({
-    this.emissIni,
-    this.emissFim,
-    this.reenviar,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'emissIni': emissIni,
-      'emissFim': emissFim,
-      'reenviar': reenviar,
-    };
-  }
-
-  factory Srf2060Filter.fromJson(Map<String, dynamic> json) {
-    return Srf2060Filter(
-      emissIni: json['emissIni'] as DateTime?,
-      emissFim: json['emissFim'] as DateTime?,
-      reenviar: json['reenviar'] as bool?,
-    );
-  }
-}
-
 class Srf2060Mail {
   final int cgs18id;
   final String cgs18nome;

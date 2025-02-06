@@ -10,6 +10,7 @@ import info.agilite.integradores.dtos.Cliente
 import info.agilite.integradores.dtos.Cobranca
 import info.agilite.integradores.dtos.FormaPagamento
 import info.agilite.integradores.dtos.ItemCobranca
+import java.math.BigDecimal
 import java.time.LocalDate
 import kotlin.math.max
 
@@ -96,7 +97,7 @@ class GeradorCobrancaTFS4 {
           FormaPagamento(
             nomeFormaPagamento = NOME_FORMA_PAGAMENTO_BOLETO,
             valor = licenca.total,
-            dataVencimento = DateUtils.lastUtilDayOfMonth()
+            dataVencimento = LocalDate.now().withDayOfMonth(20)
           )
         )
       )
@@ -136,7 +137,7 @@ class GeradorCobrancaTFS4 {
           FormaPagamento(
             nomeFormaPagamento = NOME_FORMA_PAGAMENTO_BOLETO,
             valor = total,
-            dataVencimento = DateUtils.lastUtilDayOfMonth()
+            dataVencimento = LocalDate.now().withDayOfMonth(20)
           )
         )
       )
@@ -205,10 +206,19 @@ class GeradorCobrancaTFS4 {
     println("Valor total SAM3: $valorTotalSAM3")
     println("Valor total SAM4: ${licenca.total}")
 
-    exibirCobrancasAnteriores(licenca.licencaCNPJ)
+    val cobrancasAnteriores = exibirCobrancasAnteriores(licenca.licencaCNPJ)
+    val mediaValorAnterior = cobrancasAnteriores.sumOf { it.toDouble() }.toBigDecimal() / (cobrancasAnteriores.size.let { if(it == 0) 1 else it }.toBigDecimal())
 
     println("O que fazer? [0] - Usar o MAIOR [1] - Usar só o novo, [2] - Usar só o antigo, [3] - Usar os 2, [4] - Só o novo com outro valor")
-    val resposta = readlnOrNull() ?: "0"
+    val resposta: String?
+    val maiorValor = max(valorTotalSAM3.toLong(), licenca.total.toLong())
+    if(((mediaValorAnterior / maiorValor.toBigDecimal()) - 1.toBigDecimal()).abs() <= 0.1.toBigDecimal()){
+      println("A média $mediaValorAnterior está muito próximo do maior valor $maiorValor, opção padrão será [0] - Usar o MAIOR")
+      resposta = "0"
+    }else{
+      resposta = readlnOrNull() ?: "0"
+    }
+
 
     if (resposta == "0") {
       cobrancasSam3.forEach{ cobrancasGeradas.remove(it) }
@@ -232,20 +242,22 @@ class GeradorCobrancaTFS4 {
         licenca.total = novoValor
         return FaturamentoTFS4(buildFaturamentoMultinfeInSAM4(licenca), cnpjs)
       }else{
-        throw RuntimeException("Valor inválido")
+        println("VALOR INÁLIDO, tente de novo")
+        return alterarValoresDoMultiNFe(licenca)
       }
     }
-
-    throw RuntimeException("Resposta inválida")
+    println("RESPOSTA INVÁLIDA, tente de novo")
+    return alterarValoresDoMultiNFe(licenca)
   }
 
-  private fun exibirCobrancasAnteriores(cnpj: String){
+  private fun exibirCobrancasAnteriores(cnpj: String): List<BigDecimal>{
     val resultado = CobrancaRepository.buscarCobrancas(cnpj)
     if(resultado.size < 6){
       resultado.addAll(CobAntigoRepository.buscarCobrancasAntigas(cnpj))
     }
 
     println("Ultimas cobranças: ${resultado}")
+    return resultado
   }
 
   private fun removerValoresPequenos(consumoDasLicencas: MutableList<ConsumoTFS4Licenca>) {

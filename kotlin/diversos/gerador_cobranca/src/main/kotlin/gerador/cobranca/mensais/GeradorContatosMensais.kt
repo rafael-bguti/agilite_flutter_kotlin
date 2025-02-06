@@ -1,8 +1,10 @@
 package gerador.cobranca.mensais
 
 import gerador.cobranca.*
+import info.agilite.core.utils.DateUtils
 import info.agilite.integradores.dtos.Cobranca
 import java.math.BigDecimal
+import java.time.LocalDate
 
 class GeradorContatosMensais {
   fun gerarCobrancasMensais() {
@@ -22,19 +24,19 @@ class GeradorContatosMensais {
   //TODO Multitec
   private fun gerarFaturamentoPessoal(): List<Cobranca> {
     return listOf(
-//      //Eltech Dentro
-//      Utils.buildCobranca(
-//        NATUREZA_SOFTWARE, "52104228000125",
-//        CODIGO_ITEM_PROGRAMACAO, "Programação",
-//        BigDecimal(8000),
-//      ),
-//
-//      //Multitec Dentro
-//      Utils.buildCobranca(
-//        NATUREZA_SOFTWARE, "67919092000189",
-//        CODIGO_ITEM_PROGRAMACAO, "Programação",
-//        BigDecimal(4000)
-//      ),
+      //Eltech Dentro
+      Utils.buildCobranca(
+        NATUREZA_SOFTWARE, "52104228000125",
+        CODIGO_ITEM_PROGRAMACAO, "Programação",
+        BigDecimal(6000),
+      ),
+
+      //Multitec Dentro
+      Utils.buildCobranca(
+        NATUREZA_SOFTWARE, "67919092000189",
+        CODIGO_ITEM_PROGRAMACAO, "Programação",
+        BigDecimal(9000)
+      ),
 //
 //      //Multitec fora
 //      Utils.buildCobranca(
@@ -76,7 +78,12 @@ class GeradorContatosMensais {
 
   private fun gerarCobrancaDPil(): Cobranca {
     return (Utils.buildCobranca(
-      NATUREZA_DPIL, "10703519000190", CODIGO_ITEM_DPIL, "Manutenção plataforma DPil", BigDecimal(2366)
+      NATUREZA_DPIL,
+      "10703519000190",
+      CODIGO_ITEM_DPIL,
+      "Manutenção plataforma DPil",
+      BigDecimal(2366),
+      vencimento = DateUtils.lastUtilDayOfMonth()
     ))
   }
 

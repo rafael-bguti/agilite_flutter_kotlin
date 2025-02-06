@@ -1,7 +1,8 @@
 class ForceHomeException implements Exception {
   final dynamic cause;
+  final StackTrace? stackTrace;
 
-  ForceHomeException(this.cause);
+  ForceHomeException(this.cause, [this.stackTrace]);
 
   @override
   String toString() {

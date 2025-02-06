@@ -17,6 +17,7 @@ class Utils {
       valor: BigDecimal,
       forma: String = NOME_FORMA_PAGAMENTO_BOLETO,
       obs: String? = null,
+      vencimento: LocalDate = LocalDate.now().withDayOfMonth(20)
     ): Cobranca {
       return Cobranca(
         natureza = natureza,
@@ -26,7 +27,7 @@ class Utils {
         formasPagamento = listOf(
           FormaPagamento(
             nomeFormaPagamento = forma,
-            dataVencimento = LocalDate.now().withDayOfMonth(20),
+            dataVencimento = vencimento,
             valor = valor
           )
         )

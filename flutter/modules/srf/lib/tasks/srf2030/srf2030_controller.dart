@@ -17,9 +17,10 @@ class Srf2030Controller extends ViewController<Srf2030State> {
     final bytes = await fileController.bytes;
     if (bytes == null) {
       showWarningSnack("Nenhum arquivo selecionado");
+      return;
     }
     showLoading("Carregando dados do arquivo...");
-    final json = utf8.decode(bytes!, allowMalformed: true);
+    final json = utf8.decode(bytes, allowMalformed: true);
     await httpProvider.post("/srf2030", body: json);
 
     showSuccessSnack("Arquivo processado com sucesso");

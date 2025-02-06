@@ -1,6 +1,7 @@
 package info.agilite.core.xml
 
 import info.agilite.core.exceptions.ValidationException
+import info.agilite.core.extensions.nullIfEmpty
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -37,7 +38,8 @@ class ElementXml : Serializable {
     domElement.appendChild(elementXml.domElement)
   }
 
-  fun addNode(tagName: String, value: Any?, required: Boolean = true): ElementXml? {
+  fun addNode(tagName: String, nodeText: Any?, required: Boolean = true): ElementXml? {
+    val value = nodeText?.toString()?.trim()?.nullIfEmpty()
     if (value == null) {
       if (required) throw ValidationException("Valor requerido para tag '$tagName' não informado")
       return null
@@ -45,7 +47,7 @@ class ElementXml : Serializable {
     val child = domElement.ownerDocument.createElement(tagName.trim())
     domElement.appendChild(child)
     val elementXml = ElementXml(child)
-    elementXml.setNodeValue(value.toString())
+    elementXml.setNodeValue(value)
     return elementXml
   }
 

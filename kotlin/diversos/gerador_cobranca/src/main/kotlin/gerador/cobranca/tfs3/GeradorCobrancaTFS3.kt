@@ -23,16 +23,12 @@ private const val TFS3_KEY = "DZojWtQHPedOX9kOhThMLs3MnjkWG96KZkuwUB3kfXz3XaH4tp
 class GeradorCobrancaTFS3 {
 
   fun gerar() {
-
-
     val json = buscarJsonTFS3()
     val eventos = JsonUtils.fromJson(json, object : TypeReference<List<Tfs3Evento>>(){})
 
     trocarCnpjAlgumasCobrancas(eventos)
 
     val cobrancas = eventos.map { (it.toCobranca()) }.toMutableList()
-    adicionarCobrancasNaoGeradasAPartirDaCobrancaHistorica(cobrancas)
-
     println("Listando documentos emitidos para validar cobrança...")
     validarClientesSemPagar(cobrancas)
     cobrancasGeradas.addAll(cobrancas)
@@ -60,7 +56,7 @@ class GeradorCobrancaTFS3 {
     }
   }
 
-  private fun adicionarCobrancasNaoGeradasAPartirDaCobrancaHistorica(cobrancas: MutableList<Cobranca>){
+  fun adicionarCobrancasNaoGeradasAPartirDaCobrancaHistorica(cobrancas: MutableList<Cobranca>){
     val cnpjs = cobrancas.map { it.cliente.cnpj }
     val cnpjsHistorico = TFS3ValoresHistoricos.historicos.keys
     val cnpjsNaoGerados = cnpjsHistorico.filter { !cnpjs.contains(it) }

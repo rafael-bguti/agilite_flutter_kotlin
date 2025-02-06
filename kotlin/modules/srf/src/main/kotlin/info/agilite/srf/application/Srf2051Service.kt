@@ -1,7 +1,11 @@
 package info.agilite.srf.application
 
 import info.agilite.boot.orm.BatchOperations
+import info.agilite.boot.orm.Where
+import info.agilite.boot.orm.query.DbQueryBuilders
+import info.agilite.boot.orm.where
 import info.agilite.boot.security.UserContext
+import info.agilite.boot.sse.SseEmitter
 import info.agilite.cas.adapter.infra.Cas65Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.extensions.format
@@ -16,9 +20,12 @@ import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.srf.Srf01
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.shared.events.Srf01FiscalProcessadoEvent
+import info.agilite.srf.domain.Srf01Model
+import info.agilite.srf.domain.Srf2051Model
 import info.agilite.srf.infra.Srf2051Repository
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -27,8 +34,9 @@ class Srf2051Service(
   private val cas65repo: Cas65Repository,
   private val srf2051repo: Srf2051Repository,
   private val eventPublish: ApplicationEventPublisher,
+  private val sseEmitter: SseEmitter
 ) {
-  fun processarRetornoLoteNFse(bytes: ByteArray, contentType: String?) {
+  fun processarRetornoLoteNFse(xml: String): Srf2051Model {
     val cas65 = cas65repo.findById(UserContext.safeUser.empId)
 
     if (cas65.cas65municipio == null || cas65.cas65uf == null) {
@@ -37,24 +45,29 @@ class Srf2051Service(
     val municipioEstado = "${cas65.cas65municipio}-${cas65.cas65uf}".uppercase()
     val dadosRps: List<DadosRps>
     if (municipioEstado == "ITATIBA-SP") {
-      dadosRps = extrairDadosRetornoItatiba(bytes, contentType)
+      dadosRps = extrairDadosRetornoItatiba(xml)
     } else {
       throw RuntimeException("Não é possível processar retorno de lotes de NFSe para o município de ${cas65.cas65municipio}-${cas65.cas65uf}")
     }
 
-    processarDadosDoRetornoDasNFSe(dadosRps)
+    val srf01s = processarDadosDoRetornoDasNFSe(dadosRps)
+    return Srf2051Model(srf2051repo.findCountNFSeParaProcessar(), srf01s.map {
+      Srf01Model(it.srf01numero, it.srf01dtEmiss, it.srf01nome, it.srf01vlrTotal)
+    })
   }
 
-  private fun processarDadosDoRetornoDasNFSe(dadosRpsPrefeitura: List<DadosRps>) {
+  private fun processarDadosDoRetornoDasNFSe(dadosRpsPrefeitura: List<DadosRps>): List<Srf01> {
     if (dadosRpsPrefeitura.isEmpty()) throw ValidationException("Nenhum RPS encontrado no retorno")
     val srf01processarRetorno = srf2051repo.findNFSeParaProcessar()
 
     val batch = BatchOperations()
+    val srf01s = mutableListOf<Srf01>();
     for (index in dadosRpsPrefeitura.indices) {
+      sseEmitter.sendMessage("Processando NFSe ${index + 1} de ${dadosRpsPrefeitura.size}")
       val rps = dadosRpsPrefeitura[index]
       val srf01ByRPS = srf01processarRetorno.find { srf01 ->
         srf01.srf01serie == rps.serieRps &&
-            srf01.srf01numero == rps.numeroRps
+        srf01.srf01numero == rps.numeroRps
       }
       if (srf01ByRPS == null) {
         throw ValidationException("RPS ${rps.serieRps}-${rps.numeroRps} não encontrado no lote de processamento")
@@ -63,12 +76,14 @@ class Srf2051Service(
       srf01ByRPS.srf01integracaoGdf = INTEGRACAO_OK
       srf01ByRPS.srf01numero = rps.numeroNFSe
       srf01ByRPS.srf01dfeAprov = createGdf10(rps.protocolo, srf01ByRPS, rps)
+      srf01s.add(srf01ByRPS)
 
       eventPublish.publishEvent(Srf01FiscalProcessadoEvent(this, srf01ByRPS, rps.protocolo))
       batch.updateChanges(srf01ByRPS)
     }
-
     srf2051repo.executeBatch(batch)
+
+    return srf01s
   }
 
   private fun createGdf10(protocolo: String, srf01: Srf01, dadosRps: DadosRps): Gdf10{
@@ -90,12 +105,7 @@ class Srf2051Service(
     return gdf10
   }
 
-  fun extrairDadosRetornoItatiba(bytes: ByteArray, contentType: String?): List<DadosRps> {
-    if (!contentType.equals("application/xml", true)) {
-      throw RuntimeException("O conteúdo do retorno deve ser um XML")
-    }
-
-    val xml = String(bytes)
+  fun extrairDadosRetornoItatiba(xml: String): List<DadosRps> {
     val xmlRoot = ElementXmlConverter.string2Element(xml)
     val nfses = xmlRoot.findChildNodes("Nfse") ?: return emptyList()
 
@@ -111,12 +121,14 @@ class Srf2051Service(
       val protocolo = nfse.findChildValue("InfNfse.CodigoVerificacao")
         ?: throw ValidationException("CodigoVerificacao da NFSe não encontrado na nota $index")
 
-      val tomador = nfse.findFirstChildValue("TomadorServico.IdentificacaoTomador.CpfCnpj.Cnpj", "TomadorServico.IdentificacaoTomador.CpfCnpj.Cpf").orExc("TomadorServico não localizado na NFSe")
+      val niTomador = nfse.findFirstChildValue("TomadorServico.IdentificacaoTomador.CpfCnpj.Cnpj", "TomadorServico.IdentificacaoTomador.CpfCnpj.Cpf").orExc("TomadorServico não localizado na NFSe")
       val prestador = nfse.findFirstChildValue("Prestador.CpfCnpj.Cnpj", "Prestador.CpfCnpj.Cpf").orExc("Prestador não localizado na NFSe")
       val dataEmissao = nfse.findChildValue("InfNfse.DataEmissao")?.parseDateTime("yyyy-MM-dd'T'HH:mm:ss.SSS").orExc("DataEmissao não localizado na NFSe")
+      val link = "https://iss.itatiba.sp.gov.br/Exportar/NotaPrestado?tp=0&h=$protocolo&tomador=$niTomador&prestador=$prestador&data=${dataEmissao.format("ddMMyyyy")}&numero=$numeroNFSe"
+      val valor = nfse.findChildValue("ValoresServico.ValorLiquidoNfse")?.toBigDecimal() ?:
+        throw ValidationException("ValorLiquidoNfse não localizado na NFSe")
 
-      val link = "https://iss.itatiba.sp.gov.br/Exportar/NotaPrestado?tp=0&h=$protocolo&tomador=$tomador&prestador=$prestador&data=${dataEmissao.format("ddMMyyyy")}&numero=$numeroNFSe"
-      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt(), protocolo, link))
+      result.add(DadosRps(numeroRps.toInt(), serieRps?.toInt(), numeroNFSe.toInt(), protocolo, niTomador, valor, link))
     }
 
     return result
@@ -128,5 +140,9 @@ data class DadosRps(
   val serieRps: Int?,
   val numeroNFSe: Int,
   val protocolo: String,
+
+  val niTomador: String,
+  val valor: BigDecimal,
+
   val linkPDF: String,
 )

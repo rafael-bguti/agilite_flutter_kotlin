@@ -93,27 +93,25 @@ class GDF2020EmissorItatiba() {
       rps2.addNode("Status", 1)
 
       val listaServicos = infDeclaracaoPrestacaoServico.addNode("ListaServicos")
-      srf01.srf011s!!.forEach { srf011 ->
-        val servico = listaServicos.addNode("Servico")
-        val valores = servico.addNode("Valores")
 
-        valores.addNode("ValorServicos", srf011.srf011vlrTotal?.roud(2), true)
-        valores.addNode("ValorDeducoes", "0.00") // TODO adicionar no SRF011
-        valores.addNode("ValorIss", srf011.srf011vlrIss?.roud(2) ?: "0.00", true)
-        valores.addNode("Aliquota", srf011.srf011alqIss?.roud(2) ?: "0.00", true)
-        valores.addNode("BaseCalculo", srf011.srf011vlrTotal?.roud(2), true)
-        servico.addNode("IssRetido", 2)//TODO adicionar tipo iss no PCD/Item
+      val servico = listaServicos.addNode("Servico")
+      val valores = servico.addNode("Valores")
 
-        val itemListaServico = srf011.srf011item?.cgs50tipoServico?.substringBefore('/')
-        servico.addNode("ItemListaServico", itemListaServico, true)
-        servico.addNode("CodigoCnae", cas65.cas65cnae?.numbersOnly(), false)
+      valores.addNode("ValorServicos", srf01.srf01vlrTotal.roud(2), true)
+      valores.addNode("ValorDeducoes", "0.00") // TODO adicionar no SRF011
+      valores.addNode("ValorIss", "0.00", true)
+      valores.addNode("Aliquota", "0.00", true)
+      valores.addNode("BaseCalculo", srf01.srf01vlrTotal?.roud(2), true)
+      servico.addNode("IssRetido", 2)//TODO adicionar tipo iss no PCD/Item
 
-        servico.addNode("Discriminacao", srf011.srf011item?.cgs50descr, true)
-        servico.addNode("CodigoMunicipio", ibgeItatiba, true) //TODO obter a partir do municipio do cliente
-        servico.addNode("ExigibilidadeISS", 1) //TODO adicionar ao item da nota (Srf011)
-        servico.addNode("MunicipioIncidencia", ibgeItatiba, true)
+      val itemListaServico = "01.07"
+      servico.addNode("ItemListaServico", itemListaServico, true)
+      servico.addNode("CodigoCnae", cas65.cas65cnae?.numbersOnly(), false)
+      servico.addNode("Discriminacao", "Servicos prestados", true)
+      servico.addNode("CodigoMunicipio", ibgeItatiba, true) //TODO obter a partir do municipio do cliente
+      servico.addNode("ExigibilidadeISS", 1) //TODO adicionar ao item da nota (Srf011)
+      servico.addNode("MunicipioIncidencia", ibgeItatiba, true)
 
-      }
       infDeclaracaoPrestacaoServico.addNode("Competencia",  emissao.formatISO())
 
       val prestador = infDeclaracaoPrestacaoServico.addNode("Prestador")

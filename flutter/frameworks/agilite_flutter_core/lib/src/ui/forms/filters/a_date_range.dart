@@ -57,7 +57,7 @@ class _ADateRangeState extends State<ADateRange> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.label != null) Text(widget.label!, style: textTheme?.labelLarge),
+          if (widget.label != null) Text(widget.label!, style: textTheme?.bodyLarge?.copyWith(fontFamily: 'HeaderFont')),
           const SizedBox(height: 4),
           DropdownButtonFormField<RangeValue>(
             hint: const Text("Selecione um intervalo"),

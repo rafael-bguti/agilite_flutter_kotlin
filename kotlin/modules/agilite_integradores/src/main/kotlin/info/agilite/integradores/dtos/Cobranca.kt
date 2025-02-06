@@ -17,7 +17,7 @@ data class Cobranca(
 }
 data class ItemCobranca(
   val codigo: String,
-  val descricao: String,
+  var descricao: String,
   val quantidade: Int,
   var valor: BigDecimal,
 )

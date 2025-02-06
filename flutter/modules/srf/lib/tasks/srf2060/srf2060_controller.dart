@@ -1,6 +1,5 @@
 import 'package:agilite_flutter_boot/boot.dart';
 import 'package:agilite_flutter_core/core.dart';
-import 'package:srf/tasks/srf2060/srf2060_models.dart';
 
 class Srf2060Controller extends ViewController<Srf2060State> {
   Srf2060Controller() : super(Srf2060InitialState());
@@ -18,8 +17,8 @@ class Srf2060Controller extends ViewController<Srf2060State> {
 
   Future<void> buscarEmails() async {
     showLoading("Buscando e-mails para ser enviados");
-    final filter = Srf2060Filter.fromJson(formFilterController.buidlJson());
-    final response = await httpProvider.post("/srf2060/listar", body: filter.toJson());
+    final filters = formFilterController.buidlJson();
+    final response = await httpProvider.post("/srf2060/listar", body: filters);
 
     final emails = response.bodyList;
     if (emails.isEmpty) {

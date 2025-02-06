@@ -10,10 +10,7 @@ import info.agilite.shared.entities.cgs.Cgs80
 import info.agilite.shared.entities.cgs.N_CGS18_MODELO_EMAIL
 import info.agilite.shared.entities.gdf.Gdf10
 import info.agilite.shared.entities.scf.Scf02
-import info.agilite.shared.entities.srf.N_SRF01_DT_EMAIL
-import info.agilite.shared.entities.srf.N_SRF01_INTEGRACAO_GDF
-import info.agilite.shared.entities.srf.SRF01_METADATA
-import info.agilite.shared.entities.srf.Srf01
+import info.agilite.shared.entities.srf.*
 import info.agilite.shared.events.INTEGRACAO_NAO_EXECUTAR
 import info.agilite.shared.events.INTEGRACAO_OK
 import info.agilite.srf.domain.Srf2060Doc
@@ -52,13 +49,14 @@ class Srf2060Repository : RootRepository() {
         where = where {
           and {
             default(SRF01_METADATA)
-            simple(" $N_CGS18_MODELO_EMAIL IS NOT NULL ")
+            isNull(N_SRF01_DT_CANC)
+            isNotNull(N_CGS18_MODELO_EMAIL)
             simple(" $N_SRF01_INTEGRACAO_GDF IN ($INTEGRACAO_OK, $INTEGRACAO_NAO_EXECUTAR)")
             add(whereEmiss)
             add(whereReenv)
           }
         },
-        orderBy = { "srf01dtEmiss DESC" },
+        orderBy = { "ORDER BY srf01dtEmiss DESC" },
         limitQuery = " LIMIT 100 "
       )
     )

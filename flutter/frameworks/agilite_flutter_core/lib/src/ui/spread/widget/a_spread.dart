@@ -323,7 +323,7 @@ class _ASpreadState extends State<ASpread> with FieldControllerCreatorMixin {
   }
 
   SpreadController _buildController() {
-    if (widget.name == null) throw 'O nome do controller não foi informado';
+    if (widget.name == null) throw 'O nome da spread não foi informado para criar o controller';
     final controller = SpreadController(
       widget.name!,
     );

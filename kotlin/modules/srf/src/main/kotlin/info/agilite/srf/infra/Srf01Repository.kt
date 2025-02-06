@@ -9,10 +9,12 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class Srf01Repository : RootRepository() {
-  fun findMaxNumero(): Int {
+  fun findMaxNumeroBySeries(serie: Int?): Int {
+    val localSerie = serie ?: -1
     val sql = """
      SELECT MAX(srf01numero) 
      FROM Srf01
+     WHERE COALESCE(srf01serie, -1) = $localSerie
      WHERE ${defaultWhere(SRF01_METADATA)}
     """.trimIndent()
 

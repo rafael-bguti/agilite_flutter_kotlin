@@ -66,6 +66,8 @@ class GerarCobranca {
     ajustarVencimento()
     removerValoresPequenos(cobrancasGeradas)
 
+    GeradorCobrancaTFS3().adicionarCobrancasNaoGeradasAPartirDaCobrancaHistorica(cobrancasGeradas)
+
     alterarCnpjMaliber()
     agruparCobrancaDasRevendas()
 
@@ -120,12 +122,12 @@ class GerarCobranca {
   private fun agruparCobrancaDasRevendas(){
     cobrancasGeradas.filter { cobRev -> cobRev.natureza == NATUREZA_TFS4_REV}.forEach { cobRev ->
       val cobrancasFilhas = cobrancasGeradas.filter{ cobRev.cliente.cnpj == it.cliente.cnpj && it.natureza != NATUREZA_FREELA && it != cobRev}
+      cobRev.itens.first().descricao += " - ${cobRev.obs}"
+      cobRev.obs = null
       if(cobrancasFilhas.isNotEmpty()){
-        cobRev.obs = "[Cobrança 1] - ${cobRev.obs}"
-
         cobrancasFilhas.forEachIndexed { index, it ->
-          cobRev.obs += "\n\n[Cobrança ${index + 2}] - ${it.obs ?: it.itens.first().descricao}"
-          cobRev.itens.addAll(it.itens)
+          it.itens.first().descricao += " - ${it.obs ?: it.itens.first().descricao}"
+          cobRev.itens.add(it.itens.first())
           cobRev.formasPagamento.forEach{fp -> fp.valor = fp.valor.add(it.total())}
           it.agrupada = true
         }

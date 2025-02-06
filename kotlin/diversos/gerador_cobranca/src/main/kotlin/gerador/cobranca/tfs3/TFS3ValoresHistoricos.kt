@@ -6,7 +6,6 @@ import java.math.BigDecimal
 object TFS3ValoresHistoricos {
   val historicos = mutableMapOf<String, TFS3ValorHistorio>()
   init {
-    historicos.put("56365612000132", TFS3ValorHistorio("SINDICATO DOS TRABALHADORES NAS USINAS DE ACUCAR,NAS INDUSTRIAS DE SUCO CONCENTRADO,DO CAFE SOLUVEL,", 54.88.toBigDecimal()))
     historicos.put("46106829000174", TFS3ValorHistorio("Sindicato de Papel, Papelão e Celulose de Campinas", 54.88.toBigDecimal()))
     historicos.put("43975226000110", TFS3ValorHistorio("SINDICATO DOS TRABALHADORES NAS INDUSTRIAS DE ALIMENTACAO DE ARARAQUARA E REGIAO", 54.88.toBigDecimal()))
     historicos.put("56390123000130", TFS3ValorHistorio("CASA DE SAUDE BEZERRA DE MENEZES", 54.88.toBigDecimal()))
@@ -24,7 +23,6 @@ object TFS3ValoresHistoricos {
     historicos.put("08371465000160", TFS3ValorHistorio("Marcio Mitsuo Nakati", 54.88.toBigDecimal()))
     historicos.put("61387478000100", TFS3ValorHistorio("ESCRITORIO CUNHA LIMA SOCIEDADE SIMPLES LTDA", 88.48.toBigDecimal()))
     historicos.put("50116185000172", TFS3ValorHistorio("A RELA S/A INDÚSTRIA E COMERCIO", 88.48.toBigDecimal()))
-    historicos.put("49311558000187", TFS3ValorHistorio("ADVANCE - INDUSTRIA TEXTIL LTDA", 54.88.toBigDecimal()))
     historicos.put("67165647000144", TFS3ValorHistorio("CNC CONTABILIDADE E AUDITORIA LTDA", 166.88.toBigDecimal()))
     historicos.put("46106514000127", TFS3ValorHistorio("SINDICATO DOS TRABALHADORES NAS INDUSTRIAS METALURGICAS, MECANICAS, DE MATERIAL ELETRICO E ELETRONIC", 88.48.toBigDecimal()))
     historicos.put("59620567000103", TFS3ValorHistorio("SINDICATO DOS TRABALHADORES NAS INDUSTRIAS DE LAPIS, CANETAS, QUIMICAS, FARMACEUTICAS, MATERIAL PLAS", 54.88.toBigDecimal()))
@@ -37,7 +35,6 @@ object TFS3ValoresHistoricos {
     historicos.put("01997586000173", TFS3ValorHistorio("SIMOES E MOREIRA LTDA ", 54.88.toBigDecimal()))
     historicos.put("61472650000124", TFS3ValorHistorio("MSO INDUSTRIA DE PRODUTOS OTICOS LTDA", 54.88.toBigDecimal()))
     historicos.put("12315369000172", TFS3ValorHistorio("VIVA MAO DE OBRA TEMPORARIA E SERVICOS TERCERIZADOS LTDA", 88.48.toBigDecimal()))
-    historicos.put("61702569000193", TFS3ValorHistorio("MACC CONTABILIDADE S/S", 54.88.toBigDecimal()))
     historicos.put("11894930000152", TFS3ValorHistorio("BRINQUEDOS ZUCATOYS INDUSTRIA E COMERCIO EIRELI", 88.48.toBigDecimal()))
   }
 
