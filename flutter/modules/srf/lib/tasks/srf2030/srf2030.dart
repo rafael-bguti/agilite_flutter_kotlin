@@ -30,8 +30,8 @@ class _Srf2030State extends State<Srf2030> {
           child: ASpacingColumn(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AGrid(
-                areas: const ['4, 8'],
+              AGrid.oneRow(
+                areas: '4, 8',
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,

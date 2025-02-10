@@ -10,12 +10,14 @@ class SduiGrid extends SduiWidget<SduiGridModel> {
 
   @override
   Widget render(BuildContext context, SduiGridModel model) {
-    return AGrid.rows(
-      rows: model.rows
+    return AGrid(
+      model.rows
           .map(
             (el) => el.toAGridRow(context),
           )
           .toList(),
+      spacing: model.spacing,
+      crossAxisAlignment: model.crossAxisAlignment,
     );
   }
 }
@@ -23,13 +25,13 @@ class SduiGrid extends SduiWidget<SduiGridModel> {
 @JsonSerializable(createToJson: false)
 class SduiGridModel extends SduiModel {
   final List<SduiGridRow> rows;
-  final int? spacing;
+  final double? spacing;
   final WrapCrossAlignment? crossAxisAlignment;
 
   SduiGridModel({
     required this.rows,
-    this.spacing = 8,
-    this.crossAxisAlignment = WrapCrossAlignment.start,
+    this.spacing,
+    this.crossAxisAlignment,
     super.id,
   });
 

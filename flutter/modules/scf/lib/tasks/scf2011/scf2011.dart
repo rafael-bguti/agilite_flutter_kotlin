@@ -27,8 +27,8 @@ class _Scf2011State extends State<Scf2011> {
           header: const AContainerHeader.text("Baixar boletos"),
           child: ASpacingColumn(
             children: [
-              AGrid(
-                areas: const ['4, 8'],
+              AGrid.oneRow(
+                areas: '4, 8',
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -116,8 +116,8 @@ class _BoletoCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: AGrid.rows(
-              rows: [
+            child: AGrid(
+              [
                 AGridRow(
                   areas: '2-4, 4-10, 4-12',
                   children: [

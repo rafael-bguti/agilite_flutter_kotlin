@@ -16,9 +16,8 @@ class CrudPanelFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AGrid.rows(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      rows: [
+    return AGrid(
+      [
         AGridRow(areas: "3, 9", children: [
           const ATextField.string(
             CrudController.searchName,
@@ -69,6 +68,7 @@ class CrudPanelFilters extends StatelessWidget {
           ),
         ]),
       ],
+      crossAxisAlignment: WrapCrossAlignment.center,
     );
   }
 }

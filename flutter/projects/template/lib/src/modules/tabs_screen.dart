@@ -25,11 +25,9 @@ class _TabsScreenState extends State<TabsScreen> {
       header: const AContainerHeader.text("Tabs"),
       child: ASpacingColumn(
         children: [
-          AGrid(
+          AGrid.oneRow(
+            areas: '4, 8',
             spacing: 16,
-            areas: const [
-              '4, 8',
-            ],
             children: [
               const ADivider.text(text: "Custom"),
               Padding(
@@ -63,11 +61,9 @@ class _TabsScreenState extends State<TabsScreen> {
               ),
             ],
           ),
-          AGrid(
+          AGrid.oneRow(
+            areas: '4, 8',
             spacing: 16,
-            areas: const [
-              '4, 8',
-            ],
             children: [
               const ADivider.text(text: "Underlined"),
               Padding(
@@ -94,11 +90,9 @@ class _TabsScreenState extends State<TabsScreen> {
               ),
             ],
           ),
-          AGrid(
+          AGrid.oneRow(
+            areas: '4, 8',
             spacing: 16,
-            areas: const [
-              '4, 8',
-            ],
             children: [
               const ADivider.text(text: "Pills"),
               Padding(

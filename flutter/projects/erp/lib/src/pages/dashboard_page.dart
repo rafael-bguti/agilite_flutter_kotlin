@@ -41,10 +41,8 @@ class _DashboardPageState extends State<DashboardPage> {
             title: 'Analytics Service Issues.',
             message: 'You may experience some issues with the Analytics API. Stay up to date by following our status page.',
           ),
-          AGrid(
-            areas: const [
-              '8, 4',
-            ],
+          AGrid.oneRow(
+            areas: '8, 4',
             children: const [
               _OverviewPanel(),
               _SchedulePanel(),
@@ -185,11 +183,9 @@ class _OverviewPanel extends StatelessWidget {
     return ASpacingColumn(
       children: [
         const ADivider.text(text: 'Overview'),
-        AGrid(
+        AGrid.oneRow(
           spacing: 8,
-          areas: const [
-            '6, 6',
-          ],
+          areas: '6, 6',
           children: const [
             ACard(
               padding: EdgeInsets.zero,

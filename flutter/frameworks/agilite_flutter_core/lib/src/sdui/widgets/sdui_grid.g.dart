@@ -11,10 +11,9 @@ SduiGridModel _$SduiGridModelFromJson(Map<String, dynamic> json) =>
       rows: (json['rows'] as List<dynamic>)
           .map((e) => SduiGridRow.fromJson(e as Map<String, dynamic>))
           .toList(),
-      spacing: (json['spacing'] as num?)?.toInt() ?? 8,
+      spacing: (json['spacing'] as num?)?.toDouble(),
       crossAxisAlignment: $enumDecodeNullable(
-              _$WrapCrossAlignmentEnumMap, json['crossAxisAlignment']) ??
-          WrapCrossAlignment.start,
+          _$WrapCrossAlignmentEnumMap, json['crossAxisAlignment']),
       id: json['id'] as String?,
     );
 

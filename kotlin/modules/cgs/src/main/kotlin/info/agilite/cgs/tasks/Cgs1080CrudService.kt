@@ -98,7 +98,7 @@ class Cgs1080CrudService(
         top = 8.0,
         child = SduiGrid.createByRows(
           GridRowQuery(
-            "6,6", "cgs80tipo,cgs80ni,cgs80contribuinte,cgs80ie,cgs80im",
+            "6", "cgs80tipo,cgs80ni,cgs80contribuinte,cgs80ie,cgs80im",
           )
         ),
       )

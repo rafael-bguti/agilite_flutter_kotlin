@@ -2,250 +2,115 @@
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
+const double _defaultSpacing = 16;
+const WrapCrossAlignment _defaultCrossAxisAlignment = WrapCrossAlignment.start;
+
 class AGrid extends StatelessWidget {
-  final List<Widget> children;
+  final List<AGridRow> rows;
 
-  /// Areas:
-  /// Informar o tamanho por dispositivo separado por - e os dispositivos separados por ,
-  /// o Dispositivo segue o padrao desktop[-tablet[-phone]], o valor default para todos é 12
-  /// Exemplo: 2-6, 4-6, 1-2-6 -> nesse caso primeiro componente: 2 desktop, 6 tablet, 12 phone. segundo componente: 4 desktop, 6 tablet, 12 phone. terceiro componente: 1 desktop, 2 tablet, 6 phone
-  ///          5, *    -- * indica resto do espaco
-  ///          10-6-4 -> nesse caso primeiro componente: 10 desktop, 6 tablet, 4 phone
-  ///
-  final bool recursiveGrid;
-  final double spacing;
+  final double? spacing;
+  final WrapCrossAlignment? crossAxisAlignment;
 
-  final WrapCrossAlignment crossAxisAlignment;
-
-  final GridSizes _gridSizes;
-  AGrid({
-    required this.children,
-    List<String> areas = const ['12'],
-    this.recursiveGrid = true,
-    this.spacing = 8,
-    this.crossAxisAlignment = WrapCrossAlignment.start,
+  // final GridSizes _gridSizes;
+  AGrid.oneRow({
+    required String areas,
+    required List<Widget> children,
+    this.spacing,
+    this.crossAxisAlignment,
     super.key,
-  }) : _gridSizes = GridSizes(areas, recursiveGrid);
+  }) : rows = [AGridRow(areas: areas, children: children)];
 
-  AGrid.rows({
-    required List<AGridRow> rows,
-    this.recursiveGrid = true,
-    this.spacing = 8,
-    this.crossAxisAlignment = WrapCrossAlignment.start,
+  const AGrid(
+    this.rows, {
+    this.spacing,
+    this.crossAxisAlignment,
     super.key,
-  })  : _gridSizes = GridSizes(_extractAreasFromColumns(rows), recursiveGrid),
-        children = rows.map((e) => e.children).expand((e) => e).toList();
+  });
 
   @override
   Widget build(BuildContext context) {
-    assert(children.isNotEmpty);
-    final screenSize = ScreenSize(context);
-
     return LayoutBuilder(
       builder: (context, constraints) {
         assert(!constraints.hasInfiniteWidth, 'ResponsiveGrid does not support infinite width');
+
+        final device = ScreenSize(context).whichDevice();
         final maxWidth = constraints.maxWidth;
 
-        Device device = screenSize.whichDevice();
-        return Wrap(
-          spacing: 0,
-          runSpacing: 0,
-          crossAxisAlignment: crossAxisAlignment,
-          children: _buildCells(maxWidth, device),
+        return ASpacingColumn(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: spacing ?? _defaultSpacing,
+          children: rows.map((e) => _buildRow(e, maxWidth, device)).toList(),
         );
       },
     );
   }
 
-  List<Widget> _buildCells(double maxWidth, Device device) {
-    final widgets = <Widget>[];
-    _ComputedSize computedSize = _ComputedSize(maxWidth, spacing);
+  Widget _buildRow(AGridRow row, double maxWidth, Device device) {
+    return Wrap(
+      spacing: 0,
+      runSpacing: spacing ?? _defaultSpacing,
+      crossAxisAlignment: crossAxisAlignment ?? _defaultCrossAxisAlignment,
+      children: row._buildCells(device, maxWidth, spacing ?? _defaultSpacing),
+    );
+  }
+}
 
-    for (var i = 0; i < children.length; i++) {
-      widgets.addAll(_buildCell(
-        index: i,
-        maxWidth: maxWidth,
-        device: device,
-        computedSize: computedSize,
-      ));
+/// Areas:
+/// Informar o tamanho por dispositivo separado por - e os dispositivos separados por ,
+/// o Dispositivo segue o padrao desktop[-tablet[-phone]], o valor default para todos é 12
+/// Exemplo: 2-6, 4-6, 1-2-6 -> nesse caso primeiro componente: 2 desktop, 6 tablet, 12 phone. segundo componente: 4 desktop, 6 tablet, 12 phone. terceiro componente: 1 desktop, 2 tablet, 6 phone
+///          5, *    -- * indica resto do espaco
+///          10-6-4 -> nesse caso primeiro componente: 10 desktop, 6 tablet, 4 phone
+///
+class AGridRow {
+  final String areas;
+  final List<Widget> children;
+  final List<List<String>> _splitedAreas;
+
+  AGridRow({
+    required this.areas,
+    required this.children,
+  }) : _splitedAreas = _splitAreas(areas);
+
+  List<Widget> _buildCells(Device device, double maxWidth, double spacing) {
+    final widgets = <Widget>[];
+    int totalArea = 0;
+    for (int i = 0; i < children.length; i++) {
+      double leftSpacing = totalArea % 12 == 0 ? 0 : spacing / 2;
+      int area = _area(i, device);
+      totalArea += area;
+      double rightSpacing = totalArea % 12 == 0 ? 0 : spacing / 2;
+
+      final cellWidth = area / 12 * maxWidth;
+      widgets.add(
+        Container(
+          constraints: BoxConstraints(
+            minWidth: cellWidth,
+            maxWidth: cellWidth,
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(left: leftSpacing, right: rightSpacing),
+            child: children[i],
+          ),
+        ),
+      );
     }
 
     return widgets;
   }
 
-  List<Widget> _buildCell({
-    required int index,
-    required double maxWidth,
-    required Device device,
-    required _ComputedSize computedSize,
-  }) {
-    final columnSizes = _gridSizes._getSizeToColumn(index);
-    final cellWidth = columnSizes.size.width(maxWidth, device);
-    final padding = computedSize.getPadding(cellWidth);
+  int _area(int index, Device device) {
+    int areaIndex = index % _splitedAreas.length;
+    int deviceIndex = device == Device.phone
+        ? 2
+        : device == Device.tablet
+            ? 1
+            : 0;
 
-    return [
-      Container(
-        constraints: BoxConstraints(
-          minWidth: cellWidth,
-          maxWidth: cellWidth,
-        ),
-        padding: padding,
-        child: children[index],
-      ),
-      if (columnSizes.needCompleteRowWithEmptySpace(device))
-        SizedBox(
-          width: columnSizes.sizeToCompleteRow!.width(maxWidth, device),
-        ),
-    ];
-  }
-}
-
-List<String> _extractAreasFromColumns(List<AGridRow> rows) {
-  return rows.map((e) => e.areas).toList();
-}
-
-class GridSizes {
-  final List<String> linhas;
-  final bool recursiveAreas;
-
-  final List<_ColumnSize> _sizes = [];
-  final List<_ColumnSize> _lastRowSizes = [];
-
-  int _firstComponentIndexOnLastRow = 0;
-
-  GridSizes(this.linhas, this.recursiveAreas) {
-    _processSizes();
+    return int.parse(_splitedAreas.getOrNull(areaIndex)?.getOrNull(deviceIndex) ?? '12');
   }
 
-  _ColumnSize _getSizeToColumn(int index) {
-    List<_ColumnSize> localSizes = _getLocalSizeToComponentIndex(index);
-    return localSizes[index % localSizes.length];
-  }
-
-  List<_ColumnSize> _getLocalSizeToComponentIndex(int index) {
-    bool isComponentAfterLastRow = index >= _firstComponentIndexOnLastRow;
-    if (!recursiveAreas && isComponentAfterLastRow) {
-      return _lastRowSizes;
-    } else {
-      return _sizes;
-    }
-  }
-
-  void _processSizes() {
-    _firstComponentIndexOnLastRow = 0;
-    final rows = linhas;
-
-    for (var rowIdx = 0; rowIdx < rows.length; rowIdx++) {
-      String row = rows[rowIdx];
-      List<String> columns = row.splitToList(",");
-
-      int totalRowSizePhone = 0;
-      int totalRowSizeTablet = 0;
-      int totalRowSizeDesktop = 0;
-
-      bool isLastRow = rowIdx == rows.length - 1;
-      if (!isLastRow) _firstComponentIndexOnLastRow += columns.length;
-      for (var colIdx = 0; colIdx < columns.length; colIdx++) {
-        String query = columns[colIdx];
-        final _ColumnSize columnSize;
-        if (query == '*') {
-          if (colIdx != columns.length - 1) throw Exception("The '*' character must be the last column of the row");
-          columnSize = _ColumnSize(
-            ResponsiveSize(
-              phone: 12 - totalRowSizePhone <= 0 ? 12 : 12 - totalRowSizePhone,
-              tablet: 12 - totalRowSizeTablet <= 0 ? 12 : 12 - totalRowSizeTablet,
-              desktop: 12 - totalRowSizeDesktop <= 0 ? 12 : 12 - totalRowSizeDesktop,
-            ),
-            null,
-          );
-        } else {
-          final size = ResponsiveSize.byAreas(query);
-
-          totalRowSizePhone += size.phone;
-          totalRowSizeTablet += size.tablet;
-          totalRowSizeDesktop += size.desktop;
-          ResponsiveSize? emptySizeToCompleteRow;
-          if (colIdx == columns.length - 1) {
-            final emptySizeToCompleteRowOnPhone = totalRowSizePhone % 12 == 0 ? 0 : 12;
-            final emptySizeToCompleteRowOnTablet = totalRowSizeTablet % 12 == 0 ? 0 : 12;
-            final emptySizeToCompleteRowOnDesktop = totalRowSizeDesktop % 12 == 0 ? 0 : 12;
-
-            if ((emptySizeToCompleteRowOnPhone + emptySizeToCompleteRowOnTablet + emptySizeToCompleteRowOnDesktop) > 0) {
-              emptySizeToCompleteRow = ResponsiveSize(
-                phone: emptySizeToCompleteRowOnPhone,
-                tablet: emptySizeToCompleteRowOnTablet,
-                desktop: emptySizeToCompleteRowOnDesktop,
-              );
-            }
-          }
-          columnSize = _ColumnSize(size, emptySizeToCompleteRow);
-        }
-
-        _sizes.add(columnSize);
-
-        if (isLastRow) _lastRowSizes.add(columnSize);
-      }
-    }
-  }
-}
-
-class _ColumnSize {
-  final ResponsiveSize size;
-  final ResponsiveSize? sizeToCompleteRow;
-
-  _ColumnSize(
-    this.size,
-    this.sizeToCompleteRow,
-  );
-
-  bool needCompleteRowWithEmptySpace(Device device) {
-    return sizeToCompleteRow != null && sizeToCompleteRow!.columnSize(device) > 0;
-  }
-
-  @override
-  String toString() => '_ColumnSize(size: $size, sizeToCompleteRow: $sizeToCompleteRow)';
-}
-
-class _ComputedSize {
-  final double maxWidth;
-  final double spacing;
-  double width = 0;
-  int row = 0;
-
-  _ComputedSize(this.maxWidth, this.spacing);
-
-  EdgeInsets getPadding(double cellWidth) {
-    if (spacing == 0) return EdgeInsets.zero;
-
-    _addWidth(cellWidth);
-    bool needRightSpacing = _needRightSpacing();
-    bool needLeftSpacing = _needLeftSpacing(cellWidth);
-    bool needTopSpacing = this.needTopSpacing();
-
-    return EdgeInsets.only(
-      right: needRightSpacing ? spacing : 0,
-      left: needLeftSpacing ? spacing : 0,
-      top: needTopSpacing ? spacing * 2 : 0,
-    );
-  }
-
-  void _addWidth(double cellWidth) {
-    if (width + cellWidth > maxWidth) {
-      width = 0;
-      row++;
-    }
-    width += cellWidth;
-  }
-
-  bool _needRightSpacing() {
-    return width + spacing < maxWidth;
-  }
-
-  bool _needLeftSpacing(double cellWidth) {
-    return width - cellWidth > 0;
-  }
-
-  bool needTopSpacing() {
-    return row > 0;
+  static List<List<String>> _splitAreas(String areas) {
+    return areas.split(",").map((e) => e.split("-")).toList();
   }
 }

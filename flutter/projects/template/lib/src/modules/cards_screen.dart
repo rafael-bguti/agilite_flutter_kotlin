@@ -8,73 +8,69 @@ class CardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ATaskContainer(
       header: const AContainerHeader.text("Cards"),
-      child: AGrid(
-        spacing: 16,
-        areas: const [
-          '6, 6',
-          '12',
-          '12',
-          '12',
-          '6, 6',
-          '6, 6',
-        ],
-        children: [
-          ACard(
-            header: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const ATitleSubtitle(title: "Raised", subtitle: "Subtitle goes here"),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Some quick example text to build on the card title and make up the bulk of the card's content."),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: FilledButton.tonal(
-                    style: buildButtonStyle(primaryColor, onPrimaryColor),
-                    onPressed: () {},
-                    child: const Text('GET STARTED'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ACard(
-            padding: EdgeInsets.zero,
-            header: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const ATitleSubtitle(title: "Footer", subtitle: "Titles can go in body as well"),
-                  const SizedBox(height: 16),
-                  const Text("With supporting text below as a natural lead-in to additional content."),
-                  const SizedBox(height: 8),
-                  OutlinedButton(
-                    style: buildOutlinedButtonStyle(onBackgroundColor.withOpacity(0.5)),
-                    onPressed: () {},
-                    child: const Text('GET STARTED'),
-                  ),
-                ],
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
+      child: AGrid([
+        AGridRow(
+          areas: '6, 6',
+          children: [
+            ACard(
+              header: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '2 days ago',
-                    style: textTheme?.labelMedium?.copyWith(color: onBackgroundColor.withOpacity(0.5)),
-                  ),
+                  const ATitleSubtitle(title: "Raised", subtitle: "Subtitle goes here"),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
                 ],
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Some quick example text to build on the card title and make up the bulk of the card's content."),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: FilledButton.tonal(
+                      style: buildButtonStyle(primaryColor, onPrimaryColor),
+                      onPressed: () {},
+                      child: const Text('GET STARTED'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            ACard(
+              padding: EdgeInsets.zero,
+              header: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const ATitleSubtitle(title: "Footer", subtitle: "Titles can go in body as well"),
+                    const SizedBox(height: 16),
+                    const Text("With supporting text below as a natural lead-in to additional content."),
+                    const SizedBox(height: 8),
+                    OutlinedButton(
+                      style: buildOutlinedButtonStyle(onBackgroundColor.withOpacity(0.5)),
+                      onPressed: () {},
+                      child: const Text('GET STARTED'),
+                    ),
+                  ],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '2 days ago',
+                      style: textTheme?.labelMedium?.copyWith(color: onBackgroundColor.withOpacity(0.5)),
+                    ),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        AGridRow(areas: '12', children: [
           ACard(
             padding: EdgeInsets.zero,
             child: IntrinsicHeight(
@@ -125,7 +121,11 @@ class CardsScreen extends StatelessWidget {
               ),
             ),
           ),
+        ]),
+        AGridRow(areas: '12', children: [
           const ADivider.text(text: "Custom borders"),
+        ]),
+        AGridRow(areas: '12', children: [
           ACard(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             leftBorderColor: Colors.tealAccent,
@@ -139,12 +139,16 @@ class CardsScreen extends StatelessWidget {
               ],
             ),
           ),
+        ]),
+        AGridRow(areas: '12', children: [
           const ACard(
             leftBorderColor: Colors.blueAccent,
             child: AText(
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
             ),
           ),
+        ]),
+        AGridRow(areas: '6, 6', children: [
           const ACard(
             leftBorderColor: Colors.green,
             child: AText(
@@ -157,14 +161,16 @@ class CardsScreen extends StatelessWidget {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
             ),
           ),
+        ]),
+        AGridRow(areas: '6, 6', children: [
           const ACard(
             leftBorderColor: Colors.red,
             child: AText(
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid eos hic magni mollitia pariatur possimus quidem quis quo sunt?",
             ),
           ),
-        ],
-      ),
+        ]),
+      ]),
     );
   }
 }

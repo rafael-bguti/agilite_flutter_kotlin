@@ -486,13 +486,11 @@ class SpreadMoreDetail {
   Widget Function(BuildContext context, int rowIndex, SpreadController controller)? moreDetailBodyBuilder;
   Widget Function(BuildContext context, int rowIndex, SpreadController controller)? otherWidgetsBuilder;
   void Function(int rowIndex, SpreadController controller)? onShowValue;
-  final List<String> gridAreas;
 
   SpreadMoreDetail({
     this.moreOptionActionText = 'editar mais detalhes',
     this.moreDetailBodyBuilder,
     this.otherWidgetsBuilder,
-    this.gridAreas = const ['12'],
   });
 
   Widget buildMoreDetailBody(BuildContext context, int rowIndex, SpreadController controller) {
@@ -541,8 +539,8 @@ class SpreadMoreDetail {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AGrid(
-                          areas: gridAreas,
+                        AGrid.oneRow(
+                          areas: '12',
                           children: _getMoreDetailBodyChildren(context, rowIndex, controller),
                         ),
                         otherWidgetsBuilder?.call(context, rowIndex, controller) ?? const SizedBox.shrink()

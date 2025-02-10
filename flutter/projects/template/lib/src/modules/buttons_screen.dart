@@ -176,8 +176,8 @@ class _Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AGrid(
-      areas: const ['4, 8'],
+    return AGrid.oneRow(
+      areas: '4, 8',
       children: [
         ADivider.text(text: label),
         Padding(

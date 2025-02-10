@@ -2,8 +2,8 @@ package info.agilite.boot.sdui.component
 
 class SduiGrid(
   val rows: List<SduiGridRow>,
-  val spacing: Int? = 8,
-  val crossAxisAlignment: WrapCrossAlignment? = WrapCrossAlignment.start,
+  val spacing: Int? = null,
+  val crossAxisAlignment: WrapCrossAlignment? = null,
   id: String? = null,
 ) : SduiComponent(id) {
   companion object {

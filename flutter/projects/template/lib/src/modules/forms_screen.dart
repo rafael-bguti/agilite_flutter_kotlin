@@ -11,8 +11,8 @@ class FormsScreen extends StatelessWidget {
       child: ASpacingColumn(
         spacing: 16,
         children: [
-          AGrid(
-            areas: const ['4, 8'],
+          AGrid.oneRow(
+            areas: '4, 8',
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -30,8 +30,8 @@ class FormsScreen extends StatelessWidget {
               ),
             ],
           ),
-          AGrid(
-            areas: const ['4, 8'],
+          AGrid.oneRow(
+            areas: '4, 8',
             children: const [
               ADivider.text(text: "Autocomplete/Combo"),
               Padding(
@@ -148,8 +148,8 @@ class _SimpleFormState extends State<SimpleForm> {
       children: [
         AForm(
           formController,
-          child: AGrid.rows(
-            rows: [
+          child: AGrid(
+            [
               AGridRow(
                 areas: '6, 6',
                 children: [

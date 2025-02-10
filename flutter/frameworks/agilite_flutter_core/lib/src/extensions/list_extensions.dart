@@ -35,6 +35,11 @@ extension ListExtension<T> on List<T> {
     return first;
   }
 
+  T? getOrNull(int index) {
+    if (index < 0 || index >= length) return null;
+    return this[index];
+  }
+
   bool isEquals(List<dynamic> other) {
     if (length != other.length) return false;
     for (var i = 0; i < length; i++) {

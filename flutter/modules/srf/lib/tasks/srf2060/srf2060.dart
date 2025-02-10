@@ -32,9 +32,8 @@ class _Srf2060State extends State<Srf2060> {
               AForm(
                 controller.formFilterController,
                 child: ACard(
-                  child: AGrid.rows(
-                    crossAxisAlignment: WrapCrossAlignment.end,
-                    rows: [
+                  child: AGrid(
+                    [
                       AGridRow(
                         areas: '6-12, 4-6, 2-6',
                         children: [
@@ -62,6 +61,7 @@ class _Srf2060State extends State<Srf2060> {
                         ],
                       ),
                     ],
+                    crossAxisAlignment: WrapCrossAlignment.end,
                   ),
                 ),
               ),
