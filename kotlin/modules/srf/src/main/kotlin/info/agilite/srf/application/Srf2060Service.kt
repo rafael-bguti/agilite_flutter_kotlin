@@ -55,7 +55,7 @@ class Srf2060Service(
       replyTo = docToSend.cgs15.cgs15replayTo,
       replyToName = docToSend.cgs15.cgs15replayToName,
       attachments = attachments,
-      bcc = "rafael@multitecsistemas.com.br"
+      //bcc = "rafael@multitecsistemas.com.br"
     )
     mailSender.sendHtml(smptConfig, mail)
     repository.updateEmailSent(docToSend.srf01)

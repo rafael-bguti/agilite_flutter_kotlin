@@ -87,7 +87,15 @@ class SpreadController extends FieldController<SpreadModel> {
 
   @override
   List<Map<String, dynamic>> get jsonValue {
-    return value.toListMap();
+    return value.toListMap().map((row) {
+      row.keys.forEach((key) {
+        if (row[key] is DateTime) {
+          row[key] = row[key].toIso8601String();
+        }
+      });
+
+      return row;
+    }).toList();
   }
 
   List<LowercaseMap> get selectedData {
