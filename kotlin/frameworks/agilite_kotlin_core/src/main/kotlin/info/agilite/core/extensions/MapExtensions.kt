@@ -3,6 +3,7 @@ package info.agilite.core.extensions
 import info.agilite.core.model.LowerCaseMap
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.time.LocalDate
 
 fun Map<String, *>.nest(): MutableMap<String, Any?> {
   val result = mutableMapOf<String, Any?>()
@@ -49,3 +50,14 @@ fun Map<String, String>.toHttpFormData(): String =
   entries.joinToString("&") { (key, value) ->
     "${URLEncoder.encode(key, StandardCharsets.UTF_8)}=${URLEncoder.encode(value, StandardCharsets.UTF_8)}"
   }
+
+// ------- get values --------
+fun Map<String, *>.getLocalDate(key: String): LocalDate?{
+  val value = this[key] ?: return null
+  if(value is LocalDate) return value
+  return LocalDate.parse(value.toString())
+}
+fun Map<String, *>.getMap(key: String): Map<String, Any?>?{
+  val value = this[key] ?: return null
+  return value as Map<String, Any?>
+}

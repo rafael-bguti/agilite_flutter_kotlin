@@ -4,7 +4,6 @@ import 'crud_repository.dart';
 
 class CrudEditController extends ViewController<bool> {
   final String taskName;
-
   final formController = FormController();
   final CrudRepository _repository;
 

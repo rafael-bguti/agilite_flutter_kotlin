@@ -35,7 +35,7 @@ class Cgs1080CrudService(
     return crud
   }
 
-  override fun createSduiEditForm(taskName: String, id: Long?): SduiComponent {
+  override fun createSduiEditForm(taskName: String, id: Long?, data: Map<String, Any?>): SduiComponent {
     return createFormBody()
   }
 

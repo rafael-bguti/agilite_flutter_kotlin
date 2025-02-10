@@ -77,8 +77,6 @@ abstract class RootRepository {
     return jdbc.queryForList(query, params, clazz.java)
   }
 
-
-
   fun distinctMap(query: DbQuery<*>): MutableMap<String, Any?>? {
     distinctListMap(query).let { list ->
       if(list.isEmpty()) return null

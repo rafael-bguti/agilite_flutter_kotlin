@@ -1,6 +1,7 @@
 package info.agilite.boot.crud
 
 import info.agilite.boot.defaultMetadataRepository
+import info.agilite.boot.exceptions.ClientException
 import info.agilite.boot.jdbcDialect
 import info.agilite.boot.metadata.MetadataUtils
 import info.agilite.boot.metadata.exceptions.AutocompleteMetadataNotFoundException
@@ -19,20 +20,19 @@ import info.agilite.boot.sdui.component.*
 import info.agilite.boot.security.UserContext
 import info.agilite.core.extensions.nest
 import info.agilite.core.extensions.splitToList
-import info.agilite.core.extensions.toLowerCase
 import info.agilite.core.json.JsonUtils
-import info.agilite.core.utils.MapUtils
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 interface CrudService<T> {
   val createSduiFormOnEdit : Boolean get() = false
 
   fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
-  fun parseData(data: List<MutableMap<String, Any?>>): List<MutableMap<String, Any?>> { return data }
+  fun processListData(data: List<MutableMap<String, Any?>>): List<MutableMap<String, Any?>> { return data }
 
-  fun createSduiEditForm(taskName: String, id: Long?): SduiComponent? {
+  fun createSduiEditForm(taskName: String, id: Long?, data: Map<String, Any?>): SduiComponent? {
     if (createSduiFormOnEdit) {
       return SduiSizedBox() // TODO criar o form de edição padrão
     }
@@ -40,14 +40,16 @@ interface CrudService<T> {
   }
 
   fun createNewRecord(task: String): CrudEditResponse {
-    return CrudEditResponse(buildMapOnCreateNewRecord(task), createSduiEditForm(task, null))
+    val data = buildMapOnCreateNewRecord(task)
+    return CrudEditResponse(data, createSduiEditForm(task, null, data))
   }
   fun buildMapOnCreateNewRecord(task: String): Map<String, Any?> { return emptyMap() }
 
   fun editRecord(taskName: String, id: Long): CrudEditResponse {
-    return CrudEditResponse(buildMapOnEditRecord(taskName, id), createSduiEditForm(taskName, id))
+    val data = buildMapOnEditRecord(taskName, id)
+    return CrudEditResponse(data, createSduiEditForm(taskName, id, data))
   }
-  fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?>?
+  fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?>
 
   fun validate(entity: T) {}
   fun save(entity: T)
@@ -76,7 +78,7 @@ class DefaultSduiCrudService<T>(
       TaskDescr(entityMetadata.descr),
       columns,
       metadataToLoad = entityMetadata.name,
-      formBody = if(createSduiFormOnEdit || activeProfile == "dev") null else createSduiEditForm(request.taskName, null),
+      formBody = if(createSduiFormOnEdit || activeProfile == "dev") null else createSduiEditForm(request.taskName, null, emptyMap()),
     )
   }
 
@@ -87,7 +89,7 @@ class DefaultSduiCrudService<T>(
   override fun findListData(taskName: String, request: CrudListRequest): CrudListResponse {
     val query = createListQuery(taskName, request)
     val data  = crudRepository.findListData(query)
-    val parsedData = parseData (data)
+    val parsedData = processListData (data)
     return CrudListResponse(
       request.currentPage,
       request.pageSize,
@@ -95,9 +97,9 @@ class DefaultSduiCrudService<T>(
     )
   }
 
-  override fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?>? {
+  override fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?> {
     val query = createEditQuery(taskName, id)
-    return crudRepository.findEditData(query)?.nest()
+    return crudRepository.findEditData(query)?.nest() ?: throw ClientException(HttpStatus.NOT_FOUND, "Registro não encontrado")
   }
 
   override fun save(entity: T) {
@@ -228,6 +230,7 @@ class DefaultSduiCrudService<T>(
         result.add("$localParentAlias${it.name}")
       }
     }
+
     return result
   }
 

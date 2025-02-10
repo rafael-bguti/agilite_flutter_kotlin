@@ -1,7 +1,10 @@
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_center.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_crud.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_date_range.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_fieldset.dart';
 import 'package:agilite_flutter_core/src/sdui/widgets/sdui_padding.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_tag.dart';
+import 'package:agilite_flutter_core/src/sdui/widgets/sdui_text_field.dart';
 
 import 'widgets/sdui_autocomplete.dart';
 import 'widgets/sdui_combo_field.dart';
@@ -44,6 +47,7 @@ class SduiWidgetRegistry {
 List<SduiWidget> _initWidgets = [
   SduiAutocomplete(),
   SduiComboField(),
+  SduiCenter(),
   SduiCrud(),
   SduiDateRange(),
   SduiDivider(),
@@ -53,5 +57,7 @@ List<SduiWidget> _initWidgets = [
   SduiPadding(),
   SduiSizedBox(),
   SduiSpacingColumn(),
+  SduiTextField(),
+  SduiTag(),
   SduiText(),
 ];
