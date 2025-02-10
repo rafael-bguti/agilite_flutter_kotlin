@@ -11,7 +11,7 @@ class SduiDateRange extends SduiWidget<SduiDateRangeModel> {
   SduiDateRangeModel json2Model(Map<String, dynamic> json) => SduiDateRangeModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiDateRangeModel model) {
+  Widget render(BuildContext context, SduiDateRangeModel model) {
     return ADateRange(
       nameIni: model.nameIni,
       nameEnd: model.nameFim,

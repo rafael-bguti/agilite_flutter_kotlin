@@ -2,7 +2,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sdui_widget.dart';
 import 'tables/sdui_column_model.dart';
 import 'tables/sdui_spread_column.dart';
 
@@ -13,21 +12,21 @@ class SduiCrud extends SduiWidget<SduiCrudModel> {
   SduiCrudModel json2Model(Map<String, dynamic> json) => SduiCrudModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiCrudModel model) {
+  Widget render(BuildContext context, SduiCrudModel model) {
     final crudDataColumns = model.columns
         .map(
-          (column) => SduiSpreadColumn.build(context, sduiContext, column, true),
+          (column) => SduiSpreadColumn.build(context, column, true),
         )
         .toList();
 
     final customFiltersWidgets = model.customFilters
         ?.map(
-          (json) => SduiRender.renderFromJson(context, sduiContext, json),
+          (json) => SduiRender.renderFromJson(context, json),
         )
         .toList();
 
-    final formBody = model.formBody == null ? null : SduiRender.renderFromJson(context, sduiContext, model.formBody!);
-    final moreFiltersBody = model.moreFiltersWidget == null ? null : SduiRender.renderFromJson(context, sduiContext, model.moreFiltersWidget!);
+    final formBody = model.formBody == null ? null : SduiRender.renderFromJson(context, model.formBody!);
+    final moreFiltersBody = model.moreFiltersWidget == null ? null : SduiRender.renderFromJson(context, model.moreFiltersWidget!);
 
     return ACrud.name(
       taskName: model.taskName,

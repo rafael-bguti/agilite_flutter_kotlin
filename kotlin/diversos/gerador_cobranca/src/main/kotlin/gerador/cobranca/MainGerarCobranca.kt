@@ -7,7 +7,7 @@ import gerador.cobranca.tfs4.GeradorCobrancaTFS4
 import gerador.cobranca.tfs3.GeradorCobrancaTFS3
 import info.agilite.core.extensions.moveUntilUtilDay
 import info.agilite.core.json.JsonUtils
-import info.agilite.integradores.dtos.Cobranca
+import info.agilite.integradores.bancos.dto.Cobranca
 import java.io.File
 import java.math.BigDecimal
 import java.time.LocalDate

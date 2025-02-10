@@ -131,10 +131,8 @@ class _ACrudState extends State<ACrud> {
         url: '/sdui/crudForm/${widget.taskName}',
       ).getContent();
 
-      final sduiContext = SduiContext();
       return SduiRender.renderFromJson(
         context,
-        sduiContext,
         formContent!,
       );
     }

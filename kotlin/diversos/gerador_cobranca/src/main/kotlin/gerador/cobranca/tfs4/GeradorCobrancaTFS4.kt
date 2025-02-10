@@ -5,11 +5,10 @@ import gerador.cobranca.cob_antigos.CobAntigoRepository
 import gerador.cobranca.daos.DAO
 import info.agilite.core.extensions.format
 import info.agilite.core.json.JsonUtils
-import info.agilite.core.utils.DateUtils
-import info.agilite.integradores.dtos.Cliente
-import info.agilite.integradores.dtos.Cobranca
-import info.agilite.integradores.dtos.FormaPagamento
-import info.agilite.integradores.dtos.ItemCobranca
+import info.agilite.integradores.bancos.dto.Cliente
+import info.agilite.integradores.bancos.dto.Cobranca
+import info.agilite.integradores.bancos.dto.FormaPagamento
+import info.agilite.integradores.bancos.dto.ItemCobranca
 import java.math.BigDecimal
 import java.time.LocalDate
 import kotlin.math.max
@@ -116,12 +115,14 @@ class GeradorCobrancaTFS4 {
       var total = consumos.sumOf { it.total }
       val historicos = consumos.joinToString("\n\n ", ) { "Licença: ${it.licencaCNPJ}-${it.licencaRs}\n${it.getHistorico()}" }
 
-      val itens = mutableListOf(ItemCobranca(
+      val itens = mutableListOf(
+        ItemCobranca(
         codigo = CODIGO_ITEM_TFS4,
         descricao = "Uso do TFS4 cobrado pelo contrato da revenda",
         quantidade = 1,
         valor = total
-      ))
+      )
+      )
       if(servicosAdicionaisPorRevenda.containsKey(revenda)){
         itens.addAll(servicosAdicionaisPorRevenda[revenda]!!)
         total += servicosAdicionaisPorRevenda[revenda]!!.sumOf { it.valor }

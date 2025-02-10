@@ -1,10 +1,11 @@
 package info.agilite.boot.sdui.component
 
 abstract class SduiComponent(
-  val id: String? = null
+  val id: String? = null,
+  var widgetName: String? = null
 ) {
   val widget: String
-    get() = this.javaClass.simpleName
+    get() = widgetName ?: this.javaClass.simpleName
 }
 
 enum class WrapCrossAlignment {

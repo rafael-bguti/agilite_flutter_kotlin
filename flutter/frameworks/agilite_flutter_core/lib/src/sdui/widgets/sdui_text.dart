@@ -11,7 +11,7 @@ class SduiText extends SduiWidget<SduiTextModel> {
   SduiTextModel json2Model(Map<String, dynamic> json) => SduiTextModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiTextModel model) {
+  Widget render(BuildContext context, SduiTextModel model) {
     return Text(
       model.text,
       key: buildKey(model.id),

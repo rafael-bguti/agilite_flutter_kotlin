@@ -2,10 +2,10 @@ package gerador.cobranca.multinfe
 import gerador.cobranca.CODIGO_ITEM_MULTINFE
 import gerador.cobranca.NATUREZA_MNFE
 import gerador.cobranca.NOME_FORMA_PAGAMENTO_BOLETO
-import info.agilite.integradores.dtos.Cliente
-import info.agilite.integradores.dtos.Cobranca
-import info.agilite.integradores.dtos.FormaPagamento
-import info.agilite.integradores.dtos.ItemCobranca
+import info.agilite.integradores.bancos.dto.Cliente
+import info.agilite.integradores.bancos.dto.Cobranca
+import info.agilite.integradores.bancos.dto.FormaPagamento
+import info.agilite.integradores.bancos.dto.ItemCobranca
 import java.math.BigDecimal
 import java.time.LocalDate
 

@@ -19,12 +19,9 @@ class _SduiLoaderState extends State<SduiLoader> {
     provider: widget.contentProvider,
   );
 
-  final sduiContext = SduiContext();
-
   @override
   void dispose() {
     controller.dispose();
-    sduiContext.dispose();
     super.dispose();
   }
 
@@ -38,7 +35,6 @@ class _SduiLoaderState extends State<SduiLoader> {
         }
         return SduiRender.renderFromJson(
           context,
-          sduiContext,
           state.sduiJson!,
         );
       },

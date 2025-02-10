@@ -43,6 +43,15 @@ extension MapExtension on Map<dynamic, dynamic> {
     return value.toString();
   }
 
+  Map<String, dynamic>? getMap(String key) {
+    var value = this[key];
+    if (value == null) return null;
+    if (value is Map<String, dynamic>) return value;
+
+    this[key] = value.toString().toMap();
+    return this[key] as Map<String, dynamic>;
+  }
+
   DateTime? getDateTime(String key, [DateTime? defaultValue]) {
     var value = this[key];
     if (value == null) return defaultValue;

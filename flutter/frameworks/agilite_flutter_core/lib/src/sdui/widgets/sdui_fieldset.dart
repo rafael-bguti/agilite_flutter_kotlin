@@ -1,5 +1,4 @@
 import 'package:agilite_flutter_core/core.dart';
-import 'package:agilite_flutter_core/src/sdui/widgets/sdui_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,11 +9,11 @@ class SduiFieldset extends SduiWidget<SduiFieldsetModel> {
   SduiFieldsetModel json2Model(Map<String, dynamic> json) => SduiFieldsetModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiFieldsetModel model) {
+  Widget render(BuildContext context, SduiFieldsetModel model) {
     return AFieldset(
       key: buildKey(model.id),
       title: model.title,
-      child: SduiRender.renderFromJson(context, sduiContext, model.child),
+      child: SduiRender.renderFromJson(context, model.child),
     );
   }
 }

@@ -2,8 +2,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sdui_widget.dart';
-
 part 'sdui_padding.g.dart';
 
 class SduiPadding extends SduiWidget<SduiPaddingModel> {
@@ -11,7 +9,7 @@ class SduiPadding extends SduiWidget<SduiPaddingModel> {
   SduiPaddingModel json2Model(Map<String, dynamic> json) => SduiPaddingModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiPaddingModel model) {
+  Widget render(BuildContext context, SduiPaddingModel model) {
     return Padding(
       padding: EdgeInsets.only(
         top: model.top ?? 0,
@@ -19,7 +17,7 @@ class SduiPadding extends SduiWidget<SduiPaddingModel> {
         bottom: model.bottom ?? 0,
         left: model.left ?? 0,
       ),
-      child: SduiRender.renderFromJson(context, sduiContext, model.child!),
+      child: SduiRender.renderFromJson(context, model.child!),
     );
   }
 }

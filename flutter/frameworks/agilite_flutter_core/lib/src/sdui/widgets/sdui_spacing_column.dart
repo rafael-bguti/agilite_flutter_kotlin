@@ -2,8 +2,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sdui_widget.dart';
-
 part 'sdui_spacing_column.g.dart';
 
 class SduiSpacingColumn extends SduiWidget<SduiSpacingColumnModel> {
@@ -11,14 +9,14 @@ class SduiSpacingColumn extends SduiWidget<SduiSpacingColumnModel> {
   SduiSpacingColumnModel json2Model(Map<String, dynamic> json) => SduiSpacingColumnModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiSpacingColumnModel model) {
+  Widget render(BuildContext context, SduiSpacingColumnModel model) {
     return ASpacingColumn(
       key: buildKey(model.id),
       spacing: model.spacing ?? 8,
       crossAxisAlignment: model.crossAxisAlignment ?? CrossAxisAlignment.start,
       children: model.children
           .map(
-            (json) => SduiRender.renderFromJson(context, sduiContext, json),
+            (json) => SduiRender.renderFromJson(context, json),
           )
           .toList(),
     );

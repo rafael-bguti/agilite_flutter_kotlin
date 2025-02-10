@@ -17,14 +17,18 @@ import info.agilite.boot.sdui.SduiProvider
 import info.agilite.boot.sdui.SduiRequest
 import info.agilite.boot.sdui.component.*
 import info.agilite.boot.security.UserContext
+import info.agilite.core.extensions.nest
 import info.agilite.core.extensions.splitToList
+import info.agilite.core.extensions.toLowerCase
 import info.agilite.core.json.JsonUtils
+import info.agilite.core.utils.MapUtils
 import info.agilite.core.utils.ReflectionUtils
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 interface CrudService<T> {
   fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
+  fun parseData(data: List<MutableMap<String, Any?>>): List<MutableMap<String, Any?>> { return data }
 
   fun createNewRecord(task: String): Map<String, Any?>? { return null }
   fun editRecord(taskName: String, id: Long): CrudEditResponse?
@@ -65,10 +69,11 @@ class DefaultSduiCrudService<T>(
   override fun findListData(taskName: String, request: CrudListRequest): CrudListResponse {
     val query = createListQuery(taskName, request)
     val data  = crudRepository.findListData(query)
+    val parsedData = parseData (data)
     return CrudListResponse(
       request.currentPage,
       request.pageSize,
-      data,
+      parsedData,
     )
   }
 
@@ -76,7 +81,8 @@ class DefaultSduiCrudService<T>(
     val query = createEditQuery(taskName, id)
     val data = crudRepository.findEditData(query) ?: return null
 
-    return CrudEditResponse(data)
+
+    return CrudEditResponse(data.nest() )
   }
 
   override fun save(entity: T) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import './sdui_column_model.dart';
 
 class SduiSpreadColumn {
-  static ASpreadColumn build(BuildContext context, SduiContext sduiContext, SduiColumnModel model, [bool readOnly = false]) {
+  static ASpreadColumn build(BuildContext context, SduiColumnModel model, [bool readOnly = false]) {
     ASpreadColumn result;
     if (readOnly) {
       final cellRenderer = createSpreadCellRendererByMod(model.mod);

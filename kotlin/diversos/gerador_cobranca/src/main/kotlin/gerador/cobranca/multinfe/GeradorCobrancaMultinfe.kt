@@ -6,7 +6,7 @@ import gerador.cobranca.*
 import gerador.cobranca.daos.DAO
 import info.agilite.core.extensions.format
 import info.agilite.core.json.JsonUtils
-import info.agilite.integradores.dtos.Cobranca
+import info.agilite.integradores.bancos.dto.Cobranca
 import java.io.File
 import java.nio.file.Files
 

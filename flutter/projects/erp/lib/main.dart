@@ -2,7 +2,7 @@ import 'package:agilite_flutter_boot/boot.dart';
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
-import 'src/routes.dart';
+import 'erp_app.dart';
 
 void main() async {
   activeProfile = CoreProfile(
@@ -11,10 +11,7 @@ void main() async {
   );
 
   await Boot.initialize();
+  // ScfModuleInit.init();
 
-  runApp(BootApp(
-    appTitle: 'Agilite',
-    routes: routes,
-    themeMode: ThemeMode.light,
-  ));
+  runApp(const ERPApp());
 }

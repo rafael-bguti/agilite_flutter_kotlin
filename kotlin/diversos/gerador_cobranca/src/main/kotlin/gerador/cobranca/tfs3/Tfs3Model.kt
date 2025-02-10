@@ -2,10 +2,10 @@ package gerador.cobranca.tfs3
 
 import gerador.cobranca.CODIGO_ITEM_TFS3
 import gerador.cobranca.NATUREZA_TFS3
-import info.agilite.integradores.dtos.Cliente
-import info.agilite.integradores.dtos.Cobranca
-import info.agilite.integradores.dtos.FormaPagamento
-import info.agilite.integradores.dtos.ItemCobranca
+import info.agilite.integradores.bancos.dto.Cliente
+import info.agilite.integradores.bancos.dto.Cobranca
+import info.agilite.integradores.bancos.dto.FormaPagamento
+import info.agilite.integradores.bancos.dto.ItemCobranca
 import java.math.BigDecimal
 import java.time.LocalDate
 

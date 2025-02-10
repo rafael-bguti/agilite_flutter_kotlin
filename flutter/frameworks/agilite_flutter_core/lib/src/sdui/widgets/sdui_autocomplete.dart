@@ -11,7 +11,7 @@ class SduiAutocomplete extends SduiWidget<SduiAutocompleteModel> {
   SduiAutocompleteModel json2Model(Map<String, dynamic> json) => SduiAutocompleteModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiAutocompleteModel model) {
+  Widget render(BuildContext context, SduiAutocompleteModel model) {
     return AAutocompleteField.api(
       model.name,
       labelText: model.labelText,

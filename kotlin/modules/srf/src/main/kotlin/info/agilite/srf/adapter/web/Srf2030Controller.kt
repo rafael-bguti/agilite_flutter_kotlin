@@ -2,7 +2,7 @@ package info.agilite.srf.adapter.web
 
 import info.agilite.boot.exceptions.ClientException
 import info.agilite.boot.spring.RestMapping
-import info.agilite.integradores.dtos.Cobranca
+import info.agilite.integradores.bancos.dto.Cobranca
 import info.agilite.srf.application.Srf2030Service
 import org.springframework.http.HttpStatus
 import org.springframework.transaction.annotation.Transactional

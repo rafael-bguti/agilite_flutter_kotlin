@@ -4,7 +4,71 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002" />
+    <list default="true" id="28655f87-4dd9-4aef-9cdf-319527ad45a5" name="Changes" comment="SCF1002">
+      <change beforePath="$PROJECT_DIR$/.idea/FrontEnd Agilite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FrontEnd Agilite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_boot/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/core.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/crud_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/crud/widgets/a_crud.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/extensions/map_extensions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/extensions/map_extensions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/extensions/string_extensions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/extensions/string_extensions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_response_handler.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/http/http_response_handler.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/loader/sdui_loader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/loader/sdui_loader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/sdui_context.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/sdui_mods.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/sdui_mods.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/sdui_render.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/sdui_render.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_autocomplete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_autocomplete.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_combo_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_combo_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_crud.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_crud.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_date_range.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_date_range.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_divider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_divider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_fieldset.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_fieldset.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_grid.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_grid.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_metadata_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_metadata_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_padding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_padding.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_sized_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_sized_box.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_spacing_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_spacing_column.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_text.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/sdui_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/tables/sdui_spread_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/sdui/widgets/tables/sdui_spread_column.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/controller/spread_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/spread_custom_cell_renderer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/custom_renderers/status_pagamento_custom_cell_renderer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/agilite_flutter_core/lib/src/ui/spread/widget/a_spread.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cgs/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cgs/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/scf/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/scf/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/modules/srf/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" beforeDir="false" afterPath="$PROJECT_DIR$/projects/erp/lib/main_debug.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/MainGerarCobranca.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/Utils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/mensais/GeradorContatosMensais.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/multinfe/GeradorCobrancaMultinfe.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/multinfe/GeradorCobrancaMultinfe.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/multinfe/MultiNFeModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/multinfe/MultiNFeModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs3/GeradorCobrancaTFS3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs3/GeradorCobrancaTFS3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs3/Tfs3Model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs3/Tfs3Model.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/diversos/gerador_cobranca/src/main/kotlin/gerador/cobranca/tfs4/GeradorCobrancaTFS4.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/crud/CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiMetadataField.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/frameworks/agilite_kotlin_boot/src/main/kotlin/info/agilite/boot/sdui/component/SduiMetadataField.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/dtos/Cobranca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/agilite_integradores/src/main/kotlin/info/agilite/integradores/bancos/dto/Cobranca.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/scf/src/main/kotlin/info/agilite/scf/tasks/Scf1002CrudService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/adapter/web/Srf2030Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/adapter/web/Srf2030Controller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/modules/srf/src/main/kotlin/info/agilite/srf/application/Srf2030Service.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin/projects/agilite_erp/src/main/kotlin/info/agilite/erp/ui/MenuBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/lib/srf.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../modules/srf/test/srf_test.dart" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,8 +111,8 @@
     "ignore.virus.scanning.warn.message": "true",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Fontes/FontesAgilite/Agilite/flutter/modules/srf/lib/tasks",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "C:/Fontes/FontesAgilite/agilite/flutter/frameworks/agilite_flutter_core/lib/src/ui/spread/custom_renderers",
+    "project.structure.last.edited": "Problems",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3229885",
     "settings.editor.selected.configurable": "Errors",
@@ -57,18 +121,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Fontes\FontesAgilite\agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\spread\custom_renderers" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\srf\lib\tasks" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\sdui\widgets\tables" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\forms\customs" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\forms\cep" />
-      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Fontes\FontesAgilite\agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\spread\custom_renderers" />
+      <recent name="C:\Fontes\FontesAgilite\agilite\flutter\modules\scf\lib" />
+      <recent name="C:\Fontes\FontesAgilite\agilite\flutter\modules\scf\lib\src\sdui" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\forms\customs" />
       <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\ui\forms\cep" />
-      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\sdui\widgets" />
-      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\frameworks\agilite_flutter_core\lib\src\sdui\crud" />
-      <recent name="C:\Fontes\FontesAgilite\Agilite\flutter\modules\scf\lib\tasks\scf2011" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main_debug.dart">

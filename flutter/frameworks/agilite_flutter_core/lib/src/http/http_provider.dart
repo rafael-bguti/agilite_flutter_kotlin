@@ -176,7 +176,7 @@ class HttpProviderImpl extends HttpProvider {
       client.close();
     }
     final httpResponse = HttpResponse(response);
-    return await (responseHandler ?? DefaultHttpResponseHandler()).handle(this, httpResponse);
+    return await (responseHandler ?? DefaultHttpResponseHandler()).handle(httpResponse);
   }
 
   Future<void> _startSSE(void Function(String message)? onSseMessage, Map<String, String> localHeaders) async {
@@ -208,17 +208,22 @@ class HttpProviderImpl extends HttpProvider {
       }
     }
 
-    return needEncode
-        ? jsonEncode(
-            data,
-            toEncodable: (dynamic object) {
-              if (object is DateTime) {
-                return object.toIso8601String();
-              }
-              return object;
-            },
-          )
-        : data.toString();
+    return needEncode ? jsonEncode(data) : data.toString();
+  }
+
+  String encodeBody(dynamic data) {
+    if (data is Map) {
+      return jsonEncode(
+        data,
+        toEncodable: (dynamic object) {
+          if (object is DateTime) {
+            return object.toIso8601String();
+          }
+          return object;
+        },
+      );
+    }
+    return jsonEncode(data);
   }
 
   Uri _url(String path, [Map<String, dynamic>? queryParameters]) {

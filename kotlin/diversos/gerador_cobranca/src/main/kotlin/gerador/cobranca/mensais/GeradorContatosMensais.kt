@@ -2,9 +2,8 @@ package gerador.cobranca.mensais
 
 import gerador.cobranca.*
 import info.agilite.core.utils.DateUtils
-import info.agilite.integradores.dtos.Cobranca
+import info.agilite.integradores.bancos.dto.Cobranca
 import java.math.BigDecimal
-import java.time.LocalDate
 
 class GeradorContatosMensais {
   fun gerarCobrancasMensais() {

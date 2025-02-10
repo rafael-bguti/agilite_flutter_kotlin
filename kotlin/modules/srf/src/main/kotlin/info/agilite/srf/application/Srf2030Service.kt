@@ -8,7 +8,7 @@ import info.agilite.cgs.adapter.infra.Cgs50Repository
 import info.agilite.cgs.adapter.infra.Cgs80Repository
 import info.agilite.core.exceptions.ValidationException
 import info.agilite.core.extensions.numbersOnly
-import info.agilite.integradores.dtos.Cobranca
+import info.agilite.integradores.bancos.dto.Cobranca
 import info.agilite.shared.entities.cgs.Cgs38
 import info.agilite.shared.entities.cgs.Cgs50
 import info.agilite.shared.entities.srf.Srf01

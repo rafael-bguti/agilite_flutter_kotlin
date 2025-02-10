@@ -50,9 +50,15 @@ extension StringExtensions on String {
     return sb.toString();
   }
 
-  String substrAfterLast(String separator) {
-    final index = lastIndexOf(separator);
+  String substrBefore(String separator) {
+    final index = indexOf(separator);
     if (index == -1) return this;
+    return substring(0, index);
+  }
+
+  String substrAfterLast(String separator, [String? defaultValue]) {
+    final index = lastIndexOf(separator);
+    if (index == -1) return defaultValue ?? this;
     return substring(index + separator.length);
   }
 

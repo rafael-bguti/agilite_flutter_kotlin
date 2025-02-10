@@ -1,26 +1,39 @@
 package info.agilite.scf.tasks
 
 import SduiComboField
-import info.agilite.boot.crud.*
+import info.agilite.boot.crud.AgiliteCrudRepository
+import info.agilite.boot.crud.CrudListRequest
+import info.agilite.boot.crud.DefaultSduiCrudService
+import info.agilite.boot.crud.MoreFiltersType
 import info.agilite.boot.metadata.models.EntityMetadata
+import info.agilite.boot.metadata.models.tasks.TaskDescr
 import info.agilite.boot.sdui.SduiRequest
 import info.agilite.boot.sdui.autocomplete.Option
 import info.agilite.boot.sdui.component.*
 import info.agilite.core.extensions.splitToList
 import info.agilite.shared.entities.cgs.Cgs80
-import info.agilite.shared.entities.scf.SCF02TIPO_PAGAR
 import info.agilite.shared.entities.scf.SCF02TIPO_RECEBER
-import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 const val STATUS_FILTER = "statusFilter"
-@Component
-class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCrudService<Cgs80>(crudRepository) {
+
+class Scf1002CrudService(
+  crudRepository: AgiliteCrudRepository,
+  private val scf02tipo: Int,
+) : DefaultSduiCrudService<Cgs80>(crudRepository) {
   override fun getColumnQueriesToList(taskName: String, entityMetadata: EntityMetadata): List<String> {
-    return "scf02dtVenc, scf02nossoNum, scf02lancamento.scf11data, scf02entidade.cgs80nome, scf02entidade.cgs80ni, scf02valor, scf02forma.cgs38nome".splitToList()
+    return "scf02dtVenc, scf02valor, scf02nossoNum, scf02lancamento.scf11data, scf02entidade.cgs80nome, scf02entidade.cgs80ni, scf02forma.cgs38nome".splitToList()
   }
 
   override fun createSduiComponent(request: SduiRequest): SduiComponent {
     val crud = super.createSduiComponent(request) as SduiCrud
+
+    crud.descr =
+      if(scf02tipo == SCF02TIPO_RECEBER) {
+        TaskDescr("Contas a Receber", "Contas a Receber")
+      } else {
+        TaskDescr("Contas a Pagar", "Contas a Pagar")
+      }
 
     crud.customFilters = listOf(
       SduiSizedBox(
@@ -45,6 +58,8 @@ class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCru
       )
     )
 
+    crud.formBody = createFormBody()
+
     return crud
   }
 
@@ -54,23 +69,30 @@ class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCru
     result.filter { it.name == "scf02lancamento.scf11data" }.first().label = "Dt Pagto"
 
     result.add(0, SduiColumn(
-      "scf02dtVenc", "Status", "string",
-      width = SduiColumnWidth(SduiColumnWidthType.fixed, 100.0),
-      mod = MOD_STATUS_DATE_FUNCTION("scf02dtVenc", "scf02lancamento.scf11data"))
+      "status", "Status", "string", width = SduiColumnWidth(SduiColumnWidthType.fixed, 100.0), mod = MOD_BADGE)
     )
 
     return result
   }
 
-  override fun findListData(taskName: String, request: CrudListRequest): CrudListResponse {
-    val response = super.findListData(taskName, request)
-    response.selectedGroupIndex = request.groupIndex
-    response.groups = listOf(
-      CrudListGroup("Receber/Recebidos"),
-      CrudListGroup("Pagar/Pagos"),
-    )
+  override fun parseData(data: List<MutableMap<String, Any?>>): List<MutableMap<String, Any?>> {
+    data.forEach {
+      val vcto = it["scf02dtVenc"] as LocalDate
+      val pgto = it["scf02lancamento.scf11data"] as LocalDate?
 
-    return response
+      if (pgto != null) {
+        it["status"] = "Pago|${0xFF00AA00}"
+      } else {
+        val hoje = LocalDate.now()
+        if (vcto.isBefore(hoje)) {
+          it["status"] = "Vencido|${0xFFAA0000}"
+        } else {
+          it["status"] = "A vencer|${0xFFBDBDBD}"
+        }
+      }
+    }
+
+    return data
   }
 
   override fun getCustomWhereOnList(
@@ -80,14 +102,22 @@ class Scf1002CrudService(crudRepository: AgiliteCrudRepository) : DefaultSduiCru
     val sb = StringBuilder(" true ")
     if (request.customFilters?.containsKey(STATUS_FILTER) == true) {
       val filterValue = request.customFilters?.get(STATUS_FILTER) as Int
-      val where = filterValue?.let {statusFilterData.find { it.first == filterValue }?.third}
+      val where = filterValue.let {statusFilterData.find { it.first == filterValue }?.third}
       where?.let { sb.append(" AND $it ") }
     }
 
-    if(request.groupIndex == null)request.groupIndex = SCF02TIPO_RECEBER
-    sb.append(" AND scf02tipo = ${request.groupIndex}")
+    sb.append(" AND scf02tipo = ${scf02tipo}")
 
     return Pair(sb.toString(), null)
+  }
+
+  private fun createFormBody(): SduiComponent {
+    return SduiGrid.createByRows(
+      row("6,6", "scf02forma, scf02entidade"),
+      row("4,4,4",  SduiMetadataField("scf02nossoNum", "Número"), "scf02dtVenc, scf02valor"),
+      row("3-6,3-6,3-6,3-6",  "scf02multa, scf02juros, scf02encargos, scf02desconto"),
+      row("12", "scf02hist"),
+    )
   }
 
   private val statusFilterData = listOf(

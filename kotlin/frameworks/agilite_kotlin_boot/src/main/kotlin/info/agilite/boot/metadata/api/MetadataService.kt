@@ -64,7 +64,7 @@ class MetadataService {
   }
 
   private fun buildFieldMetadataDto(field: FieldMetadata, autocompleteColumnId: String? = null, autocompleteColumnsView: String? = null) = FieldMetadataDto(
-    name = field.name.lowercase(),
+    name = field.name,
     type = if(autocompleteColumnId != null) "autocomplete" else field.type.frontEndType,
     label = field.label,
     req = field.required,

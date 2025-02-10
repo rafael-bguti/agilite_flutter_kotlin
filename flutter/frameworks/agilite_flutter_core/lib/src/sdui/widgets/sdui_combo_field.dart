@@ -11,7 +11,7 @@ class SduiComboField extends SduiWidget<SduiComboFieldModel> {
   SduiComboFieldModel json2Model(Map<String, dynamic> json) => SduiComboFieldModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiComboFieldModel model) {
+  Widget render(BuildContext context, SduiComboFieldModel model) {
     return AComboField(
       model.name,
       options: model.options,

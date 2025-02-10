@@ -11,7 +11,7 @@ class SduiDivider extends SduiWidget<SduiDividerModel> {
   SduiDividerModel json2Model(Map<String, dynamic> json) => SduiDividerModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiDividerModel model) {
+  Widget render(BuildContext context, SduiDividerModel model) {
     return model.text != null
         ? ADivider.text(
             text: model.text!,

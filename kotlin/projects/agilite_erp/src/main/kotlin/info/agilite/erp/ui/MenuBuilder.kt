@@ -22,7 +22,8 @@ class MenuBuilder : UserMenuBuilder {
         FrontEndMenuItem.item(32, "CNAE", "/cas1090/2", 0xf180),
       )),
       FrontEndMenuItem.group(5, "Financeiro", children = listOf(
-        FrontEndMenuItem.item(51, "Lançamentos", "/sdui/${buildSduiRequestBase64("scf1002")}", 0xe491),
+        FrontEndMenuItem.item(51, "Títulos a receber", "/sdui/${buildSduiRequestBase64("Scf1002Receber")}", 0xe491),
+        FrontEndMenuItem.item(52, "Títulos a pagar", "/sdui/${buildSduiRequestBase64("Scf1002Pagar")}", 0xe491),
       )),
       FrontEndMenuItem.group(4, "Processos", children = listOf(
         FrontEndMenuItem.item(41, "Importar Documentos", "/srf2030", 0xe491),

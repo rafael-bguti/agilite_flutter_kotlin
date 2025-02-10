@@ -2,8 +2,6 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sdui_widget.dart';
-
 part 'sdui_grid.g.dart';
 
 class SduiGrid extends SduiWidget<SduiGridModel> {
@@ -11,11 +9,11 @@ class SduiGrid extends SduiWidget<SduiGridModel> {
   SduiGridModel json2Model(Map<String, dynamic> json) => SduiGridModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiGridModel model) {
+  Widget render(BuildContext context, SduiGridModel model) {
     return AGrid.rows(
       rows: model.rows
           .map(
-            (el) => el.toAGridRow(context, sduiContext),
+            (el) => el.toAGridRow(context),
           )
           .toList(),
     );
@@ -48,12 +46,12 @@ class SduiGridRow {
     required this.children,
   });
 
-  AGridRow toAGridRow(BuildContext context, SduiContext sduiContext) {
+  AGridRow toAGridRow(BuildContext context) {
     return AGridRow(
       areas: areas,
       children: children
           .map(
-            (json) => SduiRender.renderFromJson(context, sduiContext, json),
+            (json) => SduiRender.renderFromJson(context, json),
           )
           .toList(),
     );

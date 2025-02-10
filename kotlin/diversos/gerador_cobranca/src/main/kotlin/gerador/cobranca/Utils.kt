@@ -1,9 +1,9 @@
 package gerador.cobranca
 
-import info.agilite.integradores.dtos.Cliente
-import info.agilite.integradores.dtos.Cobranca
-import info.agilite.integradores.dtos.FormaPagamento
-import info.agilite.integradores.dtos.ItemCobranca
+import info.agilite.integradores.bancos.dto.Cliente
+import info.agilite.integradores.bancos.dto.Cobranca
+import info.agilite.integradores.bancos.dto.FormaPagamento
+import info.agilite.integradores.bancos.dto.ItemCobranca
 import java.math.BigDecimal
 import java.time.LocalDate
 

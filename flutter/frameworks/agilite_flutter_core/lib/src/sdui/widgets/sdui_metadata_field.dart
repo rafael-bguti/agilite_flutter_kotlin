@@ -11,7 +11,7 @@ class SduiMetadataField extends SduiWidget<SduiMetadataFieldModel> {
   SduiMetadataFieldModel json2Model(Map<String, dynamic> json) => SduiMetadataFieldModel.fromJson(json);
 
   @override
-  Widget render(BuildContext context, SduiContext sduiContext, SduiMetadataFieldModel model) {
+  Widget render(BuildContext context, SduiMetadataFieldModel model) {
     return AMetadataField(
       model.name,
       labelText: model.labelText,

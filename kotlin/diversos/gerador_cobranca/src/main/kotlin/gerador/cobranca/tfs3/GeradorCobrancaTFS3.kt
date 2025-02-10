@@ -6,10 +6,10 @@ import gerador.cobranca.daos.DAO
 import info.agilite.core.extensions.format
 import info.agilite.core.extensions.numbersOnly
 import info.agilite.core.json.JsonUtils
-import info.agilite.integradores.dtos.Cliente
-import info.agilite.integradores.dtos.Cobranca
-import info.agilite.integradores.dtos.FormaPagamento
-import info.agilite.integradores.dtos.ItemCobranca
+import info.agilite.integradores.bancos.dto.Cliente
+import info.agilite.integradores.bancos.dto.Cobranca
+import info.agilite.integradores.bancos.dto.FormaPagamento
+import info.agilite.integradores.bancos.dto.ItemCobranca
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest

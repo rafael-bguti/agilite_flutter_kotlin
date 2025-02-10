@@ -1,4 +1,4 @@
-package info.agilite.integradores.dtos
+package info.agilite.integradores.bancos.dto
 
 import java.math.BigDecimal
 import java.time.LocalDate

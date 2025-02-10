@@ -2,12 +2,12 @@ import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
 abstract class HttpResponseHandler {
-  Future<HttpResponse> handle(HttpProvider provider, HttpResponse response);
+  Future<HttpResponse> handle(HttpResponse response);
 }
 
 class DefaultHttpResponseHandler extends HttpResponseHandler {
   @override
-  Future<HttpResponse> handle(HttpProvider provider, HttpResponse response) async {
+  Future<HttpResponse> handle(HttpResponse response) async {
     debugPrint(' <--- Length(${response.bodyBytes.lengthInBytes / 1024}kb) - ${response.bodyString}');
 
     switch (response.statusCode) {

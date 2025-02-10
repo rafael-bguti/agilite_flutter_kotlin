@@ -96,8 +96,10 @@ class AutocompleteController<T> extends FieldController<Option<T>?> {
     notifyListeners();
 
     status = FieldStatus.dirty;
-    if (fromUserAction) onSelectedValue?.call(value);
-    validate();
+    if (fromUserAction) {
+      onSelectedValue?.call(value);
+      validate();
+    }
   }
 
   @override

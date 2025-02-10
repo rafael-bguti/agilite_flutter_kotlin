@@ -52,10 +52,14 @@ class SpreadController extends FieldController<SpreadModel> {
   SpreadModel get value => _value;
   @override
   set value(SpreadModel newModel) {
+    _setValue(newModel);
+  }
+
+  void _setValue(SpreadModel newModel, [bool fromView = false]) {
     final valueMap = newModel._rows.map((e) => e._dataMap).toList();
     _value.replaceAll(valueMap);
 
-    notifyListeners();
+    if (!fromView) notifyListeners();
     onValueChanged();
   }
 
@@ -73,8 +77,8 @@ class SpreadController extends FieldController<SpreadModel> {
     fillFromList(List<Map<String, dynamic>>.from(data[name] as List).toList());
   }
 
-  void fillFromList(List<Map<String, dynamic>> data) {
-    value = SpreadModel.value(data);
+  void fillFromList(List<Map<String, dynamic>> data, [bool fromView = false]) {
+    _setValue(SpreadModel.value(data), fromView);
   }
 
   void refresh() {
@@ -710,6 +714,8 @@ class SpreadRow {
   int? getInt(String columnName, [int? defaultValue]) => _data.getInt(columnName, defaultValue);
 
   String? getString(String columnName, [String? defaultValue]) => _data.getString(columnName, defaultValue);
+
+  Map<String, dynamic>? getMap(String columnName) => _data.getMap(columnName);
 
   bool? getBool(String columnName, [bool? defaultValue]) => _data.getBool(columnName, defaultValue);
 
