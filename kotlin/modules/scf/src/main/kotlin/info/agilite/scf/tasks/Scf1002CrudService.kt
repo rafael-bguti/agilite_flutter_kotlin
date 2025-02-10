@@ -21,6 +21,8 @@ class Scf1002CrudService(
   crudRepository: AgiliteCrudRepository,
   private val scf02tipo: Int,
 ) : DefaultSduiCrudService<Cgs80>(crudRepository) {
+  override val createSduiFormOnEdit : Boolean get() = true
+
   override fun getColumnQueriesToList(taskName: String, entityMetadata: EntityMetadata): List<String> {
     return "scf02dtVenc, scf02valor, scf02nossoNum, scf02lancamento.scf11data, scf02entidade.cgs80nome, scf02entidade.cgs80ni, scf02forma.cgs38nome".splitToList()
   }
@@ -58,8 +60,6 @@ class Scf1002CrudService(
       )
     )
 
-    crud.formBody = createFormBody()
-
     return crud
   }
 
@@ -95,10 +95,7 @@ class Scf1002CrudService(
     return data
   }
 
-  override fun getCustomWhereOnList(
-    request: CrudListRequest,
-    entityMetadata: EntityMetadata
-  ): Pair<String, Map<String, Any>?>? {
+  override fun getCustomWhereOnList(request: CrudListRequest, entityMetadata: EntityMetadata): Pair<String, Map<String, Any>?>? {
     val sb = StringBuilder(" true ")
     if (request.customFilters?.containsKey(STATUS_FILTER) == true) {
       val filterValue = request.customFilters?.get(STATUS_FILTER) as Int
@@ -111,7 +108,7 @@ class Scf1002CrudService(
     return Pair(sb.toString(), null)
   }
 
-  private fun createFormBody(): SduiComponent {
+  override fun createSduiEditForm(taskName: String, id: Long?): SduiComponent? {
     return SduiGrid.createByRows(
       row("6,6", "scf02forma, scf02entidade"),
       row("4,4,4",  SduiMetadataField("scf02nossoNum", "Número"), "scf02dtVenc, scf02valor"),

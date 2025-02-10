@@ -11,20 +11,28 @@ import org.springframework.web.bind.annotation.*
 class CrudController(
   private val appContext: ApplicationContext,
 ) {
-
   @PostMapping("/list/find/{taskName}")
   fun getListData(@PathVariable("taskName") taskName: String, @RequestBody request: CrudListRequest): CrudListResponse {
     val service = CrudServiceResolver.createService(taskName, appContext)
-
     return service.findListData(taskName, request)
   }
 
-  @GetMapping("/{taskName}/{id}")
-  fun onEdit(@PathVariable("taskName") taskName: String, @PathVariable("id") id: Long): ResponseEntity<CrudEditResponse> {
+  @GetMapping("/{taskName}/edit")
+  fun onEdit(@PathVariable("taskName") taskName: String): ResponseEntity<CrudEditResponse> {
+    return onEdit(taskName, null)
+  }
+
+  @GetMapping("/{taskName}/edit/{id}")
+  fun onEdit(@PathVariable("taskName") taskName: String, @PathVariable("id", required = false) id: Long?): ResponseEntity<CrudEditResponse> {
     val service = CrudServiceResolver.createService(taskName, appContext)
-    val data = service.editRecord(taskName, id)
-    return if (data != null) {
-      ResponseEntity.ok(data)
+    val response: CrudEditResponse;
+    if(id == null) {
+      response = service.createNewRecord(taskName)
+    }else {
+      response = service.editRecord(taskName, id)
+    }
+    return if (response.data != null) {
+      ResponseEntity.ok(response)
     } else {
       ResponseEntity.notFound().build()
     }
@@ -46,16 +54,9 @@ class CrudController(
     service.save(service.convertEntity(taskName, data, id))
   }
 
-  @PostMapping("/onnew/{taskName}")
-  fun onNew(@PathVariable("taskName") taskName: String): Map<String, Any?>? {
-    return CrudServiceResolver.createService(taskName, appContext).createNewRecord(taskName)
-  }
-
-
   @PostMapping("/delete/{taskName}")
   @Transactional
   fun delete(@PathVariable("taskName") taskName: String, @RequestBody ids: List<Long>) {
     CrudServiceResolver.createService(taskName, appContext).delete(taskName, ids)
   }
-
 }

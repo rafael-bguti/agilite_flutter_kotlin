@@ -5,15 +5,17 @@ import 'edit_crud_buttons.dart';
 
 class AEditCrud extends StatefulWidget {
   final String taskName;
-  final CrudDescr descr;
   final int? id;
+  final CrudDescr descr;
+  final Map<String, dynamic> data;
   final Widget formBody;
 
   const AEditCrud({
     required this.taskName,
+    required this.id,
     required this.formBody,
     required this.descr,
-    this.id,
+    required this.data,
     super.key,
   });
 
@@ -24,7 +26,6 @@ class AEditCrud extends StatefulWidget {
 class _AEditCrudState extends State<AEditCrud> {
   late final CrudEditController controller = CrudEditController(
     taskName: widget.taskName,
-    id: widget.id,
   );
 
   @override
@@ -44,11 +45,11 @@ class _AEditCrudState extends State<AEditCrud> {
               '${widget.id == null ? "Incluindo" : "Editando"} - ${widget.descr.singular}',
             ),
             footer: EditCrudButtons(
-              onSave: controller.save,
+              onSave: () => controller.save(widget.id),
             ),
             child: AForm(
               controller.formController,
-              value: state is CrudEditEditingState ? state.data : null,
+              value: widget.data,
               child: widget.formBody,
             ),
           );

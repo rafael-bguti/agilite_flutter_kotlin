@@ -27,11 +27,28 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 interface CrudService<T> {
+  val createSduiFormOnEdit : Boolean get() = false
+
   fun findListData(taskName: String, request: CrudListRequest): CrudListResponse
   fun parseData(data: List<MutableMap<String, Any?>>): List<MutableMap<String, Any?>> { return data }
 
-  fun createNewRecord(task: String): Map<String, Any?>? { return null }
-  fun editRecord(taskName: String, id: Long): CrudEditResponse?
+  fun createSduiEditForm(taskName: String, id: Long?): SduiComponent? {
+    if (createSduiFormOnEdit) {
+      return SduiSizedBox() // TODO criar o form de edição padrão
+    }
+    return null // TODO criar o form de edição padrão
+  }
+
+  fun createNewRecord(task: String): CrudEditResponse {
+    return CrudEditResponse(buildMapOnCreateNewRecord(task), createSduiEditForm(task, null))
+  }
+  fun buildMapOnCreateNewRecord(task: String): Map<String, Any?> { return emptyMap() }
+
+  fun editRecord(taskName: String, id: Long): CrudEditResponse {
+    return CrudEditResponse(buildMapOnEditRecord(taskName, id), createSduiEditForm(taskName, id))
+  }
+  fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?>?
+
   fun validate(entity: T) {}
   fun save(entity: T)
 
@@ -59,6 +76,7 @@ class DefaultSduiCrudService<T>(
       TaskDescr(entityMetadata.descr),
       columns,
       metadataToLoad = entityMetadata.name,
+      formBody = if(createSduiFormOnEdit || activeProfile == "dev") null else createSduiEditForm(request.taskName, null),
     )
   }
 
@@ -77,12 +95,9 @@ class DefaultSduiCrudService<T>(
     )
   }
 
-  override fun editRecord(taskName: String, id: Long): CrudEditResponse? {
+  override fun buildMapOnEditRecord(taskName: String, id: Long): Map<String, Any?>? {
     val query = createEditQuery(taskName, id)
-    val data = crudRepository.findEditData(query) ?: return null
-
-
-    return CrudEditResponse(data.nest() )
+    return crudRepository.findEditData(query)?.nest()
   }
 
   override fun save(entity: T) {

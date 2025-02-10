@@ -1,5 +1,7 @@
 package info.agilite.boot.crud
 
+import info.agilite.boot.sdui.component.SduiComponent
+
 data class CrudListResponse(
   val currentPage: Int,
   val pageSize: Int,
@@ -11,6 +13,7 @@ data class CrudListResponse(
 )
 
 data class CrudEditResponse(
-  val data: Map<String, Any?>,
+  val data: Map<String, Any?>?,
+  val sduiForm: SduiComponent? = null,
   val editable: Boolean = true,
 )

@@ -6,9 +6,7 @@ import 'models/crud_list_request.dart';
 
 abstract class CrudRepository {
   Future<CrudState> loadData(String taskName, CrudListRequest request);
-
-  Future<Map<String, dynamic>?> onNew(String taskName);
-  Future<CrudEditResponse> edit(String taskName, int id);
+  Future<CrudEditResponse> edit(String taskName, int? id);
 
   Future<void> save(String taskName, Map<String, dynamic> data, dynamic id);
   Future<void> delete(String taskName, List<Object> ids);
@@ -26,16 +24,9 @@ class HttpCrudRepositoryAdapter extends CrudRepository {
   }
 
   @override
-  Future<Map<String, dynamic>?> onNew(String taskName) async {
-    final response = await http.post('/crud/onnew/$taskName');
-    if (!response.hasBody) return null;
-
-    return response.bodyMap;
-  }
-
-  @override
-  Future<CrudEditResponse> edit(String taskName, int id) async {
-    final response = await http.get("/crud/$taskName/$id");
+  Future<CrudEditResponse> edit(String taskName, int? id) async {
+    final idPath = id != null ? "/$id" : "";
+    final response = await http.get("/crud/$taskName/edit$idPath");
     return CrudEditResponse.fromJson(response.bodyMap);
   }
 

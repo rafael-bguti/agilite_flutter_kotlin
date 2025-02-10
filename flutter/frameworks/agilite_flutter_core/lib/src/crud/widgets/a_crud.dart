@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:agilite_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +20,6 @@ class ACrud extends StatefulWidget {
 
   // ---- Para edição de registro ----
   // ---- Informar ou o OnEdit ou o FormBody ----
-  final void Function(int? id)? onEdit;
   final Widget? formBody;
 
   const ACrud.name({
@@ -32,7 +29,6 @@ class ACrud extends StatefulWidget {
     this.metadataToLoad,
     this.customFilters,
     this.controller,
-    this.onEdit,
     this.formBody,
     this.moreFiltersWidget,
     super.key,
@@ -43,7 +39,6 @@ class ACrud extends StatefulWidget {
     required this.descr,
     required this.columns,
     this.customFilters,
-    this.onEdit,
     this.formBody,
     this.moreFiltersWidget,
     super.key,
@@ -78,7 +73,7 @@ class _ACrudState extends State<ACrud> {
         return ATaskContainer(
           header: CrudHeader.text(
             widget.descr.plural,
-            onAddTap: _isEditable ? _onEdit : null,
+            onAddTap: _controller.canEdit ? () => _controller.onEdit(null, context, widget.descr, widget.formBody) : null,
           ),
           child: ASpacingColumn(
             spacing: 16,
@@ -93,7 +88,7 @@ class _ACrudState extends State<ACrud> {
               ),
               CrudDataTableCard(
                 crudController: _controller,
-                onEdit: _isEditable ? _onEdit : null,
+                onEdit: _controller.canEdit ? (id) => _controller.onEdit(id, context, widget.descr, widget.formBody) : null,
                 columns: widget.columns,
               ),
             ],
@@ -101,41 +96,5 @@ class _ACrudState extends State<ACrud> {
         );
       },
     );
-  }
-
-  bool get _isEditable => widget.onEdit != null || widget.formBody != null;
-
-  Future<void> _onEdit([int? id]) async {
-    if (widget.onEdit != null) {
-      widget.onEdit!(id);
-    } else {
-      final body = await _loadFormBody();
-      final saved = await ASideDialog.showBottom(
-        builder: (context) => AEditCrud(
-          taskName: widget.taskName,
-          descr: widget.descr,
-          id: id,
-          formBody: body,
-        ),
-        barrierDismissible: false,
-      );
-      if (saved != null) {
-        _controller.onBtnRefreshClick();
-      }
-    }
-  }
-
-  FutureOr<Widget> _loadFormBody() async {
-    if (activeProfile.type == CoreProfileType.dev) {
-      final formContent = await RemoteSduiContentProvider(
-        url: '/sdui/crudForm/${widget.taskName}',
-      ).getContent();
-
-      return SduiRender.renderFromJson(
-        context,
-        formContent!,
-      );
-    }
-    return widget.formBody!;
   }
 }

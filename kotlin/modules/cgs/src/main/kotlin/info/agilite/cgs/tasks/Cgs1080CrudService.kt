@@ -32,8 +32,11 @@ class Cgs1080CrudService(
         )
       )
     )
-    crud.formBody = createFormBody()
     return crud
+  }
+
+  override fun createSduiEditForm(taskName: String, id: Long?): SduiComponent {
+    return createFormBody()
   }
 
   override fun getCustomWhereOnList(
@@ -48,7 +51,7 @@ class Cgs1080CrudService(
     return null
   }
 
-  override fun createNewRecord(task: String): Map<String, Any?>? {
+  override fun buildMapOnCreateNewRecord(task: String): Map<String, Any?> {
     return mapOf(
       N_CGS80_CLIENTE to true,
     )

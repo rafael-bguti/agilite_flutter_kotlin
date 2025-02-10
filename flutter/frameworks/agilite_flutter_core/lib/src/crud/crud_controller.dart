@@ -20,8 +20,10 @@ class CrudController extends ViewController<CrudState> {
   //Controllers
   final filtersFormController = FormController();
   final moreFiltersFormController = FormController();
-
   final spreadController = SpreadController("data");
+
+  //Edição
+  final bool canEdit;
 
   //Navigation
   var currentPage = 0;
@@ -31,6 +33,7 @@ class CrudController extends ViewController<CrudState> {
   final $loading = false.obs;
   CrudController({
     required this.taskName,
+    this.canEdit = true,
     this.metadataToLoad,
     CrudRepository? repository,
   })  : _repository = repository ?? HttpCrudRepositoryAdapter(coreHttpProvider),
@@ -161,6 +164,31 @@ class CrudController extends ViewController<CrudState> {
       groupIndex: groupIndex,
       dialogMoreFiltersValue: moreFiltersFormController.buidlJson(),
     );
+  }
+
+  // --- Edição ---
+  Future<void> onEdit(int? id, BuildContext context, CrudDescr descr, Widget? form) async {
+    showLoading("Carregando dados para edição...");
+    final response = await _repository.edit(taskName, id);
+    if (response.sduiForm != null) {
+      form = SduiRender.renderFromJson(context, response.sduiForm!);
+    }
+    hideLoading();
+
+    final saved = await ASideDialog.showBottom(
+      builder: (context) => AEditCrud(
+        taskName: taskName,
+        descr: descr,
+        data: response.data,
+        formBody: form!,
+        id: id,
+      ),
+      barrierDismissible: false,
+    );
+
+    if (saved == true) {
+      await onBtnRefreshClick();
+    }
   }
 
   // --- Diversos ---
